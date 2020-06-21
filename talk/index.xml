@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks | Aditya Makkar</title>
+    <link>https://makkar.github.io/talk/</link>
+      <atom:link href="https://makkar.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://makkar.github.io/talk/</link>
+    </image>
+    
+  </channel>
+</rss>

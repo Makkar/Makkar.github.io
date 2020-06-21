@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | Aditya Makkar</title>
+    <link>https://makkar.github.io/post/</link>
+      <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 20 Jun 2020 19:16:45 -0400</lastBuildDate>
+    <image>
+      <url>https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png</url>
+      <title>Posts</title>
+      <link>https://makkar.github.io/post/</link>
+    </image>
+    
+    <item>
+      <title>Partitions and Equivalence Relations</title>
+      <link>https://makkar.github.io/post/equivalence-relations/</link>
+      <pubDate>Sat, 20 Jun 2020 19:16:45 -0400</pubDate>
+      <guid>https://makkar.github.io/post/equivalence-relations/</guid>
+      <description>&lt;p&gt;I want to show how these two concepts are a single mathematical idea.&lt;/p&gt;
+&lt;h2 id=&#34;partition&#34;&gt;Partition&lt;/h2&gt;
+&lt;p&gt;The concept of partition is integral in understanding equivalence relations.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;partition&lt;/em&gt; of a non-empty set, $X$, is a disjoint class $\{X_i\}_{i \in I}$ of non-empty subsets of $X$ whose union is $X$. The $X_i$&#39;s are called the &lt;em&gt;partition sets&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;For example, if $X = \mathbb{R}$, then $X$ can be partitioned as
+$$
+X = \bigcup_{n \in \mathbb{Z}}[n, n+1)
+$$&lt;/p&gt;
+&lt;h2 id=&#34;binary-relation&#34;&gt;Binary Relation&lt;/h2&gt;
+&lt;p&gt;A &lt;em&gt;binary relation&lt;/em&gt;, or simply &lt;em&gt;relation&lt;/em&gt;, $R$, in the set $X$ is a subset of $X \times X$.&lt;/p&gt;
+&lt;p&gt;For $x, y \in X$, we denote the fact $(x,y) \in R$ by writing $x R y$. A function may be defined as a special kind of binary relation.&lt;/p&gt;
+&lt;h2 id=&#34;equivalence-relation&#34;&gt;Equivalence relation&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s assume that a partition of our non-empty set $X$ is given, and we associate with this partition a relation, $\sim$, in $X$ defined as follows: $x \sim y$ if $x$ and $y$ belong to the same partition set. It can easily checked that the relation $\sim$ satisfies:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$x \sim x$ for every $x \in X$ (&lt;em&gt;reflexivity&lt;/em&gt;);&lt;/li&gt;
+&lt;li&gt;$x \sim y \implies y \sim x$ (&lt;em&gt;symmetry&lt;/em&gt;);&lt;/li&gt;
+&lt;li&gt;$x \sim y$ and $y \sim z$ $\implies$ $x \sim z$ (&lt;em&gt;transitivity&lt;/em&gt;).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Any relation in $X$ which possesses these three properties is called an &lt;em&gt;equivalence relation&lt;/em&gt; in $X$.&lt;/p&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Let $X = \mathbb{Z}$ and let $x \sim y$ if $2 | x-y$ for $x,y \in X$. Then clearly $\sim$ is an equivalence relation in $X$.&lt;/li&gt;
+&lt;li&gt;Let $X$, $Y$ be any non-empty sets and $f$ be a mapping from $X$ onto $Y$. Let $x \sim y$ if $f(x) = f(y)$ for $x,y \in A$. This defines an equivalence relation in $X$. Indeed, $f(x) = f(x)$, and so $x \sim x$. If $f(x) = f(y)$ then $f(y) = f(x)$, and so $x \sim y \implies y \sim x$. Finally, if $f(x) = f(y)$ and $f(y) = f(z)$ then $f(x) = f(z)$, and so $x \sim y$ and $y \sim z$ $\implies$ $x \sim z$. The first example is a special case of this one if we take $X = \mathbb{Z}$, $Y = \{0,1\}$ and $f(x) = x \mod 2$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;relation-to-partition&#34;&gt;&amp;ldquo;Relation&amp;rdquo; to partition&lt;/h3&gt;
+&lt;p&gt;We have just seen that each partition of $X$ has associated with it a natural equivalence relation in $X$. Let us now reverse the situation and show that a given equivalence relation in $X$ determines a natural partition of $X$.&lt;/p&gt;
+&lt;p&gt;Let $\sim$ be an equivalence relation in $X$. For every $x \in X$ define the set
+$$
+[x] := \{ y \in X : y \sim x\}
+$$
+called the &lt;em&gt;equivalence set&lt;/em&gt; of $x$. We show that the class of all distinct equivalence sets forms a partition of $X$.&lt;/p&gt;
+&lt;p&gt;By reflexivity, $x \in [x]$ for every $x \in X$, and thus each equivalence set is non-empty and their union is $X$. We now need to show that any two equivalence sets $[x_1]$ and $[x_2]$ are either disjoint or identical. We prove this by showing that if $[x_1]$ and $[x_2]$ are not disjoint then they are identical. To this end, let $z$ be a common element of $[x_1]$ and $[x_2]$. Let $y$ be any element of $[x_1]$. Using transitivity,
+$$
+y \sim x_1 \sim z \sim x_2
+$$
+Therefore, $y \in [x_2]$. Since $y$ was an arbitrary element of $[x_1]$, we get $[x_1] \subseteq [x_2]$. We can similarly show that $[x_2] \subseteq [x_1]$. In short, $[x_1] = [x_2]$.&lt;/p&gt;
+&lt;p&gt;We have shown that there is no real distinction between partitions of a set and equivalence relations in the set. They are two &amp;ldquo;equivalent&amp;rdquo; approaches for the same mathematical idea. The approach we choose in an application depends entirely on our own convenience.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Upper and Lower Limits</title>
+      <link>https://makkar.github.io/post/upper-and-lower-limits/</link>
+      <pubDate>Fri, 19 Jun 2020 16:33:53 -0400</pubDate>
+      <guid>https://makkar.github.io/post/upper-and-lower-limits/</guid>
+      <description>&lt;h2 id=&#34;preliminaries&#34;&gt;Preliminaries&lt;/h2&gt;
+&lt;p&gt;In the spirit of keeping this article fairly independent and establishing a common notation, let&amp;rsquo;s review some preliminaries.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt; Suppose $S$ is an ordered set, and $E \subset S$. If there exists a $\beta \in S$ such that $x \leq \beta$ for every $x \in E$, we say that $E$ is &lt;em&gt;bounded above&lt;/em&gt;, and call $\beta$ an &lt;em&gt;upper bound&lt;/em&gt; of $E$.&lt;/p&gt;
+&lt;p&gt;Lower bounds are defined in the same way with $\geq$ in place of $\leq$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt; Suppose $S$ is an ordered set, $E \subset S$, and $E$ is bounded above. Suppose there exists an $\alpha \in S$ with the following properties:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\alpha$ is an upper bound of $E$.&lt;/li&gt;
+&lt;li&gt;If $\gamma &amp;lt; \alpha$ then $\gamma$ is not an upper bound of $E$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then $\alpha$ is called the &lt;em&gt;least upper bound&lt;/em&gt; of $E$ or the &lt;em&gt;supremum&lt;/em&gt; of $E$, and we write
+$$
+\alpha = \sup E
+$$
+That there is at most one supremum is clear from the property 2 above. The &lt;em&gt;greatest lower bound&lt;/em&gt;, or &lt;em&gt;infimum&lt;/em&gt;, of a set $E$ which is bounded below is defined in the same manner, and we write it as $\inf E$. Note that if $x \in E$, $\alpha = \sup E$, and $x &amp;lt; \alpha$ then there exists $y \in E$ such that $x &amp;lt; y &amp;lt; \alpha$ because otherwise $x$ would a lower bound less than $\alpha$.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
