@@ -19,7 +19,6 @@
       <guid>https://makkar.github.io/post/equivalence-relations/</guid>
       <description>&lt;p&gt;I want to show how these two concepts are a single mathematical idea.&lt;/p&gt;
 &lt;h2 id=&#34;partition&#34;&gt;Partition&lt;/h2&gt;
-&lt;p&gt;The concept of partition is integral in understanding equivalence relations.&lt;/p&gt;
 &lt;p&gt;A &lt;em&gt;partition&lt;/em&gt; of a non-empty set, $X$, is a disjoint class $\{X_i\}_{i \in I}$ of non-empty subsets of $X$ whose union is $X$. The $X_i$&#39;s are called the &lt;em&gt;partition sets&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;For example, if $X = \mathbb{R}$, then $X$ can be partitioned as
 $$
@@ -60,22 +59,162 @@ Therefore, $y \in [x_2]$. Since $y$ was an arbitrary element of $[x_1]$, we get 
     <item>
       <title>Upper and Lower Limits</title>
       <link>https://makkar.github.io/post/upper-and-lower-limits/</link>
-      <pubDate>Fri, 19 Jun 2020 16:33:53 -0400</pubDate>
+      <pubDate>Wed, 17 Jun 2020 16:33:53 -0400</pubDate>
       <guid>https://makkar.github.io/post/upper-and-lower-limits/</guid>
-      <description>&lt;h2 id=&#34;preliminaries&#34;&gt;Preliminaries&lt;/h2&gt;
-&lt;p&gt;In the spirit of keeping this article fairly independent and establishing a common notation, let&amp;rsquo;s review some preliminaries.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt; Suppose $S$ is an ordered set, and $E \subset S$. If there exists a $\beta \in S$ such that $x \leq \beta$ for every $x \in E$, we say that $E$ is &lt;em&gt;bounded above&lt;/em&gt;, and call $\beta$ an &lt;em&gt;upper bound&lt;/em&gt; of $E$.&lt;/p&gt;
-&lt;p&gt;Lower bounds are defined in the same way with $\geq$ in place of $\leq$.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt; Suppose $S$ is an ordered set, $E \subset S$, and $E$ is bounded above. Suppose there exists an $\alpha \in S$ with the following properties:&lt;/p&gt;
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limm}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sn}{\{s_n\}}
+\newcommand{\snk}{\{s_{n_k}\}}
+\newcommand{\supk}{\sup_{k \geq n}}
+\newcommand{\infk}{\inf_{k \geq n}}
+\newcommand{\sups}{\sup_{k \geq n} s_k}
+\newcommand{\infs}{\inf_{k \geq n} s_k}
+\newcommand{\cc}{\mathsf{c}}
+$$&lt;/p&gt;
+&lt;p&gt;I wrote this as a useful reference for myself. Most of what follows is taken from Rudin&amp;rsquo;s Principles of Mathematical Analysis.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The concept of upper and lower limits (commonly denoted by $\limsup$ and $\liminf$ respectively) shows up routinely when discussing the limiting behaviour of a sequence. For example, consider the Big O notation, $\mathcal{O}$, defined as $f(n) = \mathcal{O}(g(n))$ iff there exists a positive real number $c$ and an integer $N$ such that for every $n \in \Z$, $n &amp;gt; N$, we have $|f(n)| \leq c g(n)$. This can be succinctly written as
+$$
+\lims \frac{|f(n)|}{g(n)} &amp;lt; \infty
+$$&lt;/p&gt;
+&lt;p&gt;In this post, I aim to expound on the concept of upper and lower limits so that the second formulation of Big O notation above becomes easier to understand than the first one.&lt;/p&gt;
+&lt;h2 id=&#34;definitions&#34;&gt;Definitions&lt;/h2&gt;
+&lt;p&gt;I start with some definitions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1:&lt;/strong&gt; A &lt;em&gt;sequence&lt;/em&gt; is function defined on the set $\N$ of positive integers. If $f(n) = x_n$, for $n \in \N$, we denote the sequence $f$ by the symbol $\{x_n\}$, or sometimes by $x_1, x_2, \ldots$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 2:&lt;/strong&gt; A sequence $\{p_n\}$ in a metric space $X$ is said to &lt;em&gt;converge&lt;/em&gt; if there is a point $p \in X$ with the following property: For every $\e &amp;gt; 0$ there is an integer $N$ such that $n \geq N$ implies that $d(p_n, p) &amp;lt; \e$. We write this as $\limm p_n = p$ or as $p_n \to p$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; Let $\{s_n\}$ be a sequence of real numbers with the following property: For every real $M$ there is an integer $N$ such that $n \geq N$ implies $s_n \geq M$. We then write $s_n \to +\infty$. Similarly for $s_n \to -\infty$.&lt;/p&gt;
+&lt;p&gt;Note: The symbol $\to$ is now used for certain type of divergent sequences as well.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 4:&lt;/strong&gt; Given a sequence $\{p_n\}$, consider a sequence $\{n_k\}$ of positive integers, such that $n_1 &amp;lt; n_2 &amp;lt; \cdots$. Then the sequence $\{p_{n_k}\}$, which is a composition of the functions $\{n_k\}$ and $\{p_n\}$, is called a &lt;em&gt;subsequence&lt;/em&gt; of ${p_n}$. If $\{p_{n_k}\}$ converges, its limit is called a &lt;em&gt;subsequential limit&lt;/em&gt; of $\{p_n\}$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Let $E$ be the set of numbers $x$ (in the extended real number system, i.e. $x \in \RR := \R \cup \{+\infty, -\infty\}$) such that $s_{n_k} \to x$ for some subsequence $\{s_{n_k}\}$. Therefore, this set contains all the subsequential limits of $\sn$ plus possibly the numbers $+\infty$ and $-\infty$. We define
+$$
+s^* = \sup E
+$$
+$$
+s_* = \inf E
+$$
+The numbers $s^*$ and $s_*$ are called the &lt;em&gt;upper&lt;/em&gt; and &lt;em&gt;lower limits&lt;/em&gt; of $\sn$. We use the notation
+$$
+\lims s_n = s^*
+$$
+$$
+\limi s_n = s_*
+$$
+It immediately follows that $s_* \leq s^*$.&lt;/p&gt;
+&lt;p&gt;The fact that $E$ is non-empty (and thus taking $\sup$ or $\inf$ makes sense) follows from the observation that either $\sn$ is bounded or unbounded. If it is bounded then it must contain a convergent subsequence (Bolzano–Weierstrass theorem) and thus at least one element, or if it is unbounded then it must contain either $+\infty$ or $-\infty$.&lt;/p&gt;
+&lt;h2 id=&#34;some-useful-lemmas&#34;&gt;Some useful lemmas&lt;/h2&gt;
+&lt;p&gt;Now let us prove some interesting lemmas that will be useful later.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 1:&lt;/strong&gt; The subsequential limits of a sequence $\{p_n\}$ in a metric space $X$ form a closed subset of $X$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Let $E$ be the set of all subsequential limits of $\{p_n\}$ and let $q$ be a limit point of $E$. We have to show that $q \in E$.
+To show this we will construct a subsequence of $\{p_n\}$ which converges to $q$.&lt;/p&gt;
+&lt;p&gt;Choose $n_1$ so that $p_{n_1} \neq q$. If no such $n_1$ exists, then $E$ has only one element, $q = p_1 = p_2 = \cdots$, and there is nothing to prove. Define $\delta = d(q, p_{n_1})$. Suppose $n_1, \ldots, n_{i-1}$ are chosen. Since $q$ is a limit point of $E$, there is an $x \in E$ with $d(q, x) &amp;lt; \frac{\delta}{2^i}$. Since $x \in E$, there is an $n_i &amp;gt; n_{i-1}$ such that $d(x, p_{n_i}) &amp;lt; \frac{\delta}{2^i}$. Thus
+$$
+d(q, p_{n_i}) \leq d(q, x) + d(x, p_{n_i}) &amp;lt; \frac{\delta}{2^{i-1}} \quad \text{for } i = 1,2,\ldots
+$$
+This implies $p_{n_k} \to q$, and thus $q \in E$. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 2:&lt;/strong&gt; Let $F$ be a nonempty closed set of real numbers which is bounded above. Let $\alpha = \sup F$. Then $\alpha \in F$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Assume for the sake of the contradiction that $\alpha \notin F$. Then since $F^\cc$ is an open set (because $F$ is closed) there exists an $\e &amp;gt; 0$ such that $(\alpha - \e, \alpha + \e) \subset F^\cc$. But this implies $\alpha - \frac{\e}{2}$ is an upper bound for $F$ which is lower that $\alpha$. This gives us our required contradiction. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;properties&#34;&gt;Properties&lt;/h2&gt;
+&lt;p&gt;We now have all the tools to prove a very useful characterization of upper and lower limits and the highlight of this post.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 1:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Let $E$ and $s^*$ have the same meaning as in Definition 5. Then $s^*$ has the following two properties:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;$\alpha$ is an upper bound of $E$.&lt;/li&gt;
-&lt;li&gt;If $\gamma &amp;lt; \alpha$ then $\gamma$ is not an upper bound of $E$.&lt;/li&gt;
+&lt;li&gt;$s^* \in E$.&lt;/li&gt;
+&lt;li&gt;If $x &amp;gt; s^*$, there is an integer $N$ such that $n \geq N$ implies $s_n &amp;lt; x$.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Then $\alpha$ is called the &lt;em&gt;least upper bound&lt;/em&gt; of $E$ or the &lt;em&gt;supremum&lt;/em&gt; of $E$, and we write
+&lt;p&gt;Moreover, $s^*$ is the only number with these two properties.&lt;/p&gt;
+&lt;p&gt;Of course, an analogous result is true for $s_*$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; We start by showing the two properties.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;We divide it into three cases depending on what value $s^*$ takes:&lt;/p&gt;
+&lt;p&gt;If $s^* = +\infty$, then $E$ is not bounded above; hence $\sn$ is not bounded above, and thus there is a subsequence $\{s_{n_k}\}$ such that $s_{n_k} \to +\infty$. Therefore, $+\infty \in E$ and thus $s^* \in E$.&lt;/p&gt;
+&lt;p&gt;If $s^*$ is real, then $E$ is bounded above, and at least one subsequential limit exists by the definition of $\sup$. Therefore, $s^* \in E$ follows from the Lemmas 1 and 2, and the fact that $s^* = \sup E$.&lt;/p&gt;
+&lt;p&gt;If $s^* = -\infty$, then $E$ contains only one element, namely $-\infty$, and there is no subsequential limit. Thus, $s^* \in E$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Suppose for the sake of contradiction that there is a number $x &amp;gt; s^*$ such that $s_n \geq x$ for infinitely many values of $n$. Let&amp;rsquo;s denote this set of $n$&#39;s with $\mathcal{K}$ and let $\{s_k\}$$_{k \in \mathcal{K}}$ be this subsequence. If $\{s_k\}_{k \in \mathcal{K}}$ is unbounded then $s^* = +\infty$ contradicting the fact that there exists an $x &amp;gt; s^*$. And if $\{s_k\}_{k \in \mathcal{K}}$ is bounded that it contains a convergent subsequence (Bolzano–Weierstrass theorem). Suppose this convergent subsequence converges to $y$. Then $y \geq x &amp;gt; s^*$. This contradicts the definition of $s^*$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To show the uniqueness, suppose there are two distinct numbers, $p$ and $q$, which satisfy the two properties, and suppose $p &amp;lt; q$. Choose $x$ such that $p &amp;lt; x &amp;lt; q$. Since $p$ satisfies the second property, we have $s_n &amp;lt; x$ for $n \geq N$. But then $q$ cannot satisfy the second property. $\square$&lt;/p&gt;
+&lt;p&gt;An intuitive theorem:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 2:&lt;/strong&gt; If $s_n \leq t_n$ for $n \geq N$, where $N \in \N$ is fixed, then
+$$\limi s_n \leq \limi t_n,$$
+$$\lims s_n \leq \lims t_n$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Let $s^* = \lims s_n$ and $t^* = \lims t_n$. Suppose for the sake of contradiction $t^* &amp;lt; s^*$. Choose $x$ such that $t^* &amp;lt; x &amp;lt; s^*$. Then by the second property of Theorem 1 there is an integer $N_1$ such that $n \geq N_1$ implies $t_n &amp;lt; x$. Also by the first property there exists a subsequence $\snk$ such that $s_{n_k} \to s^*$. This implies that there exists an integer $N_2$ such that $n \geq N_2$ implies $x &amp;lt; s_n$. But then for $n \geq \max\{N_1, N_2\}$ we have $t_n &amp;lt; x &amp;lt; s_n$.
+This gives us our required contradiction.&lt;/p&gt;
+&lt;p&gt;A similar argument can be made for the $\liminf$ case. $\square$&lt;/p&gt;
+&lt;p&gt;Next we give a necessary and sufficient condition for the convergence of a sequence in terms of its $\liminf$ and $\limsup$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 3:&lt;/strong&gt; For a real-valued sequence $\sn$, $\limm s_n = s \in \RR$ if and only if
+$$\lims s_n = \limi s_n = s$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt;
+We divide the analysis into three cases.&lt;/p&gt;
+&lt;p&gt;First, let $s \in \R$. Then if $\lims s_n = \limi s_n = s$, Theorem 1 implies that for any $\e &amp;gt; 0$ we have $s_n \in (s-\e, s+\e)$ for all but finitely many $n$, which means $s_n \to s$. On the other hand if $s_n \to s$ then every subsequence $\snk$ must converge to $s$ and hence $\lims s_n = \limi s_n = s$.&lt;/p&gt;
+&lt;p&gt;Now let $s = +\infty$. Then $s_n \to s$, i.e., for every $M \in \R$ there is an integer $N$ such that $n \geq N$ implies $s_n \geq M$ if and only $\limi s_n = +\infty$, and then $\lims s_n = +\infty$ since $\limi s_n \leq \lims s_n$.&lt;/p&gt;
+&lt;p&gt;Lastly, let $s = -\infty$. Then $s_n \to s$, i.e., for every $M \in \R$ there is an integer $N$ such that $n \geq N$ implies $s_n \leq M$ if and only $\lims s_n = -\infty$, and then $\limi s_n = -\infty$ since $\limi s_n \leq \lims s_n$. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;upper-and-lower-limits---a-reprise&#34;&gt;Upper and lower limits - a reprise&lt;/h2&gt;
+&lt;p&gt;There is an equivalent way to express upper and lower limits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 6:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. We define the notation
+$$\sups := \sup \{ s_k : k \geq n\}$$
+$$\infs := \inf \{ s_k : k \geq n\}$$&lt;/p&gt;
+&lt;p&gt;We note that the sequence $\{ \sups \}$$_{n \in \N}$ is monotonically decreasing and the sequence $\{ \infs \}$$_{n \in \N}$ is monotonically increasing, and thus their limits exist in $\RR$.&lt;/p&gt;
+&lt;p&gt;We now show the equivalence of the two ways of looking at upper and lower limits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 4:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Then
+$$\limm \sups = \lims s_n$$
+$$\limm \infs = \limi s_n$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt;
+We will prove the first equation. The proof for the second is similar. We prove the equation in two steps.&lt;/p&gt;
+&lt;p&gt;Let $S = \{ s_n : n \in \N \}$. Let&amp;rsquo;s show that $\sup S = +\infty$ if and only if $\lims s_n = + \infty$. Suppose first that $\sup S = + \infty$. Then we construct a subsequence $\snk$ as follows. We let $n_1 = 1.$ Suppose $n_1, \ldots, n_{k}$ are chosen and let
+$$S_k = \{ n \in \N : s_n \geq \max\{s_{n_1}, \ldots, s_{n_k}, k\} + 1 \}$$
+Notice that $S_k$ is infinite as otherwise we can find an $M \in \R$ such that $s_n \leq M$ for all $n \geq 1$, contradicting the fact that $\sup S = + \infty$. We pick $n_{k+1}$ to be the smallest element of $S_k$ which is bigger than $n_k$. The resulting subsequence satisfies the condition that $s_{n_k} \geq k$ for $k \geq 2$ and thus we conclude that $s_{n_k} \to +\infty$ which gives $\lims s_n = +\infty$. Now suppose that $\lims s_n = +\infty$. From Theorem 1 we can conclude that there exists a subsequence $\snk$ such that $s_{n_k} \to +\infty$. This immediately implies $\sup S = +\infty$.&lt;/p&gt;
+&lt;p&gt;For the second step, suppose $\sup S &amp;lt; + \infty$. Let
+$$a_n = \sups$$
+Notice that $a_1 &amp;lt; +\infty$ and $\{a_n\}$ is a monotonically decreasing sequence. Therefore, we have that either $\{a_n\}$ is lower bounded in which case it converges to, say, $a$ or it is not in which case $\limm a_n = -\infty$. Since $s_n \leq a_n$, by Theorem 2 we can conclude
 $$
-\alpha = \sup E
+\lims s_n \leq \lims a_n = \limm a_n
 $$
-That there is at most one supremum is clear from the property 2 above. The &lt;em&gt;greatest lower bound&lt;/em&gt;, or &lt;em&gt;infimum&lt;/em&gt;, of a set $E$ which is bounded below is defined in the same manner, and we write it as $\inf E$. Note that if $x \in E$, $\alpha = \sup E$, and $x &amp;lt; \alpha$ then there exists $y \in E$ such that $x &amp;lt; y &amp;lt; \alpha$ because otherwise $x$ would a lower bound less than $\alpha$.&lt;/p&gt;
+where the last equality follows from Theorem 3. We will now show that
+$$
+\lims s_n \geq \limm a_n
+$$
+which will give us our required equality. If $\limm a_n = -\infty$ there is nothing to prove and so we assume that $a &amp;gt; -\infty$. Let $\e &amp;gt; 0$ be given and let
+$$
+B = \{ n \in \N : s_n  \geq a - \e \}
+$$
+We claim that $B$ is infinite. Indeed, if $B$ were finite we can find $N \in \N$ so that $N \geq \max(B)$. This will imply that $s_n \leq a - \e$ for all $n \geq N$ and so $a_n \leq a - \e$ for $n \geq N$. But then by Theorem 2 we would conclude $a = \limm a_n \leq a-\e$, which is absurd. Thus $B$ is infinite and we let $\snk$ be a subsequence of $\sn$ with $n_k \in B$. Notice that $\lims s_{n_k} \leq \lims s_n$, since any subsequential limit of $\snk$ is also a subsequential limit of $\sn$. This along with Theorem 2 give
+$$
+a - \e \leq \lims s_{n_k} \leq \lims s_n
+$$
+Since $\e$ was arbitrary we conclude that  $\lims s_n \geq a$, which is what we wanted. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;more-properties&#34;&gt;More properties&lt;/h2&gt;
+&lt;p&gt;These theorems open new avenues to discover more properties of upper and lower limits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 5:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Then
+$$\limi s_n = - \lims (-s_n)$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; TODO&lt;/p&gt;
+&lt;p&gt;Subadditivity of $\limsup$:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 6:&lt;/strong&gt; For any two real sequences ${a_n}$ and ${b_n}$,
+$$
+\lims (a_n + b_n) \leq \lims a_n + \lims b_n
+$$
+provided the sum on the right is not of the form $\infty - \infty$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; If $\lims a_n = \infty$ then as by assumption the right side is not $\infty - \infty$, it is $\infty$ and there is nothing to prove. Similarly for the case $\lims b_n = \infty$. We may thus assume that
+$$
+\lims a_n = A &amp;lt; \infty \text{ and } \lims b_n = B &amp;lt; \infty
+$$
+We note that $\sup_{k \geq 1} a_k &amp;lt; \infty$, $\sup_{k \geq 1} b_k &amp;lt; \infty$, and so TODO&lt;/p&gt;
+&lt;p&gt;Superadditivity of $\liminf$:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 7:&lt;/strong&gt; For any two real sequences ${a_n}$ and ${b_n}$,
+$$
+\limi (a_n + b_n) \geq \limi a_n + \limi b_n
+$$
+provided the sum on the right is not of the form $\infty - \infty$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; TODO&lt;/p&gt;
 </description>
     </item>
     
