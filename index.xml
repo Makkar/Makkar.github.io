@@ -87,7 +87,7 @@ Therefore, $y \in [x_2]$. Since $y$ was an arbitrary element of $[x_1]$, we get 
 \newcommand{\infs}{\inf_{k \geq n} s_k}
 \newcommand{\cc}{\mathsf{c}}
 $$&lt;/p&gt;
-&lt;p&gt;I wrote this as a useful reference for myself. Most of what follows is taken from Rudin&amp;rsquo;s Principles of Mathematical Analysis.&lt;/p&gt;
+&lt;p&gt;Most of what follows is taken from Rudin&amp;rsquo;s Principles of Mathematical Analysis.&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The concept of upper and lower limits (commonly denoted by $\limsup$ and $\liminf$ respectively) shows up routinely when discussing the limiting behaviour of a sequence. For example, consider the Big O notation, $\mathcal{O}$, defined as $f(n) = \mathcal{O}(g(n))$ iff there exists a positive real number $c$ and an integer $N$ such that for every $n \in \Z$, $n &amp;gt; N$, we have $|f(n)| \leq c g(n)$. This can be succinctly written as
 $$
