@@ -620,7 +620,7 @@ $$ \int_X (\alpha f + \beta g) \dmu = \alpha \int_X f \dmu + \beta \int_X g \dmu
 $$ F(f) = \int_X |f| \dmu, \quad f \in L^1(\mu) $$
 is a linear functional.</p>
 <h2 id="inner-products-and-norms">Inner products and norms</h2>
-<p><strong>Definition 5:</strong> If $V$ be a linear space over $\C$, an <em>inner product</em> on $V$ is a function $\langle \cdot , \cdot \rangle V \times V \to \C$ such that for all $\alpha, \beta \in \C$, and all $x,y,z \in V$, the following are satisfied:</p>
+<p><strong>Definition 5:</strong> If $V$ be a linear space over $\C$, an <em>inner product</em> on $V$ is a function $\langle \cdot , \cdot \rangle: V \times V \to \C$ such that for all $\alpha, \beta \in \C$, and all $x,y,z \in V$, the following are satisfied:</p>
 <ol>
 <li>Linearity in the first argument: $\langle \alpha x + \beta y, z \rangle = \alpha \langle x,z \rangle + \beta \langle y,z \rangle$,</li>
 <li>Conjugate symmetry: $\inner{x}{y} = \conj{\inner{y}{x}}$,</li>
@@ -708,7 +708,7 @@ $$ \norm{E_y}^2 = \norm{k_y}^2 = \inner{k_y}{k_y} = K(y,y) $$</p>
 <h3 id="example">Example</h3>
 <p>The first question that comes to mind is if any Reproducing Kernel Hilbert Spaces exist. The following example answers this question in the affirmative.</p>
 <p>We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in X$ and we have
-$$ V(j) = v_j = \inner{v}{e_j}\,, \quad (j \in X) $$
+$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in X) $$
 where $e_j$ is a vector with $1$ at $j$<sup>th</sup> position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.</p>
 <p>Can there be multiple reproducing kernels for an RKHS? The following theorem answers this question.</p>
 <p><strong>Theorem 3:</strong> If an RKHS $\H$ of functions on a set $X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.</p>

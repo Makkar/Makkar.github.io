@@ -85,7 +85,7 @@ $$ \int_X (\alpha f + \beta g) \dmu = \alpha \int_X f \dmu + \beta \int_X g \dmu
 $$ F(f) = \int_X |f| \dmu, \quad f \in L^1(\mu) $$
 is a linear functional.&lt;/p&gt;
 &lt;h2 id=&#34;inner-products-and-norms&#34;&gt;Inner products and norms&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; If $V$ be a linear space over $\C$, an &lt;em&gt;inner product&lt;/em&gt; on $V$ is a function $\langle \cdot , \cdot \rangle V \times V \to \C$ such that for all $\alpha, \beta \in \C$, and all $x,y,z \in V$, the following are satisfied:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; If $V$ be a linear space over $\C$, an &lt;em&gt;inner product&lt;/em&gt; on $V$ is a function $\langle \cdot , \cdot \rangle: V \times V \to \C$ such that for all $\alpha, \beta \in \C$, and all $x,y,z \in V$, the following are satisfied:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Linearity in the first argument: $\langle \alpha x + \beta y, z \rangle = \alpha \langle x,z \rangle + \beta \langle y,z \rangle$,&lt;/li&gt;
 &lt;li&gt;Conjugate symmetry: $\inner{x}{y} = \conj{\inner{y}{x}}$,&lt;/li&gt;
@@ -173,7 +173,7 @@ $$ \norm{E_y}^2 = \norm{k_y}^2 = \inner{k_y}{k_y} = K(y,y) $$&lt;/p&gt;
 &lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
 &lt;p&gt;The first question that comes to mind is if any Reproducing Kernel Hilbert Spaces exist. The following example answers this question in the affirmative.&lt;/p&gt;
 &lt;p&gt;We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in X$ and we have
-$$ V(j) = v_j = \inner{v}{e_j}\,, \quad (j \in X) $$
+$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in X) $$
 where $e_j$ is a vector with $1$ at $j$&lt;sup&gt;th&lt;/sup&gt; position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.&lt;/p&gt;
 &lt;p&gt;Can there be multiple reproducing kernels for an RKHS? The following theorem answers this question.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 3:&lt;/strong&gt; If an RKHS $\H$ of functions on a set $X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.&lt;/p&gt;
