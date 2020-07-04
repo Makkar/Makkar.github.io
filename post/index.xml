@@ -5,12 +5,187 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 20 Jun 2020 19:16:45 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 03 Jul 2020 21:35:10 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://makkar.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Kernels - Part 0</title>
+      <link>https://makkar.github.io/post/kernels/</link>
+      <pubDate>Fri, 03 Jul 2020 21:35:10 -0400</pubDate>
+      <guid>https://makkar.github.io/post/kernels/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\conj}[1]{\overline{#1}}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;The word &amp;ldquo;kernel&amp;rdquo; is 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Kernel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;heavily overloaded&lt;/a&gt;, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space.&lt;/p&gt;
+&lt;p&gt;We usually have the following framework: The input space $\X$ which contains our observations/inputs/features is either not rich enough (for example, if there is no linear boundary separating the two classes in a binary classification problem) or not convenient (for example, if our inputs are strings), and therefore we want to work is some other space we call feature space $\H$. Suppose we have a map which takes our inputs from $\X$ to $\H$:
+$$ \Phi : \X \to \H $$
+Then the class of kernels we are interested in are those for which is it possible to write
+$$ k(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
+What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernel theory.&lt;/p&gt;
+&lt;p&gt;In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. This beautiful theory will require some patience from the reader.&lt;/p&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;A topic like this requires quite a bit of background before we can get to the interesting results like the one above. It&amp;rsquo;s always easy to get lazy and assume all the necessary background from the reader and get straight to the meat, but I want to write an article which I would have found useful had I had it when I started learning about kernel theory. With that being said, I am under no illusion that a much better way to learn this background would be to read a functional analysis text if you have the time.&lt;/p&gt;
+&lt;h2 id=&#34;linear-spaces&#34;&gt;Linear spaces&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1:&lt;/strong&gt; A &lt;em&gt;linear space&lt;/em&gt;, or alternatively a &lt;em&gt;vector space&lt;/em&gt;, over a field $\F$ ($\F$ is $\R$ or $\C$ for our purposes) is a set $V$ of elements called &lt;em&gt;vectors&lt;/em&gt; (the elements of $\F$ are called &lt;em&gt;scalars&lt;/em&gt;) satisfying:&lt;/p&gt;
+&lt;p&gt;(A) To every pair, $x$ and $y$, of vectors in $V$ there corresponds a vector $x+y$, called the sum of $x$ and $y$, in such a way that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;addition is commutative, $x+y = y+x$,&lt;/li&gt;
+&lt;li&gt;addition is associative, $x+(y+z) = (x+y)+z$,&lt;/li&gt;
+&lt;li&gt;there exists in $V$ a unique vector $0$ such that $x+0=x$ for every vector $x$, and&lt;/li&gt;
+&lt;li&gt;to every vector $x \in V$ there corresponds a unique vector $-x$ such that $x+(-x)=0$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(B) To every pair, $\alpha \in \F$ and $x \in V$, there corresponds a vector $\alpha x \in V$, called the product of $\alpha$ and $x$, in such a way that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;multiplication by scalars is associative, $\alpha(\beta x) = (\alpha \beta)x$, and&lt;/li&gt;
+&lt;li&gt;$1x = x$ for every vector $x$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(C) Finally the distributive properties&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\alpha(x+y) = \alpha x + \alpha y$, and&lt;/li&gt;
+&lt;li&gt;$(\alpha + \beta) x = \alpha x + \beta x$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;The Euclidean spaces $\R^n$ are vector spaces over the real field.&lt;/li&gt;
+&lt;li&gt;$\C^n$ are vector spaces over $\C$.&lt;/li&gt;
+&lt;li&gt;The set of all polynomials, with complex coefficients, in a variable $t$ is a vector space over $\C$.&lt;/li&gt;
+&lt;li&gt;The set $C$ of all continuous complex functions on the unit interval $[0,1]$ is a vector space over $\C$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Definition 2:&lt;/strong&gt; A &lt;em&gt;linear transformation&lt;/em&gt; of a linear space $V$ into a linear space $W$ is a mapping $T: V \to W$ such that
+$$ T(\alpha x + \beta y) = \alpha T(x) + \beta T(y), \quad  (x,y \in V;\; \alpha, \beta \in \F) $$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; In the special case in which $W$ above is a field, $T$ is called a &lt;em&gt;linear functional&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Note that we often write $Tx$ instead of $T(x)$, if $T$ is linear.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 4:&lt;/strong&gt; Let $\mu$ be a positive measure on an arbitrary measurable space $X$. We define $L^1(\mu)$ to be the collection of all complex measurable functions $f$ on $X$ for which
+$$ \int_X |f| \dmu &amp;lt; \infty $$&lt;/p&gt;
+&lt;p&gt;It can be shown that for every $f, g \in L^1(\mu)$ and for every $\alpha, \beta \in \C$, we have $\alpha f + \beta g \in L^1(\mu)$, and
+$$ \int_X (\alpha f + \beta g) \dmu = \alpha \int_X f \dmu + \beta \int_X g \dmu $$&lt;/p&gt;
+&lt;p&gt;Thus, $L^1(\mu)$ is a vector space, and the mapping $F: L^1(\mu) \to \R$ defined by
+$$ F(f) = \int_X |f| \dmu, \quad f \in L^1(\mu) $$
+is a linear functional.&lt;/p&gt;
+&lt;h2 id=&#34;inner-products-and-norms&#34;&gt;Inner products and norms&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; If $V$ be a linear space over $\C$, an &lt;em&gt;inner product&lt;/em&gt; on $V$ is a function $\langle \cdot , \cdot \rangle V \times V \to \C$ such that for all $\alpha, \beta \in \C$, and all $x,y,z \in V$, the following are satisfied:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Linearity in the first argument: $\langle \alpha x + \beta y, z \rangle = \alpha \langle x,z \rangle + \beta \langle y,z \rangle$,&lt;/li&gt;
+&lt;li&gt;Conjugate symmetry: $\inner{x}{y} = \conj{\inner{y}{x}}$,&lt;/li&gt;
+&lt;li&gt;Positivity: $\inner{x}{x} \geq 0$,&lt;/li&gt;
+&lt;li&gt;If $\inner{x}{x} = 0$, then $x=0$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A function satisfying only the first three properties is called a &lt;em&gt;semi-inner product&lt;/em&gt; on $V$.&lt;/p&gt;
+&lt;p&gt;An immediate consequences of this definition: For every $y \in V$, the mapping $F: V \to \C$ defined by
+$$ F(x) = \inner{x}{y}, \quad (x \in V) $$
+is a linear functional on $V$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 6:&lt;/strong&gt; If $V$ be a linear space over $\C$, a &lt;em&gt;norm&lt;/em&gt; on $V$ is a non-negative function $\norm{\cdot} : V \to \R$ such that for all $\alpha \in \C$, and all $x,y \in V$, the following are satisfied:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Subadditivity: $\norm{x+y} \leq \norm{x} + \norm{y}$,&lt;/li&gt;
+&lt;li&gt;Absolutely homogenous: $\norm{\alpha x} = |\alpha| \norm{x}$,&lt;/li&gt;
+&lt;li&gt;Positive definite: $\norm{x} = 0 \implies x = 0$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Given an inner product, we can define a &lt;em&gt;norm&lt;/em&gt; as follows:
+$$ \norm{x} = \sqrt{\inner{x}{x}} $$&lt;/p&gt;
+&lt;p&gt;A classic result useful in many proofs:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 1:&lt;/strong&gt; Schwarz inequality
+$$|\inner{x}{y}| \leq \norm{x} \, \lVert y \rVert$$
+Equality hold for $y = \alpha x$ or $y=0$.&lt;/p&gt;
+&lt;p&gt;The proof is not too difficult.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 7:&lt;/strong&gt; The virtue of norm on a vector space $V$ is that
+$$ d(x,y) := \norm{ x-y } $$
+defines a &lt;em&gt;metric&lt;/em&gt; on $V$ so that $V$ becomes a metric space.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 8:&lt;/strong&gt; If $0 &amp;lt; p &amp;lt; \infty$ and if $f$ is a complex measurable function on $X$, define
+$$ \norm{f}_p := \left( \int_X |f|^p \dmu \right)^{1/p} $$
+and let $L^p(\mu)$ consist of all $f$ for which $\norm{f}_p &amp;lt; \infty$. We call $\norm{f}_p$ the $L^p$-norm of $f$.&lt;/p&gt;
+&lt;h2 id=&#34;hilbert-spaces&#34;&gt;Hilbert spaces&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Definition 9:&lt;/strong&gt; An &lt;em&gt;inner product space&lt;/em&gt;, or alternatively a &lt;em&gt;pre-Hilbert space&lt;/em&gt;, is a linear space with an inner product defined on it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 10:&lt;/strong&gt; A pre-Hilbert space $\H$ is called a &lt;em&gt;Hilbert space&lt;/em&gt; if it is complete in the metric $d$ (see Definition 7).&lt;/p&gt;
+&lt;p&gt;Note that a metric space $M$ is called complete if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.&lt;/p&gt;
+&lt;h3 id=&#34;examples-1&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;The set $\C^n$ is a Hilbert space.&lt;/li&gt;
+&lt;li&gt;The set $C$ of all continuous complex functions on the unit interval $[0,1]$ defined above is an inner product space if we define
+$$ \inner{f}{g} := \int_0^1 f(x) \conj{g(x)} \dx $$
+but is not a Hilbert space.&lt;/li&gt;
+&lt;li&gt;$L^2(\mu)$ is a Hilbert space, with inner product
+$$ \inner{f}{g} := \int_X f \, \conj{g} \dmu $$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Definition 11:&lt;/strong&gt; Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a &lt;em&gt;linear evaluation functional&lt;/em&gt; is a linear functional $E_x$ that is defined as
+$$ E_x(f) = f(x), \quad (f \in \FF) $$
+In other words, a linear evaluation function with respect to $x \in X$ evaluates each function at $x$.&lt;/p&gt;
+&lt;p&gt;In general, the evaluation functional is not continuous. This means we can have $f_n \to f$ but $E_x(f_n)$ does not converge to $E_x(f)$. Intuitively, this is because Hilbert spaces can contain very unsmooth functions. We will later consider a special type of Hilbert space, Reproducing Kernel Hilbert Space where evaluation functional is continuous.&lt;/p&gt;
+&lt;p&gt;A lemma that will be useful later on:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 1:&lt;/strong&gt; Let $\H$ be a Hilbert space and $L:\H \to \F$ a linear functional. The following statements are equivalent:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$L$ is continuous.&lt;/li&gt;
+&lt;li&gt;$L$ is continuous at $0$.&lt;/li&gt;
+&lt;li&gt;$L$ is continuous at some point.&lt;/li&gt;
+&lt;li&gt;$L$ is bounded, i.e., there is a constant $c &amp;gt; 0$ such that $|L(f)| \leq c \norm{f}$ for every $f \in \H$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; It is clear that $(1) \implies (2) \implies (3)$, and $(4) \implies (2)$. Let&amp;rsquo;s show that $(3) \implies (1)$, and $(2) \implies (4)$.&lt;/p&gt;
+&lt;p&gt;$(3) \implies (1)$: Suppose $L$ is continuous at $f$ and $g$ is any point in $\H$. If $g_n \to g$ in $\H$, then $g_n - g + f \to f$. By assumption $L(f) = \limn L(g_n - g + f) = \limn L(g_n) - L(g) + L(f)$. Hence $L(g) = \limn L(g_n)$.&lt;/p&gt;
+&lt;p&gt;$(2) \implies (4)$: The definition of continuity at $0$ implies that $L^{-1}(\{\alpha \in \F : |\alpha| &amp;lt; 1\})$ contains an open ball centered at $0$. Let $\delta &amp;gt; 0$ be the radius of that open ball centered at $0$. Then for $f \in \H$ and $\norm{f} &amp;lt; \delta$ we have $|L(f)| &amp;lt; 1$. If $f$ is an arbitrary element of $\H$ and $\e &amp;gt; 0$, then
+$$ \left\lVert \frac{\delta f}{\norm{f} + \e} \right\rVert &amp;lt; \delta $$
+Hence,
+$$ 1 &amp;gt; \left\lvert L\left( \frac{\delta f}{\norm{f} + \e} \right) \right\rvert = \frac{\delta }{\norm{f} + \e} |L(f)| $$
+Letting $\e \to 0$ we see that $(4)$ holds with $c = 1/\delta$. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;riesz-representation-theorem&#34;&gt;Riesz representation theorem&lt;/h2&gt;
+&lt;p&gt;We now come to a very important theorem called the Riesz representation theorem. The name Riesz has 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Riesz_theorem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;many theorems&lt;/a&gt; attached to it, but the one relevant to us is the following:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 2:&lt;/strong&gt; For each continuous linear functional $\phi$ on a Hilbert space $\H$, there exists a unique $g \in \H$ such that
+$$\phi(f) = \inner{f}{g}\, , \quad (f \in \H) $$&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll skip the proof as it&amp;rsquo;s not easy and will unnecessarily make this article abstruse.&lt;/p&gt;
+&lt;p&gt;Side-note: In the mathematical treatment of quantum mechanics, this theorem can be seen as a justification for the popular bra–ket notation.&lt;/p&gt;
+&lt;h1 id=&#34;reproducing-kernel-hilbert-spaces-rkhs&#34;&gt;Reproducing Kernel Hilbert Spaces (RKHS)&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Definition 12:&lt;/strong&gt; Let $X$ be a set. We will call a set $\H$ of functions from $X$ to $\F$ a &lt;em&gt;Reproducing Kernel Hilbert Space (RKHS)&lt;/em&gt; on $X$ if&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\H$ is a vector space,&lt;/li&gt;
+&lt;li&gt;$\H$ is endowed with an inner product, $\inner{\cdot}{\cdot}$, with respect to which $\H$ is a Hilbert space,&lt;/li&gt;
+&lt;li&gt;for every $x \in X$, the linear evaluation functional $E_x : \H \to \F$, is bounded (or continuous, as seen from Lemma-1).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If $\H$ is an RKHS on $X$, then an application of the Riesz representation theorem shows that the linear evaluation functional is given by the inner product with a unique vector in $\H$. Therefore, for each $x \in X$, there exists a unique vector $k_x \in \H$, such that for every $f \in \H$,
+$$ f(x) = E_x(f) = \inner{f}{k_x} $$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 13:&lt;/strong&gt; The function $k_x$ is called the &lt;em&gt;reproducing kernel for the point $x$&lt;/em&gt;. The function $K: X \times X \to \F$ defined by
+$$ K(x,y) = k_y(x) $$
+is called the &lt;em&gt;reproducing kernel for $\H$&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Note that we have
+$$ K(x,y) = k_y(x) = \inner{k_y}{k_x} = \conj{\inner{k_x}{k_y}} = \conj{K(y,x)}$$&lt;/p&gt;
+&lt;p&gt;Also,
+$$ \norm{E_y}^2 = \norm{k_y}^2 = \inner{k_y}{k_y} = K(y,y) $$&lt;/p&gt;
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+&lt;p&gt;The first question that comes to mind is if any Reproducing Kernel Hilbert Spaces exist. The following example answers this question in the affirmative.&lt;/p&gt;
+&lt;p&gt;We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in X$ and we have
+$$ V(j) = v_j = \inner{v}{e_j}\,, \quad (j \in X) $$
+where $e_j$ is a vector with $1$ at $j$&lt;sup&gt;th&lt;/sup&gt; position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.&lt;/p&gt;
+&lt;p&gt;Can there be multiple reproducing kernels for an RKHS? The following theorem answers this question.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 3:&lt;/strong&gt; If an RKHS $\H$ of functions on a set $X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Suppose that there exists another reproducing kernel $K&#39;$ for $\H$. Then
+$$
+\norm{k_y - k&amp;rsquo;_y} = \inner{k_y - k&amp;rsquo;_y}{k_y - k&amp;rsquo;_y} = \inner{k_y - k&amp;rsquo;_y}{k_y} - \inner{k_y - k&amp;rsquo;_y}{k&amp;rsquo;_y} = (k_y - k&amp;rsquo;_y)(y) - (k_y - k&amp;rsquo;_y)(y) = 0
+$$
+for any $y \in X$. In other words, $k_y(x) = k&amp;rsquo;_y(x)$ for every $x \in X$ by the positive definite property of norms and hence the kernel is unique. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;p&gt;We covered quite a lot of ground in this blog post but I didn&amp;rsquo;t even define a kernel as we commonly use in machine learning! In the next post I will do that and cover its fundamental properties.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Partitions and Equivalence Relations</title>
@@ -93,7 +268,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; Let $\{s_n\}$ be a sequence of real numbers with the following property: For every real $M$ there is an integer $N$ such that $n \geq N$ implies $s_n \geq M$. We then write $s_n \to +\infty$. Similarly for $s_n \to -\infty$.&lt;/p&gt;
 &lt;p&gt;Note: The symbol $\to$ is now used for certain type of divergent sequences as well.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 4:&lt;/strong&gt; Given a sequence $\{p_n\}$, consider a sequence $\{n_k\}$ of positive integers, such that $n_1 &amp;lt; n_2 &amp;lt; \cdots$. Then the sequence $\{p_{n_k}\}$, which is a composition of the functions $\{n_k\}$ and $\{p_n\}$, is called a &lt;em&gt;subsequence&lt;/em&gt; of ${p_n}$. If $\{p_{n_k}\}$ converges, its limit is called a &lt;em&gt;subsequential limit&lt;/em&gt; of $\{p_n\}$.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Let $E$ be the set of numbers $x$ (in the extended real number system, i.e. $x \in \RR := \R \cup \{+\infty, -\infty\}$) such that $s_{n_k} \to x$ for some subsequence $\{s_{n_k}\}$. Therefore, this set contains all the subsequential limits of $\sn$ plus possibly the numbers $+\infty$ and $-\infty$. We define
+&lt;p&gt;&lt;strong&gt;Definition 5:&lt;/strong&gt; Let $\sn$ be a sequence of real numbers. Let $E$ be the set of numbers $x$ (in the extended real number system, i.e., $x \in \RR := \R \cup \{+\infty, -\infty\}$) such that $s_{n_k} \to x$ for some subsequence $\{s_{n_k}\}$. Therefore, this set contains all the subsequential limits of $\sn$ plus possibly the numbers $+\infty$ and $-\infty$. We define
 $$
 s^* = \sup E
 $$
@@ -198,7 +373,7 @@ Since $\e$ was arbitrary we conclude that  $\lims s_n \geq a$, which is what we 
 $$\limi s_n = - \lims (-s_n)$$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; TODO&lt;/p&gt;
 &lt;p&gt;Subadditivity of $\limsup$:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Theorem 6:&lt;/strong&gt; For any two real sequences ${a_n}$ and ${b_n}$,
+&lt;p&gt;&lt;strong&gt;Theorem 6:&lt;/strong&gt; For any two real sequences $\{a_n\}$ and $\{b_n\}$,
 $$
 \lims (a_n + b_n) \leq \lims a_n + \lims b_n
 $$
@@ -209,7 +384,7 @@ $$
 $$
 We note that $\sup_{k \geq 1} a_k &amp;lt; \infty$, $\sup_{k \geq 1} b_k &amp;lt; \infty$, and so TODO&lt;/p&gt;
 &lt;p&gt;Superadditivity of $\liminf$:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Theorem 7:&lt;/strong&gt; For any two real sequences ${a_n}$ and ${b_n}$,
+&lt;p&gt;&lt;strong&gt;Theorem 7:&lt;/strong&gt; For any two real sequences $\{a_n\}$ and $\{b_n\}$,
 $$
 \limi (a_n + b_n) \geq \limi a_n + \limi b_n
 $$
