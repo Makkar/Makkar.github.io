@@ -215,8 +215,8 @@
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_192x192_fill_lanczos_center_2.png">
+  <link rel="icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://makkar.github.io/post/kernels/">
 
@@ -236,8 +236,8 @@
   <meta property="og:site_name" content="Aditya Makkar">
   <meta property="og:url" content="https://makkar.github.io/post/kernels/">
   <meta property="og:title" content="Kernels - Part 0 | Aditya Makkar">
-  <meta property="og:description" content="Functional analysis background for kernel theory."><meta property="og:image" content="https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Functional analysis background for kernel theory."><meta property="og:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2020-07-03T21:35:10-04:00">
@@ -283,7 +283,7 @@
     "name": "Aditya Makkar",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_192x192_fill_lanczos_center_2.png"
+      "url": "https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png"
     }
   },
   "description": "Functional analysis background for kernel theory."
@@ -573,15 +573,16 @@
 $$</p>
 <h1 id="introduction">Introduction</h1>
 <p>The word &ldquo;kernel&rdquo; is 
-<a href="https://en.wikipedia.org/wiki/Kernel" target="_blank" rel="noopener">heavily overloaded</a>, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space.</p>
+<a href="https://en.wikipedia.org/wiki/Kernel" target="_blank" rel="noopener">heavily overloaded</a>, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space. Kernel methods provide an elegant, theoretically well-founded, and powerful approach to solving many learning problems.</p>
 <p>We usually have the following framework: The input space $\X$ which contains our observations/inputs/features is either not rich enough (for example, if there is no linear boundary separating the two classes in a binary classification problem) or not convenient (for example, if our inputs are strings), and therefore we want to work is some other space we call feature space $\H$. Suppose we have a map which takes our inputs from $\X$ to $\H$:
 $$ \Phi : \X \to \H $$
 Then the class of kernels we are interested in are those for which is it possible to write
 $$ k(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
-What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernel theory.</p>
-<p>In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. This beautiful theory will require some patience from the reader.</p>
+What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.</p>
+<p>In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. In the 
+<a href="http://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">next article</a> I will discuss the kernel trick and some important theorems like Mercer&rsquo;s theorem and Representer theorem.</p>
 <h1 id="background">Background</h1>
-<p>A topic like this requires quite a bit of background before we can get to the interesting results like the one above. It&rsquo;s always easy to get lazy and assume all the necessary background from the reader and get straight to the meat, but I want to write an article which I would have found useful had I had it when I started learning about kernel theory. With that being said, I am under no illusion that a much better way to learn this background would be to read a functional analysis text if you have the time.</p>
+<p>A topic like this requires quite a bit of background before we can get to the interesting results like the one above. It&rsquo;s always easy to get lazy and assume all the necessary background from the reader and get straight to the meat, but I want to write an article which I would have found useful had I had it when I started learning about kernel theory. With that being said, I am under no illusion and believe that a much better way to learn this background would be to read a functional analysis text if you have the time.</p>
 <h2 id="linear-spaces">Linear spaces</h2>
 <p><strong>Definition 1:</strong> A <em>linear space</em>, or alternatively a <em>vector space</em>, over a field $\F$ ($\F$ is $\R$ or $\C$ for our purposes) is a set $V$ of elements called <em>vectors</em> (the elements of $\F$ are called <em>scalars</em>) satisfying:</p>
 <p>(A) To every pair, $x$ and $y$, of vectors in $V$ there corresponds a vector $x+y$, called the sum of $x$ and $y$, in such a way that</p>
@@ -647,23 +648,39 @@ Equality hold for $y = \alpha x$ or $y=0$.</p>
 <p><strong>Definition 7:</strong> The virtue of norm on a vector space $V$ is that
 $$ d(x,y) := \norm{ x-y } $$
 defines a <em>metric</em> on $V$ so that $V$ becomes a metric space.</p>
-<p><strong>Definition 8:</strong> If $0 &lt; p &lt; \infty$ and if $f$ is a complex measurable function on $X$, define
+<p>Note that technically the tuple $(V, d)$ defines a metric space, but I will often write just $V$ instead of $(V, d)$ when it&rsquo;s clear from context what the metric $d$ is.</p>
+<p><strong>Definition 8:</strong> If $0 &lt; p &lt; \infty$, $f$ is a complex measurable function on $X$, and $\mu$ is a nonnegative measure on $X$, define
 $$ \norm{f}_p := \left( \int_X |f|^p \dmu \right)^{1/p} $$
 and let $L^p(\mu)$ consist of all $f$ for which $\norm{f}_p &lt; \infty$. We call $\norm{f}_p$ the $L^p$-norm of $f$.</p>
 <h2 id="hilbert-spaces">Hilbert spaces</h2>
 <p><strong>Definition 9:</strong> An <em>inner product space</em>, or alternatively a <em>pre-Hilbert space</em>, is a linear space with an inner product defined on it.</p>
-<p><strong>Definition 10:</strong> A pre-Hilbert space $\H$ is called a <em>Hilbert space</em> if it is complete in the metric $d$ (see Definition 7).</p>
-<p>Note that a metric space $M$ is called complete if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.</p>
+<p>We need the concept of completeness to define Hilbert space. But before that let me define Cauchy sequences.</p>
+<p><strong>Definition 10:</strong> Given a metric space $(M, d)$, a sequence $(x_n)_{n \in \N}$ of elements in $M$ is called a <em>Cauchy sequence</em> if for every positive real number $\e &gt; 0$ there exists a positive integer $N \in \N$ such that $m, n &gt; N$ implies that $d(x_m, x_n) &lt; \e$.</p>
+<p>Recall that we say a sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ <em>converges</em> if there exists a point $x \in M$ with the following property: for every $\e &gt; 0$ there exists a positive integer $N \in \N$ such that $n &gt; N$ implies that $d(x_n, x) &lt; \e$.</p>
+<p>Now we are ready to define the notion of completeness.</p>
+<p><strong>Definition 11:</strong> A metric space $(M, d)$ is called <em>complete</em> if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.</p>
+<p><strong>Definition 12:</strong> A pre-Hilbert space $\H$ is called a <em>Hilbert space</em> if it is complete in the metric $d$ (see Definition 7).</p>
 <h3 id="examples-1">Examples</h3>
 <ol>
-<li>The set $\C^n$ is a Hilbert space.</li>
-<li>The set $C$ of all continuous complex functions on the unit interval $[0,1]$ defined above is an inner product space if we define
+<li>
+<p>The sets $\R^n$ and $\C^n$ are Hilbert spaces if we define $\inner{x}{y} := \sum_{i=1}^n x_i \conj{y_i}$.</p>
+</li>
+<li>
+<p>The set $C$ of all continuous complex functions on the unit interval $[0,1]$ defined above is an inner product space if we define
 $$ \inner{f}{g} := \int_0^1 f(x) \conj{g(x)} \dx $$
-but is not a Hilbert space.</li>
-<li>$L^2(\mu)$ is a Hilbert space, with inner product
-$$ \inner{f}{g} := \int_X f \, \conj{g} \dmu $$</li>
+but is not a Hilbert space.</p>
+</li>
+<li>
+<p>$L^2(\mu)$ is a Hilbert space, with inner product
+$$ \inner{f}{g} := \int_X f \, \conj{g} \dmu $$</p>
+</li>
+<li>
+<p>The space of square-summable real-valued sequences, namely
+$$ \ell^2(\N) := \left\{ (x_n)_{n \in \N} \; : \; x_n \in \R,\, \sum_n x_n^2 &lt; \infty \right\} $$</p>
+<p>This set, when endowed with the inner product $\inner{x}{y} := \sum_{n \in \N} x_n y_n$, defines a Hilbert space. It will play an important role in our discussion of eigenfunctions for Reproducing Kernel Hilbert spaces.</p>
+</li>
 </ol>
-<p><strong>Definition 11:</strong> Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a <em>linear evaluation functional</em> is a linear functional $E_x$ that is defined as
+<p><strong>Definition 13:</strong> Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a <em>linear evaluation functional</em> is a linear functional $E_x$ that is defined as
 $$ E_x(f) = f(x), \quad (f \in \FF) $$
 In other words, a linear evaluation function with respect to $x \in X$ evaluates each function at $x$.</p>
 <p>In general, the evaluation functional is not continuous. This means we can have $f_n \to f$ but $E_x(f_n)$ does not converge to $E_x(f)$. Intuitively, this is because Hilbert spaces can contain very unsmooth functions. We will later consider a special type of Hilbert space, Reproducing Kernel Hilbert Space where evaluation functional is continuous.</p>
@@ -682,23 +699,34 @@ $$ \left\lVert \frac{\delta f}{\norm{f} + \e} \right\rVert &lt; \delta $$
 Hence,
 $$ 1 &gt; \left\lvert L\left( \frac{\delta f}{\norm{f} + \e} \right) \right\rvert = \frac{\delta }{\norm{f} + \e} |L(f)| $$
 Letting $\e \to 0$ we see that $(4)$ holds with $c = 1/\delta$. $\square$</p>
+<h3 id="orthonormal-bases">Orthonormal bases</h3>
+<p>We generalize the idea of orthonormal basis to infinite dimensional case. This will be needed when we discuss Mercer&rsquo;s theorem.</p>
+<p><strong>Definition 14:</strong> A collection of vectors $\{v_{\alpha} \, : \, \alpha \in A \}$ in a Hilbert space $\H$ for some index set $A$ is called <em>orthonormal</em> if it satisfies $\inner{v_{\alpha}}{v_{\beta}} = \delta_{\alpha \beta}$ where $\delta_{\alpha \beta}$ is the Kronecker delta, which equals $1$ if $\alpha = \beta$ and $0$ otherwise.</p>
+<p><strong>Definition 15:</strong> A collection of vectors $\{v_{\alpha} \, : \, \alpha \in A \}$ in a Hilbert space $\H$ is <em>complete</em> if for any $u \in \H$, $\inner{u}{v_{\alpha}} = 0$ for all $\alpha \in A$ implies that $u = 0$.</p>
+<p><strong>Definition 16:</strong> An <em>orthonormal basis</em> a complete orthonormal system.</p>
+<p>Note, we can also define an orthonormal basis as a maximal orthonormal set in $\H$. To say $\{v_{\alpha}\}$ is maximal means that no vector of $\H$ can be added to $\{v_{\alpha}\}$ in such a way that the resulting set is still orthonormal. This happens precisely when there is no $u \neq 0$ in $\H$ that is orthogonal to every $v_{\alpha}$.</p>
+<h3 id="separable-hilbert-spaces">Separable Hilbert spaces</h3>
+<p>Another idea we need is separability. Let us define that now.</p>
+<p><strong>Definition 17:</strong> A topological space is called <em>separable</em> if it contains a countable, dense subset; that is, there exists a sequence $(x_{n})_{n=1}^{\infty }$ of elements of the space such that every nonempty open subset of the space contains at least one element of the sequence.</p>
+<p><strong>Definition 18:</strong> A Hilbert space is separable if and only if it has a countable orthonormal basis. It follows that any separable, infinite-dimensional Hilbert space is isometric to the space $\ell^2(\N)$ of square-summable sequences.</p>
+<p>We will be dealing with separable Hilbert spaces in our discussion.</p>
 <h2 id="riesz-representation-theorem">Riesz representation theorem</h2>
 <p>We now come to a very important theorem called the Riesz representation theorem. The name Riesz has 
 <a href="https://en.wikipedia.org/wiki/Riesz_theorem" target="_blank" rel="noopener">many theorems</a> attached to it, but the one relevant to us is the following:</p>
-<p><strong>Theorem 2:</strong> For each continuous linear functional $\phi$ on a Hilbert space $\H$, there exists a unique $g \in \H$ such that
-$$\phi(f) = \inner{f}{g}\, , \quad (f \in \H) $$</p>
+<p><strong>Theorem 2:</strong> For each continuous linear functional $L$ on a Hilbert space $\H$, there exists a unique $g \in \H$ such that
+$$L(f) = \inner{f}{g}\, , \quad (f \in \H) $$</p>
 <p>I&rsquo;ll skip the proof as it&rsquo;s not easy and will unnecessarily make this article abstruse.</p>
 <p>Side-note: In the mathematical treatment of quantum mechanics, this theorem can be seen as a justification for the popular bra–ket notation.</p>
 <h1 id="reproducing-kernel-hilbert-spaces-rkhs">Reproducing Kernel Hilbert Spaces (RKHS)</h1>
-<p><strong>Definition 12:</strong> Let $X$ be a set. We will call a set $\H$ of functions from $X$ to $\F$ a <em>Reproducing Kernel Hilbert Space (RKHS)</em> on $X$ if</p>
+<p><strong>Definition 19:</strong> Let $\X$ be a set. We will call a set $\H$ of functions from $\X$ to $\F$ a <em>Reproducing Kernel Hilbert Space (RKHS)</em> on $\X$ if</p>
 <ol>
 <li>$\H$ is a vector space,</li>
 <li>$\H$ is endowed with an inner product, $\inner{\cdot}{\cdot}$, with respect to which $\H$ is a Hilbert space,</li>
-<li>for every $x \in X$, the linear evaluation functional $E_x : \H \to \F$, is bounded (or continuous, as seen from Lemma-1).</li>
+<li>for every $x \in \X$, the linear evaluation functional $E_x : \H \to \F$, is bounded (or continuous, as seen from Lemma-1).</li>
 </ol>
-<p>If $\H$ is an RKHS on $X$, then an application of the Riesz representation theorem shows that the linear evaluation functional is given by the inner product with a unique vector in $\H$. Therefore, for each $x \in X$, there exists a unique vector $k_x \in \H$, such that for every $f \in \H$,
+<p>If $\H$ is an RKHS on $\X$, then an application of the Riesz representation theorem shows that the linear evaluation functional is given by the inner product with a unique vector in $\H$. Therefore, for each $x \in \X$, there exists a unique vector $k_x \in \H$, such that for every $f \in \H$,
 $$ f(x) = E_x(f) = \inner{f}{k_x} $$</p>
-<p><strong>Definition 13:</strong> The function $k_x$ is called the <em>reproducing kernel for the point $x$</em>. The function $K: X \times X \to \F$ defined by
+<p><strong>Definition 20:</strong> The function $k_x$ is called the <em>reproducing kernel for the point $x$</em>. The function $K: \X \times \X \to \F$ defined by
 $$ K(x,y) = k_y(x) $$
 is called the <em>reproducing kernel for $\H$</em>.</p>
 <p>Note that we have
@@ -707,18 +735,27 @@ $$ K(x,y) = k_y(x) = \inner{k_y}{k_x} = \conj{\inner{k_x}{k_y}} = \conj{K(y,x)}$
 $$ \norm{E_y}^2 = \norm{k_y}^2 = \inner{k_y}{k_y} = K(y,y) $$</p>
 <h3 id="example">Example</h3>
 <p>The first question that comes to mind is if any Reproducing Kernel Hilbert Spaces exist. The following example answers this question in the affirmative.</p>
-<p>We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in X$ and we have
-$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in X) $$
-where $e_j$ is a vector with $1$ at $j$<sup>th</sup> position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.</p>
+<p>We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $\X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : \X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in \X$ and we have
+$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in \X) $$
+where $e_j$ is a vector with $1$ at $j$<sup>th</sup> position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in \X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.</p>
 <p>Can there be multiple reproducing kernels for an RKHS? The following theorem answers this question.</p>
-<p><strong>Theorem 3:</strong> If an RKHS $\H$ of functions on a set $X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.</p>
+<p><strong>Theorem 3:</strong> If an RKHS $\H$ of functions on a set $\X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.</p>
 <p><strong>Proof:</strong> Suppose that there exists another reproducing kernel $K'$ for $\H$. Then
 $$
 \norm{k_y - k&rsquo;_y} = \inner{k_y - k&rsquo;_y}{k_y - k&rsquo;_y} = \inner{k_y - k&rsquo;_y}{k_y} - \inner{k_y - k&rsquo;_y}{k&rsquo;_y} = (k_y - k&rsquo;_y)(y) - (k_y - k&rsquo;_y)(y) = 0
 $$
-for any $y \in X$. In other words, $k_y(x) = k&rsquo;_y(x)$ for every $x \in X$ by the positive definite property of norms and hence the kernel is unique. $\square$</p>
+for any $y \in \X$. In other words, $k_y(x) = k&rsquo;_y(x)$ for every $x \in \X$ by the positive definite property of norms and hence the kernel is unique. $\square$</p>
 <h1 id="epilogue">Epilogue</h1>
-<p>We covered quite a lot of ground in this blog post but I didn&rsquo;t even define a kernel as we commonly use in machine learning! In the next post I will do that and cover its fundamental properties.</p>
+<p>We covered quite a lot of ground in this blog post but I didn&rsquo;t even define a kernel as we commonly use in machine learning!
+In the 
+<a href="http://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">next post</a> I will do that and cover its fundamental properties.</p>
+<p>Some resources I recommend to go into more depth on what&rsquo;s covered here are:</p>
+<ol>
+<li>Halmos, P: Finite-Dimensional Vector Spaces.</li>
+<li>Rudin, W: Real and Complex Analysis. (Chapter - 4)</li>
+<li>Rudin, W: Functional Analysis.</li>
+<li>Conway, J: A course in functional analysis.</li>
+</ol>
 
     </div>
 

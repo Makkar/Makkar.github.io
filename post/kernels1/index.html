@@ -1,0 +1,1014 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Aditya Makkar">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Some results in Reproducing Kernel Hilbert Spaces">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://makkar.github.io/post/kernels1/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(0, 136, 204)">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://makkar.github.io/post/kernels1/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Aditya Makkar">
+  <meta property="og:url" content="https://makkar.github.io/post/kernels1/">
+  <meta property="og:title" content="Kernels - Part 1 | Aditya Makkar">
+  <meta property="og:description" content="Some results in Reproducing Kernel Hilbert Spaces"><meta property="og:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-07-16T16:20:23-04:00">
+    
+    <meta property="article:modified_time" content="2020-07-16T16:20:23-04:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://makkar.github.io/post/kernels1/"
+  },
+  "headline": "Kernels - Part 1",
+  
+  "datePublished": "2020-07-16T16:20:23-04:00",
+  "dateModified": "2020-07-16T16:20:23-04:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Aditya Makkar"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aditya Makkar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Some results in Reproducing Kernel Hilbert Spaces"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Kernels - Part 1 | Aditya Makkar</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/hilbert/"><span>Hilbert's Hotel - Blog</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Kernels - Part 1</h1>
+
+  
+  <p class="page-subtitle">Some results in Reproducing Kernel Hilbert Spaces</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jul 16, 2020
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$</p>
+<h1 id="introduction">Introduction</h1>
+<p>This is the second blog post in the series of blog posts on kernels. In the 
+<a href="http://makkar.github.io/post/kernels/" target="_blank" rel="noopener">first part</a> I introduced the functional analysis background for kernel theory. I highly recommend you read it before continuing. I will frequently refer to it and use the same notation. In this blog post I aim to introduce the fundamental theorems like Mercer&rsquo;s theorem and Representer theorem.</p>
+<h1 id="characterization-of-reproducing-kernels">Characterization of reproducing kernels</h1>
+<p>We already defined the notion of reproducing kernels for an RKHS (Definition 19). We now turn our attention to obtaining necessary and sufficient conditions for a function $K : \X \times \X \to \C$ to be the reproducing kernel for some RKHS. But first we must define kernel functions.</p>
+<h2 id="kernel-functions">Kernel functions</h2>
+<p>Let&rsquo;s start by recalling a basic definition.</p>
+<p><strong>Definition 21:</strong> Let $A = (a_{i,j})$ be an $n \times n$ complex matrix. Then $A$ is called <em>positive</em> if for every $\alpha_1, \ldots, \alpha_n \in \C$ we have
+$$ \sum_{i,j = 1}^{n} \conj{\alpha_i}\alpha_j a_{i,j} \geq 0 $$
+We denote this by $A \geq 0$.</p>
+<p>Note that if we define a vector $x \in \C^n$ to be such that its $i$<sup>th</sup> component is $\alpha_i$, then the condition above can rewritten as
+$$ \inner{Ax}{x} \geq 0 $$</p>
+<p>Also note that if $A \geq 0$ then $A = A^* $, where $A^* $ denotes the Hermitian matrix (also known as the self-adjoint matrix), $\conj{A^T}$. Therefore, positivity gives self-adjoint property for free if we are dealing with complex matrices. Things aren&rsquo;t so elegant for real matrices. For the real case we need to explicitly state that the matrix $A$ is also symmetric apart from what&rsquo;s stated in the definition above. Therefore, we often use the following as the definition of positive matrices:</p>
+<p><strong>Definition 21&rsquo;:</strong> An $n \times n$ matrix $A$ is positive, in symbols $A \geq 0$, if it is self-adjoint and if $\inner{Ax}{x} \geq 0$ for all $x \in \C^n$.</p>
+<p>Positive matrices are also alternatively called <em> positive semidefinite</em> or <em>nonnegative</em> matrices.</p>
+<p>The following lemma connects the concept of positive matrices to its eigenvalues.</p>
+<p><strong>Lemma 2:</strong> A matrix $A \geq 0$ if and only if $A = A^*$ and every eigenvalue of $A$ is nonnegative.</p>
+<p><strong>Proof:</strong> Let us first suppose $A \geq 0$, then $A = A^*$ by definition. Now if $\lambda$ is an eigenvalue of $A$ and $v$ is an eigenvector of $A$ corresponding to $\lambda$, we have
+$$ 0 \leq \inner{Av}{v} = \inner{\lambda v}{v} = \lambda \inner{v}{v} $$
+Thus, $\lambda$ is a nonnegative number.</p>
+<p>For the other side, find an orthonormal basis $v_1, \ldots, v_n$ consisting of eigenvectors of $A$ (it exists by the Spectral theorem). Let $v_i$ be the eigenvector corresponding to the eigenvalue $\lambda_i$. Then for any $x = \sum_i \alpha_i v_i$ we have $\inner{Ax}{x} = \sum_i \lambda_i \modu{\alpha_i}^2$. Since $\lambda_i \geq 0$, $\inner{Ax}{x} \geq 0$ and $A$ must be positive. $\square$</p>
+<p>We are now ready to define kernel function.</p>
+<p><strong>Definition 22:</strong> Let $\X$ be a set, then $K : \X \times \X \to \C$ is called a <em>kernel function</em> if for every $n \in \N$ and for every choice of $\{x_1, \ldots, x_n\} \subseteq \X$, the matrix $(K(x_i, x_j)) \geq 0$. We will use the notation $K \geq 0$ to denote that the function $K$ is a kernel function.</p>
+<p>Kernel functions are alternatively called <em>positive definite functions</em> or <em>positive semidefinite functions</em>.</p>
+<p><strong>Definition 23:</strong> Given a kernel function $K : \X \times \X \to \C$ and points $x_1, \ldots, x_n \in \X$, the $n \times n$ matrix $(K(x_i, x_j))$ is called the Gram matrix of $K$ with respect to $x_1, \ldots, x_n$.</p>
+<p>Some examples follow:</p>
+<h3 id="examples">Examples</h3>
+<ol>
+<li><em>Linear kernels</em>: When $\X = \R^d$, we can define the linear kernel function as
+$$K(x, y) = \inner{x}{y} $$
+It is clearly a symmetric function of its arguments, and hence self-adjoint. To prove positivity, let $x_1, \ldots, x_n \in \R^d$ be an arbitrary collection of points, and consider its gram matrix $\matr{K}$, i.e., $\matr{K}_{i,j} = K(x_i, x_j) = \inner{x_i}{x_j}$. Then for any $\alpha \in \R^n$, we have</li>
+</ol>
+<p>$$ \inner{\matr{K} \alpha}{\alpha} = \alpha^T \matr{K}^T \alpha = \alpha^T \matr{K} \alpha = \sum_{i,j = 1}^n \alpha_i \alpha_j \inner{x_i}{x_j} = \left\lVert \sum_{i=1}^n \alpha_i x_i \right\rVert^2 \geq 0 $$</p>
+<ol start="2">
+<li>
+<p><em>Polynomial kernels</em>: A natural generalization of the linear kernel on $\R^d$ is the homogeneous polynomial kernel
+$$ K(x, y) = (\inner{x}{y})^m $$
+of degree $m \geq 2$, also defined on $\R^d$. It is clearly a symmetric function. To prove positivity, note that</p>
+<p>$$ K(x,y) = \left( \sum_{i=1}^d x_i y_i \right)^m $$</p>
+<p>This will have $D = \binom{m+d-1}{m}$ monomials, so to simplify the analysis let&rsquo;s take $m=2$. Then</p>
+<p>$$ K(x,y) = \sum_{i=1}^d x_i^2 y_i^2 + 2 \sum_{i &lt; j} x_i x_j y_i y_j $$
+In this case $D = \binom{d+1}{d} = d + \binom{d}{2}$. Define a mapping $\Phi: \R^d \to \R^D$ such that</p>
+<p>$$ \Phi(x) = [x_1^2, \ldots, x_d^2, \sqrt{2}x_1 x_2, \ldots, \sqrt{2} x_{d-1} x_d ]^T $$</p>
+<p>Then</p>
+<p>$$ K(x,y) = \inner{\Phi(x)}{\Phi(y)} $$</p>
+<p>Following the same argument as the first example, we can verify that the gram matrix thus formed is positive.</p>
+<p>The mapping $x \mapsto \Phi(x)$ is often referred to as a <em>feature map</em>. We see that dealing with elements in    the feature space, i.e. the range of $\Phi$, is computationally expensive. The relation $K(x,y) = \inner{\Phi(x)}{\Phi(y)}$ allows us compute the inner products using the kernel function instead of actually taking the inner product in a very high dimensional space. We will see that this &ldquo;kernel trick&rdquo; holds for very many kernel functions when we discuss Mercer&rsquo;s theorem.</p>
+</li>
+<li>
+<p><em>Gaussian kernels</em>: Given some compact subset $\X \subseteq \R^d$, consider the Gaussian kernel</p>
+<p>$$ K(x,y) = \exp{\left( -\frac{1}{2 \sigma^2} \norm{x-y}^2 \right)} $$</p>
+<p>It is not obvious why this is a kernel function.</p>
+</li>
+</ol>
+<h2 id="equivalence-between-kernel-function-and-reproducing-kernel">Equivalence between kernel function and reproducing kernel</h2>
+<p>Let us return to the characterization of reproducing kernels. We will now prove that a function is a kernel function if and only if there is an RKHS for which it is the reproducing kernel. At this point recall Theorem-3 which states that an RKHS admits a unique reproducing kernel.</p>
+<p><strong>Theorem 4:</strong> Let $\X$ be a set and let $\H$ be an RKHS on $\X$ with reproducing kernel $K$. Then $K$ is a kernel function.</p>
+<p><strong>Proof:</strong> For some arbitrary $n \in \N$ fix some arbitrary collection $x_1, \ldots, x_n \in \X$ and $\alpha \in \C^n$. Then if we denote by $\matr{K}$ the gram matrix of $K$ with respect to $x_1, \ldots, x_n$, we have
+$$\inner{\matr{K} \alpha}{\alpha} =  \sum_{i,j = 1}^n \conj{\alpha_i}\alpha_j K(x_i, x_j) = \sum_{i,j = 1}^n \conj{\alpha_i}\alpha_j \inner{k_{x_j}}{k_{x_i}} = \left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert^2 \geq 0 \quad$$</p>
+<p>And thus $K$ is a kernel function. $\square$</p>
+<p>What does it mean in the above proof if we have an equality? That is, if $\inner{\matr{K} \alpha}{\alpha} = 0$? This happens if and only if $\left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert = 0$. But this means that for every $f \in \H$ we have $\sum_{i=1}^n \conj{\alpha_i} f(x_i) = \inner{f}{\sum_i \alpha_i k_{x_i}} = 0$. Thus, in this case there is an equation of linear dependence between the values of every function in $\H$ at this finite set of points.</p>
+<p>Now let us state the converse of Theorem-4. It is a deep result in RKHS theory known as the Moore–Aronszajn theorem.</p>
+<p><strong>Theorem 5 [Moore–Aronszajn theorem]:</strong> Let $\X$ be a set and let $K : \X \times \X \to \C$ be a kernel function, then there exists a reproducing kernel Hilbert space $\H$ of functions on $\X$ such that $K$ is the reproducing kernel of $\H$.</p>
+<p>For a proof see 
+<a href="https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space#Moore%E2%80%93Aronszajn_theorem" target="_blank" rel="noopener">here on Wikipedia</a>.</p>
+<p>In light of these two theorems we have the following notation.</p>
+<p><strong>Definition 24:</strong> Given a kernel function $K : \X \times \X \to \C$, we let $\H(K)$ denote the unique RKHS with the reproducing kernel $K$.</p>
+<p>It is not an easy problem to start with a kernel function $K$ on some set $\X$ and give a concrete description of $\H(K)$. I will not be discussing this here, but there are plenty of resources available where you can see this problem getting discussed. I recommend Paulsen and Raghupathi&rsquo;s An Introduction to the Theory of Reproducing Kernel Hilbert Spaces.</p>
+<h1 id="mercers-theorem">Mercer&rsquo;s theorem</h1>
+<p>Recall the Spectral theorem for finite-dimensional vector spaces:  A linear operator $T: V \to V$ for some finite dimensional vector space $V$ on $\C$ is normal, i.e., $T T^* = T^* T$, if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$. This implies that if $\matr{U} = [v_1, \ldots, v_n]$ is a unitary matrix containing the $i$<sup>th</sup> eigenvector in its $i$<sup>th</sup> column and $\matr{\Lambda} = \text{diag}(\lambda_1, \ldots, \lambda_n)$ is a diagonal matrix containing the corresponding eigenvalues then if $\matr{K}$ is a normal matrix then it can written as
+$$\matr{K} = \matr{U} \matr{\Lambda} \matr{U}^T = \sum_{i=1}^n \lambda_i v_i v_i^T$$</p>
+<p>Mercer&rsquo;s theorem generalizes this decomposition to kernel functions. Let us start by defining a special type of kernel function.</p>
+<p><strong>Definition 25:</strong> Let $\X$ be a compact metric space. A function $K : \X \times \X \to \C$ is called a <em>Mercer kernel</em> if it is a continuous kernel function.</p>
+<p>Recall the space $L^2(\mu)$ from Definition-8 where we now take $\X$ (written as $X$ there) to be a compact metric space.</p>
+<p><strong>Definition 26:</strong> Given a Mercer kernel $K : \X \times \X \to \C$, we define a linear operator $T_{K} : L^2(\mu) \to L^2(\mu)$ as
+$$ T_K(f)(x) := \int_{\X} K(x, y) f(y) \dmu(y), \quad (x \in \X) $$</p>
+<p>We assume that the Mercer kernel satisfies the <em>Hilbert-Schmidt condition</em>, stated as</p>
+<p>$$ \int_{\X \times \X} \left\lvert K(x,y) \right\rvert^2 \dmu(x) \dmu(y) &lt; \infty $$</p>
+<p>which ensures that $T_K$ is a bounded linear operator on $L^2(\mu)$. Indeed, we have</p>
+<p>$$ \lVert T_K(f) \rVert^{2} = \int_{\X} \left\lvert \int_{\X} K(x, y) f(y) \dmu(y) \right\rvert^2 \dmu(x) \leq \norm{f}^2 \int_{\X \times \X} \left\lvert K(x,y) \right\rvert^2 \dmu(x) \dmu(y) $$</p>
+<p>where we have applied Schwarz inequality (Theorem-1) as follows
+$$ \left\lvert \int_{\X} K(x, y) f(y) \dmu(y) \right\rvert^2 = \left\lvert T_K(f)(x) \right\rvert^2 = \left\lvert \inner{K(x, \cdot)}{f} \right\rvert^2 \leq \norm{K(x, \cdot)}^2 \norm{f}^2$$</p>
+<p>Operators of this type are known as <em>Hilbert-Schmidt operators</em>.</p>
+<p>We are now ready to state the Mercer&rsquo;s theorem.</p>
+<p><strong>Theorem 5 [Mercer&rsquo;s theorem]:</strong> Suppose that $\X$ is a compact metric space, and $K : \X \times \X \to \C$ is a Mercer&rsquo;s kernel that satisfies the Hilbert-Schmidt condition.
+Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for $ T_K $ that form an orthonormal basis of $L^2(\mu)$, and a corresponding set of non-negative eigenvalues $ (\lambda_{i})_{i} $ such that</p>
+<p>$$ T_K(e_i) = \lambda_i e_i, \quad (i \in \N) $$</p>
+<p>Moreover, $K$ has the expansion</p>
+<p>$$ K(x,y) = \sum_{i} \lambda_i e_i(x) e_i(y), \quad (x,y \in \X) $$</p>
+<p>where the convergence of the series above holds absolutely and uniformly.</p>
+<p>I&rsquo;ll skip the proof.</p>
+<p>Among other things, Mercer&rsquo;s theorem provides a framework for embedding an element of $\X$ into an element of $\ell^2(\N)$ (for its definition, see Example-4 in the section on Hilbert spaces in the 
+<a href="http://makkar.github.io/post/kernels/" target="_blank" rel="noopener">first part</a>). More concretely, given the eigenfunctions and eigenvalues guaranteed by Mercer&rsquo;s theorem, we may define a mapping $\Phi : \X \to \ell^2(\N)$ as follows</p>
+<p>$$ x \mapsto \left( \sqrt{\lambda_i} e_i(x) \right)_{i \in \N} $$</p>
+<p>Therefore, we have</p>
+<p>$$\inner{\Phi(x)}{\Phi(y)} = \sum_{i=1}^{\infty} \lambda_i e_i(x) e_i(y) = K(x,y) $$</p>
+<p>This is the well-known &ldquo;kernel trick&rdquo;. Let us connect Mercer&rsquo;s theorem to the Spectral theorem.</p>
+<p>Let $\X = [d] := \{1, 2, \ldots, d\}$ along with the Hamming metric be our compact metric space. Let $\mu(\{i\}) = 1$ for all $i \in [d]$ be the counting measure on $\X$. Any function $f : \X \to \C$ is equivalent to the $d$-dimensional vector $[f(1), \ldots, f(d)]$, and any kernel function $K : \X \times \X \to \C$ is continuous, satisfies the Hilbert-Schmidt condition, and is equivalent to a $d \times d$ normal matrix $\matr{K}$ where $\matr{K}_{i,j} = K(i, j)$. The Hilbert-Schmidt operator reduces to</p>
+<p>$$ T_K(f)(x) = \int_{\X} K(x, y) f(y) \dmu(y) = \sum_{i=1}^{d} K(x,y) f(y) $$</p>
+<p>Mercer&rsquo;s theorem then states that there exists a set of eigenfunctions $v_1, \ldots, v_d$ (for our $\X$ they are equivalent to vectors) and the corresponding eigenvalues $\lambda_1, \ldots, \lambda_d$ such that</p>
+<p>$$ \matr{K} = \sum_{i=1}^{d} \lambda_i v_i v_i^T $$</p>
+<p>which is exactly the spectral theorem.</p>
+<h1 id="operations-on-kernels">Operations on kernels</h1>
+<p>Let us now consider how various algebraic operations on kernels affect the corresponding Hilbert spaces. All this (and a lot more) can be found in the seminal paper by Aronszajn &ldquo;Theory of Reproducing Kernels&rdquo;.</p>
+<p>I state the following theorems without proof to illustrate how operations on kernels is done.</p>
+<h2 id="sums-of-kernels">Sums of kernels</h2>
+<p><strong>Theorem 6:</strong> Suppose that $\H_1$ and $\H_2$ are both RKHSs with kernels $K_1$ and $K_2$, respectively. Then the space</p>
+<p>$$\H = \H_1 + \H_2 := \{f_1 + f_2 \, : \, f_1 \in \H_1 \text{ and } f_2 \in \H_2 \}$$</p>
+<p>with the norm</p>
+<p>$$ \norm{f}^{2}_{\H} := \inf \left\{ \lVert f_1 \rVert^{2} _ {\H_1} + \norm{f_2}^{2} _{\H_2} \, : \, f = f_1 + f_2, f_1 \in \H_1, f_2 \in \H_2 \right\} $$</p>
+<p>is an RKHS with the kernel $K = K_1 + K_2$.</p>
+<h2 id="products-of-kernels">Products of kernels</h2>
+<p>Let us first define the notion of tensor product of two (separable) Hilbert spaces $\H_1$ and $\H_2$ of functions, say with domains $\X_1$ and $\X_2$.</p>
+<p><strong>Definition 27:</strong> Consider the set of functions $h : \X_1 \times \X_2 \to \C$ satisfying</p>
+<p>$$\H = \left\{ h = \sum_{i=1}^{n} u_i v_i \, : \, n \in \N \text{ and } u_i \in \H_1, v_i \in \H_2 \text{ for all } i \in [n] \right\} $$</p>
+<p>We define an inner product on $\H$ as follows: for $h = \sum_{i=1}^{n} u_i v_i$ and $g = \sum_{j=1}^{m} w_j x_j$ in $\H$ define</p>
+<p>$$ \inner{h}{g} := \sum_{i=1}^{n} \sum_{j=1}^{m} \inner{u_i}{w_j}_{\H_1} \inner{v_i}{x_j}_{\H_2} $$</p>
+<p>Then $\H$ is a Hilbert space and is called the <em>tensor product</em> of $\H_1$ and $\H_2$. We denote it by $\H = \H_1 \otimes \H_2$.</p>
+<p>We can now state the theorem for product of kernels.</p>
+<p><strong>Theorem 7:</strong> Suppose that $\H_1$ and $\H_2$ are RKHSs of real-valued functions with domains $\X_1$ and $\X_2$, and equipped with kernels $K_1$ and $K_2$, respectively. Then the tensor product space $\H = \H_1 \otimes \H_2$ is an RKHS of functions with domain $\X_1 \times \X_2$, and with kernel function $K : (\X_1 \times \X_2) \times (\X_1 \times \X_2) \to \C$ defined by</p>
+<p>$$ K((x,s), (y,t)) := K_1(x,y) K_2(s,t) $$</p>
+<p>$K$ is called the tensor product of the kernels $K_1$ and $K_2$, and denoted by $K = K_1 \otimes K_2$.</p>
+<h2 id="other-operations">Other operations</h2>
+<p>We can similarly define more operations on kernels:</p>
+<ol>
+<li>If $K$ is a valid kernel and $\alpha \geq 0$, then $\alpha K$ is a valid kernel.</li>
+<li>If $K$ is a valid kernel and $\alpha \geq 0$, then $K + \alpha$ is a valid kernel.</li>
+<li>We can easily from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.</li>
+<li>If $K$ is a valid kernel, then $\exp(K)$ is a valid kernel.</li>
+</ol>
+<h1 id="representer-theorem">Representer theorem</h1>
+<p>We are now at a stage where we can put all this theory to use in machine learning. Specifically we will develop Representer theorem which allows many optimization problems over the RKHS to be reduced to relatively simple calculations involving the gram matrix.</p>
+<p>Let us start with a functional analytic viewpoint of supervised learning. Suppose we are given empirical data</p>
+<p>$$ (x_1, y_1), \ldots, (x_n, y_n) \in \X \times \Y $$</p>
+<p>where $\X$ is a nonempty set. For now let $\Y = \R$. They are from an unknown function, $g : \X \to \R$, i.e., we assume</p>
+<p>$$ y_i = g(x_i), \quad (i \in [n]) $$</p>
+<p>We need to find some function $f^*$ which &ldquo;best&rdquo; approximates $g$. A natural way to formalize the notion of &ldquo;best&rdquo; is to limit ourselves to an RKHS $\H$ which contains functions of the form $f : \X \to \R$ and choose</p>
+<p>$$ f^* = \argmin_{f \in \H} \norm{f} \quad \text{ such that } f^*(x_i) = y_i \text{ for } i \in [n]$$</p>
+<p>This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$ then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.</p>
+<p>In a realistic setting we assume that we have noisy observations, i.e.,</p>
+<p>$$y_i = g(x_i) + \e_i, \quad (i \in [n])$$</p>
+<p>where $\e_i$'s denote the noise. Then the constraint of exact fitting is no longer desirable, and we model the &ldquo;best&rdquo; approximation by introducing a loss function which represents how close our approximation is to the observed outputs. More concretely, let $L_y : \R^n \to \R$ be a continuous function. Then we can define our cost function as</p>
+<p>$$ J(f) = \norm{f}^2 + L_y(f(x_1), \ldots, f(x_n)) $$</p>
+<p><strong>Theorem 8 [Representer theorem]:</strong> If $f^*$ is a function such that</p>
+<p>$$ J(f^*) = \inf_{f \in \H} J(f) $$</p>
+<p>then $f^*$ is in the span of the functions $k_{x_1}, \ldots, k_{x_n}$, i.e.,</p>
+<p>$$ f^*(\cdot) = \sum_{i=1}^{n} \alpha_i k_{x_i}(\cdot) \quad \text{for some } \alpha_1, \ldots, \alpha_n \in \C$$</p>
+<p>I&rsquo;ll skip the proof which can be found in Paulsen and Raghupathi&rsquo;s An Introduction to the Theory of Reproducing Kernel Hilbert Spaces or in Schölkopf, Herbrich and Smola&rsquo;s A Generalized Representer Theorem.</p>
+<p>As an example $L$ could be the squared loss $L_y(f(x_1), \ldots, f(x_n)) = \sum_{i=1}^n (y_i - f(x_i))^2$. If we assume $L$ to be convex then the solution exists and is unique. Recall that $E \subseteq \R^k$ is a <em>convex set</em> if $\lambda x + (1-\lambda) y \in E$ whenever $x,y \in E$ and $0 &lt; \lambda &lt; 1$. A real-valued function $L$ defined on a convex set $E$ is a <em>convex function</em> if $L(\lambda x + (1-\lambda) y) \leq \lambda L(x) + (1-\lambda) L(y)$ whenever $x, y \in E$ and $0 &lt; \lambda &lt; 1$. Note that a convex function is continuous.</p>
+<p>The Representer theorem allows us to reduce the infinite-dimensional problem of optimizing over an RKHS to an $n$-dimensional problem.</p>
+<h1 id="epilogue">Epilogue</h1>
+<p>I barely scratched the surface of reproducing kernel Hilbert space theory. Some resources I recommend that do a much better job than me in explaining this theory and which I used as reference are:</p>
+<ol>
+<li>Paulsen V and Raghupathi M: An Introduction to the Theory of Reproducing Kernel Hilbert Spaces</li>
+<li>Wainwright M: High-Dimensional Statistics</li>
+<li>Schölkopf B, Herbrich R and Smola A.J: A Generalized Representer Theorem (COLT 2001)</li>
+<li>Aronszajn N: Theory of Reproducing Kernels (1950)</li>
+</ol>
+<p>In the next article (yet to be written) I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/aditya-makkar/avatar_huafef36e0e38068a1162b930b5509c06d_432110_270x270_fill_q90_lanczos_center.jpg" alt="Aditya Makkar">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://makkar.github.io/">Aditya Makkar</a></h5>
+        
+        
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/adityamakkar/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/MakkarAditya" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/makkar" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key="></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = true;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.6f7ce8be710290b8c431bbc97f405d15.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+
+    
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

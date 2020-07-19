@@ -5,12 +5,203 @@
     <link>https://makkar.github.io/</link>
       <atom:link href="https://makkar.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Aditya Makkar</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 03 Jul 2020 21:35:10 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 16 Jul 2020 16:20:23 -0400</lastBuildDate>
     <image>
-      <url>https://makkar.github.io/images/icon_hu6dd6e92dc6f0867b14293b597b8828a6_32142_512x512_fill_lanczos_center_2.png</url>
+      <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Aditya Makkar</title>
       <link>https://makkar.github.io/</link>
     </image>
+    
+    <item>
+      <title>Kernels - Part 1</title>
+      <link>https://makkar.github.io/post/kernels1/</link>
+      <pubDate>Thu, 16 Jul 2020 16:20:23 -0400</pubDate>
+      <guid>https://makkar.github.io/post/kernels1/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;This is the second blog post in the series of blog posts on kernels. In the 
+&lt;a href=&#34;http://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;first part&lt;/a&gt; I introduced the functional analysis background for kernel theory. I highly recommend you read it before continuing. I will frequently refer to it and use the same notation. In this blog post I aim to introduce the fundamental theorems like Mercer&amp;rsquo;s theorem and Representer theorem.&lt;/p&gt;
+&lt;h1 id=&#34;characterization-of-reproducing-kernels&#34;&gt;Characterization of reproducing kernels&lt;/h1&gt;
+&lt;p&gt;We already defined the notion of reproducing kernels for an RKHS (Definition 19). We now turn our attention to obtaining necessary and sufficient conditions for a function $K : \X \times \X \to \C$ to be the reproducing kernel for some RKHS. But first we must define kernel functions.&lt;/p&gt;
+&lt;h2 id=&#34;kernel-functions&#34;&gt;Kernel functions&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start by recalling a basic definition.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 21:&lt;/strong&gt; Let $A = (a_{i,j})$ be an $n \times n$ complex matrix. Then $A$ is called &lt;em&gt;positive&lt;/em&gt; if for every $\alpha_1, \ldots, \alpha_n \in \C$ we have
+$$ \sum_{i,j = 1}^{n} \conj{\alpha_i}\alpha_j a_{i,j} \geq 0 $$
+We denote this by $A \geq 0$.&lt;/p&gt;
+&lt;p&gt;Note that if we define a vector $x \in \C^n$ to be such that its $i$&lt;sup&gt;th&lt;/sup&gt; component is $\alpha_i$, then the condition above can rewritten as
+$$ \inner{Ax}{x} \geq 0 $$&lt;/p&gt;
+&lt;p&gt;Also note that if $A \geq 0$ then $A = A^* $, where $A^* $ denotes the Hermitian matrix (also known as the self-adjoint matrix), $\conj{A^T}$. Therefore, positivity gives self-adjoint property for free if we are dealing with complex matrices. Things aren&amp;rsquo;t so elegant for real matrices. For the real case we need to explicitly state that the matrix $A$ is also symmetric apart from what&amp;rsquo;s stated in the definition above. Therefore, we often use the following as the definition of positive matrices:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 21&amp;rsquo;:&lt;/strong&gt; An $n \times n$ matrix $A$ is positive, in symbols $A \geq 0$, if it is self-adjoint and if $\inner{Ax}{x} \geq 0$ for all $x \in \C^n$.&lt;/p&gt;
+&lt;p&gt;Positive matrices are also alternatively called &lt;em&gt; positive semidefinite&lt;/em&gt; or &lt;em&gt;nonnegative&lt;/em&gt; matrices.&lt;/p&gt;
+&lt;p&gt;The following lemma connects the concept of positive matrices to its eigenvalues.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 2:&lt;/strong&gt; A matrix $A \geq 0$ if and only if $A = A^*$ and every eigenvalue of $A$ is nonnegative.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Let us first suppose $A \geq 0$, then $A = A^*$ by definition. Now if $\lambda$ is an eigenvalue of $A$ and $v$ is an eigenvector of $A$ corresponding to $\lambda$, we have
+$$ 0 \leq \inner{Av}{v} = \inner{\lambda v}{v} = \lambda \inner{v}{v} $$
+Thus, $\lambda$ is a nonnegative number.&lt;/p&gt;
+&lt;p&gt;For the other side, find an orthonormal basis $v_1, \ldots, v_n$ consisting of eigenvectors of $A$ (it exists by the Spectral theorem). Let $v_i$ be the eigenvector corresponding to the eigenvalue $\lambda_i$. Then for any $x = \sum_i \alpha_i v_i$ we have $\inner{Ax}{x} = \sum_i \lambda_i \modu{\alpha_i}^2$. Since $\lambda_i \geq 0$, $\inner{Ax}{x} \geq 0$ and $A$ must be positive. $\square$&lt;/p&gt;
+&lt;p&gt;We are now ready to define kernel function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 22:&lt;/strong&gt; Let $\X$ be a set, then $K : \X \times \X \to \C$ is called a &lt;em&gt;kernel function&lt;/em&gt; if for every $n \in \N$ and for every choice of $\{x_1, \ldots, x_n\} \subseteq \X$, the matrix $(K(x_i, x_j)) \geq 0$. We will use the notation $K \geq 0$ to denote that the function $K$ is a kernel function.&lt;/p&gt;
+&lt;p&gt;Kernel functions are alternatively called &lt;em&gt;positive definite functions&lt;/em&gt; or &lt;em&gt;positive semidefinite functions&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 23:&lt;/strong&gt; Given a kernel function $K : \X \times \X \to \C$ and points $x_1, \ldots, x_n \in \X$, the $n \times n$ matrix $(K(x_i, x_j))$ is called the Gram matrix of $K$ with respect to $x_1, \ldots, x_n$.&lt;/p&gt;
+&lt;p&gt;Some examples follow:&lt;/p&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Linear kernels&lt;/em&gt;: When $\X = \R^d$, we can define the linear kernel function as
+$$K(x, y) = \inner{x}{y} $$
+It is clearly a symmetric function of its arguments, and hence self-adjoint. To prove positivity, let $x_1, \ldots, x_n \in \R^d$ be an arbitrary collection of points, and consider its gram matrix $\matr{K}$, i.e., $\matr{K}_{i,j} = K(x_i, x_j) = \inner{x_i}{x_j}$. Then for any $\alpha \in \R^n$, we have&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$$ \inner{\matr{K} \alpha}{\alpha} = \alpha^T \matr{K}^T \alpha = \alpha^T \matr{K} \alpha = \sum_{i,j = 1}^n \alpha_i \alpha_j \inner{x_i}{x_j} = \left\lVert \sum_{i=1}^n \alpha_i x_i \right\rVert^2 \geq 0 $$&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Polynomial kernels&lt;/em&gt;: A natural generalization of the linear kernel on $\R^d$ is the homogeneous polynomial kernel
+$$ K(x, y) = (\inner{x}{y})^m $$
+of degree $m \geq 2$, also defined on $\R^d$. It is clearly a symmetric function. To prove positivity, note that&lt;/p&gt;
+&lt;p&gt;$$ K(x,y) = \left( \sum_{i=1}^d x_i y_i \right)^m $$&lt;/p&gt;
+&lt;p&gt;This will have $D = \binom{m+d-1}{m}$ monomials, so to simplify the analysis let&amp;rsquo;s take $m=2$. Then&lt;/p&gt;
+&lt;p&gt;$$ K(x,y) = \sum_{i=1}^d x_i^2 y_i^2 + 2 \sum_{i &amp;lt; j} x_i x_j y_i y_j $$
+In this case $D = \binom{d+1}{d} = d + \binom{d}{2}$. Define a mapping $\Phi: \R^d \to \R^D$ such that&lt;/p&gt;
+&lt;p&gt;$$ \Phi(x) = [x_1^2, \ldots, x_d^2, \sqrt{2}x_1 x_2, \ldots, \sqrt{2} x_{d-1} x_d ]^T $$&lt;/p&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;p&gt;$$ K(x,y) = \inner{\Phi(x)}{\Phi(y)} $$&lt;/p&gt;
+&lt;p&gt;Following the same argument as the first example, we can verify that the gram matrix thus formed is positive.&lt;/p&gt;
+&lt;p&gt;The mapping $x \mapsto \Phi(x)$ is often referred to as a &lt;em&gt;feature map&lt;/em&gt;. We see that dealing with elements in    the feature space, i.e. the range of $\Phi$, is computationally expensive. The relation $K(x,y) = \inner{\Phi(x)}{\Phi(y)}$ allows us compute the inner products using the kernel function instead of actually taking the inner product in a very high dimensional space. We will see that this &amp;ldquo;kernel trick&amp;rdquo; holds for very many kernel functions when we discuss Mercer&amp;rsquo;s theorem.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Gaussian kernels&lt;/em&gt;: Given some compact subset $\X \subseteq \R^d$, consider the Gaussian kernel&lt;/p&gt;
+&lt;p&gt;$$ K(x,y) = \exp{\left( -\frac{1}{2 \sigma^2} \norm{x-y}^2 \right)} $$&lt;/p&gt;
+&lt;p&gt;It is not obvious why this is a kernel function.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;equivalence-between-kernel-function-and-reproducing-kernel&#34;&gt;Equivalence between kernel function and reproducing kernel&lt;/h2&gt;
+&lt;p&gt;Let us return to the characterization of reproducing kernels. We will now prove that a function is a kernel function if and only if there is an RKHS for which it is the reproducing kernel. At this point recall Theorem-3 which states that an RKHS admits a unique reproducing kernel.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 4:&lt;/strong&gt; Let $\X$ be a set and let $\H$ be an RKHS on $\X$ with reproducing kernel $K$. Then $K$ is a kernel function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; For some arbitrary $n \in \N$ fix some arbitrary collection $x_1, \ldots, x_n \in \X$ and $\alpha \in \C^n$. Then if we denote by $\matr{K}$ the gram matrix of $K$ with respect to $x_1, \ldots, x_n$, we have
+$$\inner{\matr{K} \alpha}{\alpha} =  \sum_{i,j = 1}^n \conj{\alpha_i}\alpha_j K(x_i, x_j) = \sum_{i,j = 1}^n \conj{\alpha_i}\alpha_j \inner{k_{x_j}}{k_{x_i}} = \left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert^2 \geq 0 \quad$$&lt;/p&gt;
+&lt;p&gt;And thus $K$ is a kernel function. $\square$&lt;/p&gt;
+&lt;p&gt;What does it mean in the above proof if we have an equality? That is, if $\inner{\matr{K} \alpha}{\alpha} = 0$? This happens if and only if $\left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert = 0$. But this means that for every $f \in \H$ we have $\sum_{i=1}^n \conj{\alpha_i} f(x_i) = \inner{f}{\sum_i \alpha_i k_{x_i}} = 0$. Thus, in this case there is an equation of linear dependence between the values of every function in $\H$ at this finite set of points.&lt;/p&gt;
+&lt;p&gt;Now let us state the converse of Theorem-4. It is a deep result in RKHS theory known as the Moore–Aronszajn theorem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 5 [Moore–Aronszajn theorem]:&lt;/strong&gt; Let $\X$ be a set and let $K : \X \times \X \to \C$ be a kernel function, then there exists a reproducing kernel Hilbert space $\H$ of functions on $\X$ such that $K$ is the reproducing kernel of $\H$.&lt;/p&gt;
+&lt;p&gt;For a proof see 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space#Moore%E2%80%93Aronszajn_theorem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here on Wikipedia&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In light of these two theorems we have the following notation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 24:&lt;/strong&gt; Given a kernel function $K : \X \times \X \to \C$, we let $\H(K)$ denote the unique RKHS with the reproducing kernel $K$.&lt;/p&gt;
+&lt;p&gt;It is not an easy problem to start with a kernel function $K$ on some set $\X$ and give a concrete description of $\H(K)$. I will not be discussing this here, but there are plenty of resources available where you can see this problem getting discussed. I recommend Paulsen and Raghupathi&amp;rsquo;s An Introduction to the Theory of Reproducing Kernel Hilbert Spaces.&lt;/p&gt;
+&lt;h1 id=&#34;mercers-theorem&#34;&gt;Mercer&amp;rsquo;s theorem&lt;/h1&gt;
+&lt;p&gt;Recall the Spectral theorem for finite-dimensional vector spaces:  A linear operator $T: V \to V$ for some finite dimensional vector space $V$ on $\C$ is normal, i.e., $T T^* = T^* T$, if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$. This implies that if $\matr{U} = [v_1, \ldots, v_n]$ is a unitary matrix containing the $i$&lt;sup&gt;th&lt;/sup&gt; eigenvector in its $i$&lt;sup&gt;th&lt;/sup&gt; column and $\matr{\Lambda} = \text{diag}(\lambda_1, \ldots, \lambda_n)$ is a diagonal matrix containing the corresponding eigenvalues then if $\matr{K}$ is a normal matrix then it can written as
+$$\matr{K} = \matr{U} \matr{\Lambda} \matr{U}^T = \sum_{i=1}^n \lambda_i v_i v_i^T$$&lt;/p&gt;
+&lt;p&gt;Mercer&amp;rsquo;s theorem generalizes this decomposition to kernel functions. Let us start by defining a special type of kernel function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 25:&lt;/strong&gt; Let $\X$ be a compact metric space. A function $K : \X \times \X \to \C$ is called a &lt;em&gt;Mercer kernel&lt;/em&gt; if it is a continuous kernel function.&lt;/p&gt;
+&lt;p&gt;Recall the space $L^2(\mu)$ from Definition-8 where we now take $\X$ (written as $X$ there) to be a compact metric space.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 26:&lt;/strong&gt; Given a Mercer kernel $K : \X \times \X \to \C$, we define a linear operator $T_{K} : L^2(\mu) \to L^2(\mu)$ as
+$$ T_K(f)(x) := \int_{\X} K(x, y) f(y) \dmu(y), \quad (x \in \X) $$&lt;/p&gt;
+&lt;p&gt;We assume that the Mercer kernel satisfies the &lt;em&gt;Hilbert-Schmidt condition&lt;/em&gt;, stated as&lt;/p&gt;
+&lt;p&gt;$$ \int_{\X \times \X} \left\lvert K(x,y) \right\rvert^2 \dmu(x) \dmu(y) &amp;lt; \infty $$&lt;/p&gt;
+&lt;p&gt;which ensures that $T_K$ is a bounded linear operator on $L^2(\mu)$. Indeed, we have&lt;/p&gt;
+&lt;p&gt;$$ \lVert T_K(f) \rVert^{2} = \int_{\X} \left\lvert \int_{\X} K(x, y) f(y) \dmu(y) \right\rvert^2 \dmu(x) \leq \norm{f}^2 \int_{\X \times \X} \left\lvert K(x,y) \right\rvert^2 \dmu(x) \dmu(y) $$&lt;/p&gt;
+&lt;p&gt;where we have applied Schwarz inequality (Theorem-1) as follows
+$$ \left\lvert \int_{\X} K(x, y) f(y) \dmu(y) \right\rvert^2 = \left\lvert T_K(f)(x) \right\rvert^2 = \left\lvert \inner{K(x, \cdot)}{f} \right\rvert^2 \leq \norm{K(x, \cdot)}^2 \norm{f}^2$$&lt;/p&gt;
+&lt;p&gt;Operators of this type are known as &lt;em&gt;Hilbert-Schmidt operators&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;We are now ready to state the Mercer&amp;rsquo;s theorem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 5 [Mercer&amp;rsquo;s theorem]:&lt;/strong&gt; Suppose that $\X$ is a compact metric space, and $K : \X \times \X \to \C$ is a Mercer&amp;rsquo;s kernel that satisfies the Hilbert-Schmidt condition.
+Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for $ T_K $ that form an orthonormal basis of $L^2(\mu)$, and a corresponding set of non-negative eigenvalues $ (\lambda_{i})_{i} $ such that&lt;/p&gt;
+&lt;p&gt;$$ T_K(e_i) = \lambda_i e_i, \quad (i \in \N) $$&lt;/p&gt;
+&lt;p&gt;Moreover, $K$ has the expansion&lt;/p&gt;
+&lt;p&gt;$$ K(x,y) = \sum_{i} \lambda_i e_i(x) e_i(y), \quad (x,y \in \X) $$&lt;/p&gt;
+&lt;p&gt;where the convergence of the series above holds absolutely and uniformly.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll skip the proof.&lt;/p&gt;
+&lt;p&gt;Among other things, Mercer&amp;rsquo;s theorem provides a framework for embedding an element of $\X$ into an element of $\ell^2(\N)$ (for its definition, see Example-4 in the section on Hilbert spaces in the 
+&lt;a href=&#34;http://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;first part&lt;/a&gt;). More concretely, given the eigenfunctions and eigenvalues guaranteed by Mercer&amp;rsquo;s theorem, we may define a mapping $\Phi : \X \to \ell^2(\N)$ as follows&lt;/p&gt;
+&lt;p&gt;$$ x \mapsto \left( \sqrt{\lambda_i} e_i(x) \right)_{i \in \N} $$&lt;/p&gt;
+&lt;p&gt;Therefore, we have&lt;/p&gt;
+&lt;p&gt;$$\inner{\Phi(x)}{\Phi(y)} = \sum_{i=1}^{\infty} \lambda_i e_i(x) e_i(y) = K(x,y) $$&lt;/p&gt;
+&lt;p&gt;This is the well-known &amp;ldquo;kernel trick&amp;rdquo;. Let us connect Mercer&amp;rsquo;s theorem to the Spectral theorem.&lt;/p&gt;
+&lt;p&gt;Let $\X = [d] := \{1, 2, \ldots, d\}$ along with the Hamming metric be our compact metric space. Let $\mu(\{i\}) = 1$ for all $i \in [d]$ be the counting measure on $\X$. Any function $f : \X \to \C$ is equivalent to the $d$-dimensional vector $[f(1), \ldots, f(d)]$, and any kernel function $K : \X \times \X \to \C$ is continuous, satisfies the Hilbert-Schmidt condition, and is equivalent to a $d \times d$ normal matrix $\matr{K}$ where $\matr{K}_{i,j} = K(i, j)$. The Hilbert-Schmidt operator reduces to&lt;/p&gt;
+&lt;p&gt;$$ T_K(f)(x) = \int_{\X} K(x, y) f(y) \dmu(y) = \sum_{i=1}^{d} K(x,y) f(y) $$&lt;/p&gt;
+&lt;p&gt;Mercer&amp;rsquo;s theorem then states that there exists a set of eigenfunctions $v_1, \ldots, v_d$ (for our $\X$ they are equivalent to vectors) and the corresponding eigenvalues $\lambda_1, \ldots, \lambda_d$ such that&lt;/p&gt;
+&lt;p&gt;$$ \matr{K} = \sum_{i=1}^{d} \lambda_i v_i v_i^T $$&lt;/p&gt;
+&lt;p&gt;which is exactly the spectral theorem.&lt;/p&gt;
+&lt;h1 id=&#34;operations-on-kernels&#34;&gt;Operations on kernels&lt;/h1&gt;
+&lt;p&gt;Let us now consider how various algebraic operations on kernels affect the corresponding Hilbert spaces. All this (and a lot more) can be found in the seminal paper by Aronszajn &amp;ldquo;Theory of Reproducing Kernels&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;I state the following theorems without proof to illustrate how operations on kernels is done.&lt;/p&gt;
+&lt;h2 id=&#34;sums-of-kernels&#34;&gt;Sums of kernels&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 6:&lt;/strong&gt; Suppose that $\H_1$ and $\H_2$ are both RKHSs with kernels $K_1$ and $K_2$, respectively. Then the space&lt;/p&gt;
+&lt;p&gt;$$\H = \H_1 + \H_2 := \{f_1 + f_2 \, : \, f_1 \in \H_1 \text{ and } f_2 \in \H_2 \}$$&lt;/p&gt;
+&lt;p&gt;with the norm&lt;/p&gt;
+&lt;p&gt;$$ \norm{f}^{2}_{\H} := \inf \left\{ \lVert f_1 \rVert^{2} _ {\H_1} + \norm{f_2}^{2} _{\H_2} \, : \, f = f_1 + f_2, f_1 \in \H_1, f_2 \in \H_2 \right\} $$&lt;/p&gt;
+&lt;p&gt;is an RKHS with the kernel $K = K_1 + K_2$.&lt;/p&gt;
+&lt;h2 id=&#34;products-of-kernels&#34;&gt;Products of kernels&lt;/h2&gt;
+&lt;p&gt;Let us first define the notion of tensor product of two (separable) Hilbert spaces $\H_1$ and $\H_2$ of functions, say with domains $\X_1$ and $\X_2$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 27:&lt;/strong&gt; Consider the set of functions $h : \X_1 \times \X_2 \to \C$ satisfying&lt;/p&gt;
+&lt;p&gt;$$\H = \left\{ h = \sum_{i=1}^{n} u_i v_i \, : \, n \in \N \text{ and } u_i \in \H_1, v_i \in \H_2 \text{ for all } i \in [n] \right\} $$&lt;/p&gt;
+&lt;p&gt;We define an inner product on $\H$ as follows: for $h = \sum_{i=1}^{n} u_i v_i$ and $g = \sum_{j=1}^{m} w_j x_j$ in $\H$ define&lt;/p&gt;
+&lt;p&gt;$$ \inner{h}{g} := \sum_{i=1}^{n} \sum_{j=1}^{m} \inner{u_i}{w_j}_{\H_1} \inner{v_i}{x_j}_{\H_2} $$&lt;/p&gt;
+&lt;p&gt;Then $\H$ is a Hilbert space and is called the &lt;em&gt;tensor product&lt;/em&gt; of $\H_1$ and $\H_2$. We denote it by $\H = \H_1 \otimes \H_2$.&lt;/p&gt;
+&lt;p&gt;We can now state the theorem for product of kernels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 7:&lt;/strong&gt; Suppose that $\H_1$ and $\H_2$ are RKHSs of real-valued functions with domains $\X_1$ and $\X_2$, and equipped with kernels $K_1$ and $K_2$, respectively. Then the tensor product space $\H = \H_1 \otimes \H_2$ is an RKHS of functions with domain $\X_1 \times \X_2$, and with kernel function $K : (\X_1 \times \X_2) \times (\X_1 \times \X_2) \to \C$ defined by&lt;/p&gt;
+&lt;p&gt;$$ K((x,s), (y,t)) := K_1(x,y) K_2(s,t) $$&lt;/p&gt;
+&lt;p&gt;$K$ is called the tensor product of the kernels $K_1$ and $K_2$, and denoted by $K = K_1 \otimes K_2$.&lt;/p&gt;
+&lt;h2 id=&#34;other-operations&#34;&gt;Other operations&lt;/h2&gt;
+&lt;p&gt;We can similarly define more operations on kernels:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If $K$ is a valid kernel and $\alpha \geq 0$, then $\alpha K$ is a valid kernel.&lt;/li&gt;
+&lt;li&gt;If $K$ is a valid kernel and $\alpha \geq 0$, then $K + \alpha$ is a valid kernel.&lt;/li&gt;
+&lt;li&gt;We can easily from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.&lt;/li&gt;
+&lt;li&gt;If $K$ is a valid kernel, then $\exp(K)$ is a valid kernel.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;representer-theorem&#34;&gt;Representer theorem&lt;/h1&gt;
+&lt;p&gt;We are now at a stage where we can put all this theory to use in machine learning. Specifically we will develop Representer theorem which allows many optimization problems over the RKHS to be reduced to relatively simple calculations involving the gram matrix.&lt;/p&gt;
+&lt;p&gt;Let us start with a functional analytic viewpoint of supervised learning. Suppose we are given empirical data&lt;/p&gt;
+&lt;p&gt;$$ (x_1, y_1), \ldots, (x_n, y_n) \in \X \times \Y $$&lt;/p&gt;
+&lt;p&gt;where $\X$ is a nonempty set. For now let $\Y = \R$. They are from an unknown function, $g : \X \to \R$, i.e., we assume&lt;/p&gt;
+&lt;p&gt;$$ y_i = g(x_i), \quad (i \in [n]) $$&lt;/p&gt;
+&lt;p&gt;We need to find some function $f^*$ which &amp;ldquo;best&amp;rdquo; approximates $g$. A natural way to formalize the notion of &amp;ldquo;best&amp;rdquo; is to limit ourselves to an RKHS $\H$ which contains functions of the form $f : \X \to \R$ and choose&lt;/p&gt;
+&lt;p&gt;$$ f^* = \argmin_{f \in \H} \norm{f} \quad \text{ such that } f^*(x_i) = y_i \text{ for } i \in [n]$$&lt;/p&gt;
+&lt;p&gt;This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$ then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.&lt;/p&gt;
+&lt;p&gt;In a realistic setting we assume that we have noisy observations, i.e.,&lt;/p&gt;
+&lt;p&gt;$$y_i = g(x_i) + \e_i, \quad (i \in [n])$$&lt;/p&gt;
+&lt;p&gt;where $\e_i$&#39;s denote the noise. Then the constraint of exact fitting is no longer desirable, and we model the &amp;ldquo;best&amp;rdquo; approximation by introducing a loss function which represents how close our approximation is to the observed outputs. More concretely, let $L_y : \R^n \to \R$ be a continuous function. Then we can define our cost function as&lt;/p&gt;
+&lt;p&gt;$$ J(f) = \norm{f}^2 + L_y(f(x_1), \ldots, f(x_n)) $$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 8 [Representer theorem]:&lt;/strong&gt; If $f^*$ is a function such that&lt;/p&gt;
+&lt;p&gt;$$ J(f^*) = \inf_{f \in \H} J(f) $$&lt;/p&gt;
+&lt;p&gt;then $f^*$ is in the span of the functions $k_{x_1}, \ldots, k_{x_n}$, i.e.,&lt;/p&gt;
+&lt;p&gt;$$ f^*(\cdot) = \sum_{i=1}^{n} \alpha_i k_{x_i}(\cdot) \quad \text{for some } \alpha_1, \ldots, \alpha_n \in \C$$&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll skip the proof which can be found in Paulsen and Raghupathi&amp;rsquo;s An Introduction to the Theory of Reproducing Kernel Hilbert Spaces or in Schölkopf, Herbrich and Smola&amp;rsquo;s A Generalized Representer Theorem.&lt;/p&gt;
+&lt;p&gt;As an example $L$ could be the squared loss $L_y(f(x_1), \ldots, f(x_n)) = \sum_{i=1}^n (y_i - f(x_i))^2$. If we assume $L$ to be convex then the solution exists and is unique. Recall that $E \subseteq \R^k$ is a &lt;em&gt;convex set&lt;/em&gt; if $\lambda x + (1-\lambda) y \in E$ whenever $x,y \in E$ and $0 &amp;lt; \lambda &amp;lt; 1$. A real-valued function $L$ defined on a convex set $E$ is a &lt;em&gt;convex function&lt;/em&gt; if $L(\lambda x + (1-\lambda) y) \leq \lambda L(x) + (1-\lambda) L(y)$ whenever $x, y \in E$ and $0 &amp;lt; \lambda &amp;lt; 1$. Note that a convex function is continuous.&lt;/p&gt;
+&lt;p&gt;The Representer theorem allows us to reduce the infinite-dimensional problem of optimizing over an RKHS to an $n$-dimensional problem.&lt;/p&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;p&gt;I barely scratched the surface of reproducing kernel Hilbert space theory. Some resources I recommend that do a much better job than me in explaining this theory and which I used as reference are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Paulsen V and Raghupathi M: An Introduction to the Theory of Reproducing Kernel Hilbert Spaces&lt;/li&gt;
+&lt;li&gt;Wainwright M: High-Dimensional Statistics&lt;/li&gt;
+&lt;li&gt;Schölkopf B, Herbrich R and Smola A.J: A Generalized Representer Theorem (COLT 2001)&lt;/li&gt;
+&lt;li&gt;Aronszajn N: Theory of Reproducing Kernels (1950)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the next article (yet to be written) I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Kernels - Part 0</title>
@@ -38,15 +229,16 @@
 $$&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The word &amp;ldquo;kernel&amp;rdquo; is 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Kernel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;heavily overloaded&lt;/a&gt;, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space.&lt;/p&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Kernel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;heavily overloaded&lt;/a&gt;, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space. Kernel methods provide an elegant, theoretically well-founded, and powerful approach to solving many learning problems.&lt;/p&gt;
 &lt;p&gt;We usually have the following framework: The input space $\X$ which contains our observations/inputs/features is either not rich enough (for example, if there is no linear boundary separating the two classes in a binary classification problem) or not convenient (for example, if our inputs are strings), and therefore we want to work is some other space we call feature space $\H$. Suppose we have a map which takes our inputs from $\X$ to $\H$:
 $$ \Phi : \X \to \H $$
 Then the class of kernels we are interested in are those for which is it possible to write
 $$ k(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
-What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernel theory.&lt;/p&gt;
-&lt;p&gt;In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. This beautiful theory will require some patience from the reader.&lt;/p&gt;
+What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.&lt;/p&gt;
+&lt;p&gt;In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. In the 
+&lt;a href=&#34;http://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next article&lt;/a&gt; I will discuss the kernel trick and some important theorems like Mercer&amp;rsquo;s theorem and Representer theorem.&lt;/p&gt;
 &lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
-&lt;p&gt;A topic like this requires quite a bit of background before we can get to the interesting results like the one above. It&amp;rsquo;s always easy to get lazy and assume all the necessary background from the reader and get straight to the meat, but I want to write an article which I would have found useful had I had it when I started learning about kernel theory. With that being said, I am under no illusion that a much better way to learn this background would be to read a functional analysis text if you have the time.&lt;/p&gt;
+&lt;p&gt;A topic like this requires quite a bit of background before we can get to the interesting results like the one above. It&amp;rsquo;s always easy to get lazy and assume all the necessary background from the reader and get straight to the meat, but I want to write an article which I would have found useful had I had it when I started learning about kernel theory. With that being said, I am under no illusion and believe that a much better way to learn this background would be to read a functional analysis text if you have the time.&lt;/p&gt;
 &lt;h2 id=&#34;linear-spaces&#34;&gt;Linear spaces&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Definition 1:&lt;/strong&gt; A &lt;em&gt;linear space&lt;/em&gt;, or alternatively a &lt;em&gt;vector space&lt;/em&gt;, over a field $\F$ ($\F$ is $\R$ or $\C$ for our purposes) is a set $V$ of elements called &lt;em&gt;vectors&lt;/em&gt; (the elements of $\F$ are called &lt;em&gt;scalars&lt;/em&gt;) satisfying:&lt;/p&gt;
 &lt;p&gt;(A) To every pair, $x$ and $y$, of vectors in $V$ there corresponds a vector $x+y$, called the sum of $x$ and $y$, in such a way that&lt;/p&gt;
@@ -112,23 +304,39 @@ Equality hold for $y = \alpha x$ or $y=0$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 7:&lt;/strong&gt; The virtue of norm on a vector space $V$ is that
 $$ d(x,y) := \norm{ x-y } $$
 defines a &lt;em&gt;metric&lt;/em&gt; on $V$ so that $V$ becomes a metric space.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 8:&lt;/strong&gt; If $0 &amp;lt; p &amp;lt; \infty$ and if $f$ is a complex measurable function on $X$, define
+&lt;p&gt;Note that technically the tuple $(V, d)$ defines a metric space, but I will often write just $V$ instead of $(V, d)$ when it&amp;rsquo;s clear from context what the metric $d$ is.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 8:&lt;/strong&gt; If $0 &amp;lt; p &amp;lt; \infty$, $f$ is a complex measurable function on $X$, and $\mu$ is a nonnegative measure on $X$, define
 $$ \norm{f}_p := \left( \int_X |f|^p \dmu \right)^{1/p} $$
 and let $L^p(\mu)$ consist of all $f$ for which $\norm{f}_p &amp;lt; \infty$. We call $\norm{f}_p$ the $L^p$-norm of $f$.&lt;/p&gt;
 &lt;h2 id=&#34;hilbert-spaces&#34;&gt;Hilbert spaces&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Definition 9:&lt;/strong&gt; An &lt;em&gt;inner product space&lt;/em&gt;, or alternatively a &lt;em&gt;pre-Hilbert space&lt;/em&gt;, is a linear space with an inner product defined on it.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 10:&lt;/strong&gt; A pre-Hilbert space $\H$ is called a &lt;em&gt;Hilbert space&lt;/em&gt; if it is complete in the metric $d$ (see Definition 7).&lt;/p&gt;
-&lt;p&gt;Note that a metric space $M$ is called complete if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.&lt;/p&gt;
+&lt;p&gt;We need the concept of completeness to define Hilbert space. But before that let me define Cauchy sequences.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 10:&lt;/strong&gt; Given a metric space $(M, d)$, a sequence $(x_n)_{n \in \N}$ of elements in $M$ is called a &lt;em&gt;Cauchy sequence&lt;/em&gt; if for every positive real number $\e &amp;gt; 0$ there exists a positive integer $N \in \N$ such that $m, n &amp;gt; N$ implies that $d(x_m, x_n) &amp;lt; \e$.&lt;/p&gt;
+&lt;p&gt;Recall that we say a sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ &lt;em&gt;converges&lt;/em&gt; if there exists a point $x \in M$ with the following property: for every $\e &amp;gt; 0$ there exists a positive integer $N \in \N$ such that $n &amp;gt; N$ implies that $d(x_n, x) &amp;lt; \e$.&lt;/p&gt;
+&lt;p&gt;Now we are ready to define the notion of completeness.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 11:&lt;/strong&gt; A metric space $(M, d)$ is called &lt;em&gt;complete&lt;/em&gt; if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 12:&lt;/strong&gt; A pre-Hilbert space $\H$ is called a &lt;em&gt;Hilbert space&lt;/em&gt; if it is complete in the metric $d$ (see Definition 7).&lt;/p&gt;
 &lt;h3 id=&#34;examples-1&#34;&gt;Examples&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;The set $\C^n$ is a Hilbert space.&lt;/li&gt;
-&lt;li&gt;The set $C$ of all continuous complex functions on the unit interval $[0,1]$ defined above is an inner product space if we define
+&lt;li&gt;
+&lt;p&gt;The sets $\R^n$ and $\C^n$ are Hilbert spaces if we define $\inner{x}{y} := \sum_{i=1}^n x_i \conj{y_i}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The set $C$ of all continuous complex functions on the unit interval $[0,1]$ defined above is an inner product space if we define
 $$ \inner{f}{g} := \int_0^1 f(x) \conj{g(x)} \dx $$
-but is not a Hilbert space.&lt;/li&gt;
-&lt;li&gt;$L^2(\mu)$ is a Hilbert space, with inner product
-$$ \inner{f}{g} := \int_X f \, \conj{g} \dmu $$&lt;/li&gt;
+but is not a Hilbert space.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$L^2(\mu)$ is a Hilbert space, with inner product
+$$ \inner{f}{g} := \int_X f \, \conj{g} \dmu $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The space of square-summable real-valued sequences, namely
+$$ \ell^2(\N) := \left\{ (x_n)_{n \in \N} \; : \; x_n \in \R,\, \sum_n x_n^2 &amp;lt; \infty \right\} $$&lt;/p&gt;
+&lt;p&gt;This set, when endowed with the inner product $\inner{x}{y} := \sum_{n \in \N} x_n y_n$, defines a Hilbert space. It will play an important role in our discussion of eigenfunctions for Reproducing Kernel Hilbert spaces.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Definition 11:&lt;/strong&gt; Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a &lt;em&gt;linear evaluation functional&lt;/em&gt; is a linear functional $E_x$ that is defined as
+&lt;p&gt;&lt;strong&gt;Definition 13:&lt;/strong&gt; Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a &lt;em&gt;linear evaluation functional&lt;/em&gt; is a linear functional $E_x$ that is defined as
 $$ E_x(f) = f(x), \quad (f \in \FF) $$
 In other words, a linear evaluation function with respect to $x \in X$ evaluates each function at $x$.&lt;/p&gt;
 &lt;p&gt;In general, the evaluation functional is not continuous. This means we can have $f_n \to f$ but $E_x(f_n)$ does not converge to $E_x(f)$. Intuitively, this is because Hilbert spaces can contain very unsmooth functions. We will later consider a special type of Hilbert space, Reproducing Kernel Hilbert Space where evaluation functional is continuous.&lt;/p&gt;
@@ -147,23 +355,34 @@ $$ \left\lVert \frac{\delta f}{\norm{f} + \e} \right\rVert &amp;lt; \delta $$
 Hence,
 $$ 1 &amp;gt; \left\lvert L\left( \frac{\delta f}{\norm{f} + \e} \right) \right\rvert = \frac{\delta }{\norm{f} + \e} |L(f)| $$
 Letting $\e \to 0$ we see that $(4)$ holds with $c = 1/\delta$. $\square$&lt;/p&gt;
+&lt;h3 id=&#34;orthonormal-bases&#34;&gt;Orthonormal bases&lt;/h3&gt;
+&lt;p&gt;We generalize the idea of orthonormal basis to infinite dimensional case. This will be needed when we discuss Mercer&amp;rsquo;s theorem.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 14:&lt;/strong&gt; A collection of vectors $\{v_{\alpha} \, : \, \alpha \in A \}$ in a Hilbert space $\H$ for some index set $A$ is called &lt;em&gt;orthonormal&lt;/em&gt; if it satisfies $\inner{v_{\alpha}}{v_{\beta}} = \delta_{\alpha \beta}$ where $\delta_{\alpha \beta}$ is the Kronecker delta, which equals $1$ if $\alpha = \beta$ and $0$ otherwise.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 15:&lt;/strong&gt; A collection of vectors $\{v_{\alpha} \, : \, \alpha \in A \}$ in a Hilbert space $\H$ is &lt;em&gt;complete&lt;/em&gt; if for any $u \in \H$, $\inner{u}{v_{\alpha}} = 0$ for all $\alpha \in A$ implies that $u = 0$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 16:&lt;/strong&gt; An &lt;em&gt;orthonormal basis&lt;/em&gt; a complete orthonormal system.&lt;/p&gt;
+&lt;p&gt;Note, we can also define an orthonormal basis as a maximal orthonormal set in $\H$. To say $\{v_{\alpha}\}$ is maximal means that no vector of $\H$ can be added to $\{v_{\alpha}\}$ in such a way that the resulting set is still orthonormal. This happens precisely when there is no $u \neq 0$ in $\H$ that is orthogonal to every $v_{\alpha}$.&lt;/p&gt;
+&lt;h3 id=&#34;separable-hilbert-spaces&#34;&gt;Separable Hilbert spaces&lt;/h3&gt;
+&lt;p&gt;Another idea we need is separability. Let us define that now.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 17:&lt;/strong&gt; A topological space is called &lt;em&gt;separable&lt;/em&gt; if it contains a countable, dense subset; that is, there exists a sequence $(x_{n})_{n=1}^{\infty }$ of elements of the space such that every nonempty open subset of the space contains at least one element of the sequence.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 18:&lt;/strong&gt; A Hilbert space is separable if and only if it has a countable orthonormal basis. It follows that any separable, infinite-dimensional Hilbert space is isometric to the space $\ell^2(\N)$ of square-summable sequences.&lt;/p&gt;
+&lt;p&gt;We will be dealing with separable Hilbert spaces in our discussion.&lt;/p&gt;
 &lt;h2 id=&#34;riesz-representation-theorem&#34;&gt;Riesz representation theorem&lt;/h2&gt;
 &lt;p&gt;We now come to a very important theorem called the Riesz representation theorem. The name Riesz has 
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Riesz_theorem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;many theorems&lt;/a&gt; attached to it, but the one relevant to us is the following:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Theorem 2:&lt;/strong&gt; For each continuous linear functional $\phi$ on a Hilbert space $\H$, there exists a unique $g \in \H$ such that
-$$\phi(f) = \inner{f}{g}\, , \quad (f \in \H) $$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 2:&lt;/strong&gt; For each continuous linear functional $L$ on a Hilbert space $\H$, there exists a unique $g \in \H$ such that
+$$L(f) = \inner{f}{g}\, , \quad (f \in \H) $$&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll skip the proof as it&amp;rsquo;s not easy and will unnecessarily make this article abstruse.&lt;/p&gt;
 &lt;p&gt;Side-note: In the mathematical treatment of quantum mechanics, this theorem can be seen as a justification for the popular bra–ket notation.&lt;/p&gt;
 &lt;h1 id=&#34;reproducing-kernel-hilbert-spaces-rkhs&#34;&gt;Reproducing Kernel Hilbert Spaces (RKHS)&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Definition 12:&lt;/strong&gt; Let $X$ be a set. We will call a set $\H$ of functions from $X$ to $\F$ a &lt;em&gt;Reproducing Kernel Hilbert Space (RKHS)&lt;/em&gt; on $X$ if&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 19:&lt;/strong&gt; Let $\X$ be a set. We will call a set $\H$ of functions from $\X$ to $\F$ a &lt;em&gt;Reproducing Kernel Hilbert Space (RKHS)&lt;/em&gt; on $\X$ if&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;$\H$ is a vector space,&lt;/li&gt;
 &lt;li&gt;$\H$ is endowed with an inner product, $\inner{\cdot}{\cdot}$, with respect to which $\H$ is a Hilbert space,&lt;/li&gt;
-&lt;li&gt;for every $x \in X$, the linear evaluation functional $E_x : \H \to \F$, is bounded (or continuous, as seen from Lemma-1).&lt;/li&gt;
+&lt;li&gt;for every $x \in \X$, the linear evaluation functional $E_x : \H \to \F$, is bounded (or continuous, as seen from Lemma-1).&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;If $\H$ is an RKHS on $X$, then an application of the Riesz representation theorem shows that the linear evaluation functional is given by the inner product with a unique vector in $\H$. Therefore, for each $x \in X$, there exists a unique vector $k_x \in \H$, such that for every $f \in \H$,
+&lt;p&gt;If $\H$ is an RKHS on $\X$, then an application of the Riesz representation theorem shows that the linear evaluation functional is given by the inner product with a unique vector in $\H$. Therefore, for each $x \in \X$, there exists a unique vector $k_x \in \H$, such that for every $f \in \H$,
 $$ f(x) = E_x(f) = \inner{f}{k_x} $$&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 13:&lt;/strong&gt; The function $k_x$ is called the &lt;em&gt;reproducing kernel for the point $x$&lt;/em&gt;. The function $K: X \times X \to \F$ defined by
+&lt;p&gt;&lt;strong&gt;Definition 20:&lt;/strong&gt; The function $k_x$ is called the &lt;em&gt;reproducing kernel for the point $x$&lt;/em&gt;. The function $K: \X \times \X \to \F$ defined by
 $$ K(x,y) = k_y(x) $$
 is called the &lt;em&gt;reproducing kernel for $\H$&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Note that we have
@@ -172,18 +391,27 @@ $$ K(x,y) = k_y(x) = \inner{k_y}{k_x} = \conj{\inner{k_x}{k_y}} = \conj{K(y,x)}$
 $$ \norm{E_y}^2 = \norm{k_y}^2 = \inner{k_y}{k_y} = K(y,y) $$&lt;/p&gt;
 &lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
 &lt;p&gt;The first question that comes to mind is if any Reproducing Kernel Hilbert Spaces exist. The following example answers this question in the affirmative.&lt;/p&gt;
-&lt;p&gt;We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in X$ and we have
-$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in X) $$
-where $e_j$ is a vector with $1$ at $j$&lt;sup&gt;th&lt;/sup&gt; position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.&lt;/p&gt;
+&lt;p&gt;We saw before that $\C^n$ is a Hilbert space. We can show that $\C^n$ is in fact an RKHS. Let $\X = \{1, 2, \ldots, n\}$, then we can view $v \in \C$ as a function $V : \X \to \C$, where $V(j) = v_j$. The linear evaluation functionals are of course bounded for every $x \in \X$ and we have
+$$ V(j) = v_j = \inner{V}{e_j}\,, \quad (j \in \X) $$
+where $e_j$ is a vector with $1$ at $j$&lt;sup&gt;th&lt;/sup&gt; position and $0$ everywhere else. Therefore, the reproducing kernel for the point $x \in \X$ is $e_x$ and the reproducing kernel can be thought as the identity matrix.&lt;/p&gt;
 &lt;p&gt;Can there be multiple reproducing kernels for an RKHS? The following theorem answers this question.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Theorem 3:&lt;/strong&gt; If an RKHS $\H$ of functions on a set $X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 3:&lt;/strong&gt; If an RKHS $\H$ of functions on a set $\X$ admits a reproducing kernel, $K$, then  $K$ is uniquely determined by $\H$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Suppose that there exists another reproducing kernel $K&#39;$ for $\H$. Then
 $$
 \norm{k_y - k&amp;rsquo;_y} = \inner{k_y - k&amp;rsquo;_y}{k_y - k&amp;rsquo;_y} = \inner{k_y - k&amp;rsquo;_y}{k_y} - \inner{k_y - k&amp;rsquo;_y}{k&amp;rsquo;_y} = (k_y - k&amp;rsquo;_y)(y) - (k_y - k&amp;rsquo;_y)(y) = 0
 $$
-for any $y \in X$. In other words, $k_y(x) = k&amp;rsquo;_y(x)$ for every $x \in X$ by the positive definite property of norms and hence the kernel is unique. $\square$&lt;/p&gt;
+for any $y \in \X$. In other words, $k_y(x) = k&amp;rsquo;_y(x)$ for every $x \in \X$ by the positive definite property of norms and hence the kernel is unique. $\square$&lt;/p&gt;
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
-&lt;p&gt;We covered quite a lot of ground in this blog post but I didn&amp;rsquo;t even define a kernel as we commonly use in machine learning! In the next post I will do that and cover its fundamental properties.&lt;/p&gt;
+&lt;p&gt;We covered quite a lot of ground in this blog post but I didn&amp;rsquo;t even define a kernel as we commonly use in machine learning!
+In the 
+&lt;a href=&#34;http://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next post&lt;/a&gt; I will do that and cover its fundamental properties.&lt;/p&gt;
+&lt;p&gt;Some resources I recommend to go into more depth on what&amp;rsquo;s covered here are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Halmos, P: Finite-Dimensional Vector Spaces.&lt;/li&gt;
+&lt;li&gt;Rudin, W: Real and Complex Analysis. (Chapter - 4)&lt;/li&gt;
+&lt;li&gt;Rudin, W: Functional Analysis.&lt;/li&gt;
+&lt;li&gt;Conway, J: A course in functional analysis.&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     
