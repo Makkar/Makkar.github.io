@@ -145,7 +145,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 &lt;p&gt;which is exactly the spectral theorem.&lt;/p&gt;
 &lt;h1 id=&#34;operations-on-kernels&#34;&gt;Operations on kernels&lt;/h1&gt;
 &lt;p&gt;Let us now consider how various algebraic operations on kernels affect the corresponding Hilbert spaces. All this (and a lot more) can be found in the seminal paper by Aronszajn &amp;ldquo;Theory of Reproducing Kernels&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;I state the following theorems without proof to illustrate how operations on kernels is done.&lt;/p&gt;
+&lt;p&gt;I state the following theorems without proof to illustrate how operations on kernels are done.&lt;/p&gt;
 &lt;h2 id=&#34;sums-of-kernels&#34;&gt;Sums of kernels&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 6:&lt;/strong&gt; Suppose that $\H_1$ and $\H_2$ are both RKHSs with kernels $K_1$ and $K_2$, respectively. Then the space&lt;/p&gt;
 &lt;p&gt;$$\H = \H_1 + \H_2 := \{f_1 + f_2 \, : \, f_1 \in \H_1 \text{ and } f_2 \in \H_2 \}$$&lt;/p&gt;
@@ -168,7 +168,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 &lt;ol&gt;
 &lt;li&gt;If $K$ is a valid kernel and $\alpha \geq 0$, then $\alpha K$ is a valid kernel.&lt;/li&gt;
 &lt;li&gt;If $K$ is a valid kernel and $\alpha \geq 0$, then $K + \alpha$ is a valid kernel.&lt;/li&gt;
-&lt;li&gt;We can easily from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.&lt;/li&gt;
+&lt;li&gt;We can easily see from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.&lt;/li&gt;
 &lt;li&gt;If $K$ is a valid kernel, then $\exp(K)$ is a valid kernel.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&#34;representer-theorem&#34;&gt;Representer theorem&lt;/h1&gt;
@@ -179,7 +179,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 &lt;p&gt;$$ y_i = g(x_i), \quad (i \in [n]) $$&lt;/p&gt;
 &lt;p&gt;We need to find some function $f^*$ which &amp;ldquo;best&amp;rdquo; approximates $g$. A natural way to formalize the notion of &amp;ldquo;best&amp;rdquo; is to limit ourselves to an RKHS $\H$ which contains functions of the form $f : \X \to \R$ and choose&lt;/p&gt;
 &lt;p&gt;$$ f^* = \argmin_{f \in \H} \norm{f} \quad \text{ such that } f^*(x_i) = y_i \text{ for } i \in [n]$$&lt;/p&gt;
-&lt;p&gt;This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$ then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.&lt;/p&gt;
+&lt;p&gt;This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$, then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.&lt;/p&gt;
 &lt;p&gt;In a realistic setting we assume that we have noisy observations, i.e.,&lt;/p&gt;
 &lt;p&gt;$$y_i = g(x_i) + \e_i, \quad (i \in [n])$$&lt;/p&gt;
 &lt;p&gt;where $\e_i$&#39;s denote the noise. Then the constraint of exact fitting is no longer desirable, and we model the &amp;ldquo;best&amp;rdquo; approximation by introducing a loss function which represents how close our approximation is to the observed outputs. More concretely, let $L_y : \R^n \to \R$ be a continuous function. Then we can define our cost function as&lt;/p&gt;
@@ -233,8 +233,8 @@ $$&lt;/p&gt;
 &lt;p&gt;We usually have the following framework: The input space $\X$ which contains our observations/inputs/features is either not rich enough (for example, if there is no linear boundary separating the two classes in a binary classification problem) or not convenient (for example, if our inputs are strings), and therefore we want to work is some other space we call feature space $\H$. Suppose we have a map which takes our inputs from $\X$ to $\H$:
 $$ \Phi : \X \to \H $$
 Then the class of kernels we are interested in are those for which is it possible to write
-$$ k(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
-What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.&lt;/p&gt;
+$$ K(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
+What kind of functions, $K : \H \times \H \to \C$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.&lt;/p&gt;
 &lt;p&gt;In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. In the 
 &lt;a href=&#34;http://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next article&lt;/a&gt; I will discuss the kernel trick and some important theorems like Mercer&amp;rsquo;s theorem and Representer theorem.&lt;/p&gt;
 &lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
@@ -338,7 +338,7 @@ $$ \ell^2(\N) := \left\{ (x_n)_{n \in \N} \; : \; x_n \in \R,\, \sum_n x_n^2 &am
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;Definition 13:&lt;/strong&gt; Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a &lt;em&gt;linear evaluation functional&lt;/em&gt; is a linear functional $E_x$ that is defined as
 $$ E_x(f) = f(x), \quad (f \in \FF) $$
-In other words, a linear evaluation function with respect to $x \in X$ evaluates each function at $x$.&lt;/p&gt;
+In other words, a linear evaluation functional with respect to $x \in X$ evaluates each function at $x$.&lt;/p&gt;
 &lt;p&gt;In general, the evaluation functional is not continuous. This means we can have $f_n \to f$ but $E_x(f_n)$ does not converge to $E_x(f)$. Intuitively, this is because Hilbert spaces can contain very unsmooth functions. We will later consider a special type of Hilbert space, Reproducing Kernel Hilbert Space where evaluation functional is continuous.&lt;/p&gt;
 &lt;p&gt;A lemma that will be useful later on:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Lemma 1:&lt;/strong&gt; Let $\H$ be a Hilbert space and $L:\H \to \F$ a linear functional. The following statements are equivalent:&lt;/p&gt;

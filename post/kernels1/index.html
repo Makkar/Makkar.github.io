@@ -192,7 +192,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap">
   
 
   
@@ -680,7 +680,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 <p>which is exactly the spectral theorem.</p>
 <h1 id="operations-on-kernels">Operations on kernels</h1>
 <p>Let us now consider how various algebraic operations on kernels affect the corresponding Hilbert spaces. All this (and a lot more) can be found in the seminal paper by Aronszajn &ldquo;Theory of Reproducing Kernels&rdquo;.</p>
-<p>I state the following theorems without proof to illustrate how operations on kernels is done.</p>
+<p>I state the following theorems without proof to illustrate how operations on kernels are done.</p>
 <h2 id="sums-of-kernels">Sums of kernels</h2>
 <p><strong>Theorem 6:</strong> Suppose that $\H_1$ and $\H_2$ are both RKHSs with kernels $K_1$ and $K_2$, respectively. Then the space</p>
 <p>$$\H = \H_1 + \H_2 := \{f_1 + f_2 \, : \, f_1 \in \H_1 \text{ and } f_2 \in \H_2 \}$$</p>
@@ -703,7 +703,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 <ol>
 <li>If $K$ is a valid kernel and $\alpha \geq 0$, then $\alpha K$ is a valid kernel.</li>
 <li>If $K$ is a valid kernel and $\alpha \geq 0$, then $K + \alpha$ is a valid kernel.</li>
-<li>We can easily from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.</li>
+<li>We can easily see from all these results that a linear combination or more generally for any polynomial $P$ with positive coefficients, the composition $P \circ K$ is a valid kernel if $K$ is a valid kernel.</li>
 <li>If $K$ is a valid kernel, then $\exp(K)$ is a valid kernel.</li>
 </ol>
 <h1 id="representer-theorem">Representer theorem</h1>
@@ -714,7 +714,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 <p>$$ y_i = g(x_i), \quad (i \in [n]) $$</p>
 <p>We need to find some function $f^*$ which &ldquo;best&rdquo; approximates $g$. A natural way to formalize the notion of &ldquo;best&rdquo; is to limit ourselves to an RKHS $\H$ which contains functions of the form $f : \X \to \R$ and choose</p>
 <p>$$ f^* = \argmin_{f \in \H} \norm{f} \quad \text{ such that } f^*(x_i) = y_i \text{ for } i \in [n]$$</p>
-<p>This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$ then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.</p>
+<p>This optimization problem is feasible whenever there exists at least one function $f \in \H$ that fits the data exactly. Denote by $y$ the vector $[y_1, \ldots, y_n]^T$. It can be shown that if $\matr{K}$ is the gram matrix of the kernel $K$ with respect to $x_1, \ldots, x_n$, then the feasibility is equivalent to $y \in \text{range}(\matr{K})$. This is a special of the representer theorem.</p>
 <p>In a realistic setting we assume that we have noisy observations, i.e.,</p>
 <p>$$y_i = g(x_i) + \e_i, \quad (i \in [n])$$</p>
 <p>where $\e_i$'s denote the noise. Then the constraint of exact fitting is no longer desirable, and we model the &ldquo;best&rdquo; approximation by introducing a loss function which represents how close our approximation is to the observed outputs. More concretely, let $L_y : \R^n \to \R$ be a continuous function. Then we can define our cost function as</p>

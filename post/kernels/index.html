@@ -192,7 +192,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap">
   
 
   
@@ -577,8 +577,8 @@ $$</p>
 <p>We usually have the following framework: The input space $\X$ which contains our observations/inputs/features is either not rich enough (for example, if there is no linear boundary separating the two classes in a binary classification problem) or not convenient (for example, if our inputs are strings), and therefore we want to work is some other space we call feature space $\H$. Suppose we have a map which takes our inputs from $\X$ to $\H$:
 $$ \Phi : \X \to \H $$
 Then the class of kernels we are interested in are those for which is it possible to write
-$$ k(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
-What kind of functions, $k : \H \times \H \to \R$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.</p>
+$$ K(x,y) = \langle \Phi(x), \Phi(y) \rangle, \quad x,y \in \X $$
+What kind of functions, $K : \H \times \H \to \C$ admit such a representation? We aim to be able to answer this question and many others in this series of articles on kernels.</p>
 <p>In this article, I aim to introduce the necessary concepts from analysis, linear algebra, and functional analysis so as to understand Reproducing Kernel Hilbert Spaces (RKHS) and a few of their basic properties. In the 
 <a href="http://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">next article</a> I will discuss the kernel trick and some important theorems like Mercer&rsquo;s theorem and Representer theorem.</p>
 <h1 id="background">Background</h1>
@@ -682,7 +682,7 @@ $$ \ell^2(\N) := \left\{ (x_n)_{n \in \N} \; : \; x_n \in \R,\, \sum_n x_n^2 &lt
 </ol>
 <p><strong>Definition 13:</strong> Consider a linear space $\FF$ of functions each of which is a mapping from a set $X$ into $\F$. For $x \in X$, a <em>linear evaluation functional</em> is a linear functional $E_x$ that is defined as
 $$ E_x(f) = f(x), \quad (f \in \FF) $$
-In other words, a linear evaluation function with respect to $x \in X$ evaluates each function at $x$.</p>
+In other words, a linear evaluation functional with respect to $x \in X$ evaluates each function at $x$.</p>
 <p>In general, the evaluation functional is not continuous. This means we can have $f_n \to f$ but $E_x(f_n)$ does not converge to $E_x(f)$. Intuitively, this is because Hilbert spaces can contain very unsmooth functions. We will later consider a special type of Hilbert space, Reproducing Kernel Hilbert Space where evaluation functional is continuous.</p>
 <p>A lemma that will be useful later on:</p>
 <p><strong>Lemma 1:</strong> Let $\H$ be a Hilbert space and $L:\H \to \F$ a linear functional. The following statements are equivalent:</p>
