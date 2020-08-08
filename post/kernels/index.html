@@ -612,7 +612,7 @@ What kind of functions, $K : \H \times \H \to \C$ admit such a representation? W
 <p><strong>Definition 2:</strong> A <em>linear transformation</em> of a linear space $V$ into a linear space $W$ is a mapping $T: V \to W$ such that
 $$ T(\alpha x + \beta y) = \alpha T(x) + \beta T(y), \quad  (x,y \in V;\; \alpha, \beta \in \F) $$</p>
 <p><strong>Definition 3:</strong> In the special case in which $W$ above is a field, $T$ is called a <em>linear functional</em>.</p>
-<p>Note that we often write $Tx$ instead of $T(x)$, if $T$ is linear.</p>
+<p>Note that we often write $Tx$ instead of $T(x)$, if $T$ is linear, hinting that a linear transformation mapping a finite dimensional vector to another finite dimensional vector space is equivalent to a matrix vector product.</p>
 <p><strong>Definition 4:</strong> Let $\mu$ be a positive measure on an arbitrary measurable space $X$. We define $L^1(\mu)$ to be the collection of all complex measurable functions $f$ on $X$ for which
 $$ \int_X |f| \dmu &lt; \infty $$</p>
 <p>It can be shown that for every $f, g \in L^1(\mu)$ and for every $\alpha, \beta \in \C$, we have $\alpha f + \beta g \in L^1(\mu)$, and
@@ -657,7 +657,10 @@ and let $L^p(\mu)$ consist of all $f$ for which $\norm{f}_p &lt; \infty$. We cal
 <p>We need the concept of completeness to define Hilbert space. But before that let me define Cauchy sequences.</p>
 <p><strong>Definition 10:</strong> Given a metric space $(M, d)$, a sequence $(x_n)_{n \in \N}$ of elements in $M$ is called a <em>Cauchy sequence</em> if for every positive real number $\e &gt; 0$ there exists a positive integer $N \in \N$ such that $m, n &gt; N$ implies that $d(x_m, x_n) &lt; \e$.</p>
 <p>Recall that we say a sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ <em>converges</em> if there exists a point $x \in M$ with the following property: for every $\e &gt; 0$ there exists a positive integer $N \in \N$ such that $n &gt; N$ implies that $d(x_n, x) &lt; \e$.</p>
-<p>Now we are ready to define the notion of completeness.</p>
+<p>It can be shown that every convergent sequence is a Cauchy sequence: Let the sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ converge to $x \in M$. If $\e &gt; 0$, there is an integer $N \in \N$ such that $d(x_n, x) &lt; \e$ for all $n &gt; N$. Hence</p>
+<p>$$d(x_n, x_m) \leq d(x_n, x) + d(x, x_m) &lt; 2\e$$</p>
+<p>if $n,m &gt; N$. Thus $(x_n)_{n \in \N}$ is a Cauchy sequence.</p>
+<p>The converse is not necessarily true. But if it holds in some space, we anoint the space with a special name.</p>
 <p><strong>Definition 11:</strong> A metric space $(M, d)$ is called <em>complete</em> if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.</p>
 <p><strong>Definition 12:</strong> A pre-Hilbert space $\H$ is called a <em>Hilbert space</em> if it is complete in the metric $d$ (see Definition 7).</p>
 <h3 id="examples-1">Examples</h3>

@@ -5,12 +5,93 @@
     <link>https://makkar.github.io/</link>
       <atom:link href="https://makkar.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Aditya Makkar</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 16 Jul 2020 16:20:23 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2020 18:59:12 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Aditya Makkar</title>
       <link>https://makkar.github.io/</link>
     </image>
+    
+    <item>
+      <title>Zorn&#39;s lemma</title>
+      <link>https://makkar.github.io/post/zorn/</link>
+      <pubDate>Fri, 07 Aug 2020 18:59:12 -0400</pubDate>
+      <guid>https://makkar.github.io/post/zorn/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\Ch}{\mathcal{C}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;I have been self-studying some functional analysis recently, and Zorn&amp;rsquo;s lemma comes up often in proofs. Since I have no formal background in mathematics (my undergrad was in Mechanical engineering), it was my first time hearing about Zorn&amp;rsquo;s lemma. I read its statement from the Wikipedia article, naively assuming I understood this extremely powerful tool. But every usage of Zorn&amp;rsquo;s lemma seemed contrived to me, and it was only in retrospect that I could see how Zorn&amp;rsquo;s lemma seems like an obvious tool to apply. An excellent article which helped me understand Zorn&amp;rsquo;s lemma is 
+&lt;a href=&#34;https://gowers.wordpress.com/2008/08/12/how-to-use-zorns-lemma/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;How to use Zorn&amp;rsquo;s lemma&lt;/a&gt; by Timothy Gowers. If you didn&amp;rsquo;t know about Gowers&amp;rsquo;s article, then mentioning it is the biggest contribution of my article and I recommend you read it.&lt;/p&gt;
+&lt;p&gt;In this article, I want to show how to use Zorn&amp;rsquo;s lemma by stating a theorem and discussing its proof. Things &amp;ldquo;clicked&amp;rdquo; for me when I proved that theorem. But before we do that let me define some important concepts.&lt;/p&gt;
+&lt;h1 id=&#34;preliminaries&#34;&gt;Preliminaries&lt;/h1&gt;
+&lt;p&gt;Recall the concept of &lt;em&gt;relation&lt;/em&gt; I defined 
+&lt;a href=&#34;https://makkar.github.io/post/equivalence-relations/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1:&lt;/strong&gt; Let $P$ be a nonempty set. A &lt;em&gt;partial order relation&lt;/em&gt; in $P$ is a relation which is symbolized by $\leq$ and that satisfies the following properties for all $x,y,z \in P$:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reflexivity: $x \leq x$;&lt;/li&gt;
+&lt;li&gt;Antisymmetry: $x \leq y$ and $y \leq x$ implies $x = y$;&lt;/li&gt;
+&lt;li&gt;Transitivity: $x \leq y$ and $y \leq z$ implies $x \leq z$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The set $P$ is then called a &lt;em&gt;partially ordered set&lt;/em&gt;. If in addition to these three properties, the set $P$ also satisfies&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;any two elements are comparable, i.e., either $x \leq y$ or $y \leq x$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;then the relation is called a &lt;em&gt;total order relation&lt;/em&gt; and the set $P$ is called a &lt;em&gt;totally ordered set&lt;/em&gt; or a &lt;em&gt;chain&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Let $P$ be the set of all positive integers, and let $m \leq n$ mean that $m$ divides $n$. Then $P$ is a partially ordered set. It is not a chain as $2$ and $3$ are not comparable, for example.&lt;/li&gt;
+&lt;li&gt;Let $P$ be the set of all real numbers, and let $x \leq y$ mean that $y-x$ is nonnegative. Then $P$ is a chain.&lt;/li&gt;
+&lt;li&gt;Let $P$ be the class of all subsets of some universal set $U$, and let $A \leq B$ for $A,B \in P$ mean that $A \subseteq B$. Then $P$ is a partially ordered set. It is not a chain because if $U$ contains at least two elements, then we can find two subsets of $U$ neither of which is a subset of the other.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Definition 2:&lt;/strong&gt; If $P$ is a partially ordered set, an element $x \in P$ is said to be &lt;em&gt;maximal&lt;/em&gt; if for any $y \in P$ for which $x \leq y$, we must have $x = y$.&lt;/p&gt;
+&lt;p&gt;Note that a maximal element does not have to be bigger than everything else: it just must not be smaller than anything else. A maximal element may not exist, and if it exists it may not be unique.
+Examples 1 and 2 above have no maximal elements. Example 3 has one maximal element: $U$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; Let $Q$ be a nonempty subset of a partially ordered set $P$. An element $x \in P$ is called an &lt;em&gt;upper bound&lt;/em&gt; of $Q$ if $y \leq x$ for every $y \in Q$. An upper bound of $Q$ is called a &lt;em&gt;least upper bound&lt;/em&gt; of $Q$ if it is less than or equal to every upper bound of $Q$.&lt;/p&gt;
+&lt;p&gt;Similarly for &lt;em&gt;lower bound&lt;/em&gt; and &lt;em&gt;greatest lower bound&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Note how similar these definitions are to the definitions of supremum and infimum for real numbers. That&amp;rsquo;s because in that case they are the same. In Example 1 above, if we take $Q$ to be any finite subset of $P$, then the greatest lower bound is the greatest common divisor of all the elements of $Q$ and the least upper bound is the least common multiple. In Example 3 above, let $Q$ be any nonempty subset of $P$. Then the least upper bound is the union of all the sets in $Q$, and the greatest lower bound is the intersection of all the sets in $Q$.&lt;/p&gt;
+&lt;p&gt;We are now ready to state the Zorn&amp;rsquo;s lemma.&lt;/p&gt;
+&lt;h1 id=&#34;zorns-lemma&#34;&gt;Zorn&amp;rsquo;s lemma&lt;/h1&gt;
+&lt;p&gt;If $P$ is a partially ordered set in which every chain has an upper bound, then $P$ possesses a maximal element.&lt;/p&gt;
+&lt;h1 id=&#34;example-application&#34;&gt;Example application&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; Any infinite set $X$ can be represented as a union of a disjoint class of countably infinite subsets.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; The theorem is trivial if $X$ is countably infinite, so assume that it is uncountably infinite.&lt;/p&gt;
+&lt;p&gt;The first thing that we need to do is realize Zorn&amp;rsquo;s lemma can be applied here. I use the following description taken from Gowers&amp;rsquo;s article as a guiding principle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you are building a mathematical object in stages and find that (i) you have not finished even after infinitely many stages, and (ii) there seems to be nothing to stop you continuing to build, then Zorn’s lemma may well be able to help you.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The fact that we need to build $X$ by taking a union of some sets, and it could be an uncountable union and therefore we might not finish even in countably infinite number of stages, suggests Zorn&amp;rsquo;s lemma might be helpful here. Zorn&amp;rsquo;s lemma will prove the existence of a maximal element in a partially ordered set, therefore, we want to construct a partially ordered set such that we can prove that its maximal element is $X$.&lt;/p&gt;
+&lt;p&gt;We want to build our partially ordered set to be consisting of elements of this form: disjoint class of countably infinite subsets of $X$. The reason we want to define our partially ordered set this way is because, first, the subset operation makes it a partially ordered set, and second, it seems intuitively true that the maximal element of this partially ordered set, if it exists, will be such that the union of its elements is $X$.&lt;/p&gt;
+&lt;p&gt;To this end, let $\P$ be the set of all disjoint classes of countably infinite subsets of $X$. $\P$ is partially ordered by $\subseteq$ as we saw in Example 3 above.&lt;/p&gt;
+&lt;p&gt;To be able to apply Zorn&amp;rsquo;s lemma we need to show that every chain in $\P$ has an upper bound. Let $\Ch$ be a chain in $\P$. A natural guess for the upper bound of $\Ch$ is $U = \bigcup _{S \in \Ch} S$. To show that $U$ is an upper bound of $\Ch$ we need to show that $U \in \P$ and $S \subseteq U$ for every $S \in \Ch$. The second claim is trivial from $U$&#39;s definition. It is easy to see that $U$ is a class of countably infinite subsets of $X$ because this is true for each $S \in \Ch$. To show that $U$ is a disjoint class, let $A, B \in U$ be distinct elements of $U$. There exist elements $S_A, S_B \in \Ch$ such that $A \in S_A$ and $B \in S_B$. Since $\Ch$ is a chain, either $S_A \subseteq S_B$ or $S_B \subseteq S_A$. Without loss of generality, $S_A \subseteq S_B$. Then $A, B \in S_B$ and this implies $A$ and $B$ are disjoint because this is true for the elements of our chain. Thus $U$ is a disjoint class of countably infinite subsets and hence belongs to $\P$.&lt;/p&gt;
+&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\P$ possesses a maximal element, $M$. If $\bigcup _{E \in M} E = X$ then we are done because $M$ is the required disjoint class of countably infinite subsets whose union is $X$. But it can still happen that some elements of $X$ are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of $M$. To see that the leftover elements must be finite, denote the set of leftover elements by $Y = X - \bigcup _{E \in M} E$. If $Y$ is infinite it must contain a countably infinite subset $Z \subseteq Y$. Consider the class $M \cup \{Z\}$. It is an element of $\P$ because it is a disjoint class of countably infinite subsets of $X$. But $M$ is a strict subset of $M \cup \{Z\}$ which contradicts the fact that $M$ is a maximal element of $\P$.&lt;/p&gt;
+&lt;p&gt;We are done!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Kernels - Part 1</title>
@@ -45,7 +126,7 @@ $$&lt;/p&gt;
 &lt;p&gt;This is the second blog post in the series of blog posts on kernels. In the 
 &lt;a href=&#34;http://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;first part&lt;/a&gt; I introduced the functional analysis background for kernel theory. I highly recommend you read it before continuing. I will frequently refer to it and use the same notation. In this blog post I aim to introduce the fundamental theorems like Mercer&amp;rsquo;s theorem and Representer theorem.&lt;/p&gt;
 &lt;h1 id=&#34;characterization-of-reproducing-kernels&#34;&gt;Characterization of reproducing kernels&lt;/h1&gt;
-&lt;p&gt;We already defined the notion of reproducing kernels for an RKHS (Definition 19). We now turn our attention to obtaining necessary and sufficient conditions for a function $K : \X \times \X \to \C$ to be the reproducing kernel for some RKHS. But first we must define kernel functions.&lt;/p&gt;
+&lt;p&gt;We already defined the notion of reproducing kernels for an RKHS (Definition 20). We now turn our attention to obtaining necessary and sufficient conditions for a function $K : \X \times \X \to \C$ to be the reproducing kernel for some RKHS. But first we must define kernel functions.&lt;/p&gt;
 &lt;h2 id=&#34;kernel-functions&#34;&gt;Kernel functions&lt;/h2&gt;
 &lt;p&gt;Let&amp;rsquo;s start by recalling a basic definition.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 21:&lt;/strong&gt; Let $A = (a_{i,j})$ be an $n \times n$ complex matrix. Then $A$ is called &lt;em&gt;positive&lt;/em&gt; if for every $\alpha_1, \ldots, \alpha_n \in \C$ we have
@@ -268,7 +349,7 @@ What kind of functions, $K : \H \times \H \to \C$ admit such a representation? W
 &lt;p&gt;&lt;strong&gt;Definition 2:&lt;/strong&gt; A &lt;em&gt;linear transformation&lt;/em&gt; of a linear space $V$ into a linear space $W$ is a mapping $T: V \to W$ such that
 $$ T(\alpha x + \beta y) = \alpha T(x) + \beta T(y), \quad  (x,y \in V;\; \alpha, \beta \in \F) $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; In the special case in which $W$ above is a field, $T$ is called a &lt;em&gt;linear functional&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Note that we often write $Tx$ instead of $T(x)$, if $T$ is linear.&lt;/p&gt;
+&lt;p&gt;Note that we often write $Tx$ instead of $T(x)$, if $T$ is linear, hinting that a linear transformation mapping a finite dimensional vector to another finite dimensional vector space is equivalent to a matrix vector product.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 4:&lt;/strong&gt; Let $\mu$ be a positive measure on an arbitrary measurable space $X$. We define $L^1(\mu)$ to be the collection of all complex measurable functions $f$ on $X$ for which
 $$ \int_X |f| \dmu &amp;lt; \infty $$&lt;/p&gt;
 &lt;p&gt;It can be shown that for every $f, g \in L^1(\mu)$ and for every $\alpha, \beta \in \C$, we have $\alpha f + \beta g \in L^1(\mu)$, and
@@ -313,7 +394,10 @@ and let $L^p(\mu)$ consist of all $f$ for which $\norm{f}_p &amp;lt; \infty$. We
 &lt;p&gt;We need the concept of completeness to define Hilbert space. But before that let me define Cauchy sequences.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 10:&lt;/strong&gt; Given a metric space $(M, d)$, a sequence $(x_n)_{n \in \N}$ of elements in $M$ is called a &lt;em&gt;Cauchy sequence&lt;/em&gt; if for every positive real number $\e &amp;gt; 0$ there exists a positive integer $N \in \N$ such that $m, n &amp;gt; N$ implies that $d(x_m, x_n) &amp;lt; \e$.&lt;/p&gt;
 &lt;p&gt;Recall that we say a sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ &lt;em&gt;converges&lt;/em&gt; if there exists a point $x \in M$ with the following property: for every $\e &amp;gt; 0$ there exists a positive integer $N \in \N$ such that $n &amp;gt; N$ implies that $d(x_n, x) &amp;lt; \e$.&lt;/p&gt;
-&lt;p&gt;Now we are ready to define the notion of completeness.&lt;/p&gt;
+&lt;p&gt;It can be shown that every convergent sequence is a Cauchy sequence: Let the sequence $(x_n)_{n \in \N}$ in a metric space $(M, d)$ converge to $x \in M$. If $\e &amp;gt; 0$, there is an integer $N \in \N$ such that $d(x_n, x) &amp;lt; \e$ for all $n &amp;gt; N$. Hence&lt;/p&gt;
+&lt;p&gt;$$d(x_n, x_m) \leq d(x_n, x) + d(x, x_m) &amp;lt; 2\e$$&lt;/p&gt;
+&lt;p&gt;if $n,m &amp;gt; N$. Thus $(x_n)_{n \in \N}$ is a Cauchy sequence.&lt;/p&gt;
+&lt;p&gt;The converse is not necessarily true. But if it holds in some space, we anoint the space with a special name.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 11:&lt;/strong&gt; A metric space $(M, d)$ is called &lt;em&gt;complete&lt;/em&gt; if every Cauchy sequence of points in $M$ has a limit that is also in $M$ or, alternatively, if every Cauchy sequence in $M$ converges in $M$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Definition 12:&lt;/strong&gt; A pre-Hilbert space $\H$ is called a &lt;em&gt;Hilbert space&lt;/em&gt; if it is complete in the metric $d$ (see Definition 7).&lt;/p&gt;
 &lt;h3 id=&#34;examples-1&#34;&gt;Examples&lt;/h3&gt;
