@@ -1,0 +1,1083 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Aditya Makkar">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Random Fourier Features">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://makkar.github.io/post/kernels2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(0, 136, 204)">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://makkar.github.io/post/kernels2/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Aditya Makkar">
+  <meta property="og:url" content="https://makkar.github.io/post/kernels2/">
+  <meta property="og:title" content="Kernels - Part 2 | Aditya Makkar">
+  <meta property="og:description" content="Random Fourier Features"><meta property="og:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-09-07T16:05:35-04:00">
+    
+    <meta property="article:modified_time" content="2020-09-07T16:05:35-04:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://makkar.github.io/post/kernels2/"
+  },
+  "headline": "Kernels - Part 2",
+  
+  "datePublished": "2020-09-07T16:05:35-04:00",
+  "dateModified": "2020-09-07T16:05:35-04:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Aditya Makkar"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aditya Makkar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Random Fourier Features"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Kernels - Part 2 | Aditya Makkar</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/hilbert/"><span>Hilbert's Hotel - Blog</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Kernels - Part 2</h1>
+
+  
+  <p class="page-subtitle">A discussion of Random Fourier Features</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Sep 7, 2020
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\L}{\mathcal{L}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\trans}{\intercal}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\O}{\mathcal{O}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+$$</p>
+<h1 id="introduction">Introduction</h1>
+<p>We discussed 
+<a href="https://makkar.github.io/post/kernels/" target="_blank" rel="noopener">some functional analysis</a> and the 
+<a href="https://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">basics of Reproducing Kernel Hilbert Space theory</a> in the previous two articles. The aim of this article is to discuss the need for approximating the kernel matrix and one method in particular to do that, Random Fourier Features.</p>
+<p>Let&rsquo;s start by discussing Kernel Ridge Regression, a simple application of kernel methods.</p>
+<h1 id="kernel-ridge-regression">Kernel Ridge Regression</h1>
+<h2 id="ridge-regression">Ridge Regression</h2>
+<p>Let&rsquo;s recall the ridge regression model. We have some training data of the form:</p>
+<p>$$
+(x_1, y_1), \ldots, (x_n, y_n) \in (\X, \Y)
+$$
+where $\X = \R^d$ and $\Y = \R$. We represent the training data more succinctly by letting $\matr{y} = [y_1, \ldots, y_n]^\trans$ and $\matr{X}$ be an $n \times d$ matrix whose $i$<sup>th</sup> row is $x_i^\trans$. Then in ridge regression the likelihood model is</p>
+<p>$$
+\matr{y} \sim \NN(\matr{X} \matr{w}, \sigma^2 \matr{I}_n)
+$$
+where $\matr{w}$ is a $d$-dimensional column vector representing the weights to learned, and $\sigma^2 &gt; 0$. We also assume a Gaussian prior on $\matr{w}$</p>
+<p>$$
+\matr{w} \sim \NN\left(0, \frac{1}{\lambda} \matr{I}_d\right)
+$$</p>
+<p>Then the maximum a posteriori (MAP) estimate is given by</p>
+<p>\begin{align}
+\matr{w}_{\text{MAP}} &amp;= \argmax _{\matr{w}} \; \ln p(\matr{w} | \matr{y}, \matr{X}) \\
+&amp;= \argmax _{\matr{w}} \; \ln p(\matr{y} | \matr{w}, \matr{X}) + \ln p(\matr{w}) \\
+&amp;= \argmax _{\matr{w}} \; \underbrace{-\frac{1}{2\sigma^2} (\matr{y} - \matr{X} \matr{w})^\trans (\matr{y} - \matr{X} \matr{w}) - \frac{\lambda}{2} \matr{w}^\trans \matr{w}} _{\L}
+\end{align}</p>
+<p>If we call this objective $\L$, then $\matr{w}_{\text{MAP}}$ is given by the solution of the equation formed by equating the gradient of $\L$ with respect to $\matr{w}$ to $0$. Thus,</p>
+<p>$$
+0 = \nabla_{\matr{w}} \L = \frac{1}{\sigma^2} \matr{X}^\trans \matr{y} - \frac{1}{\sigma^2} \matr{X}^\trans \matr{X} \matr{w} - \lambda \matr{w}
+$$</p>
+<p>and we get</p>
+<p>$$
+\matr{w}_{\text{MAP}} = (\lambda \sigma^2 \matr{I} + \matr{X}^\trans \matr{X})^{-1} \matr{X}^\trans \matr{y}
+$$</p>
+<p>which is called the ridge regression solution, and we denote it by $\matr{w}_{\text{RR}}$. We are inverting a $d \times d$ matrix taking $\O(d^3)$ time, and matrix multiplication of a $d \times d$ matrix with a $d \times n$ matrix taking $\O(d^2 n)$ time.</p>
+<h2 id="kernel-ridge-regression-1">Kernel Ridge Regression</h2>
+<p>The previous model suffers from limited expressiveness. As we have seen before, the idea of kernel methods is to define a map which takes our inputs from $\X$ to an RKHS $\H$:</p>
+<p>$$
+\phi : \X \to \H
+$$</p>
+<p>and then apply the linear model of ridge regression above to $\phi(x_i)$ instead of $x_i$. $\H$ could be an infinite-dimensional vector space, but for now suppose it is $D$-dimensional. Let $\matr{\Phi}$ represent the $n \times D$ matrix whose $i$<sup>th</sup> row is $\phi(x_i)^\trans$. Then the ridge regression solution is given by</p>
+<p>\begin{equation}
+\matr{w}_{\text{RR}} = (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans \matr{y}
+\end{equation}</p>
+<p>We immediately realize the problem here: we are inverting a $D \times D$ matrix and $D$ can be huge! Fortunately, we have a matrix trick that we can exploit, the 
+<a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity#Discussion" target="_blank" rel="noopener">push-though identity</a>. It looks like this</p>
+<p>\begin{align}
+\matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;= (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi}) \matr{\Phi}^\trans \quad \text{(can be seen by expanding)} \\<br>
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;= (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi}) \matr{\Phi}^\trans \quad \text{(left multiplying by } (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \text{ )} \\<br>
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;= \matr{\Phi}^\trans \\<br>
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} &amp;= \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \quad \text{(right multiplying by } (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \text{ )} \\<br>
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans &amp;= \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1}
+\end{align}</p>
+<p>And thus we get
+$$
+\matr{w}_{\text{RR}} = \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \matr{y}
+$$</p>
+<p>We are now inverting an $n \times n$ matrix taking $\O(n^3)$ time, and matrix multiplication of a $D \times n$ matrix with a $n \times n$ matrix taking $\O(D n^2)$ time.</p>
+<p>Notice that $\matr{\Phi} \matr{\Phi}^\trans$ is the gram matrix, and let&rsquo;s denote it by $\matr{K}$. It&rsquo;s $(i,j)$<sup>th</sup> entry is $\matr{K}_{i,j} = \inner{\phi(x_i)}{\phi(x_j)} = K(x_i, x_j)$, where $K : \R^d \times \R^d \to \C$ is the kernel function corresponding to the RKHS $\H$.</p>
+<p>If we denote</p>
+<p>$$
+\matr{\alpha} = (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \matr{y} = (\lambda \sigma^2 \matr{I}_n + \matr{K})^{-1} \matr{y}
+$$</p>
+<p>then we have</p>
+<p>$$
+\matr{w}_{\text{RR}} = \matr{\Phi}^\trans \matr{\alpha} = \sum _{i=1}^n \alpha_i \phi(x_i)
+$$</p>
+<p>and prediction for a test data point, $x$, is</p>
+<p>$$
+\matr{w}_{\text{RR}}^\trans \phi(x) = \sum _{i=1}^n \alpha_i \phi(x_i)^\trans \phi(x) = \sum _{i=1}^n \alpha_i k _{x_i}(x)
+$$</p>
+<p>where $k_{x_i}$ denotes the reproducing kernel for the point $x_i$.</p>
+<p>If this looks suspiciously similar to the 
+<a href="https://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">Representer theorem</a> (Theorem-8), then that&rsquo;s because it is an instance of it! So prediction takes $\O(n)$ time.</p>
+<p>The point of this discussion was to show that Kernel Ridge Regression is computationally expensive. Simply storing the gram matrix, $\matr{K}$, takes $\O(n^2)$ space. We need to find methods which can circumvent using $\matr{K}$ if we are to apply kernel methods to anything other than the smallest of the data sets.</p>
+<h1 id="kernel-approximation">Kernel approximation</h1>
+<p>The idea behind kernel approximation methods is to replace the gram matrix, $\matr{K}$, with a low rank approximation, i.e., find an $n \times S$ matrix, $\matr{Z}$, such that</p>
+<p>$$
+\matr{K} \approx \matr{Z} \matr{Z}^\trans
+$$</p>
+<p>We want $S \ll n$, and thus we significantly reduce our time and space complexity. $\matr{Z}$ takes $\O(nS)$ space. Inversion of $(\lambda \sigma^2 \matr{I}_n + \matr{Z} \matr{Z}^\trans)$ takes $\O(n S^2)$ time.</p>
+<p>One way to think about this is we want to find a mapping of $x_i$'s to some latent space such that the inner product in this latent space approximates the kernel</p>
+<p>$$
+\matr{K}_{i,j} = K(x_i, x_j) \approx z_i^\trans z_j
+$$</p>
+<p>where $z_i$ denotes the $i$<sup>th</sup> row of $\matr{Z}$.
+One way to do that is Nyström approximation, which I won&rsquo;t be discussing at all. The other method is to use Random Fourier Features. This approach was introduced by Rahimi and Recht in their seminal 2007 paper 
+<a href="https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines.pdf" target="_blank" rel="noopener">Random Features for Large-Scale Kernel Machines</a>. It relies on a result from functional analysis called Bochner&rsquo;s theorem, so let&rsquo;s digress and discuss that first.</p>
+<h1 id="bochners-theorem">Bochner&rsquo;s theorem</h1>
+<p><strong>Definition 28:</strong> A function $K : \R^n \to \C$, is said to be <em>positive-definite</em> if</p>
+<p>$$
+\sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} K(x_i - x_j) \geq 0
+$$</p>
+<p>for every choice of $x_1, \ldots, x_n \in \R^n$ and for every choice of complex numbers $\alpha_1, \ldots, \alpha_n$.</p>
+<p>Notice how similar this definition is to the 
+<a href="https://makkar.github.io/post/kernels1/" target="_blank" rel="noopener">definition of a kernel function</a>. Positive-definite functions have some nice properties:</p>
+<p><strong>Lemma 3:</strong> If $K: \R^n \to \C$ is a positive-definite function, then $K(-x) = \conj{K(x)}$ for every $x \in \R^n$.</p>
+<p><strong>Proof:</strong> It is easy to see that $K(0) \geq 0$. In the definition above, let $n = 2$, $x_1 = x$, $x_2 = 0$, $\alpha_1$ be an arbitrary complex number, and $\alpha_2 = 1$. Then applying the definition of a positive-definite function, we get</p>
+<p>$$
+(1 + |\alpha_1|^2)K(0) + \alpha_1 K(x) + \conj{\alpha_1}K(-x) \geq 0
+$$</p>
+<p>Let $\alpha_1 = 1$, then
+$$
+2K(0) + K(x) + K(-x) \geq 0
+$$</p>
+<p>In particular, $K(x) + K(-x)$ is real, which implies</p>
+<p>$$
+K(x) + K(-x) = \conj{K(x)} +\conj{K(-x)}
+$$</p>
+<p>Similarly, letting $\alpha_1 = i$, we get $i(K(x) - K(-x))$ is real, which implies</p>
+<p>$$
+K(x) - K(-x) = -\conj{K(x)} + \conj{K(-x)}
+$$</p>
+<p>Adding these two equations, we get $K(-x) = \conj{K(x)}$. $\square$</p>
+<p><strong>Lemma 4:</strong> If $K: \R^n \to \C$ is a positive-definite function, then $K$ is bounded. In particular, $|K(x)| \leq K(0)$ for every $x \in \R^n$.</p>
+<p><strong>Proof:</strong> From lemma-3, $K(0)$ must be real. In the definition above, let $n = 2$, $x_1 = 0$, $x_2 = x$, $\alpha_1 = |K(x)|$, and $\alpha_2 = -\conj{K(x)}$. Then applying the definition of a positive-definite function, we get</p>
+<p>$$
+2K(0) |K(x)|^2 - |K(x)| K(x) K(-x) - \conj{K(x)} |K(x)| K(x) \geq 0
+$$</p>
+<p>Now use lemma-3 to substitute $\conj{K(x)}$ for $K(-x)$ in the middle term to get</p>
+<p>$$
+2K(0) |K(x)|^2 - 2 |K(x)|^3 \geq 0
+$$</p>
+<p>If $|K(x)| = 0$, then we obviously have our result, since we can easily show $K(0) \geq 0$, otherwise we can divide by $2|K(x)|^2$ to get</p>
+<p>$$
+K(0) - |K(x)| \geq 0
+$$</p>
+<p>which is our desired result. $\square$</p>
+<p>The following theorem is the converse of Bochner&rsquo;s theorem. We state it first since it is easier to prove.</p>
+<p><strong>Theorem 9 [Converse of Bochner&rsquo;s theorem]:</strong> The Fourier transform of every finite Borel measure on $\R^n$ is positive-definite.</p>
+<p><strong>Proof:</strong> Let $\mu$ be a finite Borel measure on $\R^n$. Let $K : \R^n \to \C$ be the Fourier transform of $\mu$, i.e.,</p>
+<p>$$
+K(x) = \int_{\R^n} \exp(-i \omega^\trans x) \dmu(\omega)
+$$</p>
+<p>Let $x_1, \ldots, x_n \in \R^n$ and $\alpha_1, \ldots, \alpha_n \in \C$ be arbitrary. Then</p>
+<p>\begin{align}
+\sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} K(x_i - x_j) &amp;= \sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} \int _{\R^n} \exp\{-i \omega^\trans (x_i - x_j)\} \dmu(\omega) \\<br>
+&amp;= \int _{\R^n} \left| \sum _{i = 1}^n \alpha_i \exp(-i \omega^\trans x_i) \right|^2 \dmu(\omega) \\<br>
+&amp;\geq 0
+\end{align}</p>
+<p>Thus, $K$ is positive-definite. $\square$</p>
+<p><strong>Theorem 10 [Bochner&rsquo;s theorem]:</strong> If $K$ is continuous and positive-definite, then $K$ is the Fourier transform of a finite positive Borel measure.</p>
+<p>I&rsquo;ll skip the proof since it is beyond my understanding. The proof can be easily found on the internet, see 
+<a href="http://individual.utoronto.ca/jordanbell/notes/bochnertheorem.pdf" target="_blank" rel="noopener">here</a> for example.</p>
+<p>This finite positive Borel measure is often called as <em>spectral measure</em>. It is easy to see that $K(0) = \mu(\R^n)$, and thus if we assume $K(0) = 1$ then the spectral measure is a probability measure.</p>
+<h1 id="random-fourier-features">Random Fourier Features</h1>
+<p>Picking up where we left: We want to find a low-dimensional mapping of $x_i$'s into a latent space such that we can approximate the kernel computation with an inner product in this latent space. We will use Bochner&rsquo;s theorem for this. To apply this theorem we need to limit ourselves to a special class of kernels.</p>
+<p><strong>Definition 29:</strong> A kernel function $K : \R^d \times \R^d \to \C$ is called <em>shift-invariant</em> if $K(x, y) = K(x-y, 0)$.</p>
+<p>Gaussian and Laplacian kernels are examples of shift-invariant kernels.
+Note that the function $K&rsquo;: \R^d \to \C$ defined by $K&rsquo;(x) = K(x, 0)$ is positive-definite if $K$ is a shift-invariant kernel. Bochner&rsquo;s theorem then implies the existence of a spectral measure, $\mu$, such that</p>
+<p>$$
+K(x, y) = K(x-y, 0) = K&rsquo;(x-y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} \dmu(\omega)
+$$</p>
+<p>Let $p$ denote the Radon-Nikodym derivative of $\mu$ with respect to the Lebesgue measure on $\R^d$, then we can write the equation above as</p>
+<p>\begin{equation}
+K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \qquad \qquad (\star)
+\end{equation}</p>
+<p>For example, if we take the Gaussian kernel</p>
+<p>$$
+K(x,y) = \exp\left(-\frac{\norm{x-y}^2_2}{2 \sigma^2}\right)
+$$</p>
+<p>then since $K(0,0) = 1$, $p$ is a probability density, and can be easily shown to be Gaussian</p>
+<p>$$
+p \sim \NN\left(0, \frac{1}{\sigma^2} \matr{I}_d\right)
+$$</p>
+<p>We now see an obvious way to approximate the kernel from equation $(\star)$: use Monte Carlo approximation. If we take $S$ samples, $\omega_1, \ldots, \omega_S \sim p(\omega)$,</p>
+<p>\begin{align}
+K(x, y) &amp;= \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \\<br>
+&amp;\approx \frac{1}{S} \sum _{s=1}^S \exp\{-i\omega^\trans_s (x-y)\} \\<br>
+&amp;= \inner{z(x)}{z(y)}
+\end{align}</p>
+<p>where $z : \R^d \to \R^S$ is the latent mapping given by</p>
+<p>$$
+z(x) = \frac{1}{\sqrt{S}}[\exp(-i \omega ^\trans _1 x), \ldots, \exp(-i \omega ^\trans _S x)]^\trans
+$$</p>
+<p>We can get another mapping by noting that if the kernel is real, then from $(\star)$ we can see that the RHS must also be real and we can thus write it as</p>
+<p>\begin{equation}
+K(x, y) = \int _{\R^d} \cos\{\omega^\trans (x-y)\} p(\omega) \dom
+\end{equation}</p>
+<p>Using the fact that $\cos(a - b) = \cos(a) \cos(b) + \sin(a) \sin(b)$, we can write $\cos\{\omega^\trans (x-y)\} = \cos(\omega^\trans x) \cos(\omega^\trans y) + \sin(\omega^\trans x) \sin(\omega^\trans y)$</p>
+<p>Thus, if we define $z_1 : \R^d \to \R^{2S}$ by</p>
+<p>$$
+z_1(x) = \frac{1}{\sqrt{S}}[\cos(\omega^\trans_1 x), \ldots, \cos(\omega^\trans_S x), \sin(\omega^\trans_1 x), \ldots, \sin(\omega^\trans_S x)]^\trans
+$$</p>
+<p>we have $\inner{z_1(x)}{z_1(y)} \approx K(x, y)$.</p>
+<p>Another mapping that is used is $z_2 : \R^d \to \R^{S}$ defined by</p>
+<p>$$
+z_2(x) = \sqrt{\frac{2}{S}}[\cos(\omega^\trans_1 x + b_1), \ldots, \cos(\omega^\trans_S x + b_S)]^\trans
+$$</p>
+<p>where $b_1, \ldots, b_S \sim \text{Unif}[0, 2\pi]$. It is not too difficult to show that</p>
+<p>$$
+\E_{\omega, b}[z_2(x)^\trans z_2(y)] = \E_{\omega}[z_1(x)^\trans z_1(y)]
+$$</p>
+<p>There exist many modifications to the basic RFF approach described here. For example, we can do Quasi-Monte Carlo approximations instead of Monte Carlo approximations. See the paper 
+<a href="https://jmlr.org/papers/volume17/14-538/14-538.pdf" target="_blank" rel="noopener">Quasi-Monte Carlo Feature Maps for Shift-Invariant Kernels</a> by Avron, Sindhwani, Yang and Mahoney (2016). Or we could sample from a modified distribution in Fourier space, given by the leverage function of the kernel. See the paper 
+<a href="https://arxiv.org/pdf/1804.09893.pdf" target="_blank" rel="noopener">Random Fourier Features for Kernel Ridge Regression: Approximation Bounds and Statistical Guarantees</a> by Avron et al (2017).</p>
+<h1 id="extension-to-a-more-general-class-of-kernels">Extension to a more general class of kernels</h1>
+<p>I have often seen kernels being represented as an integral of a product of two functions neatly separating the dependence on $x$ and $y$:</p>
+<p>$$
+K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega)
+$$</p>
+<p>for some function $\varphi(\cdot, \cdot)$ and measure $\mu$ on $\Omega$. I found a good explanation of when this is possible in the papers by Bach (2017) 
+<a href="https://jmlr.org/papers/volume18/14-546/14-546.pdf" target="_blank" rel="noopener">Breaking the Curse of Dimensionality with Convex Neural Networks</a> and  Li et al (2019) 
+<a href="https://arxiv.org/pdf/1806.09178.pdf" target="_blank" rel="noopener">Towards a Unified Analysis of Random Fourier Features</a>.</p>
+<p>Let $\mu$ be a Borel probability measure on the compact space $\Omega$, and $\varphi: \Omega \times \X \to \R$ be a function such that the functions $\varphi(\cdot, x) : \Omega \to \R$ are measurable for all $x \in \X$, i.e., they are random variables. Now define the set $\H$ to consist of all functions $f$ that can written as</p>
+<p>$$
+f(x) = \int_{\Omega} h(\omega) \varphi(\omega, x) \dmu(\omega) \quad \text{for all } x \in \X
+$$</p>
+<p>for some $h: \Omega \to \R$ such that $\int_{\Omega} h^2 \dmu &lt; \infty$. Let us define the squared norm, $\norm{f}_{\H}^2$, as the infimum of $\int_{\Omega} h^2 \dmu$ over all functions $h$ for which $f$ can be decomposed as above. Then it can be shown that $\H$ is an RKHS with the kernel</p>
+<p>$$
+K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega)
+$$</p>
+<p>Therefore, we can again approximate this kernel with a Monte Carlo approximation:</p>
+<p>\begin{align}
+K(x,y) &amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega) \\<br>
+&amp;\approx \frac{1}{S} \sum_{s=1}^S \varphi(\omega_s, x) \varphi(\omega_s, y)
+\end{align}</p>
+<h1 id="epilogue">Epilogue</h1>
+<p>Random Fourier Features is an easy to implement approach that allow us to apply kernel methods on large data sets. I haven&rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.</p>
+<p>With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/aditya-makkar/avatar_huafef36e0e38068a1162b930b5509c06d_432110_270x270_fill_q90_lanczos_center.jpg" alt="Aditya Makkar">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://makkar.github.io/">Aditya Makkar</a></h5>
+        
+        
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/adityamakkar/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/MakkarAditya" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/makkar" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key="></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = true;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.6f7ce8be710290b8c431bbc97f405d15.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+
+    
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

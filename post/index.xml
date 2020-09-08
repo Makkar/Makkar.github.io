@@ -5,12 +5,272 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2020 18:59:12 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 07 Sep 2020 16:05:35 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://makkar.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Kernels - Part 2</title>
+      <link>https://makkar.github.io/post/kernels2/</link>
+      <pubDate>Mon, 07 Sep 2020 16:05:35 -0400</pubDate>
+      <guid>https://makkar.github.io/post/kernels2/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\H}{\mathcal{H}}
+\newcommand{\P}{\mathcal{P}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\L}{\mathcal{L}}
+\newcommand{\e}{\epsilon}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\trans}{\intercal}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\O}{\mathcal{O}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;We discussed 
+&lt;a href=&#34;https://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;some functional analysis&lt;/a&gt; and the 
+&lt;a href=&#34;https://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;basics of Reproducing Kernel Hilbert Space theory&lt;/a&gt; in the previous two articles. The aim of this article is to discuss the need for approximating the kernel matrix and one method in particular to do that, Random Fourier Features.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s start by discussing Kernel Ridge Regression, a simple application of kernel methods.&lt;/p&gt;
+&lt;h1 id=&#34;kernel-ridge-regression&#34;&gt;Kernel Ridge Regression&lt;/h1&gt;
+&lt;h2 id=&#34;ridge-regression&#34;&gt;Ridge Regression&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s recall the ridge regression model. We have some training data of the form:&lt;/p&gt;
+&lt;p&gt;$$
+(x_1, y_1), \ldots, (x_n, y_n) \in (\X, \Y)
+$$
+where $\X = \R^d$ and $\Y = \R$. We represent the training data more succinctly by letting $\matr{y} = [y_1, \ldots, y_n]^\trans$ and $\matr{X}$ be an $n \times d$ matrix whose $i$&lt;sup&gt;th&lt;/sup&gt; row is $x_i^\trans$. Then in ridge regression the likelihood model is&lt;/p&gt;
+&lt;p&gt;$$
+\matr{y} \sim \NN(\matr{X} \matr{w}, \sigma^2 \matr{I}_n)
+$$
+where $\matr{w}$ is a $d$-dimensional column vector representing the weights to learned, and $\sigma^2 &amp;gt; 0$. We also assume a Gaussian prior on $\matr{w}$&lt;/p&gt;
+&lt;p&gt;$$
+\matr{w} \sim \NN\left(0, \frac{1}{\lambda} \matr{I}_d\right)
+$$&lt;/p&gt;
+&lt;p&gt;Then the maximum a posteriori (MAP) estimate is given by&lt;/p&gt;
+&lt;p&gt;\begin{align}
+\matr{w}_{\text{MAP}} &amp;amp;= \argmax _{\matr{w}} \; \ln p(\matr{w} | \matr{y}, \matr{X}) \\
+&amp;amp;= \argmax _{\matr{w}} \; \ln p(\matr{y} | \matr{w}, \matr{X}) + \ln p(\matr{w}) \\
+&amp;amp;= \argmax _{\matr{w}} \; \underbrace{-\frac{1}{2\sigma^2} (\matr{y} - \matr{X} \matr{w})^\trans (\matr{y} - \matr{X} \matr{w}) - \frac{\lambda}{2} \matr{w}^\trans \matr{w}} _{\L}
+\end{align}&lt;/p&gt;
+&lt;p&gt;If we call this objective $\L$, then $\matr{w}_{\text{MAP}}$ is given by the solution of the equation formed by equating the gradient of $\L$ with respect to $\matr{w}$ to $0$. Thus,&lt;/p&gt;
+&lt;p&gt;$$
+0 = \nabla_{\matr{w}} \L = \frac{1}{\sigma^2} \matr{X}^\trans \matr{y} - \frac{1}{\sigma^2} \matr{X}^\trans \matr{X} \matr{w} - \lambda \matr{w}
+$$&lt;/p&gt;
+&lt;p&gt;and we get&lt;/p&gt;
+&lt;p&gt;$$
+\matr{w}_{\text{MAP}} = (\lambda \sigma^2 \matr{I} + \matr{X}^\trans \matr{X})^{-1} \matr{X}^\trans \matr{y}
+$$&lt;/p&gt;
+&lt;p&gt;which is called the ridge regression solution, and we denote it by $\matr{w}_{\text{RR}}$. We are inverting a $d \times d$ matrix taking $\O(d^3)$ time, and matrix multiplication of a $d \times d$ matrix with a $d \times n$ matrix taking $\O(d^2 n)$ time.&lt;/p&gt;
+&lt;h2 id=&#34;kernel-ridge-regression-1&#34;&gt;Kernel Ridge Regression&lt;/h2&gt;
+&lt;p&gt;The previous model suffers from limited expressiveness. As we have seen before, the idea of kernel methods is to define a map which takes our inputs from $\X$ to an RKHS $\H$:&lt;/p&gt;
+&lt;p&gt;$$
+\phi : \X \to \H
+$$&lt;/p&gt;
+&lt;p&gt;and then apply the linear model of ridge regression above to $\phi(x_i)$ instead of $x_i$. $\H$ could be an infinite-dimensional vector space, but for now suppose it is $D$-dimensional. Let $\matr{\Phi}$ represent the $n \times D$ matrix whose $i$&lt;sup&gt;th&lt;/sup&gt; row is $\phi(x_i)^\trans$. Then the ridge regression solution is given by&lt;/p&gt;
+&lt;p&gt;\begin{equation}
+\matr{w}_{\text{RR}} = (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans \matr{y}
+\end{equation}&lt;/p&gt;
+&lt;p&gt;We immediately realize the problem here: we are inverting a $D \times D$ matrix and $D$ can be huge! Fortunately, we have a matrix trick that we can exploit, the 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Woodbury_matrix_identity#Discussion&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;push-though identity&lt;/a&gt;. It looks like this&lt;/p&gt;
+&lt;p&gt;\begin{align}
+\matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;amp;= (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi}) \matr{\Phi}^\trans \quad \text{(can be seen by expanding)} \\&lt;br&gt;
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;amp;= (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi}) \matr{\Phi}^\trans \quad \text{(left multiplying by } (\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \text{ )} \\&lt;br&gt;
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) &amp;amp;= \matr{\Phi}^\trans \\&lt;br&gt;
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans) (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} &amp;amp;= \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \quad \text{(right multiplying by } (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \text{ )} \\&lt;br&gt;
+(\lambda \sigma^2 \matr{I}_D + \matr{\Phi}^\trans \matr{\Phi})^{-1} \matr{\Phi}^\trans &amp;amp;= \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1}
+\end{align}&lt;/p&gt;
+&lt;p&gt;And thus we get
+$$
+\matr{w}_{\text{RR}} = \matr{\Phi}^\trans (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \matr{y}
+$$&lt;/p&gt;
+&lt;p&gt;We are now inverting an $n \times n$ matrix taking $\O(n^3)$ time, and matrix multiplication of a $D \times n$ matrix with a $n \times n$ matrix taking $\O(D n^2)$ time.&lt;/p&gt;
+&lt;p&gt;Notice that $\matr{\Phi} \matr{\Phi}^\trans$ is the gram matrix, and let&amp;rsquo;s denote it by $\matr{K}$. It&amp;rsquo;s $(i,j)$&lt;sup&gt;th&lt;/sup&gt; entry is $\matr{K}_{i,j} = \inner{\phi(x_i)}{\phi(x_j)} = K(x_i, x_j)$, where $K : \R^d \times \R^d \to \C$ is the kernel function corresponding to the RKHS $\H$.&lt;/p&gt;
+&lt;p&gt;If we denote&lt;/p&gt;
+&lt;p&gt;$$
+\matr{\alpha} = (\lambda \sigma^2 \matr{I}_n + \matr{\Phi} \matr{\Phi}^\trans)^{-1} \matr{y} = (\lambda \sigma^2 \matr{I}_n + \matr{K})^{-1} \matr{y}
+$$&lt;/p&gt;
+&lt;p&gt;then we have&lt;/p&gt;
+&lt;p&gt;$$
+\matr{w}_{\text{RR}} = \matr{\Phi}^\trans \matr{\alpha} = \sum _{i=1}^n \alpha_i \phi(x_i)
+$$&lt;/p&gt;
+&lt;p&gt;and prediction for a test data point, $x$, is&lt;/p&gt;
+&lt;p&gt;$$
+\matr{w}_{\text{RR}}^\trans \phi(x) = \sum _{i=1}^n \alpha_i \phi(x_i)^\trans \phi(x) = \sum _{i=1}^n \alpha_i k _{x_i}(x)
+$$&lt;/p&gt;
+&lt;p&gt;where $k_{x_i}$ denotes the reproducing kernel for the point $x_i$.&lt;/p&gt;
+&lt;p&gt;If this looks suspiciously similar to the 
+&lt;a href=&#34;https://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Representer theorem&lt;/a&gt; (Theorem-8), then that&amp;rsquo;s because it is an instance of it! So prediction takes $\O(n)$ time.&lt;/p&gt;
+&lt;p&gt;The point of this discussion was to show that Kernel Ridge Regression is computationally expensive. Simply storing the gram matrix, $\matr{K}$, takes $\O(n^2)$ space. We need to find methods which can circumvent using $\matr{K}$ if we are to apply kernel methods to anything other than the smallest of the data sets.&lt;/p&gt;
+&lt;h1 id=&#34;kernel-approximation&#34;&gt;Kernel approximation&lt;/h1&gt;
+&lt;p&gt;The idea behind kernel approximation methods is to replace the gram matrix, $\matr{K}$, with a low rank approximation, i.e., find an $n \times S$ matrix, $\matr{Z}$, such that&lt;/p&gt;
+&lt;p&gt;$$
+\matr{K} \approx \matr{Z} \matr{Z}^\trans
+$$&lt;/p&gt;
+&lt;p&gt;We want $S \ll n$, and thus we significantly reduce our time and space complexity. $\matr{Z}$ takes $\O(nS)$ space. Inversion of $(\lambda \sigma^2 \matr{I}_n + \matr{Z} \matr{Z}^\trans)$ takes $\O(n S^2)$ time.&lt;/p&gt;
+&lt;p&gt;One way to think about this is we want to find a mapping of $x_i$&#39;s to some latent space such that the inner product in this latent space approximates the kernel&lt;/p&gt;
+&lt;p&gt;$$
+\matr{K}_{i,j} = K(x_i, x_j) \approx z_i^\trans z_j
+$$&lt;/p&gt;
+&lt;p&gt;where $z_i$ denotes the $i$&lt;sup&gt;th&lt;/sup&gt; row of $\matr{Z}$.
+One way to do that is Nyström approximation, which I won&amp;rsquo;t be discussing at all. The other method is to use Random Fourier Features. This approach was introduced by Rahimi and Recht in their seminal 2007 paper 
+&lt;a href=&#34;https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Random Features for Large-Scale Kernel Machines&lt;/a&gt;. It relies on a result from functional analysis called Bochner&amp;rsquo;s theorem, so let&amp;rsquo;s digress and discuss that first.&lt;/p&gt;
+&lt;h1 id=&#34;bochners-theorem&#34;&gt;Bochner&amp;rsquo;s theorem&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Definition 28:&lt;/strong&gt; A function $K : \R^n \to \C$, is said to be &lt;em&gt;positive-definite&lt;/em&gt; if&lt;/p&gt;
+&lt;p&gt;$$
+\sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} K(x_i - x_j) \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;for every choice of $x_1, \ldots, x_n \in \R^n$ and for every choice of complex numbers $\alpha_1, \ldots, \alpha_n$.&lt;/p&gt;
+&lt;p&gt;Notice how similar this definition is to the 
+&lt;a href=&#34;https://makkar.github.io/post/kernels1/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;definition of a kernel function&lt;/a&gt;. Positive-definite functions have some nice properties:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 3:&lt;/strong&gt; If $K: \R^n \to \C$ is a positive-definite function, then $K(-x) = \conj{K(x)}$ for every $x \in \R^n$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; It is easy to see that $K(0) \geq 0$. In the definition above, let $n = 2$, $x_1 = x$, $x_2 = 0$, $\alpha_1$ be an arbitrary complex number, and $\alpha_2 = 1$. Then applying the definition of a positive-definite function, we get&lt;/p&gt;
+&lt;p&gt;$$
+(1 + |\alpha_1|^2)K(0) + \alpha_1 K(x) + \conj{\alpha_1}K(-x) \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;Let $\alpha_1 = 1$, then
+$$
+2K(0) + K(x) + K(-x) \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;In particular, $K(x) + K(-x)$ is real, which implies&lt;/p&gt;
+&lt;p&gt;$$
+K(x) + K(-x) = \conj{K(x)} +\conj{K(-x)}
+$$&lt;/p&gt;
+&lt;p&gt;Similarly, letting $\alpha_1 = i$, we get $i(K(x) - K(-x))$ is real, which implies&lt;/p&gt;
+&lt;p&gt;$$
+K(x) - K(-x) = -\conj{K(x)} + \conj{K(-x)}
+$$&lt;/p&gt;
+&lt;p&gt;Adding these two equations, we get $K(-x) = \conj{K(x)}$. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lemma 4:&lt;/strong&gt; If $K: \R^n \to \C$ is a positive-definite function, then $K$ is bounded. In particular, $|K(x)| \leq K(0)$ for every $x \in \R^n$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; From lemma-3, $K(0)$ must be real. In the definition above, let $n = 2$, $x_1 = 0$, $x_2 = x$, $\alpha_1 = |K(x)|$, and $\alpha_2 = -\conj{K(x)}$. Then applying the definition of a positive-definite function, we get&lt;/p&gt;
+&lt;p&gt;$$
+2K(0) |K(x)|^2 - |K(x)| K(x) K(-x) - \conj{K(x)} |K(x)| K(x) \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;Now use lemma-3 to substitute $\conj{K(x)}$ for $K(-x)$ in the middle term to get&lt;/p&gt;
+&lt;p&gt;$$
+2K(0) |K(x)|^2 - 2 |K(x)|^3 \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;If $|K(x)| = 0$, then we obviously have our result, since we can easily show $K(0) \geq 0$, otherwise we can divide by $2|K(x)|^2$ to get&lt;/p&gt;
+&lt;p&gt;$$
+K(0) - |K(x)| \geq 0
+$$&lt;/p&gt;
+&lt;p&gt;which is our desired result. $\square$&lt;/p&gt;
+&lt;p&gt;The following theorem is the converse of Bochner&amp;rsquo;s theorem. We state it first since it is easier to prove.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 9 [Converse of Bochner&amp;rsquo;s theorem]:&lt;/strong&gt; The Fourier transform of every finite Borel measure on $\R^n$ is positive-definite.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; Let $\mu$ be a finite Borel measure on $\R^n$. Let $K : \R^n \to \C$ be the Fourier transform of $\mu$, i.e.,&lt;/p&gt;
+&lt;p&gt;$$
+K(x) = \int_{\R^n} \exp(-i \omega^\trans x) \dmu(\omega)
+$$&lt;/p&gt;
+&lt;p&gt;Let $x_1, \ldots, x_n \in \R^n$ and $\alpha_1, \ldots, \alpha_n \in \C$ be arbitrary. Then&lt;/p&gt;
+&lt;p&gt;\begin{align}
+\sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} K(x_i - x_j) &amp;amp;= \sum _{i,j = 1}^n \alpha_i \conj{\alpha_j} \int _{\R^n} \exp\{-i \omega^\trans (x_i - x_j)\} \dmu(\omega) \\&lt;br&gt;
+&amp;amp;= \int _{\R^n} \left| \sum _{i = 1}^n \alpha_i \exp(-i \omega^\trans x_i) \right|^2 \dmu(\omega) \\&lt;br&gt;
+&amp;amp;\geq 0
+\end{align}&lt;/p&gt;
+&lt;p&gt;Thus, $K$ is positive-definite. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem 10 [Bochner&amp;rsquo;s theorem]:&lt;/strong&gt; If $K$ is continuous and positive-definite, then $K$ is the Fourier transform of a finite positive Borel measure.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll skip the proof since it is beyond my understanding. The proof can be easily found on the internet, see 
+&lt;a href=&#34;http://individual.utoronto.ca/jordanbell/notes/bochnertheorem.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; for example.&lt;/p&gt;
+&lt;p&gt;This finite positive Borel measure is often called as &lt;em&gt;spectral measure&lt;/em&gt;. It is easy to see that $K(0) = \mu(\R^n)$, and thus if we assume $K(0) = 1$ then the spectral measure is a probability measure.&lt;/p&gt;
+&lt;h1 id=&#34;random-fourier-features&#34;&gt;Random Fourier Features&lt;/h1&gt;
+&lt;p&gt;Picking up where we left: We want to find a low-dimensional mapping of $x_i$&#39;s into a latent space such that we can approximate the kernel computation with an inner product in this latent space. We will use Bochner&amp;rsquo;s theorem for this. To apply this theorem we need to limit ourselves to a special class of kernels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 29:&lt;/strong&gt; A kernel function $K : \R^d \times \R^d \to \C$ is called &lt;em&gt;shift-invariant&lt;/em&gt; if $K(x, y) = K(x-y, 0)$.&lt;/p&gt;
+&lt;p&gt;Gaussian and Laplacian kernels are examples of shift-invariant kernels.
+Note that the function $K&amp;rsquo;: \R^d \to \C$ defined by $K&amp;rsquo;(x) = K(x, 0)$ is positive-definite if $K$ is a shift-invariant kernel. Bochner&amp;rsquo;s theorem then implies the existence of a spectral measure, $\mu$, such that&lt;/p&gt;
+&lt;p&gt;$$
+K(x, y) = K(x-y, 0) = K&amp;rsquo;(x-y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} \dmu(\omega)
+$$&lt;/p&gt;
+&lt;p&gt;Let $p$ denote the Radon-Nikodym derivative of $\mu$ with respect to the Lebesgue measure on $\R^d$, then we can write the equation above as&lt;/p&gt;
+&lt;p&gt;\begin{equation}
+K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \qquad \qquad (\star)
+\end{equation}&lt;/p&gt;
+&lt;p&gt;For example, if we take the Gaussian kernel&lt;/p&gt;
+&lt;p&gt;$$
+K(x,y) = \exp\left(-\frac{\norm{x-y}^2_2}{2 \sigma^2}\right)
+$$&lt;/p&gt;
+&lt;p&gt;then since $K(0,0) = 1$, $p$ is a probability density, and can be easily shown to be Gaussian&lt;/p&gt;
+&lt;p&gt;$$
+p \sim \NN\left(0, \frac{1}{\sigma^2} \matr{I}_d\right)
+$$&lt;/p&gt;
+&lt;p&gt;We now see an obvious way to approximate the kernel from equation $(\star)$: use Monte Carlo approximation. If we take $S$ samples, $\omega_1, \ldots, \omega_S \sim p(\omega)$,&lt;/p&gt;
+&lt;p&gt;\begin{align}
+K(x, y) &amp;amp;= \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \\&lt;br&gt;
+&amp;amp;\approx \frac{1}{S} \sum _{s=1}^S \exp\{-i\omega^\trans_s (x-y)\} \\&lt;br&gt;
+&amp;amp;= \inner{z(x)}{z(y)}
+\end{align}&lt;/p&gt;
+&lt;p&gt;where $z : \R^d \to \R^S$ is the latent mapping given by&lt;/p&gt;
+&lt;p&gt;$$
+z(x) = \frac{1}{\sqrt{S}}[\exp(-i \omega ^\trans _1 x), \ldots, \exp(-i \omega ^\trans _S x)]^\trans
+$$&lt;/p&gt;
+&lt;p&gt;We can get another mapping by noting that if the kernel is real, then from $(\star)$ we can see that the RHS must also be real and we can thus write it as&lt;/p&gt;
+&lt;p&gt;\begin{equation}
+K(x, y) = \int _{\R^d} \cos\{\omega^\trans (x-y)\} p(\omega) \dom
+\end{equation}&lt;/p&gt;
+&lt;p&gt;Using the fact that $\cos(a - b) = \cos(a) \cos(b) + \sin(a) \sin(b)$, we can write $\cos\{\omega^\trans (x-y)\} = \cos(\omega^\trans x) \cos(\omega^\trans y) + \sin(\omega^\trans x) \sin(\omega^\trans y)$&lt;/p&gt;
+&lt;p&gt;Thus, if we define $z_1 : \R^d \to \R^{2S}$ by&lt;/p&gt;
+&lt;p&gt;$$
+z_1(x) = \frac{1}{\sqrt{S}}[\cos(\omega^\trans_1 x), \ldots, \cos(\omega^\trans_S x), \sin(\omega^\trans_1 x), \ldots, \sin(\omega^\trans_S x)]^\trans
+$$&lt;/p&gt;
+&lt;p&gt;we have $\inner{z_1(x)}{z_1(y)} \approx K(x, y)$.&lt;/p&gt;
+&lt;p&gt;Another mapping that is used is $z_2 : \R^d \to \R^{S}$ defined by&lt;/p&gt;
+&lt;p&gt;$$
+z_2(x) = \sqrt{\frac{2}{S}}[\cos(\omega^\trans_1 x + b_1), \ldots, \cos(\omega^\trans_S x + b_S)]^\trans
+$$&lt;/p&gt;
+&lt;p&gt;where $b_1, \ldots, b_S \sim \text{Unif}[0, 2\pi]$. It is not too difficult to show that&lt;/p&gt;
+&lt;p&gt;$$
+\E_{\omega, b}[z_2(x)^\trans z_2(y)] = \E_{\omega}[z_1(x)^\trans z_1(y)]
+$$&lt;/p&gt;
+&lt;p&gt;There exist many modifications to the basic RFF approach described here. For example, we can do Quasi-Monte Carlo approximations instead of Monte Carlo approximations. See the paper 
+&lt;a href=&#34;https://jmlr.org/papers/volume17/14-538/14-538.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quasi-Monte Carlo Feature Maps for Shift-Invariant Kernels&lt;/a&gt; by Avron, Sindhwani, Yang and Mahoney (2016). Or we could sample from a modified distribution in Fourier space, given by the leverage function of the kernel. See the paper 
+&lt;a href=&#34;https://arxiv.org/pdf/1804.09893.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Random Fourier Features for Kernel Ridge Regression: Approximation Bounds and Statistical Guarantees&lt;/a&gt; by Avron et al (2017).&lt;/p&gt;
+&lt;h1 id=&#34;extension-to-a-more-general-class-of-kernels&#34;&gt;Extension to a more general class of kernels&lt;/h1&gt;
+&lt;p&gt;I have often seen kernels being represented as an integral of a product of two functions neatly separating the dependence on $x$ and $y$:&lt;/p&gt;
+&lt;p&gt;$$
+K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega)
+$$&lt;/p&gt;
+&lt;p&gt;for some function $\varphi(\cdot, \cdot)$ and measure $\mu$ on $\Omega$. I found a good explanation of when this is possible in the papers by Bach (2017) 
+&lt;a href=&#34;https://jmlr.org/papers/volume18/14-546/14-546.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Breaking the Curse of Dimensionality with Convex Neural Networks&lt;/a&gt; and  Li et al (2019) 
+&lt;a href=&#34;https://arxiv.org/pdf/1806.09178.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Towards a Unified Analysis of Random Fourier Features&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let $\mu$ be a Borel probability measure on the compact space $\Omega$, and $\varphi: \Omega \times \X \to \R$ be a function such that the functions $\varphi(\cdot, x) : \Omega \to \R$ are measurable for all $x \in \X$, i.e., they are random variables. Now define the set $\H$ to consist of all functions $f$ that can written as&lt;/p&gt;
+&lt;p&gt;$$
+f(x) = \int_{\Omega} h(\omega) \varphi(\omega, x) \dmu(\omega) \quad \text{for all } x \in \X
+$$&lt;/p&gt;
+&lt;p&gt;for some $h: \Omega \to \R$ such that $\int_{\Omega} h^2 \dmu &amp;lt; \infty$. Let us define the squared norm, $\norm{f}_{\H}^2$, as the infimum of $\int_{\Omega} h^2 \dmu$ over all functions $h$ for which $f$ can be decomposed as above. Then it can be shown that $\H$ is an RKHS with the kernel&lt;/p&gt;
+&lt;p&gt;$$
+K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega)
+$$&lt;/p&gt;
+&lt;p&gt;Therefore, we can again approximate this kernel with a Monte Carlo approximation:&lt;/p&gt;
+&lt;p&gt;\begin{align}
+K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omega) \\&lt;br&gt;
+&amp;amp;\approx \frac{1}{S} \sum_{s=1}^S \varphi(\omega_s, x) \varphi(\omega_s, y)
+\end{align}&lt;/p&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;p&gt;Random Fourier Features is an easy to implement approach that allow us to apply kernel methods on large data sets. I haven&amp;rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.&lt;/p&gt;
+&lt;p&gt;With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Zorn&#39;s lemma</title>
@@ -88,7 +348,7 @@ Examples 1 and 2 above have no maximal elements. Example 3 has one maximal eleme
 &lt;p&gt;We want to build our partially ordered set to be consisting of elements of this form: disjoint class of countably infinite subsets of $X$. The reason we want to define our partially ordered set this way is because, first, the subset operation makes it a partially ordered set, and second, it seems intuitively true that the maximal element of this partially ordered set, if it exists, will be such that the union of its elements is $X$.&lt;/p&gt;
 &lt;p&gt;To this end, let $\P$ be the set of all disjoint classes of countably infinite subsets of $X$. $\P$ is partially ordered by $\subseteq$ as we saw in Example 3 above.&lt;/p&gt;
 &lt;p&gt;To be able to apply Zorn&amp;rsquo;s lemma we need to show that every chain in $\P$ has an upper bound. Let $\Ch$ be a chain in $\P$. A natural guess for the upper bound of $\Ch$ is $U = \bigcup _{S \in \Ch} S$. To show that $U$ is an upper bound of $\Ch$ we need to show that $U \in \P$ and $S \subseteq U$ for every $S \in \Ch$. The second claim is trivial from $U$&#39;s definition. It is easy to see that $U$ is a class of countably infinite subsets of $X$ because this is true for each $S \in \Ch$. To show that $U$ is a disjoint class, let $A, B \in U$ be distinct elements of $U$. There exist elements $S_A, S_B \in \Ch$ such that $A \in S_A$ and $B \in S_B$. Since $\Ch$ is a chain, either $S_A \subseteq S_B$ or $S_B \subseteq S_A$. Without loss of generality, $S_A \subseteq S_B$. Then $A, B \in S_B$ and this implies $A$ and $B$ are disjoint because this is true for the elements of our chain. Thus $U$ is a disjoint class of countably infinite subsets and hence belongs to $\P$.&lt;/p&gt;
-&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\P$ possesses a maximal element, $M$. If $\bigcup _{E \in M} E = X$ then we are done because $M$ is the required disjoint class of countably infinite subsets whose union is $X$. But it can still happen that some elements of $X$ are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of $M$. To see that the leftover elements must be finite, denote the set of leftover elements by $Y = X - \bigcup _{E \in M} E$. If $Y$ is infinite it must contain a countably infinite subset $Z \subseteq Y$. Consider the class $M \cup \{Z\}$. It is an element of $\P$ because it is a disjoint class of countably infinite subsets of $X$. But $M$ is a strict subset of $M \cup \{Z\}$ which contradicts the fact that $M$ is a maximal element of $\P$.&lt;/p&gt;
+&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\P$ possesses a maximal element, $M$. If $\bigcup _{E \in M} E = X$ then we are done because $M$ is the required disjoint class of countably infinite subsets whose union is $X$. But it can still happen that some elements of $X$ are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of $M$. To see that the leftover elements must be finite, denote the set of leftover elements by $Y = X \setminus \bigcup _{E \in M} E$. If $Y$ is infinite it must contain a countably infinite subset $Z \subseteq Y$. Consider the class $M \cup \{Z\}$. It is an element of $\P$ because it is a disjoint class of countably infinite subsets of $X$. But $M$ is a strict subset of $M \cup \{Z\}$ which contradicts the fact that $M$ is a maximal element of $\P$.&lt;/p&gt;
 &lt;p&gt;We are done!&lt;/p&gt;
 </description>
     </item>
