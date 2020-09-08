@@ -267,7 +267,7 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
 &amp;amp;\approx \frac{1}{S} \sum_{s=1}^S \varphi(\omega_s, x) \varphi(\omega_s, y)
 \end{align}&lt;/p&gt;
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
-&lt;p&gt;Random Fourier Features is an easy to implement approach that allow us to apply kernel methods on large data sets. I haven&amp;rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.&lt;/p&gt;
+&lt;p&gt;Random Fourier Features is an easy to implement approach that allows us to apply kernel methods on large data sets. I haven&amp;rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.&lt;/p&gt;
 &lt;p&gt;With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.&lt;/p&gt;
 </description>
     </item>
