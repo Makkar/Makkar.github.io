@@ -540,7 +540,8 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 &lt;li&gt;Schölkopf B, Herbrich R and Smola A.J: A Generalized Representer Theorem (COLT 2001)&lt;/li&gt;
 &lt;li&gt;Aronszajn N: Theory of Reproducing Kernels (1950)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;In the next article (yet to be written) I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.&lt;/p&gt;
+&lt;p&gt;In the 
+&lt;a href=&#34;https://makkar.github.io/post/kernels2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next article&lt;/a&gt; I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.&lt;/p&gt;
 </description>
     </item>
     
