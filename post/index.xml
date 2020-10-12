@@ -5,12 +5,94 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 07 Sep 2020 16:05:35 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 11 Oct 2020 16:59:05 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://makkar.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>A coin tossing game</title>
+      <link>https://makkar.github.io/post/infcoingame/</link>
+      <pubDate>Sun, 11 Oct 2020 16:59:05 -0400</pubDate>
+      <guid>https://makkar.github.io/post/infcoingame/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\e}{\epsilon}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\se}[1]{\left{ #1 \right}}
+\newcommand{\set}[2]{\left{ #1 ; : ; #2 \right}}
+\newcommand{\sett}[2]{\left{ #1 ; | ; #2 \right}}
+\newcommand{\Ex}[1]{\E\left[#1\right]}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dpr}{d\PP}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+$$&lt;/p&gt;
+&lt;p&gt;I recently came across this simple to state puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; Suppose you have a coin that has probabilities $p$ for heads and $1-p$ for tails. You play the following game with a friend. The first player picks one of the outcomes $HH$, $TH$, $HT$ and $TT$. The second player observes the choice of the first player and picks one of the remaining 3 outcomes. You then proceed to toss the coin infinitely many times independently constructing an infinite sequence of $H$’s and $T$’s. A player wins if their choice appears first in the sequence. For example, if player one chose $HH$ and player two chose $TT$ then $HTHTHTTHTHHH&amp;hellip;$ results in a victory for player two since $TT$ occurred before $HH$ in the sequence. When is it better to go first in this game?&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let&amp;rsquo;s make the conditions under which a player wins more concrete.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver; font-size: 16pt&#34;&gt;The strategy: &lt;/span&gt; It’s better to go as the first player in the game if for some choice $a \in \{HH,TT,HT,TH\}$, the probability of winning the game is greater than $1/2$ no matter the choice of the second player. It’s better to go as the second player in the game if for every choice of the first player, we can find some element of the set $\{HH,TT,HT,TH\} \setminus \{a\}$, where $a$ is the choice of the first player, such that the probability of winning the game is greater than $1/2$.&lt;/p&gt;
+&lt;p&gt;As an example, suppose $p = 3/4$, then if the first player chooses $HH$, then no matter the choice of the second player, the probability of the first player winning the game is greater than $1/2$. To see this note that the probability of getting two consecutive heads in the first two coin tosses itself is $9/16 &amp;gt; 1/2$.&lt;/p&gt;
+&lt;p&gt;On first impression it seems as if it must be better to go as the first player, no matter the value of $p$, since the first player has more choices, but as we will see, the fact that the second player has the advantage of choosing the outcome &lt;em&gt;after&lt;/em&gt; observing the choice of the first player gives him an advantage for certain values of $p$.&lt;/p&gt;
+&lt;p&gt;But before we do that, we should prove an implicit assumption: the game ends with a winner in a finite number of moves with probability $1$. But to do that we first need to define a probability space on which the game is played. In particular, does it even exist? Indeed it does as we see below.&lt;/p&gt;
+&lt;h2 id=&#34;constructing-the-probability-space&#34;&gt;Constructing the probability space&lt;/h2&gt;
+&lt;p&gt;To formalize our analysis we need to define a sequence of i.i.d. random variables, one for each coin toss.
+However, the existence of a probability space on which we can define this sequence is not obvious at all.
+For example, the following claim shows that we cannot always construct desired number of random variables on a measurable space.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver; font-size: 16pt&#34;&gt;Claim: &lt;/span&gt; There do not exist uncountably many independent, non-constant random variables on $([0,1], \B([0,1]), \lambda)$, where $\lambda$ is the Lebesgue measure on the Borel $\sigma$-algebra $\B([0,1])$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Assume that $\{X_i \}_{i \in I}$ is a collection of independent non-constant random variables. Define the collection $\{Y_i \} _{i \in I}$ by letting $Y_i = X_i \ind{|X_i| &amp;lt; C_i}$ where $C_i$ is large enough that $Y_i$ isn&amp;rsquo;t a constant. The collection formed by the random variables $Z_i = Y_i - \Ex{Y_i}$ is a collection of independent random variables. Note that the random variables $Z_i$ are in the separable Hilbert space $L^2([0,1], \lambda)$ and are orthogonal to each other. But a separable Hilbert can have only countably such elements. Thus, $I$ must be countable. $\square$&lt;/p&gt;
+&lt;p&gt;Fortunately the situation isn&amp;rsquo;t so bleak for our case and 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Kolmogorov_extension_theorem&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kolmogorov extension theorem&lt;/a&gt; allows us to claim the existence of a probability space on which there exists our required sequence of i.i.d. random variables if we can show the existence of probability spaces $(\Omega_n, \F_n, \PP_n)$ for $n$ coin tosses that satisfy the consistency conditions. This is very easy: let $\Omega_n = \{H, T\}^n$, $\F_n = 2^{\Omega_n}$, $\PP({\omega}) = p^{m} (1-p)^{n-m}$ where $m = $ number of $H$ in $\omega \in \Omega_n$, and finally $\PP(A) = \sum_{\omega \in A} \PP({\omega})$ for any $A \in \F_n$. It is easy to see that this construction satisfies the consistency conditions and thus there exists a unique probability measure $\PP$ defined on the measurable space $(\Omega, \F)$ where $\Omega = \{H, T\}^{\N}$ and  $\F$ is the $\sigma$-algebra generated by the cylinder sets.&lt;/p&gt;
+&lt;h2 id=&#34;the-game-has-a-winner-with-probability-1&#34;&gt;The game has a winner with probability $1$&lt;/h2&gt;
+&lt;p&gt;We can now safely say the following statement: Let $\{X_n\}$ be a sequence of i.i.d. Bernoulli random variables such that $X_n = H$ or $T$ depending on the result of the $n$&lt;sup&gt;th&lt;/sup&gt; coin toss. To show that the game has a winner with probability $1$ we need to prove that in the sequence $X_1, X_2, \ldots$ all of the four choices $HH$, $TH$, $HT$ and $TT$ appear in a finite number of coin tosses with probability $1$.&lt;/p&gt;
+&lt;p&gt;To that end, fix any of the four choices $HH$, $TH$, $HT$ and $TT$, and call it $XY$. Let $E_n$ be the event that $X_{2n-1} = X$ and $X_{2n} = Y$. Then $\PP(E_n) = \e &amp;gt; 0$ independent of $n$, where $\e$ is some positive real number dependent on $XY$ (for example, if $XY = HT$ then $\e = p(1-p)$). Now the events $\{E_n\}$ are independent and $\sum_{n=1}^\infty \PP(E_n) = \infty$, and thus we can apply the 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Borel%E2%80%93Cantelli_lemma#Converse_result&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;second Borel-Cantelli lemma&lt;/a&gt;
+to get $\PP(E_n \text{ i.o.}) = 1$. But this immediately implies that each of the four outcomes appear in that sequence infinitely many times with probability $1$.&lt;/p&gt;
+&lt;h2 id=&#34;back-to-the-game&#34;&gt;Back to the game&lt;/h2&gt;
+&lt;p&gt;Recall the strategy outlined above. Without loss of generality we may assume $p \geq 1/2$ because otherwise we can just flip the tags $H$ and $T$. From a first player perspective we just want to find one of the choices $HH$, $TH$, $HT$ or $TT$. Let&amp;rsquo;s calculate the minimum $p$ we get for each choice.&lt;/p&gt;
+&lt;p&gt;If player $1$ chooses $HH$ and player $2$ chooses $TH$, then it&amp;rsquo;s better to be player $1$ if $p &amp;gt; 1/\sqrt{2}$. Checking for other choices of player $2$ we see that $TH$ is the optimal choice.&lt;/p&gt;
+&lt;p&gt;If player $1$ chooses $TT$ and player $2$ chooses $HT$, then for no $p \geq 1/2$ it is better to be player $1$.&lt;/p&gt;
+&lt;p&gt;If player $1$ chooses $HT$ and player $2$ chooses $HH$, then for no $p \geq 1/2$ it is better to be player $1$.&lt;/p&gt;
+&lt;p&gt;If player $1$ chooses $TH$ and player $2$ chooses $HT$, then for no $p \geq 1/2$ it is better to be player $1$.&lt;/p&gt;
+&lt;p&gt;Overall it is better to be player $1$ if $p &amp;gt; 1/\sqrt{2}$ or if $p &amp;lt; 1 - 1/\sqrt{2}$. And on the other hand it is better to be player $2$ if $1 - 1/\sqrt{2} &amp;lt; p &amp;lt; 1/\sqrt{2}$.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Kernels - Part 2</title>
@@ -268,6 +350,12 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
 \end{align}&lt;/p&gt;
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
 &lt;p&gt;Random Fourier Features is an easy to implement approach that allows us to apply kernel methods on large data sets. I haven&amp;rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;Definition 2:&lt;/u&gt; A random variable is &lt;u&gt;non-negative&lt;/u&gt; if $X \geq 0$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:bisque&#34;&gt;Definition 2:&lt;/span&gt; A random variable is &lt;u&gt;non-negative&lt;/u&gt; if $X \geq 0$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:powderblue&#34;&gt;Definition 2:&lt;/span&gt; A random variable is &lt;u&gt;non-negative&lt;/u&gt; if $X \geq 0$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:lightsteelblue&#34;&gt;Definition 2:&lt;/span&gt; A random variable is &lt;u&gt;non-negative&lt;/u&gt; if $X \geq 0$.&lt;/p&gt;
+&lt;h4 id=&#34;definition-2&#34;&gt;Definition 2:&lt;/h4&gt;
+&lt;p&gt;A random variable is &lt;u&gt;non-negative&lt;/u&gt; if $X \geq 0$.&lt;/p&gt;
 &lt;p&gt;With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.&lt;/p&gt;
 </description>
     </item>
