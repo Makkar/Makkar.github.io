@@ -5,12 +5,192 @@
     <link>https://makkar.github.io/</link>
       <atom:link href="https://makkar.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Aditya Makkar</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 11 Oct 2020 16:59:05 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 25 Dec 2020 17:17:08 -0500</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Aditya Makkar</title>
       <link>https://makkar.github.io/</link>
     </image>
+    
+    <item>
+      <title>Longest Increasing Subsequence</title>
+      <link>https://makkar.github.io/post/lisprob/</link>
+      <pubDate>Fri, 25 Dec 2020 17:17:08 -0500</pubDate>
+      <guid>https://makkar.github.io/post/lisprob/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\Z_{\geq 0}^N}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\Prob}[1]{\PP \left( #1 \right)}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\e}{\epsilon}
+\newcommand{\ex}[1]{\exp\left{#1\right}}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil{#1}\right \rceil}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[2]{\left\{ #1 ; : ; #2 \right\}}
+\newcommand{\sett}[2]{\left\{ #1 ; | ; #2 \right\}}
+\newcommand{\Ex}[1]{\E\left[#1\right]}
+\newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ph}[1]{\varphi^{-1}\left(#1\right)}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\du}{du}
+\DeclareMathOperator{\dz}{d\matr{z}}
+\DeclareMathOperator{\dt}{dt}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dP}{d\PP}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\V}{\mathrm{Var}}
+\DeclareMathOperator{\Log}{\mathrm{Log}}
+\DeclareMathOperator{\O}{\mathcal{O}}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Finding a longest increasing subsequence is a well-known problem in computer science (note that I use the article &amp;ldquo;a&amp;rdquo; instead of &amp;ldquo;the&amp;rdquo; because there could be multiple longest subsequences): Given a sequence $\se{a_1, \ldots, a_n}$ of real numbers, we want to find a subsequence $\se{a_{i_1}, \ldots, a_{i_k}}$ such that $0 \le i_1 &amp;lt; \cdots &amp;lt; i_k \le n$, $a_{i_1} \le \cdots \le a_{i_k}$, and the subsequence is as long as possible. It has a very easy 
+&lt;a href=&#34;https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dynamic programming&lt;/a&gt; solution with a time complexity of $\O(n^2)$ and a slightly 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Longest_increasing_subsequence#Efficient_algorithms&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;more involved solution&lt;/a&gt; with a time complexity of $\O(n \log n)$. But we are not interested in these algorithms in this blog post.&lt;/p&gt;
+&lt;p&gt;We are interested in studying the asymptotics of the &lt;em&gt;length&lt;/em&gt; of the longest increasing subsequences of a sequence whose elements are coming from a random permutation. This simple to state problem will take us on a beautiful journey touching topics from combinatorics and probability theory. In particular, we will get to see the very elegant technique of Poissonization.&lt;/p&gt;
+&lt;h1 id=&#34;problem&#34;&gt;Problem&lt;/h1&gt;
+&lt;p&gt;Let us start by stating precisely what are trying to prove. To do that we first define some notation. For any integer $n \ge 1$, let $S_n$ be the group of permutations of order $n$, i.e., it contains all permutations of $\se{1, 2, \ldots, n}$ and hence $S_n$ contains $n!$ elements.  If $\pi \in S_n$ then a subsequence of $\pi$ is a sequence $\se{\pi(i_1), \ldots, \pi(i_k)}$ such that $1 \leq i_1 &amp;lt; \cdots &amp;lt; i_k \leq n$. It is an increasing subsequence if $\pi(i_1) &amp;lt; \cdots &amp;lt; \pi(i_k)$ and similarly for the decreasing subsequence. Consider the uniform measure $\mu_n$ on the discrete measurable space $(S_n, 2^{S_n})$, i.e., $\mu_n(\pi) = 1 / n!$ for any $\pi \in S_n$. For $\pi \in S_n$ define $l_n(\pi)$ to be the maximal length of an increasing subsequence of $\pi$, i.e., $l_n(\pi)$ is the largest $k$ such that there are integers $1 \leq i_1 &amp;lt; \cdots &amp;lt; i_k \leq n$ so that $\pi(i_1) &amp;lt; \cdots &amp;lt; \pi(i_k)$. Similarly define $d_n(\pi)$ to be the maximal length of a decreasing subsequence of $\pi$.&lt;/p&gt;
+&lt;p&gt;Since $l_n$ is a random variable we can consider its expectation $L_n = \E[l_n]$ on the probability space $(S_n, 2^{S_n}, \mu_n)$. It can be explicitly written as
+$$
+L_n = \frac{1}{n!} \sum_{\pi \in S_n} l_n(\pi) \tag{1} \label{eq1}
+$$
+We want to study the limiting properties of the sequence $\se{L_n}_{n \in \N}$. Specifically we will show that
+$$
+\frac{L_n}{\sqrt{n}} \to \gamma \text{ almost surely} \tag{2} \label{eq2}
+$$
+for some constant $\gamma$. It is known that $\gamma = 2$. We will not be showing this, but we will show that $1 \le \gamma \le e$.&lt;/p&gt;
+&lt;h1 id=&#34;combinatorial-results&#34;&gt;Combinatorial results&lt;/h1&gt;
+&lt;p&gt;We now prove some useful combinatorial results. The first result is called the Erdős–Szekeres theorem.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1 [Erdős–Szekeres theorem]: &lt;/span&gt; In any sequence $\se{a_1, a_2, \ldots, a_{mn+1}}$ of $mn+1$ distinct real numbers, there exists either an increasing sequence $a_{i_1} &amp;lt; \cdots &amp;lt; a_{i_{m+1}}$ $(i_1 &amp;lt; \cdots &amp;lt; i_{m+1})$ of length $m+1$, or a decreasing sequence $a_{j_1} &amp;gt; \cdots &amp;gt; a_{j_{n+1}}$ $(j_1 &amp;lt; \cdots &amp;lt; j_{n+1})$ of length $n+1$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; For $1 \leq i \leq mn+1$ define $t_i$ to be the length of a longest increasing subsequence starting at $a_i$, i.e., the first element of a longest increasing subsequence must be $a_i$ and the rest of the $a$&#39;s must have indices greater than $i$. If $t_i \geq m+1$ for some $i$ then we are done since we then have an increasing subsequence of length $m+1$, so assume $t_i \leq m$ for all $i$. Since $t_i \geq 1$, pigeonhole principle now implies that there is some integer $1 \leq k \leq m$ such that $t_i = k$ for at least $n+1$ $i$&#39;s. Let $t_i = k$ for all $i \in (j_1 &amp;lt; \cdots &amp;lt; j_{n+1})$. Now note that if $a_{j_l} &amp;lt; a_{j_{l+1}}$ for some $1 \leq l \leq n$, then we would obtain an increasing subsequence of length $k+1$ starting at $a_{j_l}$ because there is an increasing subsequence of length $k$ starting at $a_{j_{l+1}}$. But this contradicts the fact that $t_{j_l} = k,$ and thus $a_{j_l} &amp;gt; a_{j_{l+1}}$ for all $1 \leq l \leq n$. But now this gives us a decreasing subsequence $a_{j_1} &amp;gt; \cdots &amp;gt; a_{j_{n+1}}$ of length $n+1$. $\square$&lt;/p&gt;
+&lt;p&gt;The next two theorems prove lower and upper bounds for $L_n / \sqrt{n}$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 2: &lt;/span&gt; $L_n / \sqrt{n}$ is lower bounded as follows
+$$
+L_n \geq \sqrt{n} \text{ for all } n \geq 1 \tag{3} \label{eq3}
+$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt;
+Theorem 1 implies $l_n(\pi) d_n(\pi) \geq n$ for all $\pi \in S_n$. Note that for every permutation $\pi \in S_n$ there exists an inverse permutation $\pi&#39;$ such that $l_n(\pi) = d_n(\pi&amp;rsquo;)$ and thus we can write $L_n$ also as
+$$
+L_n = \frac{1}{n!} \sum_{\pi \in S_n} d_n(\pi) \tag{4} \label{eq4}
+$$
+Therefore, averaging the two ways of computing the expectation $L_n$ (Equations \eqref{eq1} and \eqref{eq4}) and using the AM-GM inequality we have
+$$
+L_n = \frac{1}{n!} \sum_{\pi \in S_n} \frac{l(\pi) + d(\pi)}{2} \geq \frac{1}{n!} \sum_{\pi \in S_n} \sqrt{l(\pi) d(\pi)} \geq \frac{1}{n!} \sum_{\pi \in S_n} \sqrt{n} = \sqrt{n} \qquad \square
+$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 3: &lt;/span&gt; Upper bound:
+$$
+\lims \frac{L_n}{\sqrt{n}} \leq e \tag{5} \label{eq5}
+$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt;
+If $\pi \in S_n$ and $1 \leq k \leq n$ let $X_{n,k}(\pi)$ be the number of increasing subsequences of $\pi$ which are of length $k$. They are exactly those subsets $S \subseteq \se{1, \ldots, n}$ such that $|S| = k$ and if $S = \se{i_1 &amp;lt; \cdots &amp;lt; i_k}$ then $\pi(i_1) &amp;lt; \cdots &amp;lt; \pi(i_k)$. On the probability space $(S_n, 2^{S_n}, \mu_n)$, by the linearity of expectation, the expected value of $X_{n,k}$ is given by the number of ways to select $k$ subsets of $\se{1, \ldots, n}$ times the probability that a selection has all the elements in the increasing order. The number of ways is simply $\binom{n}{k}$ and the probability is $1/k!$ and thus
+$$
+\E[X_{n,k}] = \frac{1}{k!} \binom{n}{k}
+$$
+The Taylor expansion of $e^x$ implies $e^x \ge x^k / k!$. Substituting $x = k$ we get $k! \geq (k/e)^k$. Therefore, we get
+$$
+\E[X_{n,k}] = \frac{1}{k!} \binom{n}{k} = \frac{n(n-1) \cdots (n-k-1)}{(k!)^2} \leq \frac{n^k}{(k/e)^{2k}}
+$$&lt;/p&gt;
+&lt;p&gt;Now for a discrete random variable $X_{n,k}$ we can write $\E[X_{n,k}] = \sum_{i=0}^n \mu_n(X_{n,k} \geq i)$ and thus $\mu_n(X_{n,k} \geq 1) \leq \Ex{X_{n,k}}$. Also note that $l_n(\pi) \geq k$ if and only if $X_{n,k}(\pi) \geq 1$. We thus get
+$$
+\mu_n(l_n \geq k) = \mu_n(X_{n,k} \geq 1) \leq \E[X_{n,k}] \leq \frac{n^k}{(k/e)^{2k}}
+$$
+Fix an arbitrary $\delta &amp;gt; 0$ and let $k = \ceil{(1+\delta)e\sqrt{n}}$ in the inequality above to get
+$$
+\mu_n(l_n \geq k) \leq \frac{n^k}{(k/e)^{2k}} \leq \left( \frac{1}{1+\delta} \right)^{2k} \leq \left( \frac{1}{1+\delta} \right)^{2(1+\delta)e\sqrt{n}}
+$$
+Since $l_n \leq n$, we have
+$$
+L_n = \Ex{l_n} \leq \mu_n(l_n &amp;lt; k) (1+\delta)e\sqrt{n} + \mu_n(l_n \geq k) n \leq (1+\delta)e\sqrt{n} + O(e^{-c\sqrt{n}})
+$$
+where $c$ is some positive constant that depends on $\delta$.
+Since $\delta$ was arbitrary, we can let $\delta \to 0$ and then take $\limsup$ to get Equation \eqref{eq5}. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;poissonization&#34;&gt;Poissonization&lt;/h1&gt;
+&lt;p&gt;To be able to show \eqref{eq2} we will draw a correspondence between this problem of longest increasing subsequences and a seemingly unrelated problem called the Poissonized version. This Poissonized version will allow us to use the powerful Subadditive Ergodic Theorem (Theorem 5 below) to show \eqref{eq2}.&lt;/p&gt;
+&lt;p&gt;To this end, assume an underlying probability space $\probsp$ and let $N$ be a Poisson random measure on $\mathbb{R} _ + ^2$ with mean measure given by the Lebesgue measure on $\mathbb{R} _ + ^2$. In other words $N:\Omega \times \B(\R _ + ^2) \to \bar{\R} _ +$ is a transition kernel from $(\Omega, \F)$ into $(\R_+^2, \B(\R_+^2))$ with $\int_\Omega \PP(\dd \omega) N(\omega, A) = \text{Leb}(A)$ for any $A \in \B(\R_+^2)$. We can view the random process as a sequence $\se{(X_i, Y_i)} _ {i \geq 1}$ of independent random variables taking values in $\R _ + ^2$ and having a uniform probability measure (Lebesgue measure on $(\R_+^2, \B(\R_+^2))$). If we let $R_{s,t}$ denote the rectangle with vertices $(s,s), (s,t), (t,t)$ and $(t,s)$, then for each outcome $\omega \in \Omega$, we can think of having $\text{Poisson}(\text{Leb}(R_{s,t}(\omega)))$ distributed number of such points inside the rectangle $R_{s,t}(\omega).$&lt;/p&gt;
+&lt;p&gt;For $s &amp;lt; t \in [0, \infty)$ let $Z_{s,t}$ be the random variable denoting the length of the longest increasing path lying in the rectangle $R_{s,t}$, i.e., $Z_{s,t}$ is the largest integer $k$ for which there are points $(X_1,Y_1), \dots, (X_k, Y_k)$ in the Poisson process with $s &amp;lt; X_1 &amp;lt; \cdots &amp;lt; X_k &amp;lt; t$ and $s&amp;lt; Y_1 &amp;lt; \cdots &amp;lt; Y_k &amp;lt; t$.&lt;/p&gt;
+&lt;p&gt;Let $\tau(n)$ be the smallest value of $t \in [0, \infty)$ for which there are $n$ points in $R_{0,t}$. Let the $n$ points in $R_{0, \tau(n)}$ be written as $\se{(X_i, Y_i)}_{1 \leq i \leq n}$ such that $0 &amp;lt; X_1 &amp;lt; \cdots &amp;lt; X_n \leq \tau(n)$ (the inequalities are strict almost surely since they have continuous distributions). Let $\pi_n \in S_n$ be the unique permutation such that $Y_{\pi_n(1)} &amp;lt; \cdots &amp;lt; Y_{\pi_{n}(n)}$ (It is not difficult to see the existence and the uniqueness). Then
+$$
+\pi_n \text{ is a uniformly random sample of } S_n \text{ , and } Z_{0, \tau(n)} = l_n(\pi_n) \tag{6} \label{eq6}
+$$
+The second claim is obvious from the definition of $\pi_n$. The first claim is equivalent to showing that if $U_1, \ldots, U_n$ are independent random variables sampled from a uniform distribution on $[0,1]$ and if $U_{(1)}, \ldots, U_{(n)}$ are the order statistics, i.e., $U_{(k)}$ is the $k$&lt;sup&gt;th&lt;/sup&gt; smallest among $U_1, \ldots, U_n$, then the probability that $U_{(1)}, \ldots, U_{(n)}$ is same as $U_{\pi(1)}, \ldots, U_{\pi(n)}$ for any $\pi \in S_n$ is $1/n!$. But this is obvious from the independence of $U_i$&#39;s. The next theorem is from Durrett:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 4: &lt;/span&gt; $\tau(n) / \sqrt{n} \to 1$ almost surely.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt;
+Let $S_n$ be the number of points in $R_{0,\sqrt{n}}$. Since $(R_{0, \sqrt{n}} \setminus R_{0, \sqrt{n-1}}) \cap (R_{0, \sqrt{m}} \setminus R_{0, \sqrt{m-1}}) = \emp$ for $n \neq m$, the definition of a Poisson random measure implies $\se{S_n - S_{n-1}}_{n \geq 1}$ are independent Poisson random variables with mean $1$. The strong law of large numbers now implies $S_n / n \to 1$ almost surely. For any $\e &amp;gt; 0$ we can find an $n$ large enough such that $S_{n(1-\e)} &amp;lt; n &amp;lt; S_{n(1+\e)}$ but then this means $\sqrt{n(1-\e)} \leq \tau(n) \leq \sqrt{n(1+\e)}$ which is same as the statement of the theorem since $\e$ was arbitrary. $\square$&lt;/p&gt;
+&lt;p&gt;The last theorem along with \eqref{eq6} implies $Z_{0, \sqrt{n}} \to L_n$ almost surely and thus
+$$
+\frac{Z_{0,n}}{n} \to \frac{L_{n^2}}{n} \text{ almost surely} \tag{7} \label{eq7}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;back-to-longest-increasing-subsequences&#34;&gt;Back to longest increasing subsequences&lt;/h1&gt;
+&lt;p&gt;Having established the connection between the two ways of looking at the problem of longest increasing subsequences, we now freely jump between the two characterizations and use them to prove our results.&lt;/p&gt;
+&lt;p&gt;Define $W_{s,t} = - Z_{s,t}$. We now check that $W_{m,n}, 0 \le m &amp;lt; n$ satisfies the conditions required for the Subadditive Ergodic Theorem. I state the theorem below for completeness. Check out Theorem 6.4.1 in 
+&lt;a href=&#34;https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Durrett&lt;/a&gt; for a proof.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 5 [Subadditive Ergodic Theorem]: &lt;/span&gt; Suppose $W_{m,n}, 0 \le m &amp;lt; n$ satisfy:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$W_{0,m} + W_{m,n} \ge W_{0,n}$,&lt;/li&gt;
+&lt;li&gt;$\se{W_{nk, (n+1)k}, n \ge 1}$ is a stationary sequence for each $k$,&lt;/li&gt;
+&lt;li&gt;The distribution of $\se{W_{m,m+k}, k \ge 1}$ does not depend on $m$,&lt;/li&gt;
+&lt;li&gt;$\Ex{W_{0,1}^+} &amp;lt; \infty$ and $\inf_{n \ge 1} \frac{1}{n} \Ex{W_{0,1}} = \beta &amp;gt; - \infty$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\limn \frac{1}{n} \Ex{W_{0,1}} = \beta$,&lt;/li&gt;
+&lt;li&gt;$W = \limn \frac{1}{n} W_{0,1}$ exists almost surely and in $L^1$, and $\Ex{X} = \beta$,&lt;/li&gt;
+&lt;li&gt;If all stationary sequences in 2. are ergodic, then $W = \beta$ almost surely.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coming back to the problem, let $0 &amp;lt; m &amp;lt; n$ then we claim $Z_{0,m} + Z_{m,n} \leq Z_{0,n}$. To see this fix $\omega \in \Omega$ and let $Z_{0,m}(\omega) = a$ and $Z_{m,n}(\omega) = b$. Then there exist $(X_1(\omega), Y_1(\omega)), \ldots (X_a(\omega), Y_a(\omega)), (X_{a+1}(\omega), Y_{a+1}(\omega)), \ldots, (X_{a+b}(\omega), Y_{a+b}(\omega))$ such that $0 &amp;lt; X_1(\omega) &amp;lt; \cdots &amp;lt; X_a(\omega) &amp;lt; m$, $0 &amp;lt; Y_1(\omega) &amp;lt; \cdots &amp;lt; Y_a(\omega) &amp;lt; m$ and $m &amp;lt; X_{a+1}(\omega) &amp;lt; \cdots &amp;lt; X_{a+b}(\omega) &amp;lt; n$, $m &amp;lt; Y_{a+1}(\omega) &amp;lt; \cdots &amp;lt; Y_{a+b}(\omega) &amp;lt; n$. But then it&amp;rsquo;s clear that $0 &amp;lt; X_1(\omega) &amp;lt; \cdots &amp;lt; X_{a+b}(\omega) &amp;lt; n$, $0 &amp;lt; Y_1(\omega) &amp;lt; \cdots &amp;lt; Y_{a+b}(\omega) &amp;lt; n$ and we have  $Z_{0,m}(\omega) + Z_{m,n}(\omega) \leq Z_{0,n}(\omega)$. Since $\omega$ was arbitrary equation our claim is true. Therefore, $W_{0,m} + W_{m,n} \ge W_{0,n}$ and condition 1. is true.&lt;/p&gt;
+&lt;p&gt;For condition 2. we want to show that $\se{W_{nk, (n+1)k, n \geq 1}}$ is a stationary and ergodic sequence for all $k \geq 1$. This is clear from the observation that $Z_{ik, (i+1)k} \stackrel{d}{=} Y_{0,k}$ since $\text{Leb}(R_{ik, (i+1)k}) = \text{Leb}(R_{0,k})$ and thus by the definition of the Poisson random measure the number of points in each rectangle is an i.i.d. Poisson random variable. Checking the condition 3. is similar to condition 2..&lt;/p&gt;
+&lt;p&gt;For condition 4. note that $W_{0,1}^+ = Z_{0,1}$ and $Z_{0,1} \leq \text{Poisson}(1)$ since there are $\text{Poisson}(1)$ number of points inside $[0,1]^2$ and at most all of them can be arranged in the increasing order. Thus, $\Ex{W_{0,1}^+} &amp;lt; \Ex{\text{Poisson}(1)} = 1 &amp;lt; \infty$. Now note that since $W_{0,n} = - Z_{0,n}$
+$$
+\inf_{n \geq 1} \frac{1}{n} \Ex{W_{0,n}} = - \sup_{n \geq 1} \frac{1}{n} \Ex{Z_{0,n}}
+$$
+and thus to show the second part of condition 4. we need to show that $\sup_{n \geq 1} \frac{1}{n} \Ex{Z_{0,n}} &amp;lt; \infty$. But this is immediate from Equation \eqref{eq5} in Theorem 3 and Equation \eqref{eq7}. Therefore, the subadditive ergodic theorem now implies
+$$
+\frac{Z_{0,n}}{n} \to \gamma \text{ a.s.}
+$$
+where $\gamma$ from Equations \eqref{eq3} and \eqref{eq5} lies in $[1,e]$ and we are done since this implies \eqref{eq2}.&lt;/p&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;p&gt;I got introduced to this problem from an exam question in a math course I took recently. I recommend the book &amp;ldquo;The Surprising Mathematics of Longest Increasing Subsequences&amp;rdquo; by Dan Romik, which is 
+&lt;a href=&#34;https://www.math.ucdavis.edu/~romik/book/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;freely available online&lt;/a&gt;, for a lot more content.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A coin tossing game</title>
@@ -274,6 +454,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Thus, $K$ is positive-definite. $\square$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 10 [Bochner&amp;rsquo;s theorem]:&lt;/strong&gt; If $K$ is continuous and positive-definite, then $K$ is the Fourier transform of a finite positive Borel measure.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll skip the proof since it is beyond my understanding. The proof can be easily found on the internet, see 
+&lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.917.270&amp;amp;rep=rep1&amp;amp;type=pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; or 
 &lt;a href=&#34;http://individual.utoronto.ca/jordanbell/notes/bochnertheorem.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; for example.&lt;/p&gt;
 &lt;p&gt;This finite positive Borel measure is often called as &lt;em&gt;spectral measure&lt;/em&gt;. It is easy to see that $K(0) = \mu(\R^n)$, and thus if we assume $K(0) = 1$ then the spectral measure is a probability measure.&lt;/p&gt;
 &lt;h1 id=&#34;random-fourier-features&#34;&gt;Random Fourier Features&lt;/h1&gt;
@@ -286,7 +467,7 @@ K(x, y) = K(x-y, 0) = K&amp;rsquo;(x-y) = \int _{\R^d} \exp\{-i\omega^\trans (x-
 $$&lt;/p&gt;
 &lt;p&gt;Let $p$ denote the Radon-Nikodym derivative of $\mu$ with respect to the Lebesgue measure on $\R^d$, then we can write the equation above as&lt;/p&gt;
 &lt;p&gt;\begin{equation}
-K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \qquad \qquad (\star)
+K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \tag{$\star$}
 \end{equation}&lt;/p&gt;
 &lt;p&gt;For example, if we take the Gaussian kernel&lt;/p&gt;
 &lt;p&gt;$$

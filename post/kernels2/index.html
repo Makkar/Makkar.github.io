@@ -727,6 +727,7 @@ $$</p>
 <p>Thus, $K$ is positive-definite. $\square$</p>
 <p><strong>Theorem 10 [Bochner&rsquo;s theorem]:</strong> If $K$ is continuous and positive-definite, then $K$ is the Fourier transform of a finite positive Borel measure.</p>
 <p>I&rsquo;ll skip the proof since it is beyond my understanding. The proof can be easily found on the internet, see 
+<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.917.270&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener">here</a> or 
 <a href="http://individual.utoronto.ca/jordanbell/notes/bochnertheorem.pdf" target="_blank" rel="noopener">here</a> for example.</p>
 <p>This finite positive Borel measure is often called as <em>spectral measure</em>. It is easy to see that $K(0) = \mu(\R^n)$, and thus if we assume $K(0) = 1$ then the spectral measure is a probability measure.</p>
 <h1 id="random-fourier-features">Random Fourier Features</h1>
@@ -739,7 +740,7 @@ K(x, y) = K(x-y, 0) = K&rsquo;(x-y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\}
 $$</p>
 <p>Let $p$ denote the Radon-Nikodym derivative of $\mu$ with respect to the Lebesgue measure on $\R^d$, then we can write the equation above as</p>
 <p>\begin{equation}
-K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \qquad \qquad (\star)
+K(x, y) = \int _{\R^d} \exp\{-i\omega^\trans (x-y)\} p(\omega) \dom \tag{$\star$}
 \end{equation}</p>
 <p>For example, if we take the Gaussian kernel</p>
 <p>$$
