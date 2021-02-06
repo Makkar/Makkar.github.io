@@ -113,7 +113,7 @@ $$&lt;/p&gt;
 &lt;li&gt;[Positivity] If $X \ge 0$, then $\Exc{X}{\G} \ge 0$ a.s.&lt;/li&gt;
 &lt;li&gt;[Monotone convergence theorem for conditional expectation] If $\Ex{|Y|} &amp;lt; \infty$ and $Y \le X_n \uparrow X$ a.s., then $\Exc{X_n}{\G} \uparrow \Exc{X}{\G}$ a.s.&lt;/li&gt;
 &lt;li&gt;[Fatou&amp;rsquo;s lemma for conditional expectation] If $\Ex{|Y|} &amp;lt; \infty$ and $Y \le X_n$ for all $n \ge 1$ a.s., then $\Exc{\limi X_n}{\G} \le \limi \Exc{X_n}{\G}$ a.s.&lt;/li&gt;
-&lt;li&gt;[Dominated convergence theorem for conditional expectation] If $|X_n| \le |Y|$ for all $n \ge 1$, $\Ex{Y} &amp;lt; \infty$, and $X_n \to X$ a.s., then $\Exc{X_n}{\G} \to \Exc{X}{\G}$&lt;/li&gt;
+&lt;li&gt;[Dominated convergence theorem for conditional expectation] If $|X_n| \le |Y|$ for all $n \ge 1$, $\Ex{Y} &amp;lt; \infty$, and $X_n \to X$ a.s., then $\Exc{X_n}{\G} \to \Exc{X}{\G}$ a.s.&lt;/li&gt;
 &lt;li&gt;[Tower property] If $\cH \subseteq \G$, then $\Exc{\Exc{X}{\G}}{\cH} = \Exc{\Exc{X}{\cH}}{\G} = \Exc{X}{\cH}$ a.s.&lt;/li&gt;
 &lt;li&gt;[Taking out what&amp;rsquo;s known] If $Y$ is $\G$-measurable and bounded, then
 $$\Exc{Y X}{\G} = Y \Exc{X}{\G} \quad \text{a.s.}\tag{1} \label{eq1}$$
@@ -178,7 +178,7 @@ because of property 3. of Theorem 1 by taking $G$ to be $B$ and $B^\comp$. Of co
 \Pc{\bigcup_n A_n}{\G} = \sum_n \Pc{A_n}{\G} \quad \text{a.s.} \tag{2} \label{eq2}
 $$&lt;/p&gt;
 &lt;p&gt;If $A_n \in \F$, $n \ge 1$ and $\limn A_n = A$, then we also have $\limn \Pc{A_n}{\G} = \Pc{A}{G}$ a.s..&lt;/p&gt;
-&lt;p&gt;It seems very tempting from our discussion to claim that $\Pc{\cdot}{\G}$ is a probability measure on $\F$ for almost all $\omega \in \Omega$, but except for some nice spaces, which we will discuss below, this isn&amp;rsquo;t true. Let us first try to see this intuitively [2]. Equation \eqref{eq2} holds for all $\omega \in \Omega$ EXCEPT for some null set which may well depend on the particular sequence $\se{A_n}$.  It does NOT stipulate that there exists a fixed null set $N \in \F$ such that&lt;/p&gt;
+&lt;p&gt;It seems very tempting from the foregoing discussion to claim that $\Pc{\cdot}{\G}$ is a probability measure on $\F$ for almost all $\omega \in \Omega$, but except for some nice spaces, which we will discuss below, this isn&amp;rsquo;t true. Let us first try to see this intuitively [2]. Equation \eqref{eq2} holds for all $\omega \in \Omega$ EXCEPT for some null set which may well depend on the particular sequence $\se{A_n}$.  It does NOT stipulate that there exists a fixed null set $N \in \F$ such that&lt;/p&gt;
 &lt;p&gt;$$
 \Pc{\bigcup_n A_n}{\G}(\omega) = \sum_n \Pc{A_n}{\G}(\omega), \quad \omega \in N^\comp
 $$&lt;/p&gt;
@@ -190,9 +190,9 @@ $$&lt;/p&gt;
 &lt;li&gt;for a.e. $\omega \in \Omega$, $\PP(\cdot, \omega)$ is a probability measure on $\cH$,&lt;/li&gt;
 &lt;li&gt;for each $A \in \cH$, $\PP(A, \cdot)$ is a $\G$-measurable function on $\Omega$ coinciding with the conditional probability of $A$ given $\G$, i.e., $\PP(A, \cdot) = \Pc{A}{\G}$ a.s.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Let&amp;rsquo;s show that this definition is not outrageous by showing that it agrees with our traditional notion of conditional pdf and conditional expectation. So suppose that $X$ and $Y$ are random variables which have a joint probability density function $f_{X,Y}(x,y).$ This means that we are considering the probability space $(\R^2, \B(\R^2), \PP)$ with $X$ and $Y$ being the coordinate random variables, i.e. $(x,y) \mapsto x$ and $(x,y) \mapsto y$ respectively, and having an absolutely continuous distribution function $F(x,y)$ such that&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s show that this definition is not outrageous by showing that it agrees with our traditional notion of conditional pdf and conditional expectation. So suppose that $X$ and $Y$ are random variables which have a joint probability density function $f_{X,Y}(x,y).$ This means that we are considering the probability space $(\R^2, \B(\R^2), \PP)$ with $X$ and $Y$ being the coordinate random variables, i.e. $(x,y) \mapsto x$ and $(x,y) \mapsto y$ respectively, and having an absolutely continuous distribution function $F_{X,Y}(x,y)$ such that&lt;/p&gt;
 &lt;p&gt;$$
-F(x,y) = \int_{-\infty}^y \int_{\infty}^x f_{X,Y}(s,t) \; \dd s \, \dd t
+F_{X,Y}(x,y) = \int_{-\infty}^y \int_{\infty}^x f_{X,Y}(s,t) \; \dd s \, \dd t
 $$&lt;/p&gt;
 &lt;p&gt;We recall that $f_X(x) = \int_\R f_{X,Y}(x,y) \; \dd y$ and $f_Y(y) = \int_\R f_{X,Y}(x,y) \; \dd x$ act as probability density functions for $X$ and $Y$ respectively, and&lt;/p&gt;
 &lt;p&gt;$$
@@ -205,7 +205,7 @@ defines the elementary conditional pdf $f_{X \mid Y}$ of $X$ given $Y$. By Fubin
 &lt;p&gt;$$
 \PP(A, \omega) = \int_{\set{s}{(s,y) \in A}} f_{X \mid Y}(s \mid y) \; \dd s
 $$&lt;/p&gt;
-&lt;p&gt;Then for each $\omega \in \R^2$, $\PP(\cdot, \omega)$ is a probability measure on $\cH$, and for each $A \in \cH$, $\PP(A, \cdot)$ is a Borel function in $y$ and hence $\G$-measurable. To verify that $\PP(A, \cdot) = \Pc{A}{\G}$ for any $A \in \cH$ we just need to verify property 3. of Theorem 1. To this end, fix $A \in \cH$  and $G \in \G$, and note that $G$ must be of the form $G = \R \times B$ for $B \in \B(\R^2)$. Thus&lt;/p&gt;
+&lt;p&gt;Then for each $\omega \in \R^2$, $\PP(\cdot, \omega)$ is a probability measure on $\cH$, and for each $A \in \cH$, $\PP(A, \cdot)$ is a Borel function in $y$ and hence $\G$-measurable. To verify that $\PP(A, \cdot) = \Pc{A}{\G}$ for any $A \in \cH$ we just need to verify property 3. of Theorem 1. To this end, fix $A \in \cH$  and $G \in \G$, and note that $G$ must be of the form $G = \R \times B$ for $B \in \B(\R)$. Thus&lt;/p&gt;
 &lt;p&gt;\begin{align*}
 \int_G \PP(A, \omega) \, \dP(\omega) &amp;amp;= \int_B \int_R \PP(A, (s,t)) f_{X \mid Y}(s,t) \; \dd s \, \dd t \quad \text{(by absolute continuity and Fubini&amp;rsquo;s theorem)} \\&lt;br&gt;
 &amp;amp;= \int_B \int_R \left[ \int_{\set{u}{(u,t) \in A}} f_{X \mid Y}(u \mid t) \; \dd u \right] f_{X \mid Y}(s,t) \; \dd s \, \dd t \\&lt;br&gt;
@@ -243,7 +243,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$$
 \mathscr{H} = \set{X}{X \ge 0, X \text{ is } \cH \text{-measurable, and \eqref{eq3} holds for } X}
 $$&lt;/p&gt;
-&lt;p&gt;By the definition of regular conditional probability, $\ind{A} \in \mathscr{H}$ for $A \in \cH$. $\cH$ is a $\sigma$-algebra. Let&amp;rsquo;s show that $\mathscr{H}$ is a monotone system. If $X_1, X_2 \in \mathscr{H}$ and $c_1, c_2 \ge 0$, then $c_1 X_1 + c_2 X_2 \ge 0$, $c_1 X_1 + c_2 X_2$ is $\cH$-measurable and Equation \eqref{eq3} holds because of linearity of expectation and conditional expectation, and thus $c_1 X_1 + c_2 X_2 \in \mathscr{H}$. If $\se{X_n} \subseteq \mathscr{H}$ such that $X_n \uparrow X$, then $X \ge 0$, $X$ is $\cH$-measurable, and Equation \eqref{eq3} holds because of monotone convergence theorem for expectation and conditional expectation, and thus $X \in \mathscr{H}$. Therefore, by the monotone class theorem $\mathscr{H}$ contains all nonnegative $\cH$-measurable functions. $\square$&lt;/p&gt;
+&lt;p&gt;By the definition of regular conditional probability, $\ind{A} \in \mathscr{H}$ for $A \in \cH$. $\cH$ is a $\sigma$-algebra. Let&amp;rsquo;s show that $\mathscr{H}$ is a monotone system. If $X_1, X_2 \in \mathscr{H}$ and $c_1, c_2 \ge 0$, then $c_1 X_1 + c_2 X_2 \ge 0$, $c_1 X_1 + c_2 X_2$ is $\cH$-measurable and Equation \eqref{eq3} holds because of linearity of expectation and conditional expectation, and thus $c_1 X_1 + c_2 X_2 \in \mathscr{H}$. If $\se{X_n} \subseteq \mathscr{H}$ such that $X_n \uparrow X$, then $X \ge 0$, $X$ is $\cH$-measurable, and Equation \eqref{eq3} holds for $X$ because of monotone convergence theorem for expectation and conditional expectation, and thus $X \in \mathscr{H}$. Therefore, by the monotone class theorem $\mathscr{H}$ contains all nonnegative $\cH$-measurable functions. $\square$&lt;/p&gt;
 &lt;h1 id=&#34;regular-conditional-distribution&#34;&gt;Regular conditional distribution&lt;/h1&gt;
 &lt;p&gt;In some cases even the concept of regular conditional probability in inadequate, and that motivates the concept of regular conditional distributions.&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 4: &lt;/span&gt; Let $\probsp$ be a probability space, $\G \subseteq \F$ a $\sigma$-algebra, $(\Lambda, \LL)$ a measurable space, and $T \colon \Omega \to \Lambda$ a measurable mapping. A &lt;em&gt;regular conditional distribution&lt;/em&gt; for $T$ given $\G$ is a function $\PP_T \colon \LL \times \Omega \to [0,1]$ such that&lt;/p&gt;
