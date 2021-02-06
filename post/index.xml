@@ -67,7 +67,7 @@
 \newcommand{\sett}[2]{\left\{ #1 ; | ; #2 \right\}}
 \newcommand{\Ex}[1]{\E\left(#1\right)}
 \newcommand{\Exc}[2]{\E\left(#1 \mid #2\right)}
-\newcommand{\Pc}[2]{\PP\left(#1 \mid #2\right)}
+\newcommand{\Pc}[2]{\PP\left( \left. #1 \, \right\vert \, #2\right)}
 \newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ph}[1]{\varphi^{-1}\left(#1\right)}
@@ -271,6 +271,55 @@ $$&lt;/p&gt;
 &lt;li&gt;for a.e. $\omega \in \Omega$, $\mu(S(\omega), \cdot)$ is a probability measure on $\LL$,&lt;/li&gt;
 &lt;li&gt;for each $A \in \LL$, $\mu(S(\cdot), A) = \Pc{T^{-1}(A)}{\G}$ a.s.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;It is instructive to prove Theorem 3 in the special case when $(\Lambda, \LL) = (\R^n, \B(\R^n))$. The theorem and the proof is taken from [2].&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 5: &lt;/span&gt; In the setting of Definition 4, let $(\Lambda, \LL) = (\R^n, \B(\R^n))$ and $T = (T_1, \ldots, T_n) \colon \Omega \to \R^n$. Then there exists a regular conditional distribution for $T$ given $\G$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Let&amp;rsquo;s recall the definition of an $n$-dimensional distribution function on $\R^n$ (the Russian convention of left-continuous distribution function).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; An $n$-dimensional distribution function on $\R^n$ is a function $F$ satisfying:
+$$\lim_{x_j \to - \infty} F(x_1, \ldots, x_n) = 0, \quad 1 \le j \le n \tag{i}$$
+$$\lim_{\substack{x_j \to \infty \\ 1 \le j \le n}} F(x_1, \ldots, x_n) = 1 \tag{ii}$$
+$$\lim_{y_j \uparrow x_j} F(x_1, \ldots, x_{j-1}, y_j, x_{j+1}, \ldots, x_n) = F(x_1, \ldots, x_j, \ldots, x_n), \quad 1 \le j \le n \tag{iii}$$
+\begin{align*}\Delta_n^{a,b} &amp;amp;:= F(b_1, \ldots, b_n) - \sum_{j=1}^n F(b_1, \ldots, b_{j-1}, a_j, b_{j+1}, \ldots, b_n) \\ &amp;amp;+ \sum_{1 \le j &amp;lt; k \le n} F(b_1, \ldots, b_{j-1}, a_j, b_{j+1}, \ldots, b_{k-1}, a_k, b_{k+1}, \ldots, b_n) - \cdots (-1)^n F(a_1, \ldots, a_n) \\ &amp;amp;\ge 0 \tag{iv}\end{align*}
+&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We will try to construct a distribution function on $\R^n$. To this end, for any rational number $r_1, \ldots, r_n$ and $\omega \in \Omega$, define&lt;/p&gt;
+&lt;p&gt;$$
+F_n^\omega(r_1, \ldots, r_n) = \Pc{\bigcap_{i=1}^n \se{T_i &amp;lt; r_i}}{\G}(\omega)
+$$&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s evident that the properties of conditional probability discussed above imply there is a null set $N \in \G$ such that for $\omega \in N^\comp$ and all rational numbers $r_i, r_i&amp;rsquo;, q_{i,m}$ the following holds&lt;/p&gt;
+&lt;p&gt;$$
+F_n^\omega(r_1, \ldots, r_n) \ge F_n^\omega(r_1&amp;rsquo;, \ldots, r_n&amp;rsquo;) \text{ if } r_i &amp;gt; r_i&amp;rsquo;, \, 1 \le i \le n
+$$&lt;/p&gt;
+&lt;p&gt;$$
+F_n^\omega(r_1, \ldots, r_n) = \lim_{\substack{q_{i,m} \uparrow r_i \\ 1 \le i \le n}} F_n^\omega(q_{1, m}, \ldots, q_{n, m})
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\lim_{r_i \to -\infty} F_n^\omega(r_1, \ldots, r_n) = 0, \quad 1 \le i \le n
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\lim_{\substack{r_i \to \infty \\ 1 \le i \le n}} F_n^\omega(r_1, \ldots, r_n) = 1
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\Delta_n^{r, r&amp;rsquo;} F_n^\omega \ge 0 \text{ if } r \le r&amp;rsquo;
+$$&lt;/p&gt;
+&lt;p&gt;where $r \le r&#39;$ means $r_i \le r_i&#39;$ for all $1 \le i \le n$. Having defined $F_n^\omega$ for rational values, define for any real numbers $x_1, \ldots, x_n$ and $\omega \in N^\comp$ as follows&lt;/p&gt;
+&lt;p&gt;$$
+F_n^\omega(x_1, \ldots, x_n) = \lim_{\substack{r_i \uparrow x_i \\ r_i \in \Q \\ 1 \le i \le n}} F_n^\omega(r_1, \ldots, r_n)
+$$&lt;/p&gt;
+&lt;p&gt;while for $\omega \in N$, set&lt;/p&gt;
+&lt;p&gt;$$
+F_n^\omega(x_1, \ldots, x_n) = \Prob{\bigcap_{i=1}^n \se{T_i &amp;lt; r_i}}
+$$&lt;/p&gt;
+&lt;p&gt;Then for each $\omega \in \Omega$, $F_n^\omega(x_1, \ldots, x_n)$ is an $n$-dimensional distribution function and hence determines a Lebesgue-Stieltjes measure $\mu_\omega$ on $\B(\R^n)$ with $\mu_\omega(\R^n) = 1$. For $B \in \B(\R^n)$ and $\omega \in \Omega$ define&lt;/p&gt;
+&lt;p&gt;$$
+\PP_T(B, \omega) = \mu_\omega(B)
+$$&lt;/p&gt;
+&lt;p&gt;If&lt;/p&gt;
+&lt;p&gt;\begin{align*}
+\cH &amp;amp;= \set{B \in \B(\R^n)}{\PP_T(B, \cdot) = \Pc{T^{-1}(B)}{\G} \text{ a.s.} } \\&lt;br&gt;
+\D &amp;amp;= \set{B \in \B(\R^n)}{B = [-\infty, r_1) \times \cdots \times [-\infty, r_n), \, r_i \in \Q}
+\end{align*}&lt;/p&gt;
+&lt;p&gt;then a moment&amp;rsquo;s reflection will convince you that that $\cH$ is a $\lambda-$class, $\D$ is a $\pi-$class, and $\cH \subseteq \D$. Hence, by the $\pi-\lambda$ theorem $\cH \subseteq \sigma(\D) = \B(\R^n)$, or in other words, $\PP_T(B, \omega)$ is a regular conditional distribution for $T$ given $\G$. $\square$&lt;/p&gt;
 &lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Williams, David. &lt;em&gt;Probability with Martingales&lt;/em&gt;. Cambridge mathematical textbooks, Cambridge University Press, 1991.&lt;/li&gt;
