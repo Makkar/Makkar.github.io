@@ -5,7 +5,7 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 03 Feb 2021 17:24:39 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 05 Feb 2021 17:24:39 -0500</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
@@ -15,7 +15,7 @@
     <item>
       <title>A note on conditional probability</title>
       <link>https://makkar.github.io/post/regularcondprob/</link>
-      <pubDate>Wed, 03 Feb 2021 17:24:39 -0500</pubDate>
+      <pubDate>Fri, 05 Feb 2021 17:24:39 -0500</pubDate>
       <guid>https://makkar.github.io/post/regularcondprob/</guid>
       <description>&lt;p&gt;$$
 \newcommand{\R}{\mathbb{R}}
