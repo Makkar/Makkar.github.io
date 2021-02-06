@@ -5,12 +5,284 @@
     <link>https://makkar.github.io/</link>
       <atom:link href="https://makkar.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Aditya Makkar</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 25 Dec 2020 17:17:08 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 03 Feb 2021 17:24:39 -0500</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Aditya Makkar</title>
       <link>https://makkar.github.io/</link>
     </image>
+    
+    <item>
+      <title>A note on conditional probability</title>
+      <link>https://makkar.github.io/post/regularcondprob/</link>
+      <pubDate>Wed, 03 Feb 2021 17:24:39 -0500</pubDate>
+      <guid>https://makkar.github.io/post/regularcondprob/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\Z_{\geq 0}^N}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\Prob}[1]{\PP \left( #1 \right)}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\e}{\epsilon}
+\newcommand{\ex}[1]{\exp\left{#1\right}}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil{#1}\right \rceil}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[2]{\left\{ #1 \; : \; #2 \right\}}
+\newcommand{\sett}[2]{\left\{ #1 ; | ; #2 \right\}}
+\newcommand{\Ex}[1]{\E\left(#1\right)}
+\newcommand{\Exc}[2]{\E\left(#1 \mid #2\right)}
+\newcommand{\Pc}[2]{\PP\left(#1 \mid #2\right)}
+\newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ph}[1]{\varphi^{-1}\left(#1\right)}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\du}{du}
+\DeclareMathOperator{\dz}{d\matr{z}}
+\DeclareMathOperator{\dt}{dt}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dP}{d\PP}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\V}{\mathrm{Var}}
+\DeclareMathOperator{\Log}{\mathrm{Log}}
+\DeclareMathOperator{\O}{\mathcal{O}}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;The concept of conditional probability is central to probability theory and excellent treatment of it can be found in many books. My aim with this blog post is to consolidate in one place some ideas around it which helped me form a better intuition. These ideas will be useful if you have already been exposed to this concept from a textbook and just want one more person&amp;rsquo;s ramblings about it.&lt;/p&gt;
+&lt;p&gt;I will start by defining conditional expectation and stating some of its properties. It will be a grave injustice to claim my discussion of it is complete since I don&amp;rsquo;t even prove its existence; this section exists solely for establishing notation. I will then spend some time discussing conditional probability, relating it to the traditional notion of&lt;/p&gt;
+&lt;p&gt;$$
+\PP(A \mid B) = \frac{\PP(A \cap B)}{\PP(B)}
+$$&lt;/p&gt;
+&lt;p&gt;These discussions will naturally lead to the notions of regular conditional probability and regular conditional distribution which I discuss next.&lt;/p&gt;
+&lt;h1 id=&#34;conditional-expectation&#34;&gt;Conditional expectation&lt;/h1&gt;
+&lt;p&gt;Recall the concept of conditional expectation.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1: &lt;/span&gt; Let $\probsp$ be a probability space, and $X$ a random variable with $\Ex{|X|} &amp;lt; \infty$. Let $\G$ be a sub-$\sigma$-algebra of $\F$. Then there exists a random variable $Y$ such that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$Y$ is $\G$ measurable,&lt;/li&gt;
+&lt;li&gt;$\Ex{|Y|} &amp;lt; \infty$,&lt;/li&gt;
+&lt;li&gt;$\int_G Y \dP = \int_G X \dP$ for every $G \in \G$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Remarks: &lt;/span&gt; (1.) It is easy to see from the $\pi-\lambda$ theorem that the last condition can be relaxed such that $\int_G Y \dP = \int_G X \dP$ for every $G$ in some $\pi$-system which contains $\Omega$ and generates $\G$. (2.) If $Y&#39;$ is another random variable with the three properties above then $Y&amp;rsquo; = Y$ a.s.. Therefore, $Y$ in the theorem above is called a &lt;em&gt;version&lt;/em&gt; of the conditional expectation. The notation $\Exc{X}{\G}$ is used to denote this unique (up to a.e. equivalence) random variable.&lt;/p&gt;
+&lt;p&gt;The proof of this standard theorem can be found in any probability text. See [1,2] for example.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 1: &lt;/span&gt; In the setting of Theorem 1, if $Z$ is a random variable, we write $\Exc{X}{Z}$ for $\Exc{X}{\sigma(Z)}$.&lt;/p&gt;
+&lt;p&gt;The fact that conditional expectation is defined as a random variable might come as surprising, but the correspondence with the traditional usage of conditional expectation as a number becomes clear once you realize that here we are conditioning on a $\sigma$-algebra instead of a single event. For example, consider the life expectancy of a new born baby conditioned on sex. This is a random variable that takes one value for males and another value for females.&lt;/p&gt;
+&lt;h2 id=&#34;properties-of-conditional-expectation&#34;&gt;Properties of conditional expectation&lt;/h2&gt;
+&lt;p&gt;For completeness I state some useful properties of conditional expectation. You can find the proofs in [1,2] for example. Most of them are parallels to well-known properties of (unconditional) expectation. Assume that all the $X$&#39;s satisfy $\Ex{|X|} &amp;lt; \infty$ and let $\G, \cH$ be sub-$\sigma$-algebras of $\F$.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;[Linearity] $\Exc{a_1 X_1 + a_2 X_2}{\G} = a_1 \Exc{X_1}{\G} + a_2 \Exc{X_2}{\G}$ a.s.&lt;/li&gt;
+&lt;li&gt;[Positivity] If $X \ge 0$, then $\Exc{X}{\G} \ge 0$ a.s.&lt;/li&gt;
+&lt;li&gt;[Monotone convergence theorem for conditional expectation] If $\Ex{|Y|} &amp;lt; \infty$ and $Y \le X_n \uparrow X$ a.s., then $\Exc{X_n}{\G} \uparrow \Exc{X}{\G}$ a.s.&lt;/li&gt;
+&lt;li&gt;[Fatou&amp;rsquo;s lemma for conditional expectation] If $\Ex{|Y|} &amp;lt; \infty$ and $Y \le X_n$ for all $n \ge 1$ a.s., then $\Exc{\limi X_n}{\G} \le \limi \Exc{X_n}{\G}$ a.s.&lt;/li&gt;
+&lt;li&gt;[Dominated convergence theorem for conditional expectation] If $|X_n| \le |Y|$ for all $n \ge 1$, $\Ex{Y} &amp;lt; \infty$, and $X_n \to X$ a.s., then $\Exc{X_n}{\G} \to \Exc{X}{\G}$&lt;/li&gt;
+&lt;li&gt;[Tower property] If $\cH \subseteq \G$, then $\Exc{\Exc{X}{\G}}{\cH} = \Exc{\Exc{X}{\cH}}{\G} = \Exc{X}{\cH}$ a.s.&lt;/li&gt;
+&lt;li&gt;[Taking out what&amp;rsquo;s known] If $Y$ is $\G$-measurable and bounded, then
+$$\Exc{Y X}{\G} = Y \Exc{X}{\G} \quad \text{a.s.}\tag{1} \label{eq1}$$
+If $p &amp;gt; 1$, $1/p + 1/q = 1$, $X \in L^p(\Omega, \F, \PP)$ and $Y \in L^q(\Omega, \G, \PP)$, then \eqref{eq1} again holds. If $X$ is a nonnegative $\F$-measurable random variable, $Y$ is a nonnegative $\G$-measurable random variable, $\Ex{X} &amp;lt; \infty$ and $\Ex{XY} &amp;lt; \infty$, then \eqref{eq1} again holds.&lt;/li&gt;
+&lt;li&gt;[Role of independence] If $\cH$ is independent of $\sigma(\sigma(X), \G)$, then $\Exc{X}{\sigma(\G, \cH)} = \Exc{X}{\G}$ a.s.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;conditional-probability&#34;&gt;Conditional probability&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 2: &lt;/span&gt; In the setting of Theorem 1, if $A \in \F$, we let $\Pc{A}{\G}$ to mean $\Exc{\ind{A}}{\G}$ and call it the &lt;em&gt;conditional probability of&lt;/em&gt; $A$ &lt;em&gt;given&lt;/em&gt; $\G.$ Here $\ind{A}$ is the indicator random variable. If $B \in \F$, we let $\Pc{A}{B}$ to mean $\Exc{\ind{A}}{\ind{B}}$.&lt;/p&gt;
+&lt;p&gt;Just like conditional expectation, conditional probability, as defined above, is a random variable! Unlike conditional expectation this isn&amp;rsquo;t very palpable and deserves more rumination [3]. We have our probability space $\probsp$ and let $A,B \in \F$ be such that $\PP(B) \neq 0$ and $\PP(B^\comp) \neq 0$. Then our traditional notion of conditional probability tells us that the conditional probability of $A$ given $B$ is defined by&lt;/p&gt;
+&lt;p&gt;$$
+\PP_B(A) = \frac{\PP(A \cap B)}{\PP(B)}
+$$&lt;/p&gt;
+&lt;p&gt;Let us investigate how $\PP_B(A)$ depends on $B$. To this end, introduce the discrete measurable space $(\Lambda, 2^\Lambda)$ with $\Lambda = \se{\lambda_1, \lambda_2}$, and a measurable mapping $T \colon \Omega \to \Lambda$ such that&lt;/p&gt;
+&lt;p&gt;$$
+T(\omega) = \begin{cases}
+\lambda_1 &amp;amp; \text{ if } \omega \in B   \\&lt;br&gt;
+\lambda_2 &amp;amp; \text{ if } \omega \in B^\comp
+\end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;Define the two measures $\nu_A$ and $\nu$ on $(\Lambda, 2^\Lambda)$ as follows for any $E \subseteq \Lambda$&lt;/p&gt;
+&lt;p&gt;$$
+\nu_A(E) = \Prob{A \cap T^{-1}(E)}
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\nu(E) = \Prob{T^{-1}(E)}
+$$&lt;/p&gt;
+&lt;p&gt;Then it is easy to see that&lt;/p&gt;
+&lt;p&gt;$$
+\PP_B(A) = \frac{\nu_A(\se{\lambda_1})}{\nu(\se{\lambda_1})}
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\PP_{B^\comp}(A) = \frac{\nu_A(\se{\lambda_2})}{\nu(\se{\lambda_2})}
+$$&lt;/p&gt;
+&lt;p&gt;In other words conditional probability may be viewed as a measurable function on $\Lambda$. This can easily be generalized to any finite setting as follows. Let $\se{A_1, \ldots, A_n} \subseteq \F$ be a partition of $\Omega$, i.e., $A_i \cap A_j = \emp$ for $i \neq j$ and $\bigcup_i A_i = \Omega$. Introduce the discrete measurable space $(\Lambda, 2^\Lambda)$ with $\Lambda = \se{\lambda_1, \ldots, \lambda_n}$. Define a measurable mapping $T \colon \Omega \to \Lambda$ such that $T(\omega) = \lambda_i$ whenever $\omega \in A_i$. Define the measures $\nu_{A_1}, \ldots, \nu_{A_n}, \nu$ on $(\Lambda, 2^\Lambda)$ as follows for any $E \subseteq \Lambda$&lt;/p&gt;
+&lt;p&gt;$$
+\nu_{A_i}(E) = \Prob{A_i \cap T^{-1}(E)} \quad \text{for all } i = 1, \ldots, n
+$$&lt;/p&gt;
+&lt;p&gt;$$
+\nu(E) = \Prob{T^{-1}(E)}
+$$&lt;/p&gt;
+&lt;p&gt;Then once again we have for any $A \in \F$&lt;/p&gt;
+&lt;p&gt;$$
+\PP_{A_i}(A) = \frac{\PP(A \cap A_i)}{\PP(A_i)} = \frac{\nu_{A_i}(\se{\lambda_i})}{\nu(\se{\lambda_i})} \quad \text{for all } i = 1, \ldots, n
+$$&lt;/p&gt;
+&lt;p&gt;These considerations are what motivated the definition of conditional probability in general cases as you see in Definition 2. If $T$ is any measurable mapping from $\probsp$ into a measurable space $(\Lambda, \LL)$, and if we write $\nu_A(E) = \Prob{A \cap T^{-1}(E)}$ where $A \in \F$ and $E \in \LL$, then it is clear that $\nu_E$ and $\PP \circ T^{-1}$ are measures on $\LL$ such that $\nu_A \ll \PP \circ T^{-1}$. Radon-Nikodym theorem now implies that there exists an $\PP \circ T^{-1}$-integrable function $p_A$, unique upto $\PP \circ T^{-1}$-a.e., such that&lt;/p&gt;
+&lt;p&gt;$$
+\Prob{A \cap T^{-1}(E)} = \int_E p_A(\lambda) \; \PP \circ T^{-1}(\dd \lambda) \quad \text{for all } E \in \LL
+$$&lt;/p&gt;
+&lt;p&gt;We anoint $p_A(\lambda)$ as the conditional probability of $A$ given $\lambda$ or the conditional probability of $A$ given that $T(\omega) = \lambda$. Note that here we are conditioning on a measurable mapping $T$ instead of a sub-$\sigma$-algebra, but these two notions are equivalent since we can interpret conditioning on $T$ as conditioning on $\sigma(T)$ and vice-versa. Keep this &amp;ldquo;rumination&amp;rdquo; in mind when we discuss regular conditional distribution later.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s look at our definition of conditional probability from the other direction and show that $\Pc{A}{B}$ as defined in Definition 2 conforms to our traditional usage. To start, note that $\sigma(\ind{B}) = \se{\emp, B, B^\comp, \Omega}$, and since $\Pc{A}{B}$ is $\sigma(\ind{B})$ measurable, it must be constant on each of the sets $B, B^\comp$, thereby necessitating&lt;/p&gt;
+&lt;p&gt;$$
+\Pc{A}{B}(\omega) = \begin{cases}
+\frac{\PP(A \cap B)}{\PP(B)} &amp;amp; \text{ if } \omega \in B   \\&lt;br&gt;
+\frac{\PP(A \cap B^\comp)}{\PP(B^\comp)} &amp;amp; \text{ if } \omega \in B^\comp
+\end{cases}
+$$
+because of property 3. of Theorem 1 by taking $G$ to be $B$ and $B^\comp$. Of course, if any of the sets $B$ or $B^\comp$ is of measure $0$, then you can take the corresponding value for $\Pc{A}{B}(\omega)$ to be anything in $[0,1]$ and it won&amp;rsquo;t matter since the concept of conditional probability is defined up to sets of measure $0$.&lt;/p&gt;
+&lt;h2 id=&#34;properties-of-conditional-probability&#34;&gt;Properties of conditional probability&lt;/h2&gt;
+&lt;p&gt;Positivity property (property 2. above) and monotone convergence property (property 3. above) imply $0 \le \Pc{A}{\G} \le 1$ a.s. for any $A \in \F$, $\Pc{A}{\G} = 0$ a.s. if and only if $\PP(A) = 0$, and $\Pc{A}{\G} = 1$ a.s. if and only if $\PP(A) = 1.$&lt;/p&gt;
+&lt;p&gt;Let $A_1, A_2, \ldots \in \F$ be a sequence of disjoint sets. By linearity (property 1. above) and monotone convergence theorem for conditional expectation, we see that&lt;/p&gt;
+&lt;p&gt;$$
+\Pc{\bigcup_n A_n}{\G} = \sum_n \Pc{A_n}{\G} \quad \text{a.s.} \tag{2} \label{eq2}
+$$&lt;/p&gt;
+&lt;p&gt;If $A_n \in \F$, $n \ge 1$ and $\limn A_n = A$, then we also have $\limn \Pc{A_n}{\G} = \Pc{A}{G}$ a.s..&lt;/p&gt;
+&lt;p&gt;It seems very tempting from our discussion to claim that $\Pc{\cdot}{\G}$ is a probability measure on $\F$ for almost all $\omega \in \Omega$, but except for some nice spaces, which we will discuss below, this isn&amp;rsquo;t true. Let us first try to see this intuitively [2]. Equation \eqref{eq2} holds for all $\omega \in \Omega$ EXCEPT for some null set which may well depend on the particular sequence $\se{A_n}$.  It does NOT stipulate that there exists a fixed null set $N \in \F$ such that&lt;/p&gt;
+&lt;p&gt;$$
+\Pc{\bigcup_n A_n}{\G}(\omega) = \sum_n \Pc{A_n}{\G}(\omega), \quad \omega \in N^\comp
+$$&lt;/p&gt;
+&lt;p&gt;for every disjoint sequence $\se{A_n} \subseteq \F$. Except in trivial cases, there are uncountably many disjoint sequences, and therefore we will need uncountable union of such null sets to be of measure $0$, which of course may not even be defined let alone be of measure $0$. To further drive this point home you can take a look at an explicit example of how this can fail in an exercise in [3] page 210.&lt;/p&gt;
+&lt;h1 id=&#34;regular-conditional-probability&#34;&gt;Regular conditional probability&lt;/h1&gt;
+&lt;p&gt;Motivated by our discussion above, we define regular conditional probability as follows.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 3: &lt;/span&gt; Let $\probsp$ be a probability space and $\G, \cH$ be sub-$\sigma$-algebras of $\F$. A &lt;em&gt;regular conditional probability&lt;/em&gt; on $\cH$ given $\G$ is a function $\PP(\cdot, \cdot) \colon \cH \times \Omega \to [0,1]$ such that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;for a.e. $\omega \in \Omega$, $\PP(\cdot, \omega)$ is a probability measure on $\cH$,&lt;/li&gt;
+&lt;li&gt;for each $A \in \cH$, $\PP(A, \cdot)$ is a $\G$-measurable function on $\Omega$ coinciding with the conditional probability of $A$ given $\G$, i.e., $\PP(A, \cdot) = \Pc{A}{\G}$ a.s.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Let&amp;rsquo;s show that this definition is not outrageous by showing that it agrees with our traditional notion of conditional pdf and conditional expectation. So suppose that $X$ and $Y$ are random variables which have a joint probability density function $f_{X,Y}(x,y).$ This means that we are considering the probability space $(\R^2, \B(\R^2), \PP)$ with $X$ and $Y$ being the coordinate random variables, i.e. $(x,y) \mapsto x$ and $(x,y) \mapsto y$ respectively, and having an absolutely continuous distribution function $F(x,y)$ such that&lt;/p&gt;
+&lt;p&gt;$$
+F(x,y) = \int_{-\infty}^y \int_{\infty}^x f_{X,Y}(s,t) \; \dd s \, \dd t
+$$&lt;/p&gt;
+&lt;p&gt;We recall that $f_X(x) = \int_\R f_{X,Y}(x,y) \; \dd y$ and $f_Y(y) = \int_\R f_{X,Y}(x,y) \; \dd x$ act as probability density functions for $X$ and $Y$ respectively, and&lt;/p&gt;
+&lt;p&gt;$$
+f_{X \mid Y}(x \mid y) = \begin{cases}
+\frac{f_{X,Y}(x,y)}{f_Y(y)} &amp;amp; \text{ if } f_Y(y) \neq 0   \\&lt;br&gt;
+0 &amp;amp; \text{ otherwise}
+\end{cases}
+$$
+defines the elementary conditional pdf $f_{X \mid Y}$ of $X$ given $Y$. By Fubini&amp;rsquo;s theorem $f_X$ and $f_Y$ are Borel functions on $\R$ and so $f_{X \mid Y}$ is a Borel function on $\R^2$. Let $\cH = \B(\R^2) = \sigma(X, Y)$ and $\G = \sigma(Y) = \R \times \B(\R)$. For $A \in \cH$ and $\omega = (x,y) \in \R^2$ we define&lt;/p&gt;
+&lt;p&gt;$$
+\PP(A, \omega) = \int_{\set{s}{(s,y) \in A}} f_{X \mid Y}(s \mid y) \; \dd s
+$$&lt;/p&gt;
+&lt;p&gt;Then for each $\omega \in \R^2$, $\PP(\cdot, \omega)$ is a probability measure on $\cH$, and for each $A \in \cH$, $\PP(A, \cdot)$ is a Borel function in $y$ and hence $\G$-measurable. To verify that $\PP(A, \cdot) = \Pc{A}{\G}$ for any $A \in \cH$ we just need to verify property 3. of Theorem 1. To this end, fix $A \in \cH$  and $G \in \G$, and note that $G$ must be of the form $G = \R \times B$ for $B \in \B(\R^2)$. Thus&lt;/p&gt;
+&lt;p&gt;\begin{align*}
+\int_G \PP(A, \omega) \, \dP(\omega) &amp;amp;= \int_B \int_R \PP(A, (s,t)) f_{X \mid Y}(s,t) \; \dd s \, \dd t \quad \text{(by absolute continuity and Fubini&amp;rsquo;s theorem)} \\&lt;br&gt;
+&amp;amp;= \int_B \int_R \left[ \int_{\set{u}{(u,t) \in A}} f_{X \mid Y}(u \mid t) \; \dd u \right] f_{X \mid Y}(s,t) \; \dd s \, \dd t \\&lt;br&gt;
+&amp;amp;= \int_B \left[ \int_{\set{u}{(u,t) \in A}} f_{X \mid Y}(u \mid t) \; \dd u \right] f_{Y}(t) \; \dd t \\&lt;br&gt;
+&amp;amp;= \int_B \int_{\set{u}{(u,t) \in A}} f_{X, Y}(u, t) \; \dd u \, \dd t \\&lt;br&gt;
+&amp;amp;= \int_B \int_{\R} \ind{A}(u,t) f_{X, Y}(u, t) \; \dd u \, \dd t \\&lt;br&gt;
+&amp;amp;= \int_{G} \ind{A}(\omega) \; \dP(\omega)
+\end{align*}&lt;/p&gt;
+&lt;p&gt;and so $\PP(A, \cdot) = \Exc{\ind{A}}{\G} = \Pc{A}{\G}$. Hence, $\PP(A, \omega)$ is a regular probability measure on $\cH$ given $\G$.&lt;/p&gt;
+&lt;p&gt;For the corresponding analysis for conditional expectation, let $h$ be a Borel function on $\R^2$ such that $\Ex{|h(X,Y)|} = \int_\R \int_\R |h(x,y)| f_{X,Y}(x,y) \; \dd x \, \dd y &amp;lt; \infty$. Set&lt;/p&gt;
+&lt;p&gt;$$
+g(y) = \int_\R h(s, y) f_{X \mid Y}(s \mid y) \; \dd s
+$$&lt;/p&gt;
+&lt;p&gt;$g(y)$ is the traditional conditional density of $h(X, Y)$ given $Y = y$.
+Then the claim is that $g(Y) = \Exc{h(X,Y)}{\sigma(Y)}$ a.s.. The typical element of $\sigma(Y)$ has the form $\set{\omega \in \R^2}{Y(\omega) \in B}$, where $B \in \B(\R).$ Hence, we must show that&lt;/p&gt;
+&lt;p&gt;$$
+L = \Ex{h(X,Y) \ind{B}(Y)} = \Ex{g(Y) \ind{B}(Y)} = R
+$$&lt;/p&gt;
+&lt;p&gt;But we can write $L$ and $R$ as&lt;/p&gt;
+&lt;p&gt;\begin{align*}
+L &amp;amp;= \int \int h(x,y) \ind{B}(y) f_{X,Y}(x,y) \; \dd x \, \dd y \\&lt;br&gt;
+R &amp;amp;= \int g(y) \ind{B}(y) f_Y(y) \; \dd y
+\end{align*}&lt;/p&gt;
+&lt;p&gt;and they are equal by Fubini&amp;rsquo;s theorem.&lt;/p&gt;
+&lt;p&gt;In general, we have the following useful theorem (taken from [2]) which allows us to view conditional expectations as ordinary expectations relative to the measure induced by regular conditional probability.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 2: &lt;/span&gt; Consider the setting of Definition 3 and denote $\PP_\omega(\cdot) = \PP(\cdot, \omega)$. Let $X$ be an $\cH$-measurable function with $\Ex{X} &amp;lt; \infty$. Then&lt;/p&gt;
+&lt;p&gt;$$
+\Exc{X}{\G}(\omega) = \int_\Omega X \; \dP_\omega \quad \text{a.s.} \tag{3} \label{eq3}
+$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Recall the monotone class theorem for functions:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; Let $\mathscr{H}$ be a family of nonnegative functions on $\Omega$ which contains all indicators of sets of some class $\cH$ of subsets of $\Omega$. If either (i) $\cH$ is a $\pi$-class and $\mathscr{H}$ is a $\lambda$-system, or (ii) $\cH$ is a $\sigma$-algebra and $\mathscr{H}$ is a monotone system, then $\mathscr{H}$ contains all nonnegative $\sigma(\cH)$-measurable functions.&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;By separate considerations of $X^+$ and $X^-$, it may be supposed that $X \ge 0$. Let&lt;/p&gt;
+&lt;p&gt;$$
+\mathscr{H} = \set{X}{X \ge 0, X \text{ is } \cH \text{-measurable, and \eqref{eq3} holds for } X}
+$$&lt;/p&gt;
+&lt;p&gt;By the definition of regular conditional probability, $\ind{A} \in \mathscr{H}$ for $A \in \cH$. $\cH$ is a $\sigma$-algebra. Let&amp;rsquo;s show that $\mathscr{H}$ is a monotone system. If $X_1, X_2 \in \mathscr{H}$ and $c_1, c_2 \ge 0$, then $c_1 X_1 + c_2 X_2 \ge 0$, $c_1 X_1 + c_2 X_2$ is $\cH$-measurable and Equation \eqref{eq3} holds because of linearity of expectation and conditional expectation, and thus $c_1 X_1 + c_2 X_2 \in \mathscr{H}$. If $\se{X_n} \subseteq \mathscr{H}$ such that $X_n \uparrow X$, then $X \ge 0$, $X$ is $\cH$-measurable, and Equation \eqref{eq3} holds because of monotone convergence theorem for expectation and conditional expectation, and thus $X \in \mathscr{H}$. Therefore, by the monotone class theorem $\mathscr{H}$ contains all nonnegative $\cH$-measurable functions. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;regular-conditional-distribution&#34;&gt;Regular conditional distribution&lt;/h1&gt;
+&lt;p&gt;In some cases even the concept of regular conditional probability in inadequate, and that motivates the concept of regular conditional distributions.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 4: &lt;/span&gt; Let $\probsp$ be a probability space, $\G \subseteq \F$ a $\sigma$-algebra, $(\Lambda, \LL)$ a measurable space, and $T \colon \Omega \to \Lambda$ a measurable mapping. A &lt;em&gt;regular conditional distribution&lt;/em&gt; for $T$ given $\G$ is a function $\PP_T \colon \LL \times \Omega \to [0,1]$ such that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;for a.e. $\omega \in \Omega$, $\PP_T(\cdot, \omega)$ is a probability measure on $\LL$,&lt;/li&gt;
+&lt;li&gt;for each $A \in \LL$, $\PP_T(A, \cdot)$ is a $\G$-measurable function on $\Omega$ coinciding with the conditional probability of $T^{-1}(A)$ given $\G$, i.e., $\PP_T(A, \cdot) = \Pc{T^{-1}(A)}{\G}$ a.s.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It is clear that when $\Lambda = \Omega$, $\LL = \cH \subseteq \F$ and $T$ is the identity map, $\PP_T$ is exactly the regular conditional probability as defined in Definition 3.&lt;/p&gt;
+&lt;p&gt;Now would be a good time to read the first &amp;ldquo;rumination&amp;rdquo; in the section Conditional Probability and realize that the definition of regular conditional distribution is in fact well motivated.&lt;/p&gt;
+&lt;h1 id=&#34;existence-of-regular-conditional-distribution&#34;&gt;Existence of regular conditional distribution&lt;/h1&gt;
+&lt;p&gt;Before we discuss their existence, let us define the concept of standard Borel space [6].&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 5: &lt;/span&gt; Let $(X, \X)$ and $(Y, \Y)$ be measurable spaces. They are called &lt;em&gt;isomorphic&lt;/em&gt; is there exists a bijection $f \colon X \to Y$ such that $f$ and $f^{-1}$ are both measurable. The function $f$ is called an &lt;em&gt;isomorphism&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 6: &lt;/span&gt; A measurable space $(X, \X)$ is called a &lt;em&gt;standard Borel space&lt;/em&gt; if it satisfies any of the following equivalent conditions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$(X, \X)$ is isomorphic to some compact metric space with the Borel $\sigma$-algebra;&lt;/li&gt;
+&lt;li&gt;$(X, \X)$ is isomorphic to some Polish space (i.e., a separable complete metric space) with the Borel $\sigma$-algebra;&lt;/li&gt;
+&lt;li&gt;$(X, \X)$ is isomorphic to some Borel subset of some Polish space with the Borel $\sigma$-algebra.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As you can guess most spaces we deal with are standard Borel spaces. Durrett [5] calls these space &lt;em&gt;nice&lt;/em&gt; since we already have too many things named after Borel. I am not sure I agree with his reasoning but I like Durrett&amp;rsquo;s terminology.&lt;/p&gt;
+&lt;p&gt;The next two theorems show the existence of regular conditional distribution and are taken from [5, Section 4.1.3]. See also [4, Section V.8].&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 3: &lt;/span&gt; Regular conditional distribution exists if $(\Lambda, \LL)$ is nice.&lt;/p&gt;
+&lt;p&gt;A generalization of the last theorem:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 4: &lt;/span&gt; Suppose $(\Lambda, \LL)$ is a nice space, $T$ and $S$ are measurable mappings from $\Omega$ to $\Lambda$, and $\G = \sigma(S)$. Then there exists a function $\mu \colon \Lambda \times \LL \to [0,1]$ such that&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;for a.e. $\omega \in \Omega$, $\mu(S(\omega), \cdot)$ is a probability measure on $\LL$,&lt;/li&gt;
+&lt;li&gt;for each $A \in \LL$, $\mu(S(\cdot), A) = \Pc{T^{-1}(A)}{\G}$ a.s.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Williams, David. &lt;em&gt;Probability with Martingales&lt;/em&gt;. Cambridge mathematical textbooks, Cambridge University Press, 1991.&lt;/li&gt;
+&lt;li&gt;Chow, Yuan Shih and Teicher, Henry. &lt;em&gt;Probability Theory: Independence, Interchangeability, Martingales&lt;/em&gt;, 3rd edn. Springer-Verlag New York, 1997.&lt;/li&gt;
+&lt;li&gt;Halmos, P. R.. &lt;em&gt;Measure Theory&lt;/em&gt;. Van Nostrand, Princeton, N. J., 1950; Springer-Verlag, Berlin and New York, 1974.&lt;/li&gt;
+&lt;li&gt;Parthasarathy, K. R.. &lt;em&gt;Probability Measures on Metric Spaces&lt;/em&gt;. AMS Chelsea Publishing, 1967.&lt;/li&gt;
+&lt;li&gt;Durrett, R.: &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edn. Cambridge University Press, 2019.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://encyclopediaofmath.org/wiki/Standard_Borel_space&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://encyclopediaofmath.org/wiki/Standard_Borel_space&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>Longest Increasing Subsequence</title>
@@ -99,7 +371,7 @@ $$
 for some constant $\gamma$. It is known that $\gamma = 2$. We will not be showing this, but we will show that $1 \le \gamma \le e$.&lt;/p&gt;
 &lt;h1 id=&#34;combinatorial-results&#34;&gt;Combinatorial results&lt;/h1&gt;
 &lt;p&gt;We now prove some useful combinatorial results. The first result is called the Erdős–Szekeres theorem.&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1 [Erdős–Szekeres theorem]: &lt;/span&gt; In any sequence $\se{a_1, a_2, \ldots, a_{mn+1}}$ of $mn+1$ distinct real numbers, there exists either an increasing sequence $a_{i_1} &amp;lt; \cdots &amp;lt; a_{i_{m+1}}$ $(i_1 &amp;lt; \cdots &amp;lt; i_{m+1})$ of length $m+1$, or a decreasing sequence $a_{j_1} &amp;gt; \cdots &amp;gt; a_{j_{n+1}}$ $(j_1 &amp;lt; \cdots &amp;lt; j_{n+1})$ of length $n+1$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1 [Erdős–Szekeres theorem]: &lt;/span&gt; In any sequence $\se{a_1, a_2, \ldots, a_{mn+1}}$ of $mn+1$ distinct real numbers, there exists either an increasing subsequence $a_{i_1} &amp;lt; \cdots &amp;lt; a_{i_{m+1}}$ $(i_1 &amp;lt; \cdots &amp;lt; i_{m+1})$ of length $m+1$, or a decreasing subsequence $a_{j_1} &amp;gt; \cdots &amp;gt; a_{j_{n+1}}$ $(j_1 &amp;lt; \cdots &amp;lt; j_{n+1})$ of length $n+1$.&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; For $1 \leq i \leq mn+1$ define $t_i$ to be the length of a longest increasing subsequence starting at $a_i$, i.e., the first element of a longest increasing subsequence must be $a_i$ and the rest of the $a$&#39;s must have indices greater than $i$. If $t_i \geq m+1$ for some $i$ then we are done since we then have an increasing subsequence of length $m+1$, so assume $t_i \leq m$ for all $i$. Since $t_i \geq 1$, pigeonhole principle now implies that there is some integer $1 \leq k \leq m$ such that $t_i = k$ for at least $n+1$ $i$&#39;s. Let $t_i = k$ for all $i \in (j_1 &amp;lt; \cdots &amp;lt; j_{n+1})$. Now note that if $a_{j_l} &amp;lt; a_{j_{l+1}}$ for some $1 \leq l \leq n$, then we would obtain an increasing subsequence of length $k+1$ starting at $a_{j_l}$ because there is an increasing subsequence of length $k$ starting at $a_{j_{l+1}}$. But this contradicts the fact that $t_{j_l} = k,$ and thus $a_{j_l} &amp;gt; a_{j_{l+1}}$ for all $1 \leq l \leq n$. But now this gives us a decreasing subsequence $a_{j_1} &amp;gt; \cdots &amp;gt; a_{j_{n+1}}$ of length $n+1$. $\square$&lt;/p&gt;
 &lt;p&gt;The next two theorems prove lower and upper bounds for $L_n / \sqrt{n}$.&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 2: &lt;/span&gt; $L_n / \sqrt{n}$ is lower bounded as follows
@@ -144,7 +416,7 @@ where $c$ is some positive constant that depends on $\delta$.
 Since $\delta$ was arbitrary, we can let $\delta \to 0$ and then take $\limsup$ to get Equation \eqref{eq5}. $\square$&lt;/p&gt;
 &lt;h1 id=&#34;poissonization&#34;&gt;Poissonization&lt;/h1&gt;
 &lt;p&gt;To be able to show \eqref{eq2} we will draw a correspondence between this problem of longest increasing subsequences and a seemingly unrelated problem called the Poissonized version. This Poissonized version will allow us to use the powerful Subadditive Ergodic Theorem (Theorem 5 below) to show \eqref{eq2}.&lt;/p&gt;
-&lt;p&gt;To this end, assume an underlying probability space $\probsp$ and let $N$ be a Poisson random measure on $\mathbb{R} _ + ^2$ with mean measure given by the Lebesgue measure on $\mathbb{R} _ + ^2$. In other words $N:\Omega \times \B(\R _ + ^2) \to \bar{\R} _ +$ is a transition kernel from $(\Omega, \F)$ into $(\R_+^2, \B(\R_+^2))$ with $\int_\Omega \PP(\dd \omega) N(\omega, A) = \text{Leb}(A)$ for any $A \in \B(\R_+^2)$. We can view the random process as a sequence $\se{(X_i, Y_i)} _ {i \geq 1}$ of independent random variables taking values in $\R _ + ^2$ and having a uniform probability measure (Lebesgue measure on $(\R_+^2, \B(\R_+^2))$). If we let $R_{s,t}$ denote the rectangle with vertices $(s,s), (s,t), (t,t)$ and $(t,s)$, then for each outcome $\omega \in \Omega$, we can think of having $\text{Poisson}(\text{Leb}(R_{s,t}(\omega)))$ distributed number of such points inside the rectangle $R_{s,t}(\omega).$&lt;/p&gt;
+&lt;p&gt;To this end, assume an underlying probability space $\probsp$ and let $N$ be a Poisson random measure on $\mathbb{R} _ + ^2$ with mean measure given by the Lebesgue measure on $\mathbb{R} _ + ^2$. In other words $N:\Omega \times \B(\R _ + ^2) \to \bar{\R} _ +$ is a transition kernel from $(\Omega, \F)$ into $(\R_+^2, \B(\R_+^2))$ with $\int_\Omega \PP(\dd \omega) N(\omega, A) = \text{Leb}(A)$ for any $A \in \B(\R_+^2)$. We can view the random process as a sequence $\se{(X_i, Y_i)} _ {i \geq 1}$ of independent random variables taking values in $\R _ + ^2$ and having a uniform probability measure (more correctly, Lebesgue measure on $(\R_+^2, \B(\R_+^2))$). If we let $R_{s,t}$ denote the rectangle with vertices $(s,s), (s,t), (t,t)$ and $(t,s)$, then for each outcome $\omega \in \Omega$, we can think of having $\text{Poisson}(\text{Leb}(R_{s,t}(\omega)))$ distributed number of such points inside the rectangle $R_{s,t}(\omega).$&lt;/p&gt;
 &lt;p&gt;For $s &amp;lt; t \in [0, \infty)$ let $Z_{s,t}$ be the random variable denoting the length of the longest increasing path lying in the rectangle $R_{s,t}$, i.e., $Z_{s,t}$ is the largest integer $k$ for which there are points $(X_1,Y_1), \dots, (X_k, Y_k)$ in the Poisson process with $s &amp;lt; X_1 &amp;lt; \cdots &amp;lt; X_k &amp;lt; t$ and $s&amp;lt; Y_1 &amp;lt; \cdots &amp;lt; Y_k &amp;lt; t$.&lt;/p&gt;
 &lt;p&gt;Let $\tau(n)$ be the smallest value of $t \in [0, \infty)$ for which there are $n$ points in $R_{0,t}$. Let the $n$ points in $R_{0, \tau(n)}$ be written as $\se{(X_i, Y_i)}_{1 \leq i \leq n}$ such that $0 &amp;lt; X_1 &amp;lt; \cdots &amp;lt; X_n \leq \tau(n)$ (the inequalities are strict almost surely since they have continuous distributions). Let $\pi_n \in S_n$ be the unique permutation such that $Y_{\pi_n(1)} &amp;lt; \cdots &amp;lt; Y_{\pi_{n}(n)}$ (It is not difficult to see the existence and the uniqueness). Then
 $$
