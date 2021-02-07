@@ -162,7 +162,7 @@ $$&lt;/p&gt;
 &lt;p&gt;$$
 \Prob{A \cap T^{-1}(E)} = \int_E p_A(\lambda) \; \PP \circ T^{-1}(\dd \lambda) \quad \text{for all } E \in \LL
 $$&lt;/p&gt;
-&lt;p&gt;We anoint $p_A(\lambda)$ as the conditional probability of $A$ given $\lambda$ or the conditional probability of $A$ given that $T(\omega) = \lambda$. Note that here we are conditioning on a measurable mapping $T$ instead of a sub-$\sigma$-algebra, but these two notions are equivalent since we can interpret conditioning on $T$ as conditioning on $\sigma(T)$ and vice-versa. Keep this &amp;ldquo;rumination&amp;rdquo; in mind when we discuss regular conditional distribution later.&lt;/p&gt;
+&lt;p&gt;We anoint $p_A(\lambda)$ as the conditional probability of $A$ given $\lambda$ or the conditional probability of $A$ given that $T(\omega) = \lambda$. Note that here we are conditioning on a measurable mapping $T$ instead of a sub-$\sigma$-algebra, but this notion is related to conditioning on $\sigma(T)$ as will become clear ahead. Keep this &amp;ldquo;rumination&amp;rdquo; in mind when we discuss regular conditional distribution later.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s look at our definition of conditional probability from the other direction and show that $\Pc{A}{B}$ as defined in Definition 2 conforms to our traditional usage. To start, note that $\sigma(\ind{B}) = \se{\emp, B, B^\comp, \Omega}$, and since $\Pc{A}{B}$ is $\sigma(\ind{B})$ measurable, it must be constant on each of the sets $B, B^\comp$, thereby necessitating&lt;/p&gt;
 &lt;p&gt;$$
 \Pc{A}{B}(\omega) = \begin{cases}
@@ -258,6 +258,19 @@ $$&lt;/p&gt;
 &lt;p&gt;$$
 \Exc{h(T)}{\G}(\omega) = \int_\Lambda h(\lambda) \; \PP_T^\omega(\dd \lambda)
 $$&lt;/p&gt;
+&lt;p&gt;To see the power of thinking about conditional probabilities like this, let&amp;rsquo;s give an unbelievably short proof of conditional Hölder&amp;rsquo;s inequality [2]. Contrast it with 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/H%C3%B6lder%27s_inequality#Conditional_H%C3%B6lder_inequality&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;other proofs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 4: &lt;/span&gt; If $X,Y$ are random variables on $\probsp$, $\G \subseteq \F$ is a $\sigma-$algebra and $ 1 &amp;lt; p &amp;lt; \infty$, $1/p + 1/q = 1$, then&lt;/p&gt;
+&lt;p&gt;$$
+\Exc{|XY|}{\G} \le \left( \Exc{|X|^p}{\G} \right)^{1/p} \left( \Exc{|Y|^q}{\G} \right)^{1/q} \quad \text{a.s.}
+$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; For $B \in \B(\R^2)$ and $\omega \in \Omega$, let $\PP_{X,Y}^\omega(B) = \PP_{X,Y}(B, \omega)$ be the regular conditional distribution for $(X,Y)$ given $\G$. Theorem 3 allows us to write&lt;/p&gt;
+&lt;p&gt;\begin{align*}
+\Exc{|XY|}{\G}(\omega) &amp;amp;= \int_{\R^2} |x y| \; \PP_{X,Y}^\omega(\dd (x,y)) \\&lt;br&gt;
+\left( \Exc{|X|^p}{\G} \right)^{1/p} &amp;amp;= \left( \int_{\R^2} |x|^p \; \PP_{X,Y}^\omega(\dd (x,y)) \right)^{1/p} \\&lt;br&gt;
+\left( \Exc{|Y|^q}{\G} \right)^{1/q} &amp;amp;= \left( \int_{\R^2} |y|^q \; \PP_{X,Y}^\omega(\dd (x,y)) \right)^{1/q}
+\end{align*}&lt;/p&gt;
+&lt;p&gt;And now our desired inequality follows immediately from the ordinary Hölder&amp;rsquo;s inequality. $\square$&lt;/p&gt;
 &lt;h1 id=&#34;existence-of-regular-conditional-distribution&#34;&gt;Existence of regular conditional distribution&lt;/h1&gt;
 &lt;p&gt;Before we discuss their existence, let us define the concept of standard Borel space [6].&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 5: &lt;/span&gt; Let $(X, \X)$ and $(Y, \Y)$ be measurable spaces. They are called &lt;em&gt;isomorphic&lt;/em&gt; is there exists a bijection $f \colon X \to Y$ such that $f$ and $f^{-1}$ are both measurable. The function $f$ is called an &lt;em&gt;isomorphism&lt;/em&gt;.&lt;/p&gt;
@@ -269,15 +282,15 @@ $$&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;As you can guess most spaces we deal with are standard Borel spaces. Durrett [5] calls these space &lt;em&gt;nice&lt;/em&gt; since we already have too many things named after Borel. I am not sure I agree with his reasoning but I like Durrett&amp;rsquo;s terminology.&lt;/p&gt;
 &lt;p&gt;The next two theorems show the existence of regular conditional distribution and are taken from [5, Section 4.1.3]. See also [4, Section V.8].&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 4: &lt;/span&gt; Regular conditional distribution exists if $(\Lambda, \LL)$ is nice.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 5: &lt;/span&gt; Regular conditional distribution exists if $(\Lambda, \LL)$ is nice.&lt;/p&gt;
 &lt;p&gt;A generalization of the last theorem:&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 5: &lt;/span&gt; Suppose $(\Lambda, \LL)$ is a nice space, $T$ and $S$ are measurable mappings from $\Omega$ to $\Lambda$, and $\G = \sigma(S)$. Then there exists a function $\mu \colon \Lambda \times \LL \to [0,1]$ such that&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 6: &lt;/span&gt; Suppose $(\Lambda, \LL)$ is a nice space, $T$ and $S$ are measurable mappings from $\Omega$ to $\Lambda$, and $\G = \sigma(S)$. Then there exists a function $\mu \colon \Lambda \times \LL \to [0,1]$ such that&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;for a.e. $\omega \in \Omega$, $\mu(S(\omega), \cdot)$ is a probability measure on $\LL$,&lt;/li&gt;
 &lt;li&gt;for each $A \in \LL$, $\mu(S(\cdot), A) = \Pc{T^{-1}(A)}{\G}$ a.s.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;It is instructive to prove Theorem 3 in the special case when $(\Lambda, \LL) = (\R^n, \B(\R^n))$. The theorem and the proof is taken from [2].&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 6: &lt;/span&gt; In the setting of Definition 4, let $(\Lambda, \LL) = (\R^n, \B(\R^n))$ and $T = (T_1, \ldots, T_n) \colon \Omega \to \R^n$. Then there exists a regular conditional distribution for $T$ given $\G$.&lt;/p&gt;
+&lt;p&gt;It is instructive to prove Theorem 5 in the special case when $(\Lambda, \LL) = (\R^n, \B(\R^n))$. The theorem and the proof is taken from [2].&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 7: &lt;/span&gt; In the setting of Definition 4, let $(\Lambda, \LL) = (\R^n, \B(\R^n))$ and $T = (T_1, \ldots, T_n) \colon \Omega \to \R^n$. Then there exists a regular conditional distribution for $T$ given $\G$.&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Let&amp;rsquo;s recall the definition of an $n$-dimensional distribution function on $\R^n$ (the Russian convention of left-continuous distribution function).&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; An $n$-dimensional distribution function on $\R^n$ is a function $F$ satisfying:

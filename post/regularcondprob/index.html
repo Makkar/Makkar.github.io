@@ -695,7 +695,7 @@ $$</p>
 <p>$$
 \Prob{A \cap T^{-1}(E)} = \int_E p_A(\lambda) \; \PP \circ T^{-1}(\dd \lambda) \quad \text{for all } E \in \LL
 $$</p>
-<p>We anoint $p_A(\lambda)$ as the conditional probability of $A$ given $\lambda$ or the conditional probability of $A$ given that $T(\omega) = \lambda$. Note that here we are conditioning on a measurable mapping $T$ instead of a sub-$\sigma$-algebra, but these two notions are equivalent since we can interpret conditioning on $T$ as conditioning on $\sigma(T)$ and vice-versa. Keep this &ldquo;rumination&rdquo; in mind when we discuss regular conditional distribution later.</p>
+<p>We anoint $p_A(\lambda)$ as the conditional probability of $A$ given $\lambda$ or the conditional probability of $A$ given that $T(\omega) = \lambda$. Note that here we are conditioning on a measurable mapping $T$ instead of a sub-$\sigma$-algebra, but this notion is related to conditioning on $\sigma(T)$ as will become clear ahead. Keep this &ldquo;rumination&rdquo; in mind when we discuss regular conditional distribution later.</p>
 <p>Let&rsquo;s look at our definition of conditional probability from the other direction and show that $\Pc{A}{B}$ as defined in Definition 2 conforms to our traditional usage. To start, note that $\sigma(\ind{B}) = \se{\emp, B, B^\comp, \Omega}$, and since $\Pc{A}{B}$ is $\sigma(\ind{B})$ measurable, it must be constant on each of the sets $B, B^\comp$, thereby necessitating</p>
 <p>$$
 \Pc{A}{B}(\omega) = \begin{cases}
@@ -791,6 +791,19 @@ $$</p>
 <p>$$
 \Exc{h(T)}{\G}(\omega) = \int_\Lambda h(\lambda) \; \PP_T^\omega(\dd \lambda)
 $$</p>
+<p>To see the power of thinking about conditional probabilities like this, let&rsquo;s give an unbelievably short proof of conditional Hölder&rsquo;s inequality [2]. Contrast it with 
+<a href="https://en.wikipedia.org/wiki/H%C3%B6lder%27s_inequality#Conditional_H%C3%B6lder_inequality" target="_blank" rel="noopener">other proofs</a>.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 4: </span> If $X,Y$ are random variables on $\probsp$, $\G \subseteq \F$ is a $\sigma-$algebra and $ 1 &lt; p &lt; \infty$, $1/p + 1/q = 1$, then</p>
+<p>$$
+\Exc{|XY|}{\G} \le \left( \Exc{|X|^p}{\G} \right)^{1/p} \left( \Exc{|Y|^q}{\G} \right)^{1/q} \quad \text{a.s.}
+$$</p>
+<p><span style="color:darkgray; font-size: 16pt">Proof: </span> For $B \in \B(\R^2)$ and $\omega \in \Omega$, let $\PP_{X,Y}^\omega(B) = \PP_{X,Y}(B, \omega)$ be the regular conditional distribution for $(X,Y)$ given $\G$. Theorem 3 allows us to write</p>
+<p>\begin{align*}
+\Exc{|XY|}{\G}(\omega) &amp;= \int_{\R^2} |x y| \; \PP_{X,Y}^\omega(\dd (x,y)) \\<br>
+\left( \Exc{|X|^p}{\G} \right)^{1/p} &amp;= \left( \int_{\R^2} |x|^p \; \PP_{X,Y}^\omega(\dd (x,y)) \right)^{1/p} \\<br>
+\left( \Exc{|Y|^q}{\G} \right)^{1/q} &amp;= \left( \int_{\R^2} |y|^q \; \PP_{X,Y}^\omega(\dd (x,y)) \right)^{1/q}
+\end{align*}</p>
+<p>And now our desired inequality follows immediately from the ordinary Hölder&rsquo;s inequality. $\square$</p>
 <h1 id="existence-of-regular-conditional-distribution">Existence of regular conditional distribution</h1>
 <p>Before we discuss their existence, let us define the concept of standard Borel space [6].</p>
 <p><span style="color:darkgray; font-size: 16pt">Definition 5: </span> Let $(X, \X)$ and $(Y, \Y)$ be measurable spaces. They are called <em>isomorphic</em> is there exists a bijection $f \colon X \to Y$ such that $f$ and $f^{-1}$ are both measurable. The function $f$ is called an <em>isomorphism</em>.</p>
@@ -802,15 +815,15 @@ $$</p>
 </ol>
 <p>As you can guess most spaces we deal with are standard Borel spaces. Durrett [5] calls these space <em>nice</em> since we already have too many things named after Borel. I am not sure I agree with his reasoning but I like Durrett&rsquo;s terminology.</p>
 <p>The next two theorems show the existence of regular conditional distribution and are taken from [5, Section 4.1.3]. See also [4, Section V.8].</p>
-<p><span style="color:darkgray; font-size: 16pt">Theorem 4: </span> Regular conditional distribution exists if $(\Lambda, \LL)$ is nice.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 5: </span> Regular conditional distribution exists if $(\Lambda, \LL)$ is nice.</p>
 <p>A generalization of the last theorem:</p>
-<p><span style="color:darkgray; font-size: 16pt">Theorem 5: </span> Suppose $(\Lambda, \LL)$ is a nice space, $T$ and $S$ are measurable mappings from $\Omega$ to $\Lambda$, and $\G = \sigma(S)$. Then there exists a function $\mu \colon \Lambda \times \LL \to [0,1]$ such that</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 6: </span> Suppose $(\Lambda, \LL)$ is a nice space, $T$ and $S$ are measurable mappings from $\Omega$ to $\Lambda$, and $\G = \sigma(S)$. Then there exists a function $\mu \colon \Lambda \times \LL \to [0,1]$ such that</p>
 <ol>
 <li>for a.e. $\omega \in \Omega$, $\mu(S(\omega), \cdot)$ is a probability measure on $\LL$,</li>
 <li>for each $A \in \LL$, $\mu(S(\cdot), A) = \Pc{T^{-1}(A)}{\G}$ a.s.</li>
 </ol>
-<p>It is instructive to prove Theorem 3 in the special case when $(\Lambda, \LL) = (\R^n, \B(\R^n))$. The theorem and the proof is taken from [2].</p>
-<p><span style="color:darkgray; font-size: 16pt">Theorem 6: </span> In the setting of Definition 4, let $(\Lambda, \LL) = (\R^n, \B(\R^n))$ and $T = (T_1, \ldots, T_n) \colon \Omega \to \R^n$. Then there exists a regular conditional distribution for $T$ given $\G$.</p>
+<p>It is instructive to prove Theorem 5 in the special case when $(\Lambda, \LL) = (\R^n, \B(\R^n))$. The theorem and the proof is taken from [2].</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 7: </span> In the setting of Definition 4, let $(\Lambda, \LL) = (\R^n, \B(\R^n))$ and $T = (T_1, \ldots, T_n) \colon \Omega \to \R^n$. Then there exists a regular conditional distribution for $T$ given $\G$.</p>
 <p><span style="color:darkgray; font-size: 16pt">Proof: </span> Let&rsquo;s recall the definition of an $n$-dimensional distribution function on $\R^n$ (the Russian convention of left-continuous distribution function).</p>
 <blockquote>
 <p><span style="color:silver"> An $n$-dimensional distribution function on $\R^n$ is a function $F$ satisfying:
