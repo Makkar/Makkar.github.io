@@ -5,12 +5,351 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 05 Feb 2021 17:24:39 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 13 Apr 2021 00:31:57 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://makkar.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>General Theory of Processes - Part 1</title>
+      <link>https://makkar.github.io/post/grlthprcs/</link>
+      <pubDate>Tue, 13 Apr 2021 00:31:57 -0400</pubDate>
+      <guid>https://makkar.github.io/post/grlthprcs/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\Z_{\geq 0}^N}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\Prob}[1]{\bP\left( #1 \right)}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\K}{\mathscr{K}}
+\newcommand{\PO}{\mathfrak{P}}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ex}[1]{\exp\left{#1\right}}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil{#1}\right \rceil}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[2]{\left\{ #1 \; : \; #2 \right\}}
+\newcommand{\sett}[2]{\left\{ #1 \; | \; #2 \right\}}
+\newcommand{\Ex}[1]{\bE\left[#1\right]}
+\newcommand{\Exc}[2]{\bE\left(#1 \mid #2\right)}
+\newcommand{\Pc}[2]{\PP\left( \left. #1 \, \right\vert \, #2\right)}
+\newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\PM}{\widehat{\otimes}_p}
+\newcommand{\nn}{{n \in \N}}
+\newcommand{\oi}{[0, \infty)}
+\newcommand{\gr}[1]{[\![ #1 ]\!]}
+\newcommand{\grr}[1]{]\!] #1 ]\!]}
+\newcommand{\grl}[1]{[\![ #1 [\![}
+\newcommand{\grrl}[1]{]\!] #1 [\![}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\du}{du}
+\DeclareMathOperator{\dz}{d\matr{z}}
+\DeclareMathOperator{\dt}{dt}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dP}{d\PP}
+\DeclareMathOperator{\dQ}{d\QQ}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\bE}{\mathbb{E}}
+\DeclareMathOperator{\bP}{\mathbb{P}}
+\DeclareMathOperator{\V}{\mathrm{Var}}
+\DeclareMathOperator{\Log}{\mathrm{Log}}
+$$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt; 
+&lt;p&gt;I have been attending a reading course on stochastic analysis led by 
+&lt;a href=&#34;http://www.math.columbia.edu/~ik/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Professor Ioannis Karatzas&lt;/a&gt;, where the students take turn in presenting a topic of their choice. I recently presented on Choquet&amp;rsquo;s theory of capacities and its applications to measure theory and in the general theory of processes. This blog post is based on this presentation. I have freely copied&lt;sup&gt;
+&lt;a href=&#34;#plagiarism&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; from many sources, but my primary reference are the unfortunately unpublished lecture notes by Prof. Karatzas.&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Kolmogorov laid the modern axiomatic foundations of probability theory with the German monograph &lt;em&gt;Grundbegriffe der Wahrscheinlichkeitsrechnung&lt;/em&gt; which appeared in Ergebnisse Der Mathematik in 1933. This was a period of intense discussions on the foundations of probability, and a majority of probabilists at the time considered measure theory not only a waste of time, but also an offense to &amp;ldquo;probabilistic intuition&amp;rdquo; [1]. But by 1950, with the work of Doob in particular, these discussions of foundations had been settled.&lt;/p&gt;
+&lt;p&gt;Continuous-time processes, on the other hand, was difficult to tame even with measure theory: if a particle is subject to random evolution, to show that its trajectory is continuous, or bounded, requires that all time values be considered, whereas classical measure theory can only handle a &lt;em&gt;countable&lt;/em&gt; infinity of time values. Thus, not only does probability depend on measure theory, but it also requires more of measure theory than the rest of analysis [1].&lt;/p&gt;
+&lt;p&gt;The missing pieces of the puzzle, which will be the highlight of this and the next blog post, are the debut, section and projection theorems. These theorems are also indispensable in many applications, for instance in dynamic programming and stochastic control [3].&lt;/p&gt;
+&lt;p&gt;To get a taste of these theorems, let&amp;rsquo;s recall a famous error made by Lebesgue in the paper &lt;em&gt;Sur les fonctions représentables analytiquement&lt;/em&gt; published in 1905. Consider the measurable space $(\R^2, \B(\R^2))$ and the projection map $\pi$ given by $\R^2 \ni (x,y) \mapsto \pi(x,y) = y \in \R$. It is easy to see that for any open set $O$ in $\R^2$, the set $\pi(O)$ is also open in $\R$ : Recall that the standard topology on $\R^2$ is same as the product topology on $\R^2$. By definition of the product topology on $\R^2$ an open set $O$ in $\R^2$ is  of the form $O = \bigcup_{i \in I} \bigcap_{j \in J_i} U_{ij} \times V_{ij}$ for open $U_{ij}, V_{ij}$ in $\R$, $I$ arbitrary and $J_i$ finite. A simple argument gives $\pi_2(O) = \bigcup_{i \in I} \bigcap_{j \in J_i} U_{ij}$ which is open in $\R$. In fact, more generally 
+&lt;a href=&#34;https://proofwiki.org/wiki/Projection_from_Product_Topology_is_Open&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;projection from product topology is open&lt;/a&gt;. Now it seems reasonable to expect that for any Borel set $B \in \B(\R^2)$ its projection is also a Borel set in $\B(\R)$, and Lebesgue assumed this in his paper. But, in fact, this is FALSE! The error was spotted in around 1917 by Mikhail Suslin, who realised that the projection need not be Borel, and this lead to his investigation of analytic sets and to begin the study of what is now known as descriptive set theory [2].&lt;/p&gt;
+&lt;p&gt;The problem is projection doesn&amp;rsquo;t commute with countable decreasing intersection. For example, consider the decreasing sequence of sets $S_n = (0, 1/n) \times \R$. Then $\pi(S_n) = \R$ for all $n$, giving $\bigcap_\nn \pi(S_n) = \R$, but $\bigcap_\nn S_n = \emp$, giving $\pi \left( \bigcap_\nn S_n \right) = \emp$. The measurable projection theorem stated next will be one of the highlights of this post.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Measurable Projection Theorem: &lt;/span&gt; Let $\probsp$ be a complete probability space, let $(K, \B(K))$ be a locally compact separable metric space endowed with the collection of its Borel sets, and denote by $\pi$ the projection of $K \times \Omega$ onto $\Omega$.
+Then, for every $B \in \B(K) \otimes \F$, the projection $\pi(B) \in \F$.&lt;/p&gt;
+&lt;p&gt;Why is proving such results difficult? As mentioned above it&amp;rsquo;s because projection doesn&amp;rsquo;t behave nicely with intersections. Nevertheless, let us try to see how one might try to prove the above theorem. A standard approach in measure theory is to construct a collection like&lt;/p&gt;
+&lt;p&gt;$$
+\mathscr{E} = \set{S \subseteq K \times \Omega}{\pi(S) \in \F}
+$$&lt;/p&gt;
+&lt;p&gt;which contains the sets satisfying the desired property, and show that it is a $\sigma-$algebra containing a simple collection, say $\mathscr{A},$ such that it easy to show that elements of $\mathscr{A}$ satisfy the desired property and $\mathscr{A}$ generates $\B(K) \otimes \F$, because then we will have $\B(K) \otimes \F \subseteq \mathscr{E}$. To this end, let&lt;/p&gt;
+&lt;p&gt;$$
+\mathscr{A} = \set{S \subseteq K \times \Omega}{S = E \times F \text{ for } E \in \B(K), F \in \F}
+$$&lt;/p&gt;
+&lt;p&gt;Then it is easy to see that $\mathscr{A} \subseteq \mathscr{E}$, $\mathscr{A}$ generates $\B(K) \otimes \F$ and that $\mathscr{A}$ is an algebra. If we could show that $\mathscr{E}$ is a monotone class, then we would be done on account of monotone class theorem. Increasing sequences are easily handled, in fact if $\se{S_n} _ \nn \subseteq K \times \Omega$ is any sequence, then&lt;/p&gt;
+&lt;p&gt;$$
+\pi\left(\bigcup_{n=1}^\infty S_n\right) = \bigcup_{n=1}^\infty \pi(S_n)
+$$&lt;/p&gt;
+&lt;p&gt;But if $S_1 \supseteq S_2 \supseteq \cdots$, then in general we CANNOT say&lt;/p&gt;
+&lt;p&gt;$$
+\pi\left(\bigcap_{n=1}^\infty S_n\right) = \bigcap_{n=1}^\infty \pi(S_n)
+$$&lt;/p&gt;
+&lt;p&gt;Enter Choquet&amp;rsquo;s theory of capacities. It provides the language to prove results like these. We know that every finite measure $\mu$ on $\R^d$ has the interior regularity property&lt;/p&gt;
+&lt;p&gt;$$
+\mu(B) = \sup_{\substack{K \in \K(\R^d) \\ K \subseteq B}} \mu(K), \quad \forall \; B \in \B(\R^d)
+$$&lt;/p&gt;
+&lt;p&gt;where $\K(\R^d)$ is the collection of compact sets in $\R^d$. The Choquet&amp;rsquo;s theory of capacities generalizes this approximation-from-below property, and distills those properties of measure that allow for such approximation to hold in very general settings. As we will see, monotonicity and continuity from above and below properties are at play here, and notions corresponding to complements or differences will be absent.&lt;/p&gt;
+&lt;p&gt;The next few sections will be very abstract and it is easy to lose sight of our goal. Some people enjoy this mental gymnastics, but even if you find this dry, the reward at the end will be worth the initial struggle. We start with Choquet&amp;rsquo;s theory of capacities. The highlight of this part will be Choquet&amp;rsquo;s capacitability theorem. To prove this major result we will need to define a lot of new terminology and prove some major results like Sierpiński&amp;rsquo;s theorem and Sion&amp;rsquo;s theorem. Armed with Choquet&amp;rsquo;s capacitability theorem we will prove Measurable Section theorem which in turn will form the backbone of various other results in measure theory. These results in measure theory will then help us prove results in general theory of processes, but this part we will discuss in the next blog post.&lt;/p&gt;
+&lt;h1 id=&#34;pavings-and-mosaics&#34;&gt;Pavings and Mosaics&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 1: &lt;/span&gt; Let $E$ be a nonempty set. A collection $\E$ of subsets of $E$ is called a &lt;em&gt;paving&lt;/em&gt; if it closed under finite unions and finite intersections. The pair $(E, \E)$ is then called a &lt;em&gt;paved space&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The concept of paving generalizes the concept of algebra.
+It is easy to check that an arbitrary intersection of pavings is also a paving, and that the collection $\PO(E)$ of all subsets of $E$ is a paving. Thus for any collection $\A$ of subsets of $E$, we can define the notion of &lt;em&gt;paving generated by $\A$&lt;/em&gt; as the smallest paving of subsets of $E$ that contains $\A$ by simply defining it to be the intersection of all pavings of $E$ containing $\A$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 2: &lt;/span&gt; For two paved spaces $(E,\E)$ and $(F,\F)$, the &lt;em&gt;product paving&lt;/em&gt; of $\E$ and $\F$, denoted by $\E \otimes_p \F$, is a paving on $E \times F$ generated by all rectangles $\cR = \set{A \times B}{A \in \E, B \in \F}$.&lt;/p&gt;
+&lt;p&gt;Using the fact that $(A_1 \times B_1) \cap (A_2 \times B_2) = (A_1 \cap A_2) \times (B_1 \cap B_2)$ we see that $\cR$ is stable under finite intersections. Therefore, any element of $\E \otimes_p \F$ is of the form $\bigcup_{i=1}^n A_i \times B_i$, where $A_i \in \E$ and $B_i \in \F$ for all $i=1,\ldots,n$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 3: &lt;/span&gt; Let $E$ be a nonempty set. A collection of subsets of $E$ which is closed under countable unions and countable intersections is called a &lt;em&gt;mosaic&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The concept of mosaic generalizes the concept of $\sigma-$algebra. Just like paving, it is easy to define the notion of &lt;em&gt;mosaic generated by a collection&lt;/em&gt;. They will always occur in the context of a paving $\E$ on $E$. We denote by $\widehat{\E}$ the mosaic generated by $\E$. $\E \PM \F$ will denote the mosaic generated by the product paving $\E \otimes_p \F$.&lt;/p&gt;
+&lt;p&gt;Henceforth the notation $\E$ will be used for a paving on $E$.&lt;/p&gt;
+&lt;h2 id=&#34;properties-of-pavings-and-mosaics&#34;&gt;Properties of pavings and mosaics&lt;/h2&gt;
+&lt;p&gt;Just like the results connecting algebra and $\sigma-$algebra, we have results connecting pavings and mosaics.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 1: &lt;/span&gt; If $A \in \E$ implies $A^\comp = E \setminus A \in \widehat{\E}$, then $\widehat{\E} = \sigma(\E)$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Follows immediately from the monotone class theorem. $\square$&lt;/p&gt;
+&lt;p&gt;As an example, if $E$ is a separable, locally compact metric space, and $\E = \K(E)$ is the collection of compact subsets of $E$, then this property holds. Too see this, note that in metric spaces compact sets are closed and thus their complement is open. It is a standard result in topology that in this case every open set is a countable union of compact sets. In fact, every second-countable locally compact Hausdorff space is $\sigma-$compact.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 2: &lt;/span&gt; The mosaic $\widehat{\E}$ is the smallest collection of subsets of $E$ that contains $\E$ and is closed under countable increasing unions and under countable decreasing intersections. In other words, if $\M(\E)$ denotes the monotone class generated by $\E$, then $\widehat{\E} = \M(\E)$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Since a mosaic is a monotone class and since $\E \subseteq \widehat{\E}$, we have $\M(\E) \subseteq \widehat{\E}$. For the other side, we will be done if we show that $\M(\E)$ is a mosaic, since $\E \subseteq \M(\E)$.&lt;br&gt;
+The first property to note is that a monotone paving is a mosaic. To see this, let $\cR$ be a monotone paving and $A_1, A_2, \ldots \in \cR$. Then since $\cR$ is a paving, $B_n = \bigcup_{i=1}^n A_i \in \cR$ for all $\nn$. But $\se{B_n}_\nn$ is an increasing sequence and $\cR$ is a monotone class, and therefore their union $\bigcup_\nn A_n = \bigcup_\nn B_n \in \cR$, and hence $\cR$ is closed under countable unions. Similarly for countable intersections.&lt;br&gt;
+Therefore, we will be done if we show that $\M(\E)$ is a paving.
+To this end, for any $B \subseteq E$, let
+$$\cK(B) := \set{A \subseteq E}{ A \cup B, A \cap B \in \M(\E)}$$
+Notice that by symmetry, $A \in \cK(B) \iff B \in \cK(A)$. If $A_1 \subseteq A_2 \subseteq \cdots \in \cK(B)$ is an increasing sequence, then
+$$
+\bigcup_\nn A_n \cup B = \bigcup_\nn (A_n \cup B) \in \M(\E)
+$$
+$$
+\bigcup_\nn A_n \cap B = \bigcup_\nn (A_n \cap B) \in \M(\E)
+$$
+and similarly for decreasing sequences. Therefore, if $\cK(B) \neq \emp$, then it is a monotone class. If $A, B \in \E$, then by the definition of paving, $A \in \cK(B)$. Since this is true for every $A \in \E$, we have $\E \subseteq \cK(B)$, and $\cK(B)$ is a monotone class containing $\E$. Since $\M(\E)$ is the smallest monotone class containing $\E$, we have
+$$\M(\E) \subseteq \cK(B)$$
+Hence if $A \in \M(\E)$ and $B \in \E$, then $A \in \cK(B)$, and therefore $B \in \cK(A)$. Since this is true for every $B \in \E$, it follows that
+$$\M(\E) \subseteq \cK(A)$$
+The validity of this relation for every $A \in \M(\E)$ is equivalent to the assertion that $\M(\E)$ is a paving. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;compact-pavings&#34;&gt;Compact pavings&lt;/h2&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 4: &lt;/span&gt; A paving $\E$ is a &lt;em&gt;compact paving&lt;/em&gt;, if every decreasing sequence of nonempty elements of $\E$ has a nonempty intersection.&lt;/p&gt;
+&lt;p&gt;For example, if $E$ is a separable metric space, the collection, $\K(E)$, of all compact subsets of $E$ is a compact paving. This is easy to see in light of the fact that every compact subset of $E$ is closed and this allows use of Cantor&amp;rsquo;s intersection theorem.
+We define $$\E_\delta := \set{\bigcap_{\nn} A_n}{A_n \in \E \text{ for all } n \in \N}$$ and note that if $\E$ is a compact paving then so is $\E_\delta$.
+The next lemma tells us when it acceptable to commute projection with countable intersections.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 3: &lt;/span&gt; Let $K$ and $E$ be two nonempty sets, and denote by $\pi$ the projection of $K \times E$ onto $E$. Suppose that $\cH$ is a paving of subsets of $K \times E$ with the property that, for every $x \in E$, the collection $\cH(x) := \set{H(x)}{H \in \cH}$ is a compact paving on $K$.&lt;br&gt;
+Then, for every decreasing sequence $\se{H_n} _ {n \in \N}$ of sets in the paving $\cH_\delta$, we have
+$$\pi\left(\bigcap _ {n \in \N} H_n\right) = \bigcap _ {n \in \N} \pi(H_n)$$
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; $\pi\left(\bigcap_{n \in \N} H_n\right) \subseteq \bigcap_{n \in \N} \pi(H_n)$ is easy to see because if $x \in \pi\left(\bigcap_{n \in \N} H_n\right)$ then there exists $(y,x) \in K \times E$ such that $(y,x) \in \bigcap_{n \in \N} H_n$ which implies $x \in \pi(H_n)$ for all $n \in \N$.&lt;br&gt;
+For the other side, let $x \in \bigcap_{n \in \N} \pi(H_n)$. Then the sequence $\se{H_n(x)}_{n \in \N}$ is decreasing whose elements are nonempty and they are in $\cH(x)_\delta$. But since $\cH(x)_\delta$ is a compact paving by assumption, $\bigcap_n H_n(x)$ must be nonempty, implying $x \in \pi\left(\bigcap_{n \in \N} H_n\right)$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;envelopes&#34;&gt;Envelopes&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 5: &lt;/span&gt; Let $(E, \E)$ be a paved space, and fix a subset $A \subseteq E$ as well as a decreasing sequence $\se{A_k} _ {k \in \N} \subseteq \mathfrak{P}(E)$. We say that $A$ is an &lt;em&gt;$\E-$envelope&lt;/em&gt; of $\se{A_k} _ {k \in \N}$, if there exists a decreasing sequence $\se{C_k} _ {k \in \N} \subseteq \E \cup \se{E}$ such that
+$$A_k \subseteq C_k, \quad \forall ; k \in \N \quad \text{ and } \quad \bigcap _ {k \in \N} C_k \subseteq A \tag{1} \label{envelope}$$&lt;/p&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Let $E$ be a separable metric space, and $\E$ the paving consisting of all closed subsets of $E$. Then a subset $A$ of $E$ is an $\E-$envelope of a given decreasing sequence $\se{A_k} _ {k \in \N} \subseteq \PO(E)$ if, and only if, $A$ contains $\bigcap _ {k \in \N} \overline{A}_k$, the intersection of the closures of the sets $A_k, k \in \N$ in the sequence.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An abstract version of the one above: Let $(E, \E)$ be a paved space; for every subset $A$ of $E$, introduce the collection of sets $\A := \set{B \in \E \cup \se{E}}{A \subseteq B}$ and assume that the intersection $\overline{A} := \bigcap_{B \in \A} B$, called the &lt;i&gt;adherent of $A$ in the paving $\E$&lt;/i&gt;, belongs to $\E_\delta \cup \se{E}$, i.e., $\overline{A}$ is a countable intersection of sets in $\E \cup \se{E}$. We claim that $A$ is an $\E-$envelope of a given decreasing sequence $\se{A_k}_{k \in \N} \subseteq \PO(E)$ if, and only if, $A$ contains $\bigcap_{k \in \N} \overline{A}_k$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 4:&lt;/span&gt; In the setting of the last example, a subset $A$ of $E$ is an $\E-$envelope of a given decreasing sequence $\se{A_k} _ {k \in \N} \subseteq \PO(E)$ if, and only if, $A$ contains $\bigcap_{k \in \N} \overline{A}_k$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; The necessity is clear: if there exists a decreasing sequence $\se{C_k}_{k \in \N} \subseteq \E \cup \se{E}$ such that \eqref{envelope} is satisfied then $\overline{A}_k \subseteq C_k$ and therefore $\bigcap_{k \in \N} \overline{A}_k \subseteq \bigcap_{k \in \N} C_k \subseteq A$.&lt;br&gt;
+To see the sufficiency, for every $k \in \N$, let $\se{B_n^k}_{n \in \N} \subseteq \E \cup \se{E}$ be a decreasing sequence such that $\overline{A}_k = \bigcap_{n \in \N} B_n^k$ (such a sequence exists because of the assumption in Example 2). Then $$C_k := B_k^1 \cap B_k^2 \cap \cdots \cap B_k^k, \quad k \in \N$$ defines a decreasing sequence of elements in $\E \cup \se{E}$ with $A_k \subseteq \overline{A}_k \subseteq C_k$ and $\bigcap_{k \in \N} \overline{A}_k =\bigcap_{k \in \N} C_k$. It follows that the set $A$ envelops the sequence $\se{A_k}_{k \in \N}$, if $A$ contains the countable intersection $\bigcap_{k \in \N} \overline{A}_k$; for then the decreasing sequence $\se{C_k}_{k \in \N} \subseteq \E \cup \se{E}$ satisfies the requirements of \eqref{envelope}. $\square$&lt;/p&gt;
+&lt;h2 id=&#34;properties-of-envelopes&#34;&gt;Properties of envelopes&lt;/h2&gt;
+&lt;p&gt;The next lemma lists some properties of envelopes which we will be using frequently.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 5:&lt;/span&gt; (i) If $A$ is an envelope of a given decreasing sequence $\se{A_n} _ {n \in \N} \subseteq \PO(E)$, then every subset of $E$ that contains $A$ is also an envelope of $\se{A_n} _ {n \in \N}$.&lt;br&gt;
+(ii) Two decreasing sequences of subsets of $E$ that possess a common subsequence, admit the exact same envelopes.&lt;br&gt;
+(iii) The collection of envelopes of a given decreasing sequence of subsets of $E$, is closed under countable intersections.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Parts (i) and (ii) are trivial. For part (iii), let $\se{A^k} _ {k \in \N}$ be a sequence of envelopes of a given decreasing sequence $\se{A_n} _ {n \in \N} \subseteq \PO(E)$. For each $k \in \N$, let $\se{B_n^k} _ \nn \subseteq \E \cup \se{E}$ be a decreasing sequence, such that $A_n \subseteq B_n^k$ for all $n \in \N$ and $\bigcap_{n \in \N} B_n^k \subseteq A^k$. Then $$C_n := B_n^1 \cap B_n^2 \cap \cdots \cap B_n^n, \quad n \in \N$$ defines a decreasing sequence of elements in $\E \cup \se{E}$ that satisfies $A_n \subseteq C_n$ and $\bigcap_{n \in \N} C_n = \bigcap_{(k,n) \in \N^2} B_n^k \subseteq \bigcap_{k \in \N} A^k$. It follows that $\bigcap_{k \in \N} A^k$ is an $\E-$envelope of $\se{A_n}_{n \in \N}$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;capacitance&#34;&gt;Capacitance&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 6: &lt;/span&gt; Let $E$ be a nonempty set. A collection $\C$ of subsets of $E$ is called a &lt;em&gt;capacitance&lt;/em&gt;, if&lt;br&gt;
+(i) whenever $A \in \C$ and $A \subseteq B$, then $B \in \C$, and&lt;br&gt;
+(ii) whenever $\se{A_n} _ {n \in \N}$ is an increasing sequence of subsets of $E$ such that $\bigcup _ {n \in \N} A_n \in \C$, there is an integer $m$ such that $A_m \in \C$.&lt;/p&gt;
+&lt;p&gt;Intuitively, a capacitance is a collection of &amp;ldquo;big&amp;rdquo; sets: the power set $\PO(E)$ is a capacitance, and so are the collections of nonempty and of uncountable subsets of $E$. The notion of pre-capacity, defined next, gives a more useful example.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 7: &lt;/span&gt; A function $I \colon \PO(E) \to \RR$ is called a &lt;em&gt;pre-capacity&lt;/em&gt;, if it is&lt;br&gt;
+(i) monotone increasing, i.e., $I(A) \le I(B)$ holds for every $A \subseteq B$, and&lt;br&gt;
+(ii) ascending, i.e., for every increasing sequence $\se{A_n} _ {n \in \N}$ we have $$I\left(\bigcup_{n \in \N} A_n\right) = \sup_{n \in \N} I(A_n)$$&lt;/p&gt;
+&lt;p&gt;If $I \colon \PO(E) \to \RR$ is a pre-capacity, then for every given real number $t$ the collection $\C = \set{A \in \PO(E)}{I(A) &amp;gt; t}$ is a capacitance. Conversely, given a capacitance $\C$, one can associate to it a pre-capacity by defining $I(A) := 1$ whenever $A \in \C$ , and $I(A) := 0$ whenever $A \notin \C$; this then leads to the identification $\C = \set{A \in \PO(E)}{I(A) &amp;gt; 0}$.&lt;/p&gt;
+&lt;p&gt;Henceforth assume that there is an underlying paved space $(E, \E)$ and a capacitance $\C$ of subsets of $E$.&lt;/p&gt;
+&lt;h1 id=&#34;scrapers&#34;&gt;Scrapers&lt;/h1&gt;
+&lt;img src=&#34;planing.jpg&#34; alt=&#34;scraping&#34; width=&#34;400&#34;/&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 8:&lt;/span&gt; A sequence $\f = \se{f_n} _ {n \in \N}$ of mappings $f_n \colon \left(\PO(E)\right)^n \to \PO(E)$ is called a &lt;em&gt;$\C-$scraper&lt;/em&gt; if&lt;br&gt;
+(i) $f_n(B_1, B_2, \ldots, B_n) \subseteq B_n$ for all $n \in \N$ and for all sets $B_1, \ldots, B_n \in \PO(E)$, and&lt;br&gt;
+(ii) whenever $B_n \in \C$, then $f_n(B_1, B_2, \ldots, B_n) \in \C$.&lt;/p&gt;
+&lt;p&gt;Property (i) expresses the intuitive notion that $f_n(B_1, B_2, \ldots, B_n)$ &amp;ldquo;scrapes&amp;rdquo; $B_n$ and property (ii) ensures that &amp;ldquo;the scraping does not remove too big a chunk&amp;rdquo; from $B_n$. In French, scraper is called &lt;em&gt;rabotage&lt;/em&gt; which can be translated as &lt;em&gt;planing&lt;/em&gt;. A simple example of a scraper is the &lt;i&gt;identity scraper&lt;/i&gt; : $f_n(B_1, \ldots B_n) = B_n$ for all $n \in \N$ and for all sets $B_1, \ldots, B_n \in \PO(E)$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 9:&lt;/span&gt; Given a $\C-$scraper $\f = \se{f_n} _ {n \in \N}$, a (necessarily decreasing) sequence $\se{B_n} _ {n \in \N}$ of subsets of $E$ will be called &lt;em&gt;$\f-$scraped&lt;/em&gt;, if for all $n \in \N$ we have $$B_{n+1} \subseteq f_n(B_1, B_2, \ldots, B_n) \quad \text{and} \quad B_n \in \C$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 10:&lt;/span&gt; For any $B \in \PO(E)$ and $\C-$scraper $\f = \se{f_n} _ {n \in \N}$, the sequence $\se{P_n} _ {n \in \N} \subseteq \C$ defined by $P_1 := B$, $P_{n+1} := f_n(P_1, \ldots, P_n)$ for all $n \in \N$ is $\f-$scraped. It is called the &lt;i&gt;$\f-$scraped orbit of $B$&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 11:&lt;/span&gt; A $\C-$scraper $\f = \se{f_n}_{n \in \N}$  is called &lt;em&gt;compatible&lt;/em&gt; with a given set $A \in \PO(E)$, if $A$ envelopes every $\f-$scraped sequence $\se{B_n} _ {n \in \N}$ with $B_1 \subseteq A$.&lt;br&gt;
+A set $A \in \PO(E)$ is &lt;em&gt;smooth&lt;/em&gt; for the capacitance $\C$, if there exists a $\C-$scraper compatible with it.&lt;/p&gt;
+&lt;p&gt;The next result is central in this theory.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1 [Sierpiński]:&lt;/span&gt; Let $(E, \E)$ be a paved space, and $\C$ a capacitance. The collection of subsets of $E$ which are smooth for the capacitance, is closed under countable increasing unions and under countable intersections.&lt;/p&gt;
+&lt;p&gt;We will come back to its proof later. Let&amp;rsquo;s prove some its consequences first.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 2:&lt;/span&gt; Let $(E ,\E)$ be a paved space, and $\C$ a capacitance. The elements of the mosaic $\widehat{\E}$ generated by $\E$ are smooth.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; An easy consequence of Theorem 1, Lemma 2 and the fact that every element of $\E$ is smooth because they are compatible with the identity scraper. $\square$&lt;/p&gt;
+&lt;p&gt;This theorem is in turn very useful in proving some important results. We will discuss two of them. The first one is the metric space version of Choquet&amp;rsquo;s capacitability theorem. The proof of it will be very similar to the general Choquet&amp;rsquo;s capacitability theorem, but we will need Sion&amp;rsquo;s theorem for the general version, which will be the second result.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 12:&lt;/span&gt; Let $E$ be a compact metric space, endowed with the paving $\E = \K(E)$ of its compact sets. Let $I$ be a &lt;i&gt;metric capacity&lt;/i&gt; on $(E, \E)$, i.e., a pre-capacity that &amp;ldquo;descends on compacts&amp;rdquo; in the sense that for every decreasing sequence $\se{K_n} _ \nn \subseteq \K(E)$ it satisfies $I\left(\bigcap _ {n \in \N}K_n\right) = \inf _ {n \in \N} I(K_n)$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 3 [Metric space version of Choquet&amp;rsquo;s capacitability theorem]:&lt;/span&gt; For every Borel subset $B$ of a compact metric space $E$, and any metric capacity $I \colon \PO(E) \to \RR$, we have
+$$
+I(B) = \sup_{\substack{K \in \K(E) \\ K \subseteq B}} I(K)
+$$
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Fix an arbitrary $B \in \B(E)$. If $I(B) = -\infty$ then $I(B) = I(\emp)$, and we have our desired equality trivially. Otherwise, we need to show that whenever $I(B) &amp;gt; t$ holds for some given real number $t$, there exists a compact set $K \subseteq B$ such that $I(K) \ge t$. Recall that $$\C = \set{A \in \PO(E)}{I(A) &amp;gt; t}$$ is a capacitance. Also recall that a subset $A$ of $E$ is an $\E-$envelope of a decreasing sequence $\se{A_n}_{n \in \N} \subseteq \PO(E)$ if and only if $A$ contains $\bigcap_{n \in \N}\overline{A}_n$.&lt;br&gt;
+Lemma 1 gives that the mosaic $\widehat{\E}$ generated by $\E = \K(E)$ coincides with the Borel $\sigma-$algebra $\B(E)$. Hence by Theorem 2 every Borel set is smooth. Thus, there exists a $\C-$scraper $\f = \se{f_n}_{n \in \N}$ compatible with the set $B$.&lt;br&gt;
+Consider the $\f-$scraped orbit of $B$, $\se{P_n} _ {n \in \N} \subseteq \C$. By construction $B$ is an envelope of $\se{P_n} _ {n \in \N}$, and hence it contains $K := \bigcap _ {n \in \N} \overline{P}_n$. $K$ is closed and hence also compact on account of being a subset of a compact set $E$; similarly for $\overline{P}_n$ for all $n \in \N$. But since $\se{P_n} _ {n \in \N} \subseteq \C$ we have $I(\overline{P}_n) &amp;gt; t$ for all $n \in \N$. Now use the descending on compacts property of $I$ to get $I(K) = I\left(\bigcap _ {n \in \N} \overline{P}_n\right) = \inf _ {n \in \N} I(\overline{P}_n) \ge t$. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 4 [Sion&amp;rsquo;s theorem]:&lt;/span&gt; Let $(E,\E)$ be a paved space, and $\C$ a capacitance. For every element $B$ of $\C \cap \widehat{\E}$, there exists a decreasing sequence $\se{K_n} _ {n \in \N} \subseteq \C \cap \E$ such that $\bigcap _ {n \in \N} K_n \subseteq B$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Theorem 2 implies that the set $B$ is smooth, and thus there exists a $\C-$scraper $\f = \se{f_n} _ {n \in \N}$ compatible with it. Let $\se{P_n} _ {n \in \N} \subseteq \C$ be the $\f-$scraped orbit of $B$. Then $B$ is an envelope of $\se{P_n} _ {n \in \N}$, so there exists a decreasing sequence $\se{B_n} _ {n \in \N}$ of subsets of $\E \cup \se{E}$ such that $\bigcap _ \nn B_n \subseteq B$ and $P_n \subseteq B_n$ for all $\nn$. Notice $B_n \in \C$.&lt;br&gt;
+If the sets $B_n$ belong to the paving $\E$ from a certain index $m$ onward, we take $K_n := B_{m+n}, n \in \N$ as our sequence. Otherwise if $B_n = E$ holds for all integers $n$, the set $B=E$ is the union of an increasing sequence of sets in $\E$ because $B \in \widehat{\E}$ and Lemma 2. Therefore, the fact that $B \in \C$ implies $B$ contains a set $K \in \C \cap \E$; it suffices then to take $K_n = K$ for all integers $n$. $\square$&lt;/p&gt;
+&lt;p&gt;We now come back to the proof of Theorem 1. But first we will need the following clever operation on scrapers, and a couple of results.&lt;/p&gt;
+&lt;h2 id=&#34;mixing-of-scrapers&#34;&gt;Mixing of Scrapers&lt;/h2&gt;
+&lt;p&gt;Consider a sequence $\se{\f^k, k \in \N} = \se{\se{f^k_n} _ \nn, k \in \N}$ of scrapers, and a bijection $\N^2 \ni (p,q) \mapsto \beta(p,q) = p \star q \in \N$ which is strictly increasing in each of its arguments. For every integer $\nn$ and sets $P_1, P_2, \ldots, P_n$, if $n = p \star q$, let
+$$
+f_n(P_1, P_2, \ldots, P_n) := f^p_q(P_{p \star 1}, P_{p \star 2}, \ldots, P_{p \star q})
+$$
+It is easy to see that this defines a new scraper $\f = \se{f_n}_\nn$, called the &lt;i&gt;mixing of the scrapers $\se{\f^k, k \in \N}$ via the bijection $\beta$&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 5 :&lt;/span&gt; Let $\se{\f^k, k \in \N}$ be a sequence of scrapers, and denote by $\f$ its mixing by a bijection $\beta$. In order for a subset $A$ of $E$ to be compatible with $\f$, it suffices that it be compatible with one of the scrapers $\f^k, k \in \N$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Let $A \in \PO(E)$ be compatible with $\f^k$ for some arbitrary but fixed $k$. Consider also a sequence of sets $\se{P_n} _ \nn$, which is $\f-$scraped and whose first term $P_1$ is contained in $A$. We need to show that the set $A$ envelops $\se{P_n} _ \nn$.&lt;br&gt;
+To do this, we exploit Lemma 5 (ii) and construct a decreasing sequence $\se{Q_n} _ \nn \subseteq \PO(E)$ which is subsequence of $\se{P_n} _ \nn$ and show that $A$ envelops $\se{Q_n} _ \nn$. This will then imply $A$ envelops $\se{P_n} _ \nn$. To this end, let $$Q_n := P_{k \star n} \quad \forall \; \nn$$ Because $Q_1 = P_{k \star 1} \subseteq P_{1 \star 1} = P_1 \subseteq A$ and $A$ is compatible with $\f^k$, to show that $A$ envelops $\se{Q_n}_\nn$ it suffices to show $\se{Q_n} _ \nn$ is $\f^k-$scraped.&lt;br&gt;
+Now, $Q_n \in \C$ for all $\nn$, so all that remains to be shown is that $Q_{n+1} \subseteq f^k_n(Q_1, Q_2, \ldots, Q_n)$ holds for all $\nn$. Because $\se{P_n} _ \nn$ is $\f-$scraped we have $$Q_{n+1} = P_{k \star (n+1)} \subseteq P_{1 + k\star n} \subseteq f_{k \star n}(P_1, P_2, \ldots, P_{k \star n}) = f^k_n(Q_1, Q_2, \ldots, Q_n)$$ giving the desired result. $\square$&lt;/p&gt;
+&lt;p&gt;An immediate corollary of this theorem is : If $\se{A_n}_\nn$ is a sequence of smooth subsets of $E$, there exists a scraper $\f$ which is compatible with all the sets $A_n, \nn$.&lt;/p&gt;
+&lt;h2 id=&#34;proof-of-theorem-1&#34;&gt;Proof of Theorem 1&lt;/h2&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Closure under countable intersections:&lt;/span&gt;&lt;br&gt;
+Suppose $\se{A^k} _ {k \in \N}$ is a sequence of smooth sets, $A = \bigcap _ {k \in \N} A^k$, and $\f$ is a $\C-$scraper compatible with all of the sets $A^k, k \in \N$. If $\se{P_n} _ \nn$ is an $\f-$scraped sequence of sets such that $P_1 \subseteq A$, then $P_1 \subseteq A^k$ for all $k \in \N$. Our construction then implies $A^k$ is an $\E-$envelope of $\se{P_n} _ \nn$ for all $k \in \N$. Lemma 5 (iii) now implies $A$ is also an $\E-$envelope $\se{P_n} _ \nn$, showing that $A$ is compatible with $\f$, and hence smooth.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Closure under countable increasing unions:&lt;/span&gt;&lt;br&gt;
+Suppose $\se{A^k} _ {k \in \N}$ is an increasing sequence of smooth sets, $A = \bigcup _ {k \in \N} A^k$, and $\f$ is a $\C-$scraper compatible with all of the sets $A^k, k \in \N$. The scraper $\f$ doesn&amp;rsquo;t work for this case and so we create a new one. For any $n \in \N$ and sets $P_1, P_2, \ldots, P_n$ we define
+$$
+\varphi_n(P_1, P_2, \ldots, P_n) = \begin{cases} P_n &amp;amp;\text{if } A \cap P_1 \notin \C \\ f_n(A^p \cap P_1, P_2, \ldots, P_n) &amp;amp;\text{if } A \cap P_1 \in \C \end{cases}
+$$
+where $p$ is the smallest integer such that $A^p \cap P_1 \in \C$. Such an integer does exist from part (ii) of the definition of capacitance. It is easy to see that $\Phi = \se{\varphi_n} _ \nn$ is a $\C-$scraper. It is sufficient to show that $\Phi$ is compatible with $A$ to finish our proof.&lt;br&gt;
+Let $\se{P_n} _ \nn$ be a $\Phi-$scraped sequence of sets such that $P_1 \subseteq A$. By definition $P_1 \in \C$ and $A \cap P_1 = P_1$, and so from our construction $\varphi_n(P_1, P_2, \ldots, P_n) = f_n(A^p \cap P_1, P_2, \ldots, P_n)$. All elements of the sequence $A^p \cap P_1, P_2, \ldots, P_n, \ldots$ are in $\C$ and for all $n \in \N$
+$$
+P_{n+1} \subseteq \varphi_n(P_1, P_2, \ldots, P_n) = f_n(A^p \cap P_1, P_2, \ldots, P_n)
+$$
+and thus it follows that this sequence is $\f-$scraped. Now since $A^p$ is compatible with $\f$, $A^p$ is an envelope of this sequence, and also of $\se{P_n} _ \nn$ by Lemma 5 (ii). It follows that $A$ is an envelope of $\se{P_n} _ \nn$ by Lemma 5 (i) because $A^p \subseteq A$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;choquet-capacities&#34;&gt;Choquet Capacities&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 13:&lt;/span&gt; A mapping $I \colon \PO(E) \to \RR$ is called a Choquet &lt;em&gt;$\E-$capacity&lt;/em&gt; if it is&lt;br&gt;
+(i) monotone increasing, i.e., $I(A) \le I(B)$ holds for every $A \subseteq B$,&lt;br&gt;
+(ii) ascending, i.e., for every increasing sequence $\se{A_n} _ {n \in \N} \subseteq \PO(E)$ we have $$I\left(\bigcup _ {n \in \N} A_n\right) = \sup _ {n \in \N} I(A_n)$$
+(iii) descending on pavings, i.e., for every decreasing sequence $\se{E_n} _ {n \in \N} \subseteq \E$ we have $$I\left(\bigcap _ {n \in \N} E_n\right) = \inf _ {n \in \N} I(E_n)$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 14:&lt;/span&gt; A set $A \in \PO(E)$ is called &lt;em&gt;$I-$capacitable&lt;/em&gt; if
+$$I(A) = \sup_{\substack{K \in \E_\delta \\ K \subseteq A}} I(K)$$&lt;/p&gt;
+&lt;h3 id=&#34;examples-1&#34;&gt;Examples&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Consider a paved space $(E, \E)$ with compact paving $\E$, and define $I(A) = 0$ if $A = \emp$, $I(A) = 1$ if $A \neq \emp$. Then $I$ is a Choquet $\E-$capacity. The property (iii) in the definition of capacity reflects now the assumption that the paving $\E$ is compact.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Consider a probability space $\probsp$, then the outer measure
+$$\PP^*(A) := \inf_{\substack{B \in \F \ A \subseteq B}} \PP(B)$$
+is a Choquet $\F-$capacity. Proof of this is a standard exercise in measure theory, albeit with a different terminology of continuity from below.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Consider a locally compact, separable metric space $K$, and the paving $\K$ of its compact subsets. If $\pi$ denotes the projection of $K \times \Omega$ onto $\Omega$ and $$I(A) := \PP^*(\pi(A)) \text{ for all } A \in \PO(K \times \Omega),$$ then $I$ is a Choquet $(\K \otimes_p \F)-$capacity. Proof of this follows from $\pi\left( \bigcup_n A_n\right) = \bigcup_n \pi(A_n)$ and Lemma 3 combined with the properties of outer measure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 6 [Choquet&amp;rsquo;s capacitability theorem]:&lt;/span&gt; Consider a paved space $(E, \E)$, and let $I \colon \PO(E) \to \RR$ be a Choquet $\E-$capacity. Then every set $A \in \widehat{\E}$ is $I-$capacitable.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Fix an arbitrary set $A \in \widehat{\E}$. If $I(A) = -\infty$ then $I(A) = I(\emp)$, and we have our desired equality trivially. Otherwise, we need to show that whenever $I(A) &amp;gt; t$ holds for some given real number $t$, there exists a set $K \in \E_\delta$ with $K \subseteq A$ and $I(K) \ge t$.&lt;br&gt;
+Recall that $$\C = \set{B \in \PO(E)}{I(B) &amp;gt; t}$$ is a capacitance. Then $A \in \C$, and from Sion&amp;rsquo;s Theorem (Theorem 4) there exists a decreasing sequence $\se{K_n} _ \nn$ of elements in $\E \cap \C$ such that $\bigcap _ \nn K_n \subseteq A$. But then $I\left(\bigcap _ \nn K_n\right) = \inf _ \nn I(K_n) \ge t$, and thus we can take $K = \bigcap_\nn K_n$. $\square$&lt;/p&gt;
+&lt;p&gt;We are now ready to prove some major results in measure theory.&lt;/p&gt;
+&lt;h1 id=&#34;measurable-projection&#34;&gt;Measurable Projection&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 7 [Measurable Projection]:&lt;/span&gt; Let $\probsp$ be a complete probability space, let $(K, \B(K))$ be a locally compact separable metric space endowed with the collection of its Borel sets, and denote by $\pi$ the projection of $K \times \Omega$ onto $\Omega$. Then, for every $B \in \B(K) \otimes \F$, the projection $\pi(B) \in \F$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; We start by noticing $\B(K) \PM \F = \B(K) \otimes \F$. This follows from the fact that if $A \in \B(K) \otimes_p \F$, then $A = \bigcup _ {i=1}^n U_i \times V_i$ for some $U_i \in \B(K)$ and $V_i \in \F$, and thus it can be shown $A^\comp \in \B(K) \PM \F$, and thus Lemma 1 gives $\B(K) \PM \F = \sigma(\B(K) \otimes_p \F) = \B(K) \otimes \F$.&lt;/p&gt;
+&lt;p&gt;Consider the paving $\K$ on $K$ consisting of all compact subsets of $K$, and introduce the $(\K \otimes_p \F)-$capacity $I(A) = \PP^*(\pi(A))$, $A \in \B(K \times \Omega)$. Recall that $\B(K) = \widehat{\K}$, and so $\B(K) \PM \F = \K \PM \F$, the mosaic generated by the paving $\K \otimes_p \F$ ($\supseteq$ is trivial. For $\subseteq$ let $A \in \B(K) \otimes_p \F$ and show $A \in \K \PM \F$).&lt;/p&gt;
+&lt;p&gt;Choquet&amp;rsquo;s capacitability theorem (Theorem 6) thus guarantees that every set in $\B(K) \otimes \F$ is $I-$capacitable. In particular, for every integer $n \in \N$, there exists a set $C_n \in (\K \otimes_p \F)_\delta$ contained in $B$ and such that&lt;/p&gt;
+&lt;p&gt;$$I(C_n) \le I(B) \le I(C_n) + (1/n) \tag{2} \label{ms}$$&lt;/p&gt;
+&lt;p&gt;Because $C_n \in (\K \otimes_p \F)_\delta$, $C_n$ is a countable intersection $C_n = \bigcap _ {m \in \N} G_n^m$, where each $G_n^m$ is a finite union of sets of the form $U \times V (U \in \K, V \in \F)$. Letting $H_n^m = \bigcap _ {i=1}^m G_n^i$, we see that $H_n^1 \supseteq H_n^2 \supseteq \cdots$ and $C_n = \bigcap _ {m \in \N} H_n^m$, where now $H_n^m$ is also a finite union of sets of the form $U \times V (U \in \K, V \in \F)$.&lt;/p&gt;
+&lt;p&gt;The form of $H_n^m$ immediately implies $\pi(H_n^m) \in \F$ for all $(m,n) \in \N^2$. Lemma 3  implies
+$$\pi(C_n) = \pi\left(\bigcap _ {m \in \N} H_n^m\right) = \bigcap _ {m \in \N} \pi(H_n^m) \in \F, \quad \forall \; n \in \N$$
+which further implies $\pi\left(\bigcup _ {n \in \N} C_n\right) = \bigcup _ {n \in \N} \pi(C_n) \in \F$.&lt;/p&gt;
+&lt;p&gt;On the other hand, $C_n \subseteq B$ for all $\nn$ and thus $\pi\left(\bigcup _ {n \in \N} C_n\right) \subseteq B$. But \eqref{ms} implies that the difference of these two sets is a $\PP-$null set, and the completeness of the probability space gives the desired conclusion $\pi(B) \in \F$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;measurable-graph&#34;&gt;Measurable Graph&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 15:&lt;/span&gt; We call a set $G \in \B(K) \otimes \F$ &lt;i&gt;measurable graph&lt;/i&gt;, if for every $\omega \in \Omega$ the section $G(\omega) = \set{y \in K}{(y,\omega) \in G}$ contains at most one point.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 8 [Measurable Graph]:&lt;/span&gt; A subset $G$ of $K \times \Omega$ is a measurable graph, if and only if, there exists a set $\Xi \in \F$ and a measurable mapping $g \colon \Xi \to K$, such that $G = \set{(y,\omega) \in K \times \Xi}{y = g(\omega)}$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: Sufficiency.&lt;/span&gt; If $\Xi$ and $g$ are as stated, the set $G = \set{(y,\omega) \in K \times \Xi}{y = g(\omega)}$ equals the pre-image $\varphi^{-1}(\Delta)$ of the diagonal $\Delta = \set{(y,y) \in K \times K}{y \in K}$ under the mapping
+$$K \times \Xi \ni (y,\omega) \mapsto \varphi(y,\omega) := (y, g(\omega)) \in K \times K$$
+This mapping $\varphi$ is $(\B(K) \otimes \F)-$measurable because of the fact that $\B(K \times K) = \B(K) \otimes \B(K)$ and that $g$ is measurable. Since $\Delta$ is a closed set, $\Delta \in \B(K \times K)$ and thus $G$ is a measurable graph.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Necessity.&lt;/span&gt; Suppose that $G$ is a measurable graph, and let $\Xi := \pi(G)$. Then $\Xi \in \F$ by Measurable Projection theorem. For every $\omega \in \Xi$, define $g(\omega)$ to be the unique element of the set $G(\omega)$. We want to show $g \colon \Xi \to K$ is measurable. Indeed for any $H \in \B(K)$, it is easy to see that $g^{-1}(H) = \pi\left(G \cap (H \times \Omega)\right) \in \F$ where the inclusion follows from Measurable Projection theorem. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;debut&#34;&gt;Debut&lt;/h1&gt;
+&lt;p&gt;Now let $K = [0, \infty)$, the case important in stochastic processes.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 16:&lt;/span&gt; Let $A \subseteq [0, \infty) \times \Omega$. The &lt;em&gt;debut&lt;/em&gt; of $A$ is the nonnegative function $D_A \colon \Omega \to \RR$ defined as
+$$D_A(\omega) = \inf\set{t \in [0, \infty)}{(t, \omega) \in A}$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 9 [Measurable Debut]:&lt;/span&gt; Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F.$ Then the debut $D_A$ of this set is a random variable.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; For any given real number $t &amp;gt; 0$, the set $D_A^{-1}([0,t)) = \set{\omega \in \Omega}{D_A(\omega) &amp;lt; t}$ is the projection onto $\Omega$ of the measurable subset $A \cap ([0, t) \times \Omega) \in \B([0, \infty)) \otimes \F$. To see this, note $\omega \in D_A^{-1}([0,t))$ $\iff$ $0 \le D_A(\omega) &amp;lt; t$ $\iff$ $\exists , s \in [0,t)$ such that $(s, \omega) \in A$ $\iff$ $\omega \in \pi(A \cap ([0, t) \times \Omega))$.  Measurable Projection theorem shows that this set is in $\F$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;measurable-section&#34;&gt;Measurable Section&lt;/h1&gt;
+&lt;p&gt;Let $\probsp$ be a complete probability space, and consider a set $A \subseteq \oi \times \Omega$. Then for every $\omega \in \pi(A)$, there exists a $t \in \oi$ such that $(t, \omega) \in A$. In other words, we can define a mapping $Z \colon \pi(A) \to \oi$. It is convenient to extend $Z$ to the whole of $\Omega$ by setting $Z = \infty$ on $\Omega \setminus \pi(A)$. When is $Z$ measurable? The measurable section theorem (also known as measurable selection theorem) says that it is possible to define $Z$ to be measurable if $A \in \B(\oi) \otimes \F$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 17:&lt;/span&gt; For a mapping $Z \colon \Omega \to [0, \infty]$ we shall define its &lt;em&gt;graph&lt;/em&gt; as the product set
+$$\gr{Z} := \set{(t, \omega) \in [0, \infty) \times \Omega}{Z(\omega) = t}$$&lt;/p&gt;
+&lt;p&gt;The condition $(Z(\omega), \omega) \in A$ whenever $Z &amp;lt; \infty$ can then be expressed by saying $\gr{Z} \subseteq A$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 9 [Measurable Section]:&lt;/span&gt; Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F$. Then there exists a random variable $Z \colon \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\se{Z &amp;lt; \infty} = \pi(A)$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; &lt;span style=&#34;color:darkgray; font-size: 14pt&#34;&gt;We shall show first, that for every $\eps &amp;gt; 0$ there exists a random variable $Z_\eps \colon \Omega \to [0, \infty]$ with $\gr{Z_\eps} \subseteq A$ and $\Prob{\pi(A)} \le \Prob{Z_\eps &amp;lt; \infty} + \eps$.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;To this end, recall that if $K = [0, \infty)$ and $\K$ is the paving of all compact subsets of $K$, then we have the $\K \otimes_p \F-$capacity $I(A) = \PP^*(\pi(A)), A \in \PO(K \times \Omega)$. Therefore, every $A \in \B(K) \otimes \F$ is $I-$capacitable, and fixing $A$, there exists for every $\eps &amp;gt; 0$ a set $C_\eps \in (\K \otimes_p \F)_\delta$ such that
+$$C_\eps \subseteq A, \quad I(C_\eps) \le I(A) \le I(C_\eps) + \eps \tag{3} \label{eq_sec}$$
+Let $Z_\eps := D_{C_\eps}$ be the debut of this $C_\eps$, then Measurable Debut theorem (Theorem 9) implies $Z_\eps$ is a random variable. For every $\omega \in \Omega$, the section $C_\eps(\omega)$ is a compact subset of $K$ (use the facts that compact$\iff$closed and bounded here, and $C_\eps \in (\K \otimes_p \F)_\delta$). Notice that if $(t, \omega) \in \gr{D_{C_\eps}}$ then $D_{C_\eps}(\omega) = t$ which is same as saying $t = \inf \set{s \in [0, \infty)}{(s,\omega) \in C_\eps}$, but since $C_\eps(\omega)$ is closed this implies $(t, \omega) \in C_\eps$. Therefore, $\gr{Z_\eps} \subseteq C_\eps$, showing the first requirement.&lt;/p&gt;
+&lt;p&gt;The second requirement $\Prob{\pi(A)} \le \Prob{Z_\eps &amp;lt; \infty} + \eps$ is true because $\pi(A) \in \F$ by Measurable Projection theorem (Theorem 7) and $\se{Z_\eps &amp;lt; \infty} = \pi(C_\eps) \in \F$, and now use \eqref{eq_sec}.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 14pt&#34;&gt;Let us now construct a random variable $Z$ to satisfy the properties claimed in the theorem.&lt;/span&gt; Set $A_1 = A$; from above there exists a random variable $Z_1 \colon \Omega \to [0, \infty]$ with $\gr{Z_1} \subseteq A_1$ and $\Prob{\pi(A_1)} \le 2 \Prob{Z_1 &amp;lt; \infty}$, by taking $\eps = \Prob{Z_1 &amp;lt; \infty} &amp;gt; 0$; if it happens that $\Prob{Z_1 &amp;lt; \infty} = 0$, then $\Prob{\pi(A_1)} = 0$ and the inequality is still true.&lt;br&gt;
+Set $A_2 = A_1 \setminus ([0, \infty) \times \se{Z_1 &amp;lt; \infty})$ and, reasoning as before, construct $Z_2 \colon \Omega \to [0, \infty]$ with $\gr{Z_2} \subseteq A_2$ and $\Prob{\pi(A_2)} \le 2 \Prob{Z_2 &amp;lt; \infty}$.&lt;/p&gt;
+&lt;p&gt;Continuing this way, we obtain a sequence $\se{Z_n} _ {\nn}$ such that $\gr{Z_n} \subseteq A$, the projections $\pi(\gr{Z_n})$ are disjoint, and we have
+$$\sum_{k=1}^n \Prob{Z_k &amp;lt; \infty} \ge (1 - 2^{-n}) \Prob{\pi(A)}, \quad \forall \; \nn \tag{4} \label{eq_notsure}$$
+The random variable $Z$ defined as $Z := Z_k$ on $\se{Z_k &amp;lt; \infty}$ for each $k \in \N$, and $Z := \infty$ otherwise, satisfies therefore $\gr{Z} \subseteq A$, thus also $\se{Z &amp;lt; \infty} \subseteq \pi(A).$&lt;/p&gt;
+&lt;p&gt;On the other hand, letting $n \to \infty$ in \eqref{eq_notsure}, we see that $\se{Z &amp;lt; \infty}$ and $\pi(A)$ have the same probability. Therefore, the completeness of the probability space implies these two sets can be made equal.  $\square$&lt;/p&gt;
+&lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
+&lt;p&gt;With this we are done laying the foundations. In the next blog post, we will discuss applications of these results in the general theory of processes.&lt;/p&gt;
+&lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Paul-André Meyer. 
+&lt;a href=&#34;http://www.jehps.net/juin2009/Meyer.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Stochastic Processes from 1950 to the Present&lt;/em&gt;&lt;/a&gt; (Translated from the French by Jeanine Sedjro), 2009.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://almostsuremath.com/stochastic-calculus/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Almost Sure&lt;/a&gt; blog by George Lowther.&lt;/li&gt;
+&lt;li&gt;Nicole El Karoui and Xiaolu Tan. 
+&lt;a href=&#34;https://arxiv.org/abs/1310.3363&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Capacities, Measurable Selection and Dynamic Programming Part I: Abstract Framework&lt;/em&gt;&lt;/a&gt;, 2013.&lt;/li&gt;
+&lt;li&gt;Claude Dellacherie. &lt;em&gt;Capacities and analytic sets&lt;/em&gt;, Part of the Lecture Notes in Mathematics book series (LNM, volume 839), Springer-Verlag, 1981.&lt;/li&gt;
+&lt;li&gt;Claude Dellacherie. &lt;em&gt;Capacités et processus stochastiques&lt;/em&gt;, Springer-Verlag, 1972.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;plagiarism&#34;&gt;1&lt;/a&gt;: If you steal from one author, it’s plagiarism; if you steal from many, it’s research.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A note on conditional probability</title>
@@ -87,6 +426,7 @@
 \DeclareMathOperator{\Log}{\mathrm{Log}}
 \DeclareMathOperator{\O}{\mathcal{O}}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The concept of conditional probability is central to probability theory and excellent treatment of it can be found in many books. My aim with this blog post is to consolidate in one place some ideas around it which helped me form a better intuition. These ideas will be useful if you have already been exposed to this concept from a textbook and just want one more person&amp;rsquo;s ramblings about it.&lt;/p&gt;
 &lt;p&gt;I will start by defining conditional expectation and stating some of its properties. It will be a grave injustice to claim my discussion of it is complete since I don&amp;rsquo;t even prove its existence; this section exists solely for establishing notation. I will then spend some time discussing conditional probability, relating it to the traditional notion of&lt;/p&gt;
@@ -192,7 +532,7 @@ $$&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Let&amp;rsquo;s show that this definition is not outrageous by showing that it agrees with our traditional notion of conditional pdf and conditional expectation. So suppose that $X$ and $Y$ are random variables which have a joint probability density function $f_{X,Y}(x,y).$ This means that we are considering the probability space $(\R^2, \B(\R^2), \PP)$ with $X$ and $Y$ being the coordinate random variables, i.e. $(x,y) \mapsto x$ and $(x,y) \mapsto y$ respectively, and having an absolutely continuous distribution function $F_{X,Y}(x,y)$ such that&lt;/p&gt;
 &lt;p&gt;$$
-F_{X,Y}(x,y) = \int_{-\infty}^y \int_{\infty}^x f_{X,Y}(s,t) \; \dd s \, \dd t
+F_{X,Y}(x,y) = \int_{-\infty}^y \int_{-\infty}^x f_{X,Y}(s,t) \; \dd s \, \dd t
 $$&lt;/p&gt;
 &lt;p&gt;We recall that $f_X(x) = \int_\R f_{X,Y}(x,y) \; \dd y$ and $f_Y(y) = \int_\R f_{X,Y}(x,y) \; \dd x$ act as probability density functions for $X$ and $Y$ respectively, and&lt;/p&gt;
 &lt;p&gt;$$
@@ -357,7 +697,7 @@ $$&lt;/p&gt;
 &lt;li&gt;
 &lt;a href=&#34;https://encyclopediaofmath.org/wiki/Standard_Borel_space&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://encyclopediaofmath.org/wiki/Standard_Borel_space&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -429,6 +769,7 @@ $$&lt;/p&gt;
 \DeclareMathOperator{\Log}{\mathrm{Log}}
 \DeclareMathOperator{\O}{\mathcal{O}}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Finding a longest increasing subsequence is a well-known problem in computer science (note that I use the article &amp;ldquo;a&amp;rdquo; instead of &amp;ldquo;the&amp;rdquo; because there could be multiple longest subsequences): Given a sequence $\se{a_1, \ldots, a_n}$ of real numbers, we want to find a subsequence $\se{a_{i_1}, \ldots, a_{i_k}}$ such that $0 \le i_1 &amp;lt; \cdots &amp;lt; i_k \le n$, $a_{i_1} \le \cdots \le a_{i_k}$, and the subsequence is as long as possible. It has a very easy 
 &lt;a href=&#34;https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dynamic programming&lt;/a&gt; solution with a time complexity of $\O(n^2)$ and a slightly 
@@ -537,7 +878,7 @@ where $\gamma$ from Equations \eqref{eq3} and \eqref{eq5} lies in $[1,e]$ and we
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
 &lt;p&gt;I got introduced to this problem from an exam question in a math course I took recently. I recommend the book &amp;ldquo;The Surprising Mathematics of Longest Increasing Subsequences&amp;rdquo; by Dan Romik, which is 
 &lt;a href=&#34;https://www.math.ucdavis.edu/~romik/book/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;freely available online&lt;/a&gt;, for a lot more content.&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -590,6 +931,7 @@ where $\gamma$ from Equations \eqref{eq3} and \eqref{eq5} lies in $[1,e]$ and we
 \DeclareMathOperator{\Ord}{\mathcal{O}}
 \DeclareMathOperator{\E}{\mathbb{E}}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt; 
 &lt;p&gt;I recently came across this simple to state puzzle:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; Suppose you have a coin that has probabilities $p$ for heads and $1-p$ for tails. You play the following game with a friend. The first player picks one of the outcomes $HH$, $TH$, $HT$ and $TT$. The second player observes the choice of the first player and picks one of the remaining 3 outcomes. You then proceed to toss the coin infinitely many times independently constructing an infinite sequence of $H$’s and $T$’s. A player wins if their choice appears first in the sequence. For example, if player one chose $HH$ and player two chose $TT$ then $HTHTHTTHTHHH&amp;hellip;$ results in a victory for player two since $TT$ occurred before $HH$ in the sequence. When is it better to go first in this game?&lt;/span&gt;&lt;/p&gt;
@@ -619,7 +961,7 @@ to get $\PP(E_n \text{ i.o.}) = 1$. But this immediately implies that each of th
 &lt;p&gt;If player $1$ chooses $HT$ and player $2$ chooses $HH$, then for no $p \geq 1/2$ it is better to be player $1$.&lt;/p&gt;
 &lt;p&gt;If player $1$ chooses $TH$ and player $2$ chooses $HT$, then for no $p \geq 1/2$ it is better to be player $1$.&lt;/p&gt;
 &lt;p&gt;Overall it is better to be player $1$ if $p &amp;gt; 1/\sqrt{2}$ or if $p &amp;lt; 1 - 1/\sqrt{2}$. And on the other hand it is better to be player $2$ if $1 - 1/\sqrt{2} &amp;lt; p &amp;lt; 1/\sqrt{2}$.&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -660,6 +1002,7 @@ to get $\PP(E_n \text{ i.o.}) = 1$. But this immediately implies that each of th
 \DeclareMathOperator{\O}{\mathcal{O}}
 \DeclareMathOperator{\E}{\mathbb{E}}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt; 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;We discussed 
 &lt;a href=&#34;https://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;some functional analysis&lt;/a&gt; and the 
@@ -880,7 +1223,7 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
 &lt;p&gt;Random Fourier Features is an easy to implement approach that allows us to apply kernel methods on large data sets. I haven&amp;rsquo;t discussed the number of samples, $S$, needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.&lt;/p&gt;
 &lt;p&gt;With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -890,6 +1233,7 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
       <guid>https://makkar.github.io/post/zorn/</guid>
       <description>&lt;p&gt;$$
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
 \newcommand{\RR}{\overline{\mathbb{R}}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
@@ -900,9 +1244,12 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\Y}{\mathcal{Y}}
 \newcommand{\H}{\mathcal{H}}
-\newcommand{\P}{\mathcal{P}}
-\newcommand{\Ch}{\mathcal{C}}
+\newcommand{\P}{\mathscr{P}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\Ch}{\mathscr{C}}
 \newcommand{\M}{\mathcal{M}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\S}{\mathcal{S}}
 \newcommand{\e}{\epsilon}
 \newcommand{\limn}{\lim_{n \to \infty}}
 \newcommand\inner[2]{\langle #1, #2 \rangle}
@@ -910,58 +1257,73 @@ K(x,y) &amp;amp;= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \dmu(\omeg
 \newcommand{\modu}[1]{\lvert#1\rvert}
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
 \DeclareMathOperator{\dx}{dx}
 \DeclareMathOperator{\dmu}{d\mu}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;I have been self-studying some functional analysis recently, and Zorn&amp;rsquo;s lemma comes up often in proofs (for example, showing that every nontrivial vector space has a Hamel basis or in the proof of Hahn-Banach theorem). Since I have no formal background in mathematics (my undergrad was in Mechanical engineering), it was my first time hearing about Zorn&amp;rsquo;s lemma. I read its statement from the Wikipedia article, naively assuming I understood this extremely powerful tool. But every usage of Zorn&amp;rsquo;s lemma seemed contrived to me, and it was only in retrospect that I could see how Zorn&amp;rsquo;s lemma seems like an obvious tool to apply. An excellent article which helped me understand Zorn&amp;rsquo;s lemma is 
+&lt;p&gt;I have been self-studying some functional analysis recently, and Zorn&amp;rsquo;s lemma comes up often in proofs (for example, showing that every nontrivial vector space has a Hamel basis (I show this fundamental result below) or in the proof of Hahn-Banach theorem). Since I have no formal background in mathematics (my undergrad was in Mechanical engineering), it was my first time hearing about Zorn&amp;rsquo;s lemma. I read its statement from the Wikipedia article, naively assuming I understood this extremely powerful tool. But every usage of Zorn&amp;rsquo;s lemma seemed contrived to me, and it was only in retrospect that I could see how Zorn&amp;rsquo;s lemma seems like an obvious tool to apply. An excellent article which helped me understand Zorn&amp;rsquo;s lemma is 
 &lt;a href=&#34;https://gowers.wordpress.com/2008/08/12/how-to-use-zorns-lemma/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;How to use Zorn&amp;rsquo;s lemma&lt;/a&gt; by Timothy Gowers. If you didn&amp;rsquo;t know about Gowers&amp;rsquo;s article, then mentioning it is the biggest contribution of my article and I recommend you read it.&lt;/p&gt;
 &lt;p&gt;In this article, I want to show how to use Zorn&amp;rsquo;s lemma by stating a theorem and discussing its proof. Things &amp;ldquo;clicked&amp;rdquo; for me when I proved that theorem. But before we do that let me define some important concepts.&lt;/p&gt;
 &lt;h1 id=&#34;preliminaries&#34;&gt;Preliminaries&lt;/h1&gt;
 &lt;p&gt;Recall the concept of &lt;em&gt;relation&lt;/em&gt; I defined 
 &lt;a href=&#34;https://makkar.github.io/post/equivalence-relations/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1:&lt;/strong&gt; Let $P$ be a nonempty set. A &lt;em&gt;partial order relation&lt;/em&gt; in $P$ is a relation which is symbolized by $\leq$ and that satisfies the following properties for all $x,y,z \in P$:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 1: &lt;/span&gt; Let $P$ be a nonempty set. A &lt;em&gt;partial order relation&lt;/em&gt; in $P$ is a relation which is symbolized by $\preceq$ and that satisfies the following properties for all $x,y,z \in P$:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Reflexivity: $x \leq x$;&lt;/li&gt;
-&lt;li&gt;Antisymmetry: $x \leq y$ and $y \leq x$ implies $x = y$;&lt;/li&gt;
-&lt;li&gt;Transitivity: $x \leq y$ and $y \leq z$ implies $x \leq z$.&lt;/li&gt;
+&lt;li&gt;Reflexivity: $x \preceq x$;&lt;/li&gt;
+&lt;li&gt;Antisymmetry: $x \preceq y$ and $y \preceq x$ implies $x = y$;&lt;/li&gt;
+&lt;li&gt;Transitivity: $x \preceq y$ and $y \preceq z$ implies $x \preceq z$.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The set $P$ is then called a &lt;em&gt;partially ordered set&lt;/em&gt;. If in addition to these three properties, the set $P$ also satisfies&lt;/p&gt;
 &lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;any two elements are comparable, i.e., either $x \leq y$ or $y \leq x$.&lt;/li&gt;
+&lt;li&gt;any two elements are comparable, i.e., either $x \preceq y$ or $y \preceq x$.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;then the relation is called a &lt;em&gt;total order relation&lt;/em&gt; and the set $P$ is called a &lt;em&gt;totally ordered set&lt;/em&gt; or a &lt;em&gt;chain&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;then the relation is called a &lt;em&gt;total order relation&lt;/em&gt; and the set $P$ is called a &lt;em&gt;totally ordered set&lt;/em&gt; or a &lt;em&gt;chain&lt;/em&gt;. We often write $x \prec y$ to mean $x \preceq y$ but $x \neq y$.&lt;/p&gt;
 &lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Let $P$ be the set of all positive integers, and let $m \leq n$ mean that $m$ divides $n$. Then $P$ is a partially ordered set. It is not a chain as $2$ and $3$ are not comparable, for example.&lt;/li&gt;
-&lt;li&gt;Let $P$ be the set of all real numbers, and let $x \leq y$ mean that $y-x$ is nonnegative. Then $P$ is a chain.&lt;/li&gt;
-&lt;li&gt;Let $P$ be the class of all subsets of some universal set $U$, and let $A \leq B$ for $A,B \in P$ mean that $A \subseteq B$. Then $P$ is a partially ordered set. It is not a chain because if $U$ contains at least two elements, then we can find two subsets of $U$ neither of which is a subset of the other.&lt;/li&gt;
+&lt;li&gt;Let $P$ be the set of all positive integers, and let $m \preceq n$ mean that $m$ divides $n$. Then $P$ is a partially ordered set. It is not a chain as $2$ and $3$ are not comparable, for example.&lt;/li&gt;
+&lt;li&gt;Let $P$ be the set of all real numbers, and let $x \preceq y$ mean that $y-x$ is nonnegative. Then $P$ is a chain. Note that with this choice of ordering we have our usual ordering of real numbers, which we denote by $x \leq y$.&lt;/li&gt;
+&lt;li&gt;Let $P$ be the class of all subsets of some universal set $U$, and let $A \preceq B$ for $A,B \in P$ mean that $A \subseteq B$. Then $P$ is a partially ordered set. It is not a chain because if $U$ contains at least two elements, then we can find two subsets of $U$ neither of which is a subset of the other.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Definition 2:&lt;/strong&gt; If $P$ is a partially ordered set, an element $x \in P$ is said to be &lt;em&gt;maximal&lt;/em&gt; if for any $y \in P$ for which $x \leq y$, we must have $x = y$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 2: &lt;/span&gt; If $P$ is a partially ordered set, an element $x \in P$ is said to be &lt;em&gt;maximal&lt;/em&gt; if for any $y \in P$ for which $x \preceq y$, we must have $x = y$.&lt;/p&gt;
 &lt;p&gt;Note that a maximal element does not have to be bigger than everything else: it just must not be smaller than anything else. A maximal element may not exist, and if it exists it may not be unique.
 Examples 1 and 2 above have no maximal elements. Example 3 has one maximal element: $U$.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 3:&lt;/strong&gt; Let $Q$ be a nonempty subset of a partially ordered set $P$. An element $x \in P$ is called an &lt;em&gt;upper bound&lt;/em&gt; of $Q$ if $y \leq x$ for every $y \in Q$. An upper bound of $Q$ is called a &lt;em&gt;least upper bound&lt;/em&gt; of $Q$ if it is less than or equal to every upper bound of $Q$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 3: &lt;/span&gt; Let $Q$ be a nonempty subset of a partially ordered set $P$. An element $x \in P$ is called an &lt;em&gt;upper bound&lt;/em&gt; of $Q$ if $y \preceq x$ for every $y \in Q$. An upper bound of $Q$ is called a &lt;em&gt;least upper bound&lt;/em&gt; of $Q$ if it is less than or equal to every upper bound of $Q$.&lt;/p&gt;
 &lt;p&gt;Similarly for &lt;em&gt;lower bound&lt;/em&gt; and &lt;em&gt;greatest lower bound&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Note how similar these definitions are to the definitions of supremum and infimum for real numbers. That&amp;rsquo;s because in that case they are the same. In Example 1 above, if we take $Q$ to be any finite subset of $P$, then the greatest lower bound is the greatest common divisor of all the elements of $Q$ and the least upper bound is the least common multiple. In Example 3 above, let $Q$ be any nonempty subset of $P$. Then the least upper bound is the union of all the sets in $Q$, and the greatest lower bound is the intersection of all the sets in $Q$.&lt;/p&gt;
 &lt;p&gt;We are now ready to state the Zorn&amp;rsquo;s lemma.&lt;/p&gt;
 &lt;h1 id=&#34;zorns-lemma&#34;&gt;Zorn&amp;rsquo;s lemma&lt;/h1&gt;
-&lt;p&gt;If $P$ is a partially ordered set in which every chain has an upper bound, then $P$ possesses a maximal element.&lt;/p&gt;
-&lt;h1 id=&#34;example-application&#34;&gt;Example application&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; Any infinite set $X$ can be represented as a union of a disjoint class of countably infinite subsets.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; The theorem is trivial if $X$ is countably infinite, so assume that it is uncountably infinite.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Zorn&amp;rsquo;s lemma: &lt;/span&gt; If $P$ is a partially ordered set in which every chain has an upper bound, then $P$ possesses a maximal element.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll mention in passing that Zorn&amp;rsquo;s lemma is equivalent to 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Axiom_of_choice&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;axiom of choice&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;example-application-1&#34;&gt;Example application 1&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 1: &lt;/span&gt; Any infinite set $X$ can be represented as a union of a disjoint class of countably infinite subsets.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; The theorem is trivial if $X$ is countably infinite, so assume that it is uncountably infinite.&lt;/p&gt;
 &lt;p&gt;The first thing that we need to do is realize Zorn&amp;rsquo;s lemma can be applied here. I use the following description taken from Gowers&amp;rsquo;s article as a guiding principle:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If you are building a mathematical object in stages and find that (i) you have not finished even after infinitely many stages, and (ii) there seems to be nothing to stop you continuing to build, then Zorn’s lemma may well be able to help you.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;The fact that we need to build $X$ by taking a union of some sets, and it could be an uncountable union and therefore we might not finish even in countably infinite number of stages, suggests Zorn&amp;rsquo;s lemma might be helpful here. Zorn&amp;rsquo;s lemma will prove the existence of a maximal element in a partially ordered set, therefore, we want to construct a partially ordered set such that we can prove that its maximal element is $X$.&lt;/p&gt;
+&lt;p&gt;The fact that we need to build $X$ by taking a union of some sets, and it could be an uncountable union and therefore we might not finish even in countably infinite number of stages, suggests Zorn&amp;rsquo;s lemma might be helpful here. Zorn&amp;rsquo;s lemma will prove the existence of a maximal element in a partially ordered set, therefore, we want to construct a partially ordered set such that we can prove that its maximal element constructs $X$.&lt;/p&gt;
 &lt;p&gt;We want to build our partially ordered set to be consisting of elements of this form: disjoint class of countably infinite subsets of $X$. The reason we want to define our partially ordered set this way is because, first, the subset operation makes it a partially ordered set, and second, it seems intuitively true that the maximal element of this partially ordered set, if it exists, will be such that the union of its elements is $X$.&lt;/p&gt;
 &lt;p&gt;To this end, let $\P$ be the set of all disjoint classes of countably infinite subsets of $X$. $\P$ is partially ordered by $\subseteq$ as we saw in Example 3 above.&lt;/p&gt;
-&lt;p&gt;To be able to apply Zorn&amp;rsquo;s lemma we need to show that every chain in $\P$ has an upper bound. Let $\Ch$ be a chain in $\P$. A natural guess for the upper bound of $\Ch$ is $U = \bigcup _{S \in \Ch} S$. To show that $U$ is an upper bound of $\Ch$ we need to show that $U \in \P$ and $S \subseteq U$ for every $S \in \Ch$. The second claim is trivial from $U$&#39;s definition. It is easy to see that $U$ is a class of countably infinite subsets of $X$ because this is true for each $S \in \Ch$. To show that $U$ is a disjoint class, let $A, B \in U$ be distinct elements of $U$. There exist elements $S_A, S_B \in \Ch$ such that $A \in S_A$ and $B \in S_B$. Since $\Ch$ is a chain, either $S_A \subseteq S_B$ or $S_B \subseteq S_A$. Without loss of generality, $S_A \subseteq S_B$. Then $A, B \in S_B$ and this implies $A$ and $B$ are disjoint because this is true for the elements of our chain. Thus $U$ is a disjoint class of countably infinite subsets and hence belongs to $\P$.&lt;/p&gt;
-&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\P$ possesses a maximal element, $M$. If $\bigcup _{E \in M} E = X$ then we are done because $M$ is the required disjoint class of countably infinite subsets whose union is $X$. But it can still happen that some elements of $X$ are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of $M$. To see that the leftover elements must be finite, denote the set of leftover elements by $Y = X \setminus \bigcup _{E \in M} E$. If $Y$ is infinite it must contain a countably infinite subset $Z \subseteq Y$. Consider the class $M \cup \{Z\}$. It is an element of $\P$ because it is a disjoint class of countably infinite subsets of $X$. But $M$ is a strict subset of $M \cup \{Z\}$ which contradicts the fact that $M$ is a maximal element of $\P$.&lt;/p&gt;
-&lt;p&gt;We are done!&lt;/p&gt;
-</description>
+&lt;p&gt;To be able to apply Zorn&amp;rsquo;s lemma we need to show that every chain in $\P$ has an upper bound. Let $\Ch$ be a chain in $\P$. A natural guess for the upper bound of $\Ch$ is $\U = \bigcup _{\S \in \Ch} \S$. To show that $\U$ is an upper bound of $\Ch$ we need to show that $\U \in \P$ and $\S \subseteq \U$ for every $\S \in \Ch$. The second claim is trivial from $\U$&#39;s definition. It is easy to see that $\U$ is a class of countably infinite subsets of $X$ because this is true for each $\S \in \Ch$. To show that $\U$ is a disjoint class, let $A, B \in \U$ be distinct elements of $\U$. There exist elements $\S_A, \S_B \in \Ch$ such that $A \in \S_A$ and $B \in \S_B$. Since $\Ch$ is a chain, either $\S_A \subseteq \S_B$ or $\S_B \subseteq \S_A$. Without loss of generality, $\S_A \subseteq \S_B$. Then $A, B \in \S_B$ and this implies $A$ and $B$ are disjoint because this is true for the elements of our chain. Thus $\U$ is a disjoint class of countably infinite subsets and hence belongs to $\P$.&lt;/p&gt;
+&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\P$ possesses a maximal element, $\M$. If $\bigcup _{E \in \M} E = X$ then we are done because $\M$ is the required disjoint class of countably infinite subsets whose union is $X$. But it can still happen that some elements of $X$ are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of $\M$. To see that the leftover elements must be finite, denote the set of leftover elements by $Y = X \setminus \bigcup _{E \in \M} E$. If $Y$ is infinite it must contain a countably infinite subset $Z \subseteq Y$. Consider the class $\M \cup \{Z\}$. It is an element of $\P$ because it is a disjoint class of countably infinite subsets of $X$. But $\M$ is a strict subset of $\M \cup \{Z\}$ which contradicts the fact that $\M$ is a maximal element of $\P$.&lt;/p&gt;
+&lt;p&gt;We are done! $\square$&lt;/p&gt;
+&lt;h1 id=&#34;example-application-2&#34;&gt;Example application 2&lt;/h1&gt;
+&lt;p&gt;Let us end by showing a fundamental theorem in functional analysis.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 4: &lt;/span&gt; Let $X$ be a nontrivial vector space (i.e., $X \neq \se{0}$) over the field $\K$. Then a &lt;em&gt;Hamel basis&lt;/em&gt; of $X$ is any family $\se{e_i}_{i \in I}$ of vectors $e_i \in X$ that satisfy&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The family is linearly independent, i.e., given any finite subfamily $\se{e_j}_ {j \in J}$ of $\se{e_i}_{i \in I}$ and any scalars $\se{\alpha_j} _{j \in J} \subseteq \K$ such that $\sum_{j \in J} \alpha_j e_j = 0$, then $\alpha_j = 0$, $j \in J$.&lt;/li&gt;
+&lt;li&gt;$\text{Span}\left(\se{e_i} _{i \in I}\right) = X$, i.e., given any vector $x \in X$, there exists a finite subfamily $\se{e_j} _ {j \in J}$ of $\se{e_i} _ {i \in I}$ and there exist scalars $\se{x_j} _ {j \in J} \subseteq \K$, such that $x = \sum _ {j \in J} x_j e_j.$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 2: &lt;/span&gt; Let $X$ be a nontrivial vector space, then there exists a Hamel basis of $X$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof: &lt;/span&gt; Let $\cP$ denote the set formed by all linearly independent families of vectors of $X$. Hence, $\cP$ is nonempty, since $\cP$ contains $\se{x}$, where $x$ is any nonzero vector of $X$. We define a partial order on the elements of $\cP$ as follows: if $E = \se{e_i} _ {i \in I}$ and $F = \se{e_j} _ {j \in J}$ are any two elements of $\cP$, then $E \preceq F$ iff $E \subseteq F$.&lt;/p&gt;
+&lt;p&gt;The next step is to show that if $\mathcal{C}$ is any chain in $\cP$, then $\mathcal{C}$ has an upper bound in $\cP$. To this end, define $U = \bigcup_{S \in \mathcal{C}} S$. We claim that this is the desired upper bound. $U$ is in $\cP$ because any finite subfamily $\se{e_i} _ {i=1}^n$ of $U$ is a subfamily of some $S \in \mathcal{C}$ since $\mathcal{C}$ is a chain, and therefore the vectors $\se{e_i} _ {i=1}^n$ are linearly independent. Also, $U$ is clearly an upper bound of $\mathcal{C}$, since $S \subseteq U$ for all $S \in \mathcal{C}$.&lt;/p&gt;
+&lt;p&gt;By the Zorn&amp;rsquo;s lemma, $\cP$ possesses a maximal element, $M$, which we claim to be a Hamel basis of $X$. For otherwise, there would exist a nonzero vector $x \in X$ that cannot be written as a linear combination of elements of $M$. But then $M \cup \se{x}$ would be an element of $\cP$ that satisfies $M \prec M \cup \se{x}$, a contradiction. $\square$&lt;/p&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -993,6 +1355,7 @@ Examples 1 and 2 above have no maximal elements. Example 3 has one maximal eleme
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;This is the second blog post in the series of blog posts on kernels. In the 
 &lt;a href=&#34;http://makkar.github.io/post/kernels/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;first part&lt;/a&gt; I introduced the functional analysis background for kernel theory. I highly recommend you read it before continuing. I will frequently refer to it and use the same notation. In this blog post I aim to introduce the fundamental theorems like Mercer&amp;rsquo;s theorem and Representer theorem.&lt;/p&gt;
@@ -1153,7 +1516,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 &lt;/ol&gt;
 &lt;p&gt;In the 
 &lt;a href=&#34;https://makkar.github.io/post/kernels2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next article&lt;/a&gt; I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -1180,6 +1543,7 @@ Then there exists an at most countable set of eigenfunctions $ (e_{i})_{i} $ for
 \DeclareMathOperator{\dx}{dx}
 \DeclareMathOperator{\dmu}{d\mu}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The word &amp;ldquo;kernel&amp;rdquo; is 
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Kernel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;heavily overloaded&lt;/a&gt;, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space. Kernel methods provide an elegant, theoretically well-founded, and powerful approach to solving many learning problems.&lt;/p&gt;
@@ -1368,7 +1732,7 @@ In the
 &lt;li&gt;Rudin, W: Functional Analysis.&lt;/li&gt;
 &lt;li&gt;Conway, J: A course in functional analysis.&lt;/li&gt;
 &lt;/ol&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -1376,7 +1740,8 @@ In the
       <link>https://makkar.github.io/post/equivalence-relations/</link>
       <pubDate>Sat, 20 Jun 2020 19:16:45 -0400</pubDate>
       <guid>https://makkar.github.io/post/equivalence-relations/</guid>
-      <description>&lt;p&gt;I want to show how these two concepts are a single mathematical idea.&lt;/p&gt;
+      <description>&lt;div style=&#34;text-align: justify&#34;&gt;
+&lt;p&gt;I want to show how these two concepts are a single mathematical idea.&lt;/p&gt;
 &lt;h2 id=&#34;partition&#34;&gt;Partition&lt;/h2&gt;
 &lt;p&gt;A &lt;em&gt;partition&lt;/em&gt; of a non-empty set, $X$, is a disjoint class $\{X_i\}_{i \in I}$ of non-empty subsets of $X$ whose union is $X$. The $X_i$&#39;s are called the &lt;em&gt;partition sets&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;For example, if $X = \mathbb{R}$, then $X$ can be partitioned as
@@ -1412,7 +1777,7 @@ y \sim x_1 \sim z \sim x_2
 $$
 Therefore, $y \in [x_2]$. Since $y$ was an arbitrary element of $[x_1]$, we get $[x_1] \subseteq [x_2]$. We can similarly show that $[x_2] \subseteq [x_1]$. In short, $[x_1] = [x_2]$.&lt;/p&gt;
 &lt;p&gt;We have shown that there is no real distinction between partitions of a set and equivalence relations in the set. They are two &amp;ldquo;equivalent&amp;rdquo; approaches for the same mathematical idea. The approach we choose in an application depends entirely on our own convenience.&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -1438,6 +1803,7 @@ Therefore, $y \in [x_2]$. Since $y$ was an arbitrary element of $[x_1]$, we get 
 \newcommand{\infs}{\inf_{k \geq n} s_k}
 \newcommand{\cc}{\mathsf{c}}
 $$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
 &lt;p&gt;Most of what follows is taken from Rudin&amp;rsquo;s Principles of Mathematical Analysis.&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The concept of upper and lower limits (commonly denoted by $\limsup$ and $\liminf$ respectively) shows up routinely when discussing the limiting behaviour of a sequence. For example, consider the Big O notation, $\mathcal{O}$, defined as $f(n) = \mathcal{O}(g(n))$ iff there exists a positive real number $c$ and an integer $N$ such that for every $n \in \Z$, $n &amp;gt; N$, we have $|f(n)| \leq c g(n)$. This can be succinctly written as
@@ -1574,7 +1940,7 @@ $$
 $$
 provided the sum on the right is not of the form $\infty - \infty$.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof:&lt;/strong&gt; TODO&lt;/p&gt;
-</description>
+&lt;/div&gt;</description>
     </item>
     
   </channel>
