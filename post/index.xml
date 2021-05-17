@@ -5,12 +5,436 @@
     <link>https://makkar.github.io/post/</link>
       <atom:link href="https://makkar.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 13 Apr 2021 00:31:57 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 15 May 2021 20:34:25 -0400</lastBuildDate>
     <image>
       <url>https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://makkar.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>General Theory of Processes - Part 2</title>
+      <link>https://makkar.github.io/post/grlthprcs2/</link>
+      <pubDate>Sat, 15 May 2021 20:34:25 -0400</pubDate>
+      <guid>https://makkar.github.io/post/grlthprcs2/</guid>
+      <description>&lt;p&gt;$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\Z_{\geq 0}^N}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LO}{\mathbb{L}^0}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\Prob}[1]{\bP\left( #1 \right)}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\K}{\mathscr{K}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\PO}{\mathfrak{P}}
+\newcommand{\fS}{\mathfrak{S}}
+\newcommand{\fSP}{\fS^{(\sP)}}
+\newcommand{\fA}{\mathfrak{A}}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ex}[1]{\exp\left{#1\right}}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil{#1}\right \rceil}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[2]{\left\{ #1 \; : \; #2 \right\}}
+\newcommand{\sett}[2]{\left\{ #1 \; | \; #2 \right\}}
+\newcommand{\Ex}[1]{\bE\left[#1\right]}
+\newcommand{\Excc}[2]{\bE\left( \left. #1 \, \right\vert \, #2\right)}
+\newcommand{\Exc}[2]{\bE\left[ \left. #1 \, \right\vert \, #2\right]}
+\newcommand{\Pc}[2]{\bP\left( \left. #1 \, \right\vert \, #2\right)}
+\newcommand{\Prob}[1]{\bP\left(#1\right)}
+\newcommand{\Probb}[1]{\bP\left[#1\right]}
+\newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\PM}{\widehat{\otimes}_p}
+\newcommand{\nn}{{n \in \N}}
+\newcommand{\oi}{[0, \infty)}
+\newcommand{\oio}{{[0, \infty) \times \Omega}}
+\newcommand{\gr}[1]{[\![ #1 ]\!]}
+\newcommand{\grr}[1]{]\!] #1 ]\!]}
+\newcommand{\grl}[1]{[\![ #1 [\![}
+\newcommand{\grrl}[1]{]\!] #1 [\![}
+\newcommand{\oX}{\sideset{^o}{}X}
+\newcommand{\pX}{\sideset{^p}{}X}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\du}{du}
+\DeclareMathOperator{\dz}{d\matr{z}}
+\DeclareMathOperator{\dt}{dt}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dP}{d\PP}
+\DeclareMathOperator{\dQ}{d\QQ}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\bE}{\mathbb{E}}
+\DeclareMathOperator{\bP}{\mathbb{P}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+$$&lt;/p&gt;
+&lt;div style=&#34;text-align: justify&#34;&gt;
+&lt;p&gt;This is part 2 of the sequence of blog posts on general theory of processes. For part 1 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;see here&lt;/a&gt;. I will be building upon the content presented there.&lt;/p&gt;
+&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction&lt;/li&gt;
+&lt;li&gt;Stochastic Processes&lt;/li&gt;
+&lt;li&gt;Stopping Times
+&lt;ul&gt;
+&lt;li&gt;Predictable Stopping Times&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Debut of a Progressive Set&lt;/li&gt;
+&lt;li&gt;Optional and Predictable Processes&lt;/li&gt;
+&lt;li&gt;Properties of Debuts&lt;/li&gt;
+&lt;li&gt;Section Theorems&lt;/li&gt;
+&lt;li&gt;Applications of Section Theorems&lt;/li&gt;
+&lt;li&gt;Projection Theorems&lt;/li&gt;
+&lt;li&gt;References&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color:silver&#34;&gt; &amp;ldquo;Mathematics exists solely for the honour of the human mind.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ndash; Jacobi in a letter to Legendre after the death of Fourier. Fourier had the opinion that the principal aim of mathematics was public utility and explanation of natural phenomena. &lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We previously discussed Choquet&amp;rsquo;s theory of capacities and its applications in measure theory. The goal of this blog post is to discuss the debut, section and projection theorems in stochastic processes. These theorems form the core of the &amp;ldquo;general theory of processes&amp;rdquo;. At the risk of being overly simplistic, general theory of processes is the study of filtrations and stopping times.&lt;/p&gt;
+&lt;p&gt;Unlike part 1 where there were no prerequisites other than basic measure theory, this part assumes a good amount of familiarity with stochastic processes, at the level of [1,2]. Without that the material here will feel unmotivated and difficult. On the other hand, the theorems proved here are skipped even in advanced courses in stochastic processes as they aren&amp;rsquo;t the most useful for applications, but rather are necessary to fill in gaps if a rigorous treatment is warranted. Nevertheless the theory presented is extremely profound and beautiful, and reading it will be an honour for the mind, if nothing else.&lt;/p&gt;
+&lt;h1 id=&#34;stochastic-processes&#34;&gt;Stochastic Processes&lt;/h1&gt;
+&lt;p&gt;For this whole blog post, we shall place ourselves on a complete probability space $\probsp$ endowed with a filtration $\bF = \se{\F(t)} _ {0 \le t &amp;lt; \infty}$, i.e., a family of sub$-\sigma-$algebras of $\F$ which is increasing in the sense that
+$$\F(s) \subseteq \F(t) \subseteq \F(\infty) := \sigma\left(\bigcup_{u \in \oi} \F(u)\right), \quad 0 \le s \le t &amp;lt; \infty.$$&lt;/p&gt;
+&lt;p&gt;We sometimes denote this setup conveniently as $(\Omega, \F, \bF, \bP)$ and call it a &lt;em&gt;filtered probability space&lt;/em&gt;. We shall assume that this filtration satisfies the &lt;em&gt;usual conditions&lt;/em&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Right-continuity, i.e., $\F(t) = \F(t+) := \bigcap_{s &amp;gt; t} \F(s)$ for all $t \in [0, \infty)$, and&lt;/li&gt;
+&lt;li&gt;$\F(0)$ contains all the $\bP-$negligible events in $\F$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For our purposes, a stochastic process is simply a collection of real-valued random variables $X = \se{X(t)}_{0 \le t &amp;lt; \infty}$ on $(\Omega, \F)$. The &lt;em&gt;sample paths&lt;/em&gt; of $X$ are the mapping $\oi \ni t \mapsto X(t, \omega) \in \R$ obtained when fixing $\omega \in \Omega$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 18:&lt;/span&gt; Consider two stochastic process $X$ and $Y$ defined on the same probability space $\probsp$. We say&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;$X$ and $Y$ have the &lt;em&gt;same finite-dimensional distributions&lt;/em&gt; if, for any integer $n \ge 1$, real numbers $0 \le t_1 &amp;lt; t_2 &amp;lt; \cdots &amp;lt; t_n &amp;lt; \infty,$ and $A \in \B(\R^n)$, we have
+$$\bP[(X_{t_1}, \ldots, X_{t_n}) \in A] = \bP[(Y_{t_1}, \ldots, Y_{t_n}) \in A]$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$Y$ is a &lt;em&gt;modification&lt;/em&gt; or a &lt;em&gt;version&lt;/em&gt; of $X$ if, for every $t \in \oi$, we have $\bP(X_t = Y_t) = 1$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$X$ and $Y$ are &lt;em&gt;indistinguishable&lt;/em&gt; if almost all their sample paths agree, i.e., $\bP(X_t = Y_t, \; \forall \, t \in \oi) = 1$. Technically, this formulation isn&amp;rsquo;t rigorous since the set $\se{X_t = Y_t, \; \forall \, t \in \oi}$ need not be measurable, and so we can define indistinguishability as follows: $X$ and $Y$ are indistinguishable if there exists a negligible subset $\Psi$ of $\Omega$ such that
+$$X_t(\omega) = Y_t(\omega), \quad \forall \; \omega \in \Omega \setminus \Psi, \; \forall \; t \in \oi$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 19:&lt;/span&gt; A stochastic process $X = \se{X(t)}_{0 \le t &amp;lt; \infty}$ is called&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;adapted&lt;/em&gt;, if $X(t)$ is $\F(t)-$measurable for every $t \in \oi$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;measurable&lt;/em&gt;, if the mapping
+$$[0, \infty) \times \Omega \ni (t,\omega) \mapsto X(t,\omega) \in \R \tag{5} \label{eq_meas}$$
+is $\B(\oi) \otimes \F-$measurable, when $\R$ is endowed with its Borel $\sigma-$algebra.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;progressively measurable&lt;/em&gt;, if for every $t \in \oi$ the mapping $$[0,t] \times \Omega \ni (t,\omega) \mapsto X(t,\omega) \in \R$$ is $\B([0,t]) \otimes \F(t)-$measurable, when $\R$ is endowed with its Borel $\sigma-$algebra.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Recall that every progressively measurable process is both measurable and adapted; and every adapted process with right-continuous or with left-continuous paths, is progressively measurable [1]. On the other hand, we have the following&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 11:&lt;/span&gt; Every measurable and adapted process $X = \se{X(t)} _ {0 \le t &amp;lt; \infty}$ has a progressively measurable modification $Y = \se{Y(t)} _ {0 \le t &amp;lt; \infty}$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Consider the space $\LO$ of equivalence classes of measurable functions $f : \Omega \to \R$, and endow it with the topology of convergence in probability, for example with the pseudo-metrics $\rho(f, g) = \bE (1 \wedge |f-g|)$ or $\rho(f,g) = \bE \left( \frac{|f-g|}{1 + |f-g|} \right)$. Recall that if a sequence $\se{f_n} _ \nn \subseteq \LO$ satisfies $\sum _ \nn \rho(f _ n, f _ {n+1}) &amp;lt; \infty,$ then it converges in probability &amp;ldquo;fast&amp;rdquo;, thus also almost surely.&lt;/p&gt;
+&lt;p&gt;Every process $Y = \se{Y(t)} _ {0 \le t &amp;lt; \infty}$ can be thought of as a mapping from $\oi$ into $\LO$, which associates to each element in $\oi$ the equivalence class $\mathcal{Y} _ t$ of $Y(t)$. Consider now the collection $\sH$ of processes $Y$ such that the mapping $\oi \ni t \mapsto \Y_t \in \LO$ satisfies&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;it takes values in a separable subspace of $\LO$;&lt;/li&gt;
+&lt;li&gt;under it, the inverse image of every open ball of $\LO$ is a Borel subset of $\oi$; and&lt;/li&gt;
+&lt;li&gt;it is the uniform limit of a sequence of simple measurable functions with values in the space $\LO$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then note that property 3 implies the other two, and that conversely, properties 1 and 2 together imply property 3, because a real-valued function is measurable if and only if it is the increasing limit of a sequence of simple measurable functions.&lt;/p&gt;
+&lt;p&gt;Next, note that $\sH$ is a real vector space on account of property 3, and is closed under sequential pointwise convergence on account of properties 1 and 2. It is easy to see that $\sH$ contains all processes of the form $Y(t,\omega) = K(t) \xi(\omega)$, where $K$ is the indicator of an interval in $\oi$ and $\xi : \Omega \to \R$ is a bounded measurable function. Thus, monotone class theorem implies $\sH$ contains all bounded measurable processes. Using a standard slicing argument it is easily seen that every measurable process $Y$ has properties 1, 2 and 3.&lt;/p&gt;
+&lt;p&gt;Consider now a measurable and adapted process $X = \se{X(t)} _ {0 \le t &amp;lt; \infty}$. For each $\nn$, there exists a process $X^{(n)} = \se{X^{(n)}(t)} _ {0 \le t &amp;lt; \infty}$ which is simple and measurable (in the sense that there exists a partition $\se{A^{(n)} _ k} _ {k \in \N}$ of $\oi$ into Borel sets, and a sequence of random variable $\se{H^{(n)} _ k} _ {k \in \N}$, such that $X^{(n)}(t) = H^{(n)} _ k$ for $t \in A^{(n)} _ k$), and satisfies
+$$\rho(X(t), X^{(n)}(t)) \le 2^{-(n+1)}, \quad \forall \; t \in \oi$$&lt;/p&gt;
+&lt;p&gt;Next, we define a sequence of random variables $\se{G^{(n)} _ k} _ {k \in \N}$ for each $\nn$ using the sequence $\se{H^{(n)} _ k} _ {k \in \N}$ to get &amp;ldquo;enhanced&amp;rdquo; measurability properties. To this end, define $s^{(n)} _ k = \inf A^{(n)} _ k$, and define $G^{(n)} _ k = X(s^{(n)} _ k)$ if $s^{(n)} _ k \in A^{(n)} _ k$; if, on the other hand $s^{(n)} _ k \notin A^{(n)} _ k$, we pick any $\F(s^{(n)} _ k)-$measurable $G^{(n)} _ k$ that satisfies
+$$\rho\left(G^{(n)} _ k, H^{(n)} _ k\right) \le 2^{-(n+1)}$$
+Such a $G^{(n)} _ k$ always exists since we may take a decreasing sequence $\se{\theta_m} _ {m \in \N} \subseteq A^{(n)} _ k$ with $\theta_m \downarrow s^{(n)} _ k$, and set $G^{(n)} _ k = \liminf _ {m \to \infty} X(\theta_m)$; and the above inequality holds for all integers $k$.&lt;/p&gt;
+&lt;p&gt;We define now the process $Y^{(n)} = \se{Y^{(n)}(t)} _ {0 \le t &amp;lt; \infty}$ by $Y^{(n)}(t) := G^{(n)} _ k, \, t \in A^{(n)} _ k$, and check that it is progressively measurable and satisfies $\rho\left(X(t), Y^{(n)}(t)\right) \le 2^{-(n+1)}$ for all $t \in \oi$ and $\nn$.&lt;/p&gt;
+&lt;p&gt;Finally, we construct a progressively measurable process $Y$ by
+$$Y(t, \omega) := \limn Y^{(n)}(t, \omega), \quad \forall \; (t,\omega) \in \oi \times \Omega \text{ such that this limit exists,}$$
+and $Y(t, \omega) := 0$ otherwise. The properties of $\rho$ then implies $\bP(X(t) = Y(t)) = 1$ holds for all $t \in \oi$, so $Y$ is a modification of $X$. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 20:&lt;/span&gt; The &lt;em&gt;$\sigma-$algebra of progressively measurable sets&lt;/em&gt;, denoted by $\sP _ \star$, is the smallest $\sigma-$algebra on the product space $\oi \times \Omega$, with respect to which the mapping as in \eqref{eq_meas} are measurable for all progressively measurable processes $X$.&lt;/p&gt;
+&lt;p&gt;It is easy to see that a subset $A$ of $\oi \times \Omega$ belongs to $\sP _ \star$ if and only if, for every $t \in \oi$, $A \cap ([0,t] \times \Omega) \in \B([0,t]) \otimes \F(t).$ This important characterization will be used later.&lt;/p&gt;
+&lt;h1 id=&#34;stopping-times&#34;&gt;Stopping Times&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 21:&lt;/span&gt; A random variable $T : \Omega \to [0, \infty]$ is called a &lt;em&gt;stopping time&lt;/em&gt; if $\se{T \le t} \in \F(t)$ for all $t \in \oi$.&lt;/p&gt;
+&lt;p&gt;Because $\bF$ is right-continuous this is equivalent to $\se{T &amp;lt; t} \in \F(t)$ for all $t \in \oi$ as can be seen by writing $\se{T \le t} = \bigcap_{\substack{q \in \Q \ t &amp;lt; q &amp;lt; s}} \se{T &amp;lt; q} \in \F(s)$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 22:&lt;/span&gt; For a stopping time $T$, we define&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\sigma-$algebra of events prior to it&lt;/em&gt; by
+$$\F(T) := \set{A \in \F}{ A \cap \se{T \le t} \in \F(t), \quad \forall \; t \in \oi}$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\sigma-$algebra of events strictly prior to it&lt;/em&gt; by
+$$\F(T-) := \sigma(\F(0) \cup \set{A \cap \se{T &amp;gt; t}}{t \in \oi, A \in \F(t)})$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The following properties are useful and their proofs can be found in any standard textbook [1,2].&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 6:&lt;/span&gt; Let $T$ and $S$ be any two stopping times. Then&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\F(T-) \subseteq \F(T)$;&lt;/li&gt;
+&lt;li&gt;$T$ is measurable with respect to both $\F(T)$ and $\F(T-)$;&lt;/li&gt;
+&lt;li&gt;$\F(T) \cap \F(S) = \F(T \wedge S)$;&lt;/li&gt;
+&lt;li&gt;$A \cap \se{T \le S} \in \F(S)$, for all $A \in \F(T)$;&lt;/li&gt;
+&lt;li&gt;$A \cap \se{T &amp;lt; S} \in \F(S-)$, for all $A \in \F(T)$;&lt;/li&gt;
+&lt;li&gt;If the stopping times satisfy $T \le S$, then $\F(T) \subseteq \F(S)$ and $\F(T-) \subseteq \F(S-)$;&lt;/li&gt;
+&lt;li&gt;If the stopping times satisfy $T &amp;lt; S$ on the set $\se{0 &amp;lt; S &amp;lt; \infty}$, then $\F(T) \subseteq \F(S-)$.&lt;/li&gt;
+&lt;li&gt;If $\se{T_n} _ \nn$ is an increasing sequence of stopping times and $T = \lim _ \nn \uparrow T_n$, then
+$$\F(T-) = \sigma\left(\bigcup_\nn \F(T_n-)\right); \quad \text{as well as  } \F(T-) = \sigma\left(\bigcup_\nn \F(T_n)\right)$$
+provided that $T_n &amp;lt; T$ holds on the set $\se{0 &amp;lt; T &amp;lt; \infty}$ for every $\nn$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;predictable-stopping-times&#34;&gt;Predictable Stopping Times&lt;/h2&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 23:&lt;/span&gt; A stopping time $T$ is called &lt;em&gt;predictable&lt;/em&gt;, if there exists an increasing (&amp;ldquo;announcing&amp;rdquo;) sequence $\se{T_n} _ \nn$ of stopping times with $T = \lim _ \nn \uparrow T_n$, and $T_n &amp;lt; T$ holds on the set $\se{T &amp;gt; 0}$ for all $\nn$.&lt;/p&gt;
+&lt;p&gt;Note $\se{T \le t} = \bigcap_\nn \se{T_n \le t} \in \F(t)$ and therefore if in the definition above we had not required $T$ to be a stopping time, it would still be a stopping time. A canonical example of a predictable stopping time is the first time Brownian motion $W$ hits or exceeds a certain level $b$. It is announced by sequence of first times $W$ hits or exceeds the levels $b - 1/n$, for $\nn$. In fact, we have (from [3])&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 12:&lt;/span&gt; Let $X$ be a continuous adapted process and $b$ be a real number. Then
+$$T = \inf \set{t \in \oi}{X(t) \ge c}$$
+is a predictable stopping time.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Let $T_n = \inf \set{t \in \oi}{X(t) \ge b - 1/n}$ which, by the Debut Theorem below is a stopping time. This gives an increasing sequence $\se{T_n} _ \nn$ of stopping times bounded above by $T$. Also, $X(T _ n) \ge c - 1/n$ whenever $T _ n &amp;lt; \infty$ and, by left-continuity, setting $\tau = \lim _ n T _ n$ gives $X(\tau) \ge c$ whenever $\tau &amp;lt; \infty$. So $T \ge \tau$, showing that $T = \lim _ \nn \uparrow T_n$. If $0 &amp;lt; T _ n \le T &amp;lt; \infty$ then, by continuity, $X(T_n) = c - 1/n &amp;lt; c = X(T)$. So, $T_n &amp;lt; T$ on the set $\se{0 &amp;lt; T &amp;lt; \infty}$ and the sequence $\se{T_n \wedge n} _ \nn$ announces $T$. $\square$&lt;/p&gt;
+&lt;p&gt;Of course, in the above proof we assumed Debut Theorem for stopping times and proving it is our next agenda. In the same flavor as Lemma-6 we have&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 7:&lt;/span&gt; If $T$ is a predictable and $S$ an arbitrary stopping time, then&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$A \cap \se{T \le S} \in \F(S-)$ for all $A \in \F(T-)$;&lt;/li&gt;
+&lt;li&gt;$A \cap \se{S = \infty} \in \F(S-)$ for all $A \in \F(\infty)$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In particular, both events $\se{T \le S}$ and $\se{T = S}$ belong to $\F(S-)$.&lt;/p&gt;
+&lt;h1 id=&#34;debut-of-a-progressive-set&#34;&gt;Debut of a Progressive Set&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 24:&lt;/span&gt; For any measurable mapping $Z : \Omega \to [0, \infty]$ and any $A \in \F$, we define the &lt;em&gt;restriction of $Z$ on $A$&lt;/em&gt; as
+$$Z_A := Z \ind{A} + \infty \ind{A^\comp}$$&lt;/p&gt;
+&lt;p&gt;Notice that $\se{Z_A \le Z} = A \sqcup \left(A^\comp \cap \se{Z = \infty}\right)$. If $T$ is a stopping time and $A \in \F(T)$, then since $\se{T_A \le t} = \se{T \le t} \cap A \in \F(t)$ for all $t \in \oi$, $T_A$ is also a stopping time.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 13 [Debut of a Progressive Set]:&lt;/span&gt; Under the usual conditions, if $A$ is a progressively measurable set, i.e., $A \in \sP_\star$, then the debut $D_A$ is a stopping time.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Since $A \in \sP_\star \subseteq \B(\oi) \otimes \F$, Measurable Debut theorem (Theorem 9) implies $D_A$ is a random variable.&lt;br&gt;
+Just like in the proof of Theorem 9, for any real number $t &amp;gt; 0$, the set $\se{D_A &amp;lt; t}$ is the projection onto $\Omega$ of the set $A_t := A \cap ([0, t) \times \Omega)$. Recall that the fact that $A \in \sP_\star$ implies $A_t \in \B([0,t]) \otimes \F(t)$. Therefore, Measurable Projection theorem (Theorem 7) implies $\se{D_A &amp;lt; t} = \pi(A_t) \in \F(t)$. Right continuity of the filtration now implies $D_A$ is an $\bF-$stopping time. $\square$&lt;/p&gt;
+&lt;p&gt;The following important theorem now becomes an easy corollary.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 14 [First Hitting Times]:&lt;/span&gt; In the context above, if $X$ is a progressively measurable process and $\Gamma \in \B(\R)$, the first hitting time
+$$H_\Gamma := \inf \set{t \in \oi}{X(t) \in \Gamma}$$
+is a stopping time.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Since $X$ is a progressively measurable process, the set $A = \set{(t,\omega) \in \oi \times \Omega}{X(t, \omega) \in \Gamma}$ is a progressively measurable set. Theorem 13 then implies the debut $D_A$ is a stopping time, but it is easy to see $D_A = H_\Gamma$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;optional-and-predictable-processes&#34;&gt;Optional and Predictable Processes&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 25:&lt;/span&gt; The &lt;em&gt;predictable $\sigma-$algebra&lt;/em&gt;, denoted by $\sP$, is the smallest $\sigma-$algebra on $\oi \times \Omega$ with respect to which left-continuous $\bF-$adapted processes are measurable. A stochastic process is said to &lt;em&gt;predictable}&lt;/em&gt; if it is $\sP-$measurable.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 26:&lt;/span&gt; The &lt;em&gt;optional $\sigma-$algebra&lt;/em&gt;, denoted by $\sO$, is the smallest $\sigma-$algebra on $\oi \times \Omega$ with respect to which right-continuous $\bF-$adapted processes are measurable. A stochastic process is said to &lt;em&gt;optional&lt;/em&gt; if it is $\sO-$measurable.&lt;/p&gt;
+&lt;p&gt;Since all right-continuous or left-continuous adapted processes are progressively measurable, all optional or predictable processes are adapted. We need the concept of stochastic intervals to ease some notation and see some examples of optional and predictable sets.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 26:&lt;/span&gt; If $U,V : \Omega \to [0, \infty]$ are two random variables, and $U \le V$, then define the &lt;em&gt;stochastic intervals&lt;/em&gt; as
+$$\gr{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) \le t \le V(\omega)}$$
+$$\grl{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) \le t &amp;lt; V(\omega)}$$
+$$\grr{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) &amp;lt; t \le V(\omega)}$$
+$$\grrl{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) &amp;lt; t &amp;lt; V(\omega)}$$
+Also, for $A \in \F(0)$, define
+$$0_A(\omega) = \begin{cases}
+0 &amp;amp;\text{ if } \omega \in A \\&lt;br&gt;
+\infty &amp;amp;\text{ if } \omega \in A^\comp
+\end{cases}$$&lt;/p&gt;
+&lt;p&gt;Notice that $\gr{U} = \gr{U,U} = \gr{0, U} \setminus \grl{0, U}$, and that $0_A$ is predictable with the announcing sequence $\se{0_A \wedge n} _ \nn$. Denote by $\fS$ the collection of all stopping times and by $\fSP$ the collection of all predictable stopping times. The next lemma collects some useful properties of stochastic intervals in relation to optional and predictable $\sigma-$algebras.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 8:&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If $S,T \in \fS$ such that $S \le T$, then the stochastic intervals $\gr{S,T}, \grl{S,T}, \grr{S,T}, \grrl{S,T}$ and the graphs $\gr{S}, \gr{T}$ are optional.&lt;/li&gt;
+&lt;li&gt;If $S,T \in \fS$ such that $S \le T$, then the stochastic interval $\grr{S,T}$ is predictable. If $S \in \fSP$, then the stochastic interval $\grl{S, \infty}$ is predictable.&lt;/li&gt;
+&lt;li&gt;The $\sigma-$algebra $\sO$ of optional sets is generated by stochastic intervals in many ways
+$$
+\sO = \sigma\left(\set{\grl{S,\infty}}{S \in \fS}\right) = \sigma\left(\set{\grl{S,T}}{S, T \in \fS}\right) = \sigma\left(\set{\gr{S,T}}{S,T \in \fS}\right)
+$$&lt;/li&gt;
+&lt;li&gt;Similarly, $\sigma-$algebra $\sP$ of predictable sets is generated by stochastic intervals in many ways
+$$
+\sP = \sigma\left(\set{\grr{S,T}, \gr{0_A}}{S,T \in \fS \text{ and } A \in \F(0)}\right) = \sigma\left(\set{\grl{S,\infty}}{S \in \fSP}\right) = \sigma\left(\set{\gr{S,T}}{S,T \in \fSP}\right)
+$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; I will only be proving some results. For a complete picture see [3,4].&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is easy to see that $\ind{\grl{S,T}}$ is right-continuous and adapted, hence $\grl{S,T}$ is optional. If $T_n = S + 1/n$ for $\nn$, then $\gr{S} = \bigcap _ \nn \grl{S, T_n}$, and thus $\gr{S}$ is also optional. Similar, for $\gr{T}$. These facts along with simple manipulation of sets immediately imply $\gr{S,T}, \grr{S,T}, \grrl{S,T}$ are also optional.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is easy to see that $\ind{\grr{S,T}}$ is left-continuous and adapted, hence $\grr{S,T}$ is predictable. $\square$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It is an easy exercise to show&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 9:&lt;/span&gt; Every predictable process is optional, and every optional process is progressively measurable. In other words
+$$ \sP \subseteq \sO \subseteq \sP _ \star \subseteq \B(\oi) \otimes \F $$&lt;/p&gt;
+&lt;h1 id=&#34;properties-of-debuts&#34;&gt;Properties of Debuts&lt;/h1&gt;
+&lt;p&gt;Recall the setting of section &amp;ldquo;Measurable Section&amp;rdquo; from 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;part 1&lt;/a&gt;. We showed there that if $A \in \B([0, \infty)) \otimes \F$, then we can define a &lt;em&gt;measurable&lt;/em&gt; mapping $T : \Omega \to [0, \infty]$ such that for all $\omega \in \pi(A)$ we have $(T(\omega), \omega) \in A$, or stated more succinctly, $\gr{T} \subseteq A$. Now, what if we want something stronger, say, $T$ should be a stopping time? As we will see, we will have to make stronger assumptions on the set $A$ and even then if we want $T$ to be a stopping time we will have to let go of the nice property that $\se{T &amp;lt; \infty}= \pi(A)$.&lt;/p&gt;
+&lt;p&gt;But first, we need to prove a certain property of debuts which we will need in proving the aforementioned section theorem, and that&amp;rsquo;s the goal of this section.&lt;/p&gt;
+&lt;p&gt;It isn&amp;rsquo;t difficult to see that $\sP$ coincides with the mosaic generated by the paving on $\oi \times \Omega$ that consists of finite unions of stochastic intervals of the form $\gr{S,T}$, where $S,T \in \fSP$. Generalizing this, let us consider a collection $\fA$ of stopping times that contains $0$ and $\infty$, and which is closed under a.s. equality and under finitely many lattice operations ($\wedge$ and $\vee$). We denote by $\cJ := \set{\grl{S,T}}{S,T \in \fA}$, and by $\cT$ the collection of finite unions of elements of $\cJ$.&lt;/p&gt;
+&lt;p&gt;Simple observations like $\grl{S,T}^\comp = \grl{0, S} \cup \grl{T, \infty}$ or $\grl{S,T} \,\cap \, \grl{U,V} = \grl{S \vee U, (S \vee U) \vee (T \wedge V)}$, can be used to show that $\cJ$ is a paving on $\oi \times \Omega$ and $\cT$ is an algebra on $\oi \times \Omega$.&lt;/p&gt;
+&lt;p&gt;For more structure, let us impose the following conditions on the collection $\fA$:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;For any pair $S,T \in \fA$, the stopping time $S _ {\se{S &amp;lt; T}}$ (recall the notation of Definition 24 and the observation right after it) belongs to $\fA$;&lt;/li&gt;
+&lt;li&gt;For any increasing sequence $\se{S_n} _ \nn \subseteq \fA$, the limit $\lim _ \nn \uparrow S_n$ belongs to $\fA$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Condition 1 ensures that the debut of an element of $\cT$ belongs to $\fA$. This is because $S_{\se{S &amp;lt; T}} = D_{\grl{S,T}}$ and because the debut of union of a finite collection of elements from $\cJ$ is equal to to the minimum of the debuts of those elements.&lt;/p&gt;
+&lt;p&gt;Condition 2 ensures that the debut of an element of $\cT _ \delta$ (which recall equals $\set{\bigcup _ \nn A_n}{A_n \in \cT \text{ for all } \nn}$) belongs to to $\fA$. This is the main result of this section, and is proved below as Theorem 15.&lt;/p&gt;
+&lt;p&gt;Coming out of the abstraction for a bit, we note that the collection $\fS$ of all stopping times satisfies all the conditions imposed above on $\fA$. Similarly for the collection $\fSP$ of all predictable stopping times. The first claim is trivial to see. To show the second claim, we first prove the following lemma.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Lemma 10:&lt;/span&gt; For any stopping time $T$ and set $A \in \F(T)$, the random variable $T_A$ is a stopping time as we saw above. For $T_A$ to be a predictable stopping time, it is necessary that $A \in \F(T-)$; this condition is also sufficient if $T$ is predictable.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; If $T_A$ is a predictable stopping time, then since $A = \se{T_A \le T} \setminus \left(A^\comp \cap \se{T = \infty}\right)$ and by Lemma 7 both $\se{T_A \le T}, \left(A^\comp \cap \se{T = \infty}\right) \in \F(T-)$, we have $A \in \F(T-)$.&lt;br&gt;
+Conversely, suppose $T$ is a predictable stopping time. Consider the collection $\mathscr{A} := \set{A \in \F(T-)}{T_A \text{ and } T _ {A^\comp} \text{ are both predictable}}$. It is a $\sigma-$algebra: $\Omega \in \mathscr{A}$ clearly and it is closed under complements by definition; if $A_1, A_2, \ldots \in \mathscr{A}$ with $A = \bigcup _ \nn A_n$, note $T_A = \inf _ \nn T _ {A _ n}$. Let $\se{T _ n ^ m} _ {m \in \N}$ be the announcing sequence for $T _ {A _ n}$ for each $\nn$, and define $\tau _ n := \min \set{T _ j ^ k}{j,k \le n}$. Then $\se{\tau _ n} _ \nn$ announces $T_A$ and hence $A \in \mathscr{A}$.&lt;br&gt;
+Thus, it suffices to show that $T_A$ is predictable for any $A$ in a collection of sets that generates $\F(T-)$. To this end, suppose $\se{T^n} _ \nn$ announces $T$, and fix an arbitrary $n \in \N$ and an arbitrary $A \in \F(T^n)$. For every integer $m \ge n$, the restriction $T _ A ^ m$ is a stopping time and so is $R _ m := T ^ m _ A \wedge m$. The sequence $\se{R_m} _ {m \in \N}$ then announces $T_A$, showing $T_A$ is predictable; similarly for $T _ {A^\comp}$. We conclude $T_A, T _ {A^\comp}$ are predictable for every $A \in \bigcup _ \nn \F(T^n)$. But recall $\F(T-) = \sigma\left(\bigcup _ \nn \F(T^n)\right)$ since $T^n &amp;lt; T$ on $\se{T &amp;gt; 0}$, so we obtain the property for all $A \in \F(T-)$.  $\square$&lt;/p&gt;
+&lt;p&gt;Coming back to the second claim above, if $S,T \in \fSP$, then by Lemma 7, $\se{S &amp;lt; T} \in \F(S-)$, and thus by Lemma 10, $S _ {\se{S &amp;lt; T}} \in \fSP$. The rest of the conditions are trivial to check.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 15:&lt;/span&gt; Suppose $\fA$ is a collection of stopping times with the properties postulated above, and let $B \in \cT_\delta$. Then the debut $D_B$ of this set is a stopping time in $\fA$, and its graph $\gr{D_B} \subseteq B$.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; We first show that $\gr{D_B} \subseteq B$. If $(s, \omega) \in \gr{D_B}$, then $D_B(\omega) = s$ which is same as saying $s = \inf \set{t \in \oi}{(t,\omega) \in B}$. But we constructed our collection $\cT_\delta$ using stochastic intervals of the form $\grl{S,T}$, and thus $B(\omega) = \set{t \in \oi}{(t,\omega) \in B}$ is closed implying $(s, \omega) \in B$.&lt;br&gt;
+To show that $D_B \in \fA$, consider the collection $\mathfrak{B} := \set{S \in \fA}{S \le D_B}$, and note that $\mathfrak{B}$ contains $0$, is closed under pairwise maximization, i.e., $S,T \in \mathfrak{B}$ implies $S \vee T \in \mathfrak{B}$, and is closed under countable increasing limits, i.e., if $\se{S _ n} _ \nn \subseteq \mathfrak{B}$ is an increasing sequence then $\lim _ \nn \uparrow S_n \in \mathfrak{B}$. Then $\mathfrak{B}$ contains a representative $T := \esssup \mathfrak{B}$ of its essential supremum (see [4,5]).&lt;br&gt;
+Since $B \in \cT_\delta$ we can find a decreasing sequence $\se{B_n} _ \nn \subseteq \cT$ with $\bigcap _ \nn B_n = B$. Define $T_n := D _ {B_n \cap \grl{T, \infty}}$ for all $\nn$ and note $\gr{T_n} \subseteq B_n$. As $B_n \cap \grl{T, \infty} \, \in \cT$ and thus can be expressed as a finite union $\bigcup _ {k=1} ^ m \grl{U_k, V_k}$ for $U_k, V_k \in \cT$, we have
+$$T_n = \min _ {1 \le k \le m} D _ {\grl{U_k, V_k}} = \min _ {1 \le k \le m} (U_k) _ {\se{U_k &amp;lt; V_k}} \in \cT$$
+Since $B \subseteq B_n$, we have $T \le T_n \le D_B$, and therefore $T_n \in \mathfrak{B}$. Thus, by definition of essential supremum $T_n = T$ a.s., and as $\gr{T} \subseteq \bigcap _ \nn B_n = B$, we conclude that $T = D_B$. $\square$&lt;/p&gt;
+&lt;h1 id=&#34;section-theorems&#34;&gt;Section Theorems&lt;/h1&gt;
+&lt;p&gt;We are now ready to come back to proving section theorems. We start by proving a general section theorem.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 16 [General Section Theorem]:&lt;/span&gt; In the context of Theorem 15, let $\sH$ be the $\sigma-$algebra generated by the algebra $\cT$. For every set $A \in \sH$ and $\eps &amp;gt; 0$, there exists a stopping time $T_\eps \in \fA$ with
+$$\gr{T_\eps} \subseteq A \text{ and } \bP\left[\pi(A)\right] \le \bP(T_\eps &amp;lt; \infty) + \eps.$$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Measurable Section Theorem (Theorem 10 in 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;part 1&lt;/a&gt;) implies there exists a random variable $Z : \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\pi(A) = \se{Z &amp;lt; \infty}$. We denote by $\nu$ the measure on the measurable space $\left(\oi \times \Omega, \sH\right)$ defined by
+$$
+\int _ \oio f(t, \omega) \, \nu(\dd t, \dd \omega) = \int _ {\se{Z &amp;lt; \infty}} f(Z(\omega), \omega) \, \bP(\dd \omega)
+$$
+for every $\sH-$measurable $f : \oio \to \oi$. Notice that $(Z(\omega), \omega) \in A$ for $\omega \in \se{Z &amp;lt; \infty}$. By first taking $f$ to be the indicator $\ind{A}$ for $A$ and then indicator $\ind{\oio}$ for $\oio$ in the equation above, we see that $\nu(A) = \bP(Z &amp;lt; \infty) \equiv \bP\left[\pi(A)\right] = \nu(\oio)$. Thus, the measure $\nu$ is carried by the set $A$. Similarly, taking $f$ to be $\ind{B}$ for $B \in \sH$, we get $$\nu(B) = \int _ {\pi(A)} \ind{B}(Z(\omega), \omega) \, \bP(\dd \omega) \le \bP\left[\pi(A \cap B)\right].$$
+Choquet’s capacitability theorem (Theorem 6 in 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;part 1&lt;/a&gt;) applied to the paving $\cT$ and to the capacity $$\nu^*(C) := \inf _ {B \in \sH, C \subseteq B} \nu(B), \quad C \subseteq \oio$$
+we obtain the existence of a subset $B_\eps \in \cT_\delta$ of $A$, such that
+$$
+\bP\left[\pi(A)\right] = \nu(A) \le \nu(B_\eps) + \eps \le \bP\left[\pi(A \cap B_\eps)\right] + \eps \le \bP\left[\pi(B_\eps)\right] + \eps
+$$
+Now take $T_\eps$ to be the debut $D _ {B_\eps}$ which by Theorem 15 is a stopping time in $\fA$. $\square$&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 17 [Optional and Predictable Sections]:&lt;/span&gt; Let $A$ be an optional (respectively, predictable) subset of the product space $\oio$. For every $\eps &amp;gt; 0$, there exists a stopping time (respectively, a predictable stopping time) $T_\eps$ with
+$$\gr{T_\eps} \subseteq A \text{ and } \bP\left[\pi(A)\right] \le \bP(T_\eps &amp;lt; \infty) + \eps \tag{6} \label{eq_apprx}$$
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Both statements follow from the General Section Theorem (Theorem 16) in conjunction with the observation before Lemma 10, by taking $\fA$ to be either $\fS$ or $\fSP$. $\square$&lt;/p&gt;
+&lt;p&gt;As mentioned in the beginning of the section &amp;ldquo;Properties of Debuts&amp;rdquo;, we didn&amp;rsquo;t get the nice equality
+$$\gr{T} \subseteq A \text{ and } \se{T &amp;lt; \infty} = \pi(A) \tag{7} \label{eq_exact}$$
+as we got in Measurable Section theorem, but instead obtained an approximation \eqref{eq_apprx}. The condition $\gr{T_\eps} \subseteq A$ makes sure that $\se{T_\eps &amp;lt; \infty} \subseteq \pi(A)$, and the $\bP\left[\pi(A)\right] \le \bP(T_\eps &amp;lt; \infty) + \eps$ part ensures that the measure of the difference $\bP\left[ \pi(A) \setminus \se{T_\eps &amp;lt; \infty} \right]$ of these two events can be made as small as desired.&lt;/p&gt;
+&lt;p&gt;To see that it is not always possible to choose a stopping time $T$ that satisfies \eqref{eq_exact} if $A \in \sO$, we will construct a filtration $\se{\F_t}_{t \ge 0}$ and choose a set $A \in \sO$ that forces $\pi(A) \setminus \se{T &amp;lt; \infty} \neq \emp$ for every stopping time $T$ (from [3]).&lt;/p&gt;
+&lt;p&gt;To this end, let $\tau : \Omega \to (0, \infty)$ be a random variable such that $\Prob{\tau &amp;lt; t} &amp;gt; 0$ for all $t &amp;gt; 0$. For example, let $\tau$ be such that its distribution is uniform on $(0,1)$. Let $\se{\F_t}_{t \ge 0}$ be the completed filtration such that $\F_t$ is generated by $\set{\se{\tau \le s}}{s \le t}$, and thus $\tau$ becomes a stopping time. Let $A = \grrl{0, \tau} \in \sO$. Note that $\Prob{\pi(A)} = 1$ by our construction.&lt;/p&gt;
+&lt;p&gt;It is easy to see that $\F_t$ is trivial when restricted to $\se{\tau &amp;gt; t}$. So, every $\F_t-$measurable random variable is a.s. constant on the event $\se{\tau &amp;gt; t}$. Therefore, any stopping time $T$ is deterministic on the event $\se{T &amp;lt; \tau}$. So, if $\gr{T} \subseteq A$, we have
+$$T = \begin{cases} s &amp;amp;\text{on } \se{\tau &amp;gt; s} \\ \infty &amp;amp;\text{on } \se{\tau \le s} \end{cases}$$
+a.s. for some fixed $s &amp;gt; 0$. But then $\Prob{T &amp;lt; \infty} = \Prob{\tau &amp;gt; s} &amp;lt; 1 = \Prob{\pi(A)}$.&lt;/p&gt;
+&lt;p&gt;A similar argument can be used to show that it is not possible to choose a predictable stopping time $T$ that satisfies \eqref{eq_exact} if $A \in \sP$.&lt;/p&gt;
+&lt;h1 id=&#34;applications-of-section-theorems&#34;&gt;Applications of Section Theorems&lt;/h1&gt;
+&lt;p&gt;Recall the measurable graph theorem (Theorem 8 in 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;part 1&lt;/a&gt;) which implies a map $T : \Omega \to [0, \infty]$ is measurable if and only if its graph $\gr{T}$ is measurable. We also have the following neat result:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 18:&lt;/span&gt; A random variable $T : \Omega \to [0, \infty]$ is a stopping time (respectively, a predictable stopping time), if and only if its graph $\gr{T}$ is an optional (respectively, predictable) set.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; The necessity follows from the characterization of $\sO$ and $\sP$ in Lemma 8. In the optional case, sufficiency follows from Theorem 13 and the fact that $\sO \subseteq \sP_\star$. For the sufficiency in the predictable case, suppose $\gr{T}$ is predictable. Apply Predictable Section theorem (Theorem 17) for $A = \gr{T}$ to construct a sequence $\se{T_n} _ \nn$ of predictable stopping times such that
+$$\gr{T_n} \subseteq \gr{T} \text{ and } \bP(T &amp;lt; \infty) \le \bP(T_n &amp;lt; \infty) + 2^{-n}, \quad \forall \; \nn$$
+Replacing $T_n$ be $T_1 \vee \cdots \vee T_n$ if necessary, we may assume that this sequence is increasing. It follows then, that the limit $T = \lim _ \nn \uparrow T_n = \sup _ \nn T_n$ is predictable (if $\se{T_n^m} _ {m \in \N}$ announces $T_n$, then $\tau_n = \max \set{T_j^k}{j,k \le n}$ announces $T$). $\square$&lt;/p&gt;
+&lt;p&gt;Suppose $X$ and $Y$ are measurable processes such that $\Probb{X(T) \ind{\se{T &amp;lt; \infty}} = Y(T) \ind{\se{T &amp;lt; \infty}}} = 1$ for each $\F-$measurable $T : \Omega \to [0, \infty]$. Then what can we say what $X$ and $Y$? We will show that $X$ and $Y$ are indistinguishable! To this end, let $F = \set{(t,\Omega) \in \oio}{X(t,\omega) \neq Y(t, \omega)}$. It is measurable since $X$ and $Y$ are measurable. We want to show that $\Probb{\pi(F)} = 0$, so suppose to the contrary that $\Probb{\pi(F)} &amp;gt; 0$. Any $\F-$measurable $T : \Omega \to [0, \infty]$ satisfying $\gr{T} \subseteq F$ must also satisfy $X(T) \ind{\se{T &amp;lt; \infty}} \neq Y(T) \ind{\se{T &amp;lt; \infty}}$. Now Measurable Section theorem (Theorem 10) says there exists a random variable $T : \Omega \to [0,\infty]$ such that $\gr{T} \subseteq F$ and $\se{T &amp;lt; \infty} = \pi(F)$, and therefore $\Probb{X(T) \ind{\se{T &amp;lt; \infty}} \neq Y(T) \ind{\se{T &amp;lt; \infty}}} \ge \Prob{T &amp;lt; \infty} = \Probb{\pi(F)} &amp;gt; 0$ contradicting our initial assumption.&lt;/p&gt;
+&lt;p&gt;Remarkably, we have similar results for optional and predictable processes.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 19:&lt;/span&gt; Suppose two optional (respectively, predictable) processes $X$ and $Y$ agree at finite stopping times (respectively, predictable stopping times), i.e., we have
+$$\Probb{X(T) \ind{\se{T &amp;lt; \infty}} = Y(T) \ind{\se{T &amp;lt; \infty}}} = 1, \quad \forall \; T \in \fS \; \left(\text{respectively, } T \in \fSP\right)$$
+Then the two processes $X$ and $Y$ are indistinguishable.&lt;br&gt;
+&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Consider the optional case &amp;ndash; the predictable case is similar. Just like above we have to show that for optional set $F = \set{(t,\Omega) \in \oio}{X(t,\omega) \neq Y(t, \omega)}$, $\Probb{\pi(F)} = 0$. Suppose to the contrary that $\Probb{\pi(F)} = 2\eps &amp;gt; 0$ for some $0 &amp;lt; \eps \le 1/2$. Then Optional Section theorem (Theorem 17) implies there exists a stopping time $T_\eps$ with the properties $\gr{T_\eps} \subseteq F$ and $2\eps = \Probb{\pi(F)} \le \Prob{T_\eps &amp;lt; \infty} + \eps$. But then $\Probb{X(T) \ind{\se{T &amp;lt; \infty}} \neq Y(T) \ind{\se{T &amp;lt; \infty}}} \ge \Prob{T_\eps &amp;lt; \infty} \ge \eps &amp;gt; 0$ contradicting our initial assumption. $\square$&lt;/p&gt;
+&lt;p&gt;As we can see section theorems are really powerful and allow simple proofs of otherwise very difficult results. Other than these two applications, section theorems can be used to prove Proposition 1.2.26 in [1] which is left unproved there. Let me skip this proof.&lt;/p&gt;
+&lt;h1 id=&#34;projection-theorems&#34;&gt;Projection Theorems&lt;/h1&gt;
+&lt;p&gt;To motivate optional and predictable projections, let us start with a fundamental problem in 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Filtering_problem_%28stochastic_processes%29&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;filtering theory&lt;/a&gt;: Assume an underlying complete probability space $\probsp$. There is an underlying signal $X = \se{X(t)} _ {t \ge 0}$ which is modelled as a stochastic process and which we are interested in studying. Our observation process has noise and therefore instead of observing $X$ we observe a process $Z = \se{Z(t)} _ {t \ge 0}$ such that $Z(t) = X(t) + \eps_t$ for some additive noise $\eps_t$. Therefore, it makes sense to consider $\bF = \se{\F(t)} _ {t \ge 0}$ the completed natural filtration of $Z$. The problem, then, is to compute an estimate for $X$ based on the observable data at time $t$, viz. the filtration $\bF$.&lt;/p&gt;
+&lt;p&gt;Looking at the expected value of $X$ conditional on the observable data, we obtain the following estimate for $X$ at each time $t \in \oi$,
+$$
+Y(t) = \Exc{X(t)}{\F(t)} \tag{8} \label{motiv}
+$$
+Since, the conditional expectation is defined up to $\bP-$a.s., we have some flexibility in choosing a version of the process $Y = \se{Y(t)} _ {t \ge 0}$. We would be very lucky if it were possible for us to choose a version of $Y$ such that \eqref{motiv} holds not only for all $t \in \oi$ but also for all finite stopping times. And indeed this is possible! This is part of the statement of the optional projection theorem.&lt;/p&gt;
+&lt;p&gt;On the other hand, if we want an estimate of $X$ based on observable data before time $t$, then our estimate would be $Y(t) = \Exc{X(t)}{\F(t-)}$ where recall $\F(t-) := \sigma\left(\bigcup _ {s &amp;lt; t} \F(s)\right)$. Again it is possible to choose a version of $Y$ such that this equality holds not only for all $t \in \oi$ but also for all finite predictable stopping times, and this is part of the statement of the predictable projection theorem.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 20 [Optional and Predictable Projections]:&lt;/span&gt; Let $X$ be a bounded, measurable (though not necessarily adapted) process.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;There is a unique, modulo indistinguishability, optional process $\oX$, called &lt;em&gt;optional projection of $X$&lt;/em&gt;, that satisfies for all stopping times $T \in \fS$ the identity
+$$
+\Exc{X(T) \ind{\se{T &amp;lt; \infty}}}{\F(T)} = \oX(T) \ind{\se{T &amp;lt; \infty}} \tag{9} \label{o_proj}
+$$&lt;/li&gt;
+&lt;li&gt;There is a unique, modulo indistinguishability, predictable process $\pX$, called &lt;em&gt;predictable projection of $X$&lt;/em&gt;, that satisfies for all predictable stopping times $T \in \fSP$ the identity
+$$
+\Exc{X(T) \ind{\se{T &amp;lt; \infty}}}{\F(T-)} = \pX(T) \ind{\se{T &amp;lt; \infty}} \tag{10} \label{p_proj}
+$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Remarks:&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Taking expectations in \eqref{o_proj} we get
+$$
+\Ex{X(T) \ind{\se{T &amp;lt; \infty}}} = \Ex{\oX(T) \ind{\se{T &amp;lt; \infty}}} \tag{11} \label{o_proj2}
+$$
+for all stopping times $T \in \fS$. Now suppose \eqref{o_proj2} holds for all stopping times $T \in \fS$. Fix an arbitrary stopping time $S \in \fS$ and a set $A \in \F(S)$, and write \eqref{o_proj2} for $T = S_A$ to get
+$$\Ex{X(S) \ind{\se{S &amp;lt; \infty}} \ind{A}} = \Ex{\oX(S) \ind{\se{S &amp;lt; \infty}} \ind{A}}$$
+But this immediately implies \eqref{o_proj} for stopping time $S$. Therefore, requiring \eqref{o_proj} to hold for all stopping times is equivalent to requiring \eqref{o_proj2} to hold for for all stopping times.&lt;/li&gt;
+&lt;li&gt;Similarly, requiring \eqref{p_proj} to hold for all predictable stopping times is equivalent to requiring
+$$\Ex{X(T) \ind{\se{T &amp;lt; \infty}}} = \Ex{\pX(T) \ind{\se{T &amp;lt; \infty}}} \tag{12} \label{p_proj2}$$
+to hold for for all predictable stopping times.&lt;/li&gt;
+&lt;li&gt;Operators $\sideset{^o}{}\,$ and $\sideset{^p}{}\,$ are linear operators, i.e., for bounded, measurable processes $X,Y$ and $a,b \in \R$
+$$\sideset{^o}{}(aX + bY) = a \oX + b \sideset{^o}{}Y$$
+$$\sideset{^p}{}(aX + bY) = a \pX + b \sideset{^p}{}Y$$
+as can be easily seen by properties of conditional expectation. The formulation of \eqref{o_proj2} and \eqref{p_proj2} makes it obvious that $\sideset{^o}{}(\oX) = \oX$ and $\sideset{^p}{}(\pX) = \pX$. This explains the terminology of &amp;ldquo;projection&amp;rdquo;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; Uniqueness is immediate from Theorem 19, so let&amp;rsquo;s focus on existence.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;We will employ the monotone class theorem for functions. We need a simple class of processes for which finding an optional projection is easy. To this end, consider the processes of the form
+$$
+X(t, \omega) = \ind{B}(\omega) \ind{[u,v)}(t), \quad 0 \le u &amp;lt; v &amp;lt; \infty \text{ and } B \in \F
+$$
+We claim that the candidate for the optional projection is $\oX(t, \omega) := M(t,\omega) \ind{[u,v)}(t)$, where $M$ is the right-continuous version of the bounded, thus also uniformly integrable, martingale $\Exc{\ind{B}}{\F(t)}$ (see [1,2] for the proof of existence of such a martingale; it is here that the usual conditions on the filtration $\bF$ become crucial).&lt;/p&gt;
+&lt;p&gt;With these choices and an arbitrary stopping time $T$, the left-hand side of \eqref{o_proj2} becomes $\bP(B \cap \se{u \le T &amp;lt; v})$, whereas optional stopping theorem [1,2] shows that its right-hand side is $\Ex{\Exc{\ind{B}}{\F(T)} \ind{[u,v)}(T)}$. Recalling now that $T$ is $\F(T)-$measurable shows that the two sides are equal.&lt;/p&gt;
+&lt;p&gt;Finally, use linearity and monotone class arguments to establish existence for arbitrary bounded, measurable $X$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Similar ideas work in the predictable case. We first consider processes of the form
+$$
+X(t, \omega) = \ind{B}(\omega) \ind{(u,v]}(t), \quad 0 \le u &amp;lt; v &amp;lt; \infty \text{ and } B \in \F
+$$
+We claim that the candidate for the predictable projection is $\pX(t, \omega) = M_{-}(t,\omega) \ind{[u,v)}(t)$, where $M_{-}(t,\omega) := M(t,\omega)$ is the left-continuous version of the martingale $M$ from above. Again using $\F(T-)-$measurability of $T$ we see the two sides of \eqref{p_proj2} are equal. Monotone class arguments now allow us to finish the proof. $\square$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Ioannis Karatzas and Steven Shreve. &lt;em&gt;Brownian Motion and Stochastic Calculus&lt;/em&gt;, Graduate Texts in Mathematics Volume 113, Springer-Verlag New York, 1998.&lt;/li&gt;
+&lt;li&gt;Jean-François Le Gall. &lt;em&gt;Brownian Motion, Martingales, and Stochastic Calculus&lt;/em&gt;, Graduate Texts in Mathematics Volume 274, Springer International Publishing, 2016.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://almostsuremath.com/stochastic-calculus/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Almost Sure&lt;/a&gt; blog by George Lowther.&lt;/li&gt;
+&lt;li&gt;Sheng-wu He, Jia-gang Wang and Jia-an Yan. &lt;em&gt;Semimartingale Theory and Stochastic Calculus&lt;/em&gt;, CRC Press, 1992.&lt;/li&gt;
+&lt;li&gt;Ioannis Karatzas and Steven Shreve. &lt;em&gt;Methods of Mathematical Finance&lt;/em&gt;, Probability Theory and Stochastic Modelling Volume 39, Springer-Verlag New York, 1998.&lt;/li&gt;
+&lt;li&gt;Claude Dellacherie. &lt;em&gt;Capacités et processus stochastiques&lt;/em&gt;, Springer-Verlag, 1972.&lt;/li&gt;
+&lt;li&gt;Claude Dellacherie and Paul-André Meyer. &lt;em&gt;Probabilities and Potential&lt;/em&gt;, North-Holland Publishing Company, 1978.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>General Theory of Processes - Part 1</title>
@@ -110,6 +534,34 @@ $$&lt;/p&gt;
 &lt;p&gt;I have been attending a reading course on stochastic analysis led by 
 &lt;a href=&#34;http://www.math.columbia.edu/~ik/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Professor Ioannis Karatzas&lt;/a&gt;, where the students take turn in presenting a topic of their choice. I recently presented on Choquet&amp;rsquo;s theory of capacities and its applications to measure theory and in the general theory of processes. This blog post is based on this presentation. I have freely copied&lt;sup&gt;
 &lt;a href=&#34;#plagiarism&#34;&gt;*&lt;/a&gt;&lt;/sup&gt; from many sources, but my primary reference are the unfortunately unpublished lecture notes by Prof. Karatzas.&lt;/p&gt;
+&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction&lt;/li&gt;
+&lt;li&gt;Pavings and Mosaics
+&lt;ul&gt;
+&lt;li&gt;Properties of pavings and mosaics&lt;/li&gt;
+&lt;li&gt;Compact pavings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Envelopes
+&lt;ul&gt;
+&lt;li&gt;Properties of envelopes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Capacitance&lt;/li&gt;
+&lt;li&gt;Scrapers
+&lt;ul&gt;
+&lt;li&gt;Mixing of Scrapers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Choquet Capacities&lt;/li&gt;
+&lt;li&gt;Measurable Projection&lt;/li&gt;
+&lt;li&gt;Measurable Graph&lt;/li&gt;
+&lt;li&gt;Debut&lt;/li&gt;
+&lt;li&gt;Measurable Section&lt;/li&gt;
+&lt;li&gt;Epilogue&lt;/li&gt;
+&lt;li&gt;References&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Kolmogorov laid the modern axiomatic foundations of probability theory with the German monograph &lt;em&gt;Grundbegriffe der Wahrscheinlichkeitsrechnung&lt;/em&gt; which appeared in Ergebnisse Der Mathematik in 1933. This was a period of intense discussions on the foundations of probability, and a majority of probabilists at the time considered measure theory not only a waste of time, but also an offense to &amp;ldquo;probabilistic intuition&amp;rdquo; [1]. But by 1950, with the work of Doob in particular, these discussions of foundations had been settled.&lt;/p&gt;
 &lt;p&gt;Continuous-time processes, on the other hand, were difficult to tame even with measure theory: if a particle is subject to random evolution, to show that its trajectory is continuous, or bounded, requires that all time values be considered, whereas classical measure theory can only handle a &lt;em&gt;countable&lt;/em&gt; infinity of time values. Thus, not only does probability depend on measure theory, but it also requires more of measure theory than the rest of analysis [1].&lt;/p&gt;
@@ -281,7 +733,7 @@ $$I(A) = \sup_{\substack{K \in \E_\delta \\ K \subseteq A}} I(K)$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Consider a probability space $\probsp$, then the outer measure
-$$\PP^*(A) := \inf_{\substack{B \in \F \ A \subseteq B}} \PP(B)$$
+$$\PP^*(A) := \inf_{\substack{B \in \F \\ A \subseteq B}} \PP(B)$$
 is a Choquet $\F-$capacity. Proof of this is a standard exercise in measure theory, albeit with a different terminology of continuity from below.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -323,7 +775,7 @@ $$D_A(\omega) = \inf\set{t \in [0, \infty)}{(t, \omega) \in A}$$&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Definition 17:&lt;/span&gt; For a mapping $Y \colon \Omega \to [0, \infty]$ we shall define its &lt;em&gt;graph&lt;/em&gt; as the product set
 $$\gr{Y} := \set{(t, \omega) \in [0, \infty) \times \Omega}{Y(\omega) = t}$$&lt;/p&gt;
 &lt;p&gt;The condition $(Z(\omega), \omega) \in A$ whenever $Z &amp;lt; \infty$ can then be expressed by saying $\gr{Z} \subseteq A$.&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 9 [Measurable Section]:&lt;/span&gt; Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F$. Then there exists a random variable $Z \colon \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\se{Z &amp;lt; \infty} = \pi(A)$.&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Theorem 10 [Measurable Section]:&lt;/span&gt; Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F$. Then there exists a random variable $Z \colon \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\se{Z &amp;lt; \infty} = \pi(A)$.&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;color:darkgray; font-size: 16pt&#34;&gt;Proof:&lt;/span&gt; &lt;span style=&#34;color:darkgray; font-size: 14pt&#34;&gt;We shall first show that for every $\eps &amp;gt; 0$ there exists a random variable $Z_\eps \colon \Omega \to [0, \infty]$ with $\gr{Z_\eps} \subseteq A$ and $\Prob{\pi(A)} \le \Prob{Z_\eps &amp;lt; \infty} + \eps$.&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;To this end, recall that if $K = [0, \infty)$ and $\K$ is the paving of all compact subsets of $K$, then we have the $\K \otimes_p \F-$capacity $I(A) = \PP^*(\pi(A)), A \in \PO(K \times \Omega)$. Therefore, every $A \in \B(K) \otimes \F$ is $I-$capacitable, and fixing $A$, there exists for every $\eps &amp;gt; 0$ a set $C_\eps \in (\K \otimes_p \F)_\delta$ such that
 $$C_\eps \subseteq A, \quad I(C_\eps) \le I(A) \le I(C_\eps) + \eps \tag{3} \label{eq_sec}$$
@@ -336,7 +788,8 @@ $$\sum_{k=1}^n \Prob{Z_k &amp;lt; \infty} \ge (1 - 2^{-n}) \Prob{\pi(A)}, \quad 
 The random variable $Z$ defined as $Z := Z_k$ on $\se{Z_k &amp;lt; \infty}$ for each $k \in \N$, and $Z := \infty$ otherwise, satisfies therefore $\gr{Z} \subseteq A$, thus also $\se{Z &amp;lt; \infty} \subseteq \pi(A).$&lt;/p&gt;
 &lt;p&gt;On the other hand, letting $n \to \infty$ in \eqref{eq_notsure}, we see that $\se{Z &amp;lt; \infty}$ and $\pi(A)$ have the same probability. Therefore, the completeness of the probability space implies these two sets can be made equal.  $\square$&lt;/p&gt;
 &lt;h1 id=&#34;epilogue&#34;&gt;Epilogue&lt;/h1&gt;
-&lt;p&gt;With this we are done laying the foundations. In the next blog post, we will discuss applications of these results in the general theory of processes.&lt;/p&gt;
+&lt;p&gt;With this we are done laying the foundations. In the 
+&lt;a href=&#34;https://makkar.github.io/post/grlthprcs2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;next blog post&lt;/a&gt;, we will discuss applications of these results in the general theory of processes.&lt;/p&gt;
 &lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Paul-André Meyer. 
@@ -1271,7 +1724,7 @@ $$&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;I have been self-studying some functional analysis recently, and Zorn&amp;rsquo;s lemma comes up often in proofs (for example, showing that every nontrivial vector space has a Hamel basis (I show this fundamental result below) or in the proof of Hahn-Banach theorem). Since I have no formal background in mathematics (my undergrad was in Mechanical engineering), it was my first time hearing about Zorn&amp;rsquo;s lemma. I read its statement from the Wikipedia article, naively assuming I understood this extremely powerful tool. But every usage of Zorn&amp;rsquo;s lemma seemed contrived to me, and it was only in retrospect that I could see how Zorn&amp;rsquo;s lemma seems like an obvious tool to apply. An excellent article which helped me understand Zorn&amp;rsquo;s lemma is 
 &lt;a href=&#34;https://gowers.wordpress.com/2008/08/12/how-to-use-zorns-lemma/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;How to use Zorn&amp;rsquo;s lemma&lt;/a&gt; by Timothy Gowers. If you didn&amp;rsquo;t know about Gowers&amp;rsquo;s article, then mentioning it is the biggest contribution of my article and I recommend you read it.&lt;/p&gt;
-&lt;p&gt;In this article, I want to show how to use Zorn&amp;rsquo;s lemma by stating a theorem and discussing its proof. Things &amp;ldquo;clicked&amp;rdquo; for me when I proved that theorem. But before we do that let me define some important concepts.&lt;/p&gt;
+&lt;p&gt;In this article, I want to show how to use Zorn&amp;rsquo;s lemma by stating two theorems and discussing their proofs. Things &amp;ldquo;clicked&amp;rdquo; for me when I proved the first theorem discussed below. I will therefore try to be verbose, and go through my thinking process in detail. But before we do that let me define some important concepts.&lt;/p&gt;
 &lt;h1 id=&#34;preliminaries&#34;&gt;Preliminaries&lt;/h1&gt;
 &lt;p&gt;Recall the concept of &lt;em&gt;relation&lt;/em&gt; I defined 
 &lt;a href=&#34;https://makkar.github.io/post/equivalence-relations/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;

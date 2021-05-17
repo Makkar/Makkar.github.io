@@ -1,0 +1,1247 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Aditya Makkar">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Applications of Choquet&#39;s theory of capacities in the general theory of processes">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://makkar.github.io/post/grlthprcs2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(0, 136, 204)">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://makkar.github.io/post/grlthprcs2/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Aditya Makkar">
+  <meta property="og:url" content="https://makkar.github.io/post/grlthprcs2/">
+  <meta property="og:title" content="General Theory of Processes - Part 2 | Aditya Makkar">
+  <meta property="og:description" content="Applications of Choquet&#39;s theory of capacities in the general theory of processes"><meta property="og:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-05-15T20:34:25-04:00">
+    
+    <meta property="article:modified_time" content="2021-05-15T20:34:25-04:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://makkar.github.io/post/grlthprcs2/"
+  },
+  "headline": "General Theory of Processes - Part 2",
+  
+  "datePublished": "2021-05-15T20:34:25-04:00",
+  "dateModified": "2021-05-15T20:34:25-04:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Aditya Makkar"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aditya Makkar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://makkar.github.io/images/icon_hu6726f8512450ca078cf8b558674bfa85_44401_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Applications of Choquet's theory of capacities in the general theory of processes"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>General Theory of Processes - Part 2 | Aditya Makkar</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/hilbert/"><span>Hilbert's Hotel - Blog</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>General Theory of Processes - Part 2</h1>
+
+  
+  <p class="page-subtitle">Applications of Choquet&rsquo;s theory of capacities in the general theory of processes</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 15, 2021
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\Z_{\geq 0}^N}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\LO}{\mathbb{L}^0}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\Prob}[1]{\bP\left( #1 \right)}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eql}[1]{\begin{align}#1\end{align}}
+\newcommand{\ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\indo}[1]{\mathbf{1}_{#1}(\omega)}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\K}{\mathscr{K}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\PO}{\mathfrak{P}}
+\newcommand{\fS}{\mathfrak{S}}
+\newcommand{\fSP}{\fS^{(\sP)}}
+\newcommand{\fA}{\mathfrak{A}}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\probsp}{(\Omega, \F, \PP)}
+\newcommand{\integ}[1]{\int_{\Omega} #1 \dmu}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Bo}{\B(\R)}
+\newcommand{\Bon}[1]{\B(\R^{#1})}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\lims}{\limsup_{n \to \infty}}
+\newcommand{\limi}{\liminf_{n \to \infty}}
+\newcommand{\sumn}{\sum_{n=1}^{\infty}}
+\newcommand{\trans}{\intercal}
+\newcommand\inner[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\modu}[1]{\lvert#1\rvert}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ex}[1]{\exp\left{#1\right}}
+\newcommand{\comp}{\mathsf{c}}
+\newcommand{\emp}{\varnothing}
+\newcommand{\floor}[1]{\left \lfloor{#1}\right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil{#1}\right \rceil}
+\newcommand{\se}[1]{\left\{ #1 \right\}}
+\newcommand{\set}[2]{\left\{ #1 \; : \; #2 \right\}}
+\newcommand{\sett}[2]{\left\{ #1 \; | \; #2 \right\}}
+\newcommand{\Ex}[1]{\bE\left[#1\right]}
+\newcommand{\Excc}[2]{\bE\left( \left. #1 \, \right\vert \, #2\right)}
+\newcommand{\Exc}[2]{\bE\left[ \left. #1 \, \right\vert \, #2\right]}
+\newcommand{\Pc}[2]{\bP\left( \left. #1 \, \right\vert \, #2\right)}
+\newcommand{\Prob}[1]{\bP\left(#1\right)}
+\newcommand{\Probb}[1]{\bP\left[#1\right]}
+\newcommand{\pard}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\PM}{\widehat{\otimes}_p}
+\newcommand{\nn}{{n \in \N}}
+\newcommand{\oi}{[0, \infty)}
+\newcommand{\oio}{{[0, \infty) \times \Omega}}
+\newcommand{\gr}[1]{[\![ #1 ]\!]}
+\newcommand{\grr}[1]{]\!] #1 ]\!]}
+\newcommand{\grl}[1]{[\![ #1 [\![}
+\newcommand{\grrl}[1]{]\!] #1 [\![}
+\newcommand{\oX}{\sideset{^o}{}X}
+\newcommand{\pX}{\sideset{^p}{}X}
+\DeclareMathOperator{\dx}{dx}
+\DeclareMathOperator{\dy}{dy}
+\DeclareMathOperator{\du}{du}
+\DeclareMathOperator{\dz}{d\matr{z}}
+\DeclareMathOperator{\dt}{dt}
+\DeclareMathOperator{\dmu}{d\mu}
+\DeclareMathOperator{\dom}{d\omega}
+\DeclareMathOperator{\dP}{d\PP}
+\DeclareMathOperator{\dQ}{d\QQ}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ord}{\mathcal{O}}
+\DeclareMathOperator{\bE}{\mathbb{E}}
+\DeclareMathOperator{\bP}{\mathbb{P}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+$$</p>
+<div style="text-align: justify">
+<p>This is part 2 of the sequence of blog posts on general theory of processes. For part 1 
+<a href="https://makkar.github.io/post/grlthprcs/" target="_blank" rel="noopener">see here</a>. I will be building upon the content presented there.</p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li>Introduction</li>
+<li>Stochastic Processes</li>
+<li>Stopping Times
+<ul>
+<li>Predictable Stopping Times</li>
+</ul>
+</li>
+<li>Debut of a Progressive Set</li>
+<li>Optional and Predictable Processes</li>
+<li>Properties of Debuts</li>
+<li>Section Theorems</li>
+<li>Applications of Section Theorems</li>
+<li>Projection Theorems</li>
+<li>References</li>
+</ol>
+<h1 id="introduction">Introduction</h1>
+<blockquote>
+<p><span style="color:silver"> &ldquo;Mathematics exists solely for the honour of the human mind.&rdquo;</p>
+<p>&ndash; Jacobi in a letter to Legendre after the death of Fourier. Fourier had the opinion that the principal aim of mathematics was public utility and explanation of natural phenomena. </span></p>
+</blockquote>
+<p>We previously discussed Choquet&rsquo;s theory of capacities and its applications in measure theory. The goal of this blog post is to discuss the debut, section and projection theorems in stochastic processes. These theorems form the core of the &ldquo;general theory of processes&rdquo;. At the risk of being overly simplistic, general theory of processes is the study of filtrations and stopping times.</p>
+<p>Unlike part 1 where there were no prerequisites other than basic measure theory, this part assumes a good amount of familiarity with stochastic processes, at the level of [1,2]. Without that the material here will feel unmotivated and difficult. On the other hand, the theorems proved here are skipped even in advanced courses in stochastic processes as they aren&rsquo;t the most useful for applications, but rather are necessary to fill in gaps if a rigorous treatment is warranted. Nevertheless the theory presented is extremely profound and beautiful, and reading it will be an honour for the mind, if nothing else.</p>
+<h1 id="stochastic-processes">Stochastic Processes</h1>
+<p>For this whole blog post, we shall place ourselves on a complete probability space $\probsp$ endowed with a filtration $\bF = \se{\F(t)} _ {0 \le t &lt; \infty}$, i.e., a family of sub$-\sigma-$algebras of $\F$ which is increasing in the sense that
+$$\F(s) \subseteq \F(t) \subseteq \F(\infty) := \sigma\left(\bigcup_{u \in \oi} \F(u)\right), \quad 0 \le s \le t &lt; \infty.$$</p>
+<p>We sometimes denote this setup conveniently as $(\Omega, \F, \bF, \bP)$ and call it a <em>filtered probability space</em>. We shall assume that this filtration satisfies the <em>usual conditions</em>:</p>
+<ol>
+<li>Right-continuity, i.e., $\F(t) = \F(t+) := \bigcap_{s &gt; t} \F(s)$ for all $t \in [0, \infty)$, and</li>
+<li>$\F(0)$ contains all the $\bP-$negligible events in $\F$.</li>
+</ol>
+<p>For our purposes, a stochastic process is simply a collection of real-valued random variables $X = \se{X(t)}_{0 \le t &lt; \infty}$ on $(\Omega, \F)$. The <em>sample paths</em> of $X$ are the mapping $\oi \ni t \mapsto X(t, \omega) \in \R$ obtained when fixing $\omega \in \Omega$.</p>
+<p><span style="color:darkgray; font-size: 16pt">Definition 18:</span> Consider two stochastic process $X$ and $Y$ defined on the same probability space $\probsp$. We say</p>
+<ol>
+<li>
+<p>$X$ and $Y$ have the <em>same finite-dimensional distributions</em> if, for any integer $n \ge 1$, real numbers $0 \le t_1 &lt; t_2 &lt; \cdots &lt; t_n &lt; \infty,$ and $A \in \B(\R^n)$, we have
+$$\bP[(X_{t_1}, \ldots, X_{t_n}) \in A] = \bP[(Y_{t_1}, \ldots, Y_{t_n}) \in A]$$</p>
+</li>
+<li>
+<p>$Y$ is a <em>modification</em> or a <em>version</em> of $X$ if, for every $t \in \oi$, we have $\bP(X_t = Y_t) = 1$.</p>
+</li>
+<li>
+<p>$X$ and $Y$ are <em>indistinguishable</em> if almost all their sample paths agree, i.e., $\bP(X_t = Y_t, \; \forall \, t \in \oi) = 1$. Technically, this formulation isn&rsquo;t rigorous since the set $\se{X_t = Y_t, \; \forall \, t \in \oi}$ need not be measurable, and so we can define indistinguishability as follows: $X$ and $Y$ are indistinguishable if there exists a negligible subset $\Psi$ of $\Omega$ such that
+$$X_t(\omega) = Y_t(\omega), \quad \forall \; \omega \in \Omega \setminus \Psi, \; \forall \; t \in \oi$$</p>
+</li>
+</ol>
+<p><span style="color:darkgray; font-size: 16pt">Definition 19:</span> A stochastic process $X = \se{X(t)}_{0 \le t &lt; \infty}$ is called</p>
+<ol>
+<li>
+<p><em>adapted</em>, if $X(t)$ is $\F(t)-$measurable for every $t \in \oi$.</p>
+</li>
+<li>
+<p><em>measurable</em>, if the mapping
+$$[0, \infty) \times \Omega \ni (t,\omega) \mapsto X(t,\omega) \in \R \tag{5} \label{eq_meas}$$
+is $\B(\oi) \otimes \F-$measurable, when $\R$ is endowed with its Borel $\sigma-$algebra.</p>
+</li>
+<li>
+<p><em>progressively measurable</em>, if for every $t \in \oi$ the mapping $$[0,t] \times \Omega \ni (t,\omega) \mapsto X(t,\omega) \in \R$$ is $\B([0,t]) \otimes \F(t)-$measurable, when $\R$ is endowed with its Borel $\sigma-$algebra.</p>
+</li>
+</ol>
+<p>Recall that every progressively measurable process is both measurable and adapted; and every adapted process with right-continuous or with left-continuous paths, is progressively measurable [1]. On the other hand, we have the following</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 11:</span> Every measurable and adapted process $X = \se{X(t)} _ {0 \le t &lt; \infty}$ has a progressively measurable modification $Y = \se{Y(t)} _ {0 \le t &lt; \infty}$.</p>
+<p><span style="color:darkgray; font-size: 16pt">Proof:</span> Consider the space $\LO$ of equivalence classes of measurable functions $f : \Omega \to \R$, and endow it with the topology of convergence in probability, for example with the pseudo-metrics $\rho(f, g) = \bE (1 \wedge |f-g|)$ or $\rho(f,g) = \bE \left( \frac{|f-g|}{1 + |f-g|} \right)$. Recall that if a sequence $\se{f_n} _ \nn \subseteq \LO$ satisfies $\sum _ \nn \rho(f _ n, f _ {n+1}) &lt; \infty,$ then it converges in probability &ldquo;fast&rdquo;, thus also almost surely.</p>
+<p>Every process $Y = \se{Y(t)} _ {0 \le t &lt; \infty}$ can be thought of as a mapping from $\oi$ into $\LO$, which associates to each element in $\oi$ the equivalence class $\mathcal{Y} _ t$ of $Y(t)$. Consider now the collection $\sH$ of processes $Y$ such that the mapping $\oi \ni t \mapsto \Y_t \in \LO$ satisfies</p>
+<ol>
+<li>it takes values in a separable subspace of $\LO$;</li>
+<li>under it, the inverse image of every open ball of $\LO$ is a Borel subset of $\oi$; and</li>
+<li>it is the uniform limit of a sequence of simple measurable functions with values in the space $\LO$.</li>
+</ol>
+<p>Then note that property 3 implies the other two, and that conversely, properties 1 and 2 together imply property 3, because a real-valued function is measurable if and only if it is the increasing limit of a sequence of simple measurable functions.</p>
+<p>Next, note that $\sH$ is a real vector space on account of property 3, and is closed under sequential pointwise convergence on account of properties 1 and 2. It is easy to see that $\sH$ contains all processes of the form $Y(t,\omega) = K(t) \xi(\omega)$, where $K$ is the indicator of an interval in $\oi$ and $\xi : \Omega \to \R$ is a bounded measurable function. Thus, monotone class theorem implies $\sH$ contains all bounded measurable processes. Using a standard slicing argument it is easily seen that every measurable process $Y$ has properties 1, 2 and 3.</p>
+<p>Consider now a measurable and adapted process $X = \se{X(t)} _ {0 \le t &lt; \infty}$. For each $\nn$, there exists a process $X^{(n)} = \se{X^{(n)}(t)} _ {0 \le t &lt; \infty}$ which is simple and measurable (in the sense that there exists a partition $\se{A^{(n)} _ k} _ {k \in \N}$ of $\oi$ into Borel sets, and a sequence of random variable $\se{H^{(n)} _ k} _ {k \in \N}$, such that $X^{(n)}(t) = H^{(n)} _ k$ for $t \in A^{(n)} _ k$), and satisfies
+$$\rho(X(t), X^{(n)}(t)) \le 2^{-(n+1)}, \quad \forall \; t \in \oi$$</p>
+<p>Next, we define a sequence of random variables $\se{G^{(n)} _ k} _ {k \in \N}$ for each $\nn$ using the sequence $\se{H^{(n)} _ k} _ {k \in \N}$ to get &ldquo;enhanced&rdquo; measurability properties. To this end, define $s^{(n)} _ k = \inf A^{(n)} _ k$, and define $G^{(n)} _ k = X(s^{(n)} _ k)$ if $s^{(n)} _ k \in A^{(n)} _ k$; if, on the other hand $s^{(n)} _ k \notin A^{(n)} _ k$, we pick any $\F(s^{(n)} _ k)-$measurable $G^{(n)} _ k$ that satisfies
+$$\rho\left(G^{(n)} _ k, H^{(n)} _ k\right) \le 2^{-(n+1)}$$
+Such a $G^{(n)} _ k$ always exists since we may take a decreasing sequence $\se{\theta_m} _ {m \in \N} \subseteq A^{(n)} _ k$ with $\theta_m \downarrow s^{(n)} _ k$, and set $G^{(n)} _ k = \liminf _ {m \to \infty} X(\theta_m)$; and the above inequality holds for all integers $k$.</p>
+<p>We define now the process $Y^{(n)} = \se{Y^{(n)}(t)} _ {0 \le t &lt; \infty}$ by $Y^{(n)}(t) := G^{(n)} _ k, \, t \in A^{(n)} _ k$, and check that it is progressively measurable and satisfies $\rho\left(X(t), Y^{(n)}(t)\right) \le 2^{-(n+1)}$ for all $t \in \oi$ and $\nn$.</p>
+<p>Finally, we construct a progressively measurable process $Y$ by
+$$Y(t, \omega) := \limn Y^{(n)}(t, \omega), \quad \forall \; (t,\omega) \in \oi \times \Omega \text{ such that this limit exists,}$$
+and $Y(t, \omega) := 0$ otherwise. The properties of $\rho$ then implies $\bP(X(t) = Y(t)) = 1$ holds for all $t \in \oi$, so $Y$ is a modification of $X$. $\square$</p>
+<p><span style="color:darkgray; font-size: 16pt">Definition 20:</span> The <em>$\sigma-$algebra of progressively measurable sets</em>, denoted by $\sP _ \star$, is the smallest $\sigma-$algebra on the product space $\oi \times \Omega$, with respect to which the mapping as in \eqref{eq_meas} are measurable for all progressively measurable processes $X$.</p>
+<p>It is easy to see that a subset $A$ of $\oi \times \Omega$ belongs to $\sP _ \star$ if and only if, for every $t \in \oi$, $A \cap ([0,t] \times \Omega) \in \B([0,t]) \otimes \F(t).$ This important characterization will be used later.</p>
+<h1 id="stopping-times">Stopping Times</h1>
+<p><span style="color:darkgray; font-size: 16pt">Definition 21:</span> A random variable $T : \Omega \to [0, \infty]$ is called a <em>stopping time</em> if $\se{T \le t} \in \F(t)$ for all $t \in \oi$.</p>
+<p>Because $\bF$ is right-continuous this is equivalent to $\se{T &lt; t} \in \F(t)$ for all $t \in \oi$ as can be seen by writing $\se{T \le t} = \bigcap_{\substack{q \in \Q \ t &lt; q &lt; s}} \se{T &lt; q} \in \F(s)$.</p>
+<p><span style="color:darkgray; font-size: 16pt">Definition 22:</span> For a stopping time $T$, we define</p>
+<ol>
+<li>
+<p><em>$\sigma-$algebra of events prior to it</em> by
+$$\F(T) := \set{A \in \F}{ A \cap \se{T \le t} \in \F(t), \quad \forall \; t \in \oi}$$</p>
+</li>
+<li>
+<p><em>$\sigma-$algebra of events strictly prior to it</em> by
+$$\F(T-) := \sigma(\F(0) \cup \set{A \cap \se{T &gt; t}}{t \in \oi, A \in \F(t)})$$</p>
+</li>
+</ol>
+<p>The following properties are useful and their proofs can be found in any standard textbook [1,2].</p>
+<p><span style="color:darkgray; font-size: 16pt">Lemma 6:</span> Let $T$ and $S$ be any two stopping times. Then</p>
+<ol>
+<li>$\F(T-) \subseteq \F(T)$;</li>
+<li>$T$ is measurable with respect to both $\F(T)$ and $\F(T-)$;</li>
+<li>$\F(T) \cap \F(S) = \F(T \wedge S)$;</li>
+<li>$A \cap \se{T \le S} \in \F(S)$, for all $A \in \F(T)$;</li>
+<li>$A \cap \se{T &lt; S} \in \F(S-)$, for all $A \in \F(T)$;</li>
+<li>If the stopping times satisfy $T \le S$, then $\F(T) \subseteq \F(S)$ and $\F(T-) \subseteq \F(S-)$;</li>
+<li>If the stopping times satisfy $T &lt; S$ on the set $\se{0 &lt; S &lt; \infty}$, then $\F(T) \subseteq \F(S-)$.</li>
+<li>If $\se{T_n} _ \nn$ is an increasing sequence of stopping times and $T = \lim _ \nn \uparrow T_n$, then
+$$\F(T-) = \sigma\left(\bigcup_\nn \F(T_n-)\right); \quad \text{as well as  } \F(T-) = \sigma\left(\bigcup_\nn \F(T_n)\right)$$
+provided that $T_n &lt; T$ holds on the set $\se{0 &lt; T &lt; \infty}$ for every $\nn$.</li>
+</ol>
+<h2 id="predictable-stopping-times">Predictable Stopping Times</h2>
+<p><span style="color:darkgray; font-size: 16pt">Definition 23:</span> A stopping time $T$ is called <em>predictable</em>, if there exists an increasing (&ldquo;announcing&rdquo;) sequence $\se{T_n} _ \nn$ of stopping times with $T = \lim _ \nn \uparrow T_n$, and $T_n &lt; T$ holds on the set $\se{T &gt; 0}$ for all $\nn$.</p>
+<p>Note $\se{T \le t} = \bigcap_\nn \se{T_n \le t} \in \F(t)$ and therefore if in the definition above we had not required $T$ to be a stopping time, it would still be a stopping time. A canonical example of a predictable stopping time is the first time Brownian motion $W$ hits or exceeds a certain level $b$. It is announced by sequence of first times $W$ hits or exceeds the levels $b - 1/n$, for $\nn$. In fact, we have (from [3])</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 12:</span> Let $X$ be a continuous adapted process and $b$ be a real number. Then
+$$T = \inf \set{t \in \oi}{X(t) \ge c}$$
+is a predictable stopping time.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> Let $T_n = \inf \set{t \in \oi}{X(t) \ge b - 1/n}$ which, by the Debut Theorem below is a stopping time. This gives an increasing sequence $\se{T_n} _ \nn$ of stopping times bounded above by $T$. Also, $X(T _ n) \ge c - 1/n$ whenever $T _ n &lt; \infty$ and, by left-continuity, setting $\tau = \lim _ n T _ n$ gives $X(\tau) \ge c$ whenever $\tau &lt; \infty$. So $T \ge \tau$, showing that $T = \lim _ \nn \uparrow T_n$. If $0 &lt; T _ n \le T &lt; \infty$ then, by continuity, $X(T_n) = c - 1/n &lt; c = X(T)$. So, $T_n &lt; T$ on the set $\se{0 &lt; T &lt; \infty}$ and the sequence $\se{T_n \wedge n} _ \nn$ announces $T$. $\square$</p>
+<p>Of course, in the above proof we assumed Debut Theorem for stopping times and proving it is our next agenda. In the same flavor as Lemma-6 we have</p>
+<p><span style="color:darkgray; font-size: 16pt">Lemma 7:</span> If $T$ is a predictable and $S$ an arbitrary stopping time, then</p>
+<ol>
+<li>$A \cap \se{T \le S} \in \F(S-)$ for all $A \in \F(T-)$;</li>
+<li>$A \cap \se{S = \infty} \in \F(S-)$ for all $A \in \F(\infty)$.</li>
+</ol>
+<p>In particular, both events $\se{T \le S}$ and $\se{T = S}$ belong to $\F(S-)$.</p>
+<h1 id="debut-of-a-progressive-set">Debut of a Progressive Set</h1>
+<p><span style="color:darkgray; font-size: 16pt">Definition 24:</span> For any measurable mapping $Z : \Omega \to [0, \infty]$ and any $A \in \F$, we define the <em>restriction of $Z$ on $A$</em> as
+$$Z_A := Z \ind{A} + \infty \ind{A^\comp}$$</p>
+<p>Notice that $\se{Z_A \le Z} = A \sqcup \left(A^\comp \cap \se{Z = \infty}\right)$. If $T$ is a stopping time and $A \in \F(T)$, then since $\se{T_A \le t} = \se{T \le t} \cap A \in \F(t)$ for all $t \in \oi$, $T_A$ is also a stopping time.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 13 [Debut of a Progressive Set]:</span> Under the usual conditions, if $A$ is a progressively measurable set, i.e., $A \in \sP_\star$, then the debut $D_A$ is a stopping time.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> Since $A \in \sP_\star \subseteq \B(\oi) \otimes \F$, Measurable Debut theorem (Theorem 9) implies $D_A$ is a random variable.<br>
+Just like in the proof of Theorem 9, for any real number $t &gt; 0$, the set $\se{D_A &lt; t}$ is the projection onto $\Omega$ of the set $A_t := A \cap ([0, t) \times \Omega)$. Recall that the fact that $A \in \sP_\star$ implies $A_t \in \B([0,t]) \otimes \F(t)$. Therefore, Measurable Projection theorem (Theorem 7) implies $\se{D_A &lt; t} = \pi(A_t) \in \F(t)$. Right continuity of the filtration now implies $D_A$ is an $\bF-$stopping time. $\square$</p>
+<p>The following important theorem now becomes an easy corollary.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 14 [First Hitting Times]:</span> In the context above, if $X$ is a progressively measurable process and $\Gamma \in \B(\R)$, the first hitting time
+$$H_\Gamma := \inf \set{t \in \oi}{X(t) \in \Gamma}$$
+is a stopping time.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> Since $X$ is a progressively measurable process, the set $A = \set{(t,\omega) \in \oi \times \Omega}{X(t, \omega) \in \Gamma}$ is a progressively measurable set. Theorem 13 then implies the debut $D_A$ is a stopping time, but it is easy to see $D_A = H_\Gamma$. $\square$</p>
+<h1 id="optional-and-predictable-processes">Optional and Predictable Processes</h1>
+<p><span style="color:darkgray; font-size: 16pt">Definition 25:</span> The <em>predictable $\sigma-$algebra</em>, denoted by $\sP$, is the smallest $\sigma-$algebra on $\oi \times \Omega$ with respect to which left-continuous $\bF-$adapted processes are measurable. A stochastic process is said to <em>predictable}</em> if it is $\sP-$measurable.</p>
+<p><span style="color:darkgray; font-size: 16pt">Definition 26:</span> The <em>optional $\sigma-$algebra</em>, denoted by $\sO$, is the smallest $\sigma-$algebra on $\oi \times \Omega$ with respect to which right-continuous $\bF-$adapted processes are measurable. A stochastic process is said to <em>optional</em> if it is $\sO-$measurable.</p>
+<p>Since all right-continuous or left-continuous adapted processes are progressively measurable, all optional or predictable processes are adapted. We need the concept of stochastic intervals to ease some notation and see some examples of optional and predictable sets.</p>
+<p><span style="color:darkgray; font-size: 16pt">Definition 26:</span> If $U,V : \Omega \to [0, \infty]$ are two random variables, and $U \le V$, then define the <em>stochastic intervals</em> as
+$$\gr{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) \le t \le V(\omega)}$$
+$$\grl{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) \le t &lt; V(\omega)}$$
+$$\grr{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) &lt; t \le V(\omega)}$$
+$$\grrl{U,V} := \set{(t,\omega) \in \oi \times \Omega}{U(\omega) &lt; t &lt; V(\omega)}$$
+Also, for $A \in \F(0)$, define
+$$0_A(\omega) = \begin{cases}
+0 &amp;\text{ if } \omega \in A \\<br>
+\infty &amp;\text{ if } \omega \in A^\comp
+\end{cases}$$</p>
+<p>Notice that $\gr{U} = \gr{U,U} = \gr{0, U} \setminus \grl{0, U}$, and that $0_A$ is predictable with the announcing sequence $\se{0_A \wedge n} _ \nn$. Denote by $\fS$ the collection of all stopping times and by $\fSP$ the collection of all predictable stopping times. The next lemma collects some useful properties of stochastic intervals in relation to optional and predictable $\sigma-$algebras.</p>
+<p><span style="color:darkgray; font-size: 16pt">Lemma 8:</span></p>
+<ol>
+<li>If $S,T \in \fS$ such that $S \le T$, then the stochastic intervals $\gr{S,T}, \grl{S,T}, \grr{S,T}, \grrl{S,T}$ and the graphs $\gr{S}, \gr{T}$ are optional.</li>
+<li>If $S,T \in \fS$ such that $S \le T$, then the stochastic interval $\grr{S,T}$ is predictable. If $S \in \fSP$, then the stochastic interval $\grl{S, \infty}$ is predictable.</li>
+<li>The $\sigma-$algebra $\sO$ of optional sets is generated by stochastic intervals in many ways
+$$
+\sO = \sigma\left(\set{\grl{S,\infty}}{S \in \fS}\right) = \sigma\left(\set{\grl{S,T}}{S, T \in \fS}\right) = \sigma\left(\set{\gr{S,T}}{S,T \in \fS}\right)
+$$</li>
+<li>Similarly, $\sigma-$algebra $\sP$ of predictable sets is generated by stochastic intervals in many ways
+$$
+\sP = \sigma\left(\set{\grr{S,T}, \gr{0_A}}{S,T \in \fS \text{ and } A \in \F(0)}\right) = \sigma\left(\set{\grl{S,\infty}}{S \in \fSP}\right) = \sigma\left(\set{\gr{S,T}}{S,T \in \fSP}\right)
+$$</li>
+</ol>
+<p><span style="color:darkgray; font-size: 16pt">Proof:</span> I will only be proving some results. For a complete picture see [3,4].</p>
+<ol>
+<li>
+<p>It is easy to see that $\ind{\grl{S,T}}$ is right-continuous and adapted, hence $\grl{S,T}$ is optional. If $T_n = S + 1/n$ for $\nn$, then $\gr{S} = \bigcap _ \nn \grl{S, T_n}$, and thus $\gr{S}$ is also optional. Similar, for $\gr{T}$. These facts along with simple manipulation of sets immediately imply $\gr{S,T}, \grr{S,T}, \grrl{S,T}$ are also optional.</p>
+</li>
+<li>
+<p>It is easy to see that $\ind{\grr{S,T}}$ is left-continuous and adapted, hence $\grr{S,T}$ is predictable. $\square$</p>
+</li>
+</ol>
+<p>It is an easy exercise to show</p>
+<p><span style="color:darkgray; font-size: 16pt">Lemma 9:</span> Every predictable process is optional, and every optional process is progressively measurable. In other words
+$$ \sP \subseteq \sO \subseteq \sP _ \star \subseteq \B(\oi) \otimes \F $$</p>
+<h1 id="properties-of-debuts">Properties of Debuts</h1>
+<p>Recall the setting of section &ldquo;Measurable Section&rdquo; from 
+<a href="https://makkar.github.io/post/grlthprcs/" target="_blank" rel="noopener">part 1</a>. We showed there that if $A \in \B([0, \infty)) \otimes \F$, then we can define a <em>measurable</em> mapping $T : \Omega \to [0, \infty]$ such that for all $\omega \in \pi(A)$ we have $(T(\omega), \omega) \in A$, or stated more succinctly, $\gr{T} \subseteq A$. Now, what if we want something stronger, say, $T$ should be a stopping time? As we will see, we will have to make stronger assumptions on the set $A$ and even then if we want $T$ to be a stopping time we will have to let go of the nice property that $\se{T &lt; \infty}= \pi(A)$.</p>
+<p>But first, we need to prove a certain property of debuts which we will need in proving the aforementioned section theorem, and that&rsquo;s the goal of this section.</p>
+<p>It isn&rsquo;t difficult to see that $\sP$ coincides with the mosaic generated by the paving on $\oi \times \Omega$ that consists of finite unions of stochastic intervals of the form $\gr{S,T}$, where $S,T \in \fSP$. Generalizing this, let us consider a collection $\fA$ of stopping times that contains $0$ and $\infty$, and which is closed under a.s. equality and under finitely many lattice operations ($\wedge$ and $\vee$). We denote by $\cJ := \set{\grl{S,T}}{S,T \in \fA}$, and by $\cT$ the collection of finite unions of elements of $\cJ$.</p>
+<p>Simple observations like $\grl{S,T}^\comp = \grl{0, S} \cup \grl{T, \infty}$ or $\grl{S,T} \,\cap \, \grl{U,V} = \grl{S \vee U, (S \vee U) \vee (T \wedge V)}$, can be used to show that $\cJ$ is a paving on $\oi \times \Omega$ and $\cT$ is an algebra on $\oi \times \Omega$.</p>
+<p>For more structure, let us impose the following conditions on the collection $\fA$:</p>
+<ol>
+<li>For any pair $S,T \in \fA$, the stopping time $S _ {\se{S &lt; T}}$ (recall the notation of Definition 24 and the observation right after it) belongs to $\fA$;</li>
+<li>For any increasing sequence $\se{S_n} _ \nn \subseteq \fA$, the limit $\lim _ \nn \uparrow S_n$ belongs to $\fA$.</li>
+</ol>
+<p>Condition 1 ensures that the debut of an element of $\cT$ belongs to $\fA$. This is because $S_{\se{S &lt; T}} = D_{\grl{S,T}}$ and because the debut of union of a finite collection of elements from $\cJ$ is equal to to the minimum of the debuts of those elements.</p>
+<p>Condition 2 ensures that the debut of an element of $\cT _ \delta$ (which recall equals $\set{\bigcup _ \nn A_n}{A_n \in \cT \text{ for all } \nn}$) belongs to to $\fA$. This is the main result of this section, and is proved below as Theorem 15.</p>
+<p>Coming out of the abstraction for a bit, we note that the collection $\fS$ of all stopping times satisfies all the conditions imposed above on $\fA$. Similarly for the collection $\fSP$ of all predictable stopping times. The first claim is trivial to see. To show the second claim, we first prove the following lemma.</p>
+<p><span style="color:darkgray; font-size: 16pt">Lemma 10:</span> For any stopping time $T$ and set $A \in \F(T)$, the random variable $T_A$ is a stopping time as we saw above. For $T_A$ to be a predictable stopping time, it is necessary that $A \in \F(T-)$; this condition is also sufficient if $T$ is predictable.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> If $T_A$ is a predictable stopping time, then since $A = \se{T_A \le T} \setminus \left(A^\comp \cap \se{T = \infty}\right)$ and by Lemma 7 both $\se{T_A \le T}, \left(A^\comp \cap \se{T = \infty}\right) \in \F(T-)$, we have $A \in \F(T-)$.<br>
+Conversely, suppose $T$ is a predictable stopping time. Consider the collection $\mathscr{A} := \set{A \in \F(T-)}{T_A \text{ and } T _ {A^\comp} \text{ are both predictable}}$. It is a $\sigma-$algebra: $\Omega \in \mathscr{A}$ clearly and it is closed under complements by definition; if $A_1, A_2, \ldots \in \mathscr{A}$ with $A = \bigcup _ \nn A_n$, note $T_A = \inf _ \nn T _ {A _ n}$. Let $\se{T _ n ^ m} _ {m \in \N}$ be the announcing sequence for $T _ {A _ n}$ for each $\nn$, and define $\tau _ n := \min \set{T _ j ^ k}{j,k \le n}$. Then $\se{\tau _ n} _ \nn$ announces $T_A$ and hence $A \in \mathscr{A}$.<br>
+Thus, it suffices to show that $T_A$ is predictable for any $A$ in a collection of sets that generates $\F(T-)$. To this end, suppose $\se{T^n} _ \nn$ announces $T$, and fix an arbitrary $n \in \N$ and an arbitrary $A \in \F(T^n)$. For every integer $m \ge n$, the restriction $T _ A ^ m$ is a stopping time and so is $R _ m := T ^ m _ A \wedge m$. The sequence $\se{R_m} _ {m \in \N}$ then announces $T_A$, showing $T_A$ is predictable; similarly for $T _ {A^\comp}$. We conclude $T_A, T _ {A^\comp}$ are predictable for every $A \in \bigcup _ \nn \F(T^n)$. But recall $\F(T-) = \sigma\left(\bigcup _ \nn \F(T^n)\right)$ since $T^n &lt; T$ on $\se{T &gt; 0}$, so we obtain the property for all $A \in \F(T-)$.  $\square$</p>
+<p>Coming back to the second claim above, if $S,T \in \fSP$, then by Lemma 7, $\se{S &lt; T} \in \F(S-)$, and thus by Lemma 10, $S _ {\se{S &lt; T}} \in \fSP$. The rest of the conditions are trivial to check.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 15:</span> Suppose $\fA$ is a collection of stopping times with the properties postulated above, and let $B \in \cT_\delta$. Then the debut $D_B$ of this set is a stopping time in $\fA$, and its graph $\gr{D_B} \subseteq B$.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> We first show that $\gr{D_B} \subseteq B$. If $(s, \omega) \in \gr{D_B}$, then $D_B(\omega) = s$ which is same as saying $s = \inf \set{t \in \oi}{(t,\omega) \in B}$. But we constructed our collection $\cT_\delta$ using stochastic intervals of the form $\grl{S,T}$, and thus $B(\omega) = \set{t \in \oi}{(t,\omega) \in B}$ is closed implying $(s, \omega) \in B$.<br>
+To show that $D_B \in \fA$, consider the collection $\mathfrak{B} := \set{S \in \fA}{S \le D_B}$, and note that $\mathfrak{B}$ contains $0$, is closed under pairwise maximization, i.e., $S,T \in \mathfrak{B}$ implies $S \vee T \in \mathfrak{B}$, and is closed under countable increasing limits, i.e., if $\se{S _ n} _ \nn \subseteq \mathfrak{B}$ is an increasing sequence then $\lim _ \nn \uparrow S_n \in \mathfrak{B}$. Then $\mathfrak{B}$ contains a representative $T := \esssup \mathfrak{B}$ of its essential supremum (see [4,5]).<br>
+Since $B \in \cT_\delta$ we can find a decreasing sequence $\se{B_n} _ \nn \subseteq \cT$ with $\bigcap _ \nn B_n = B$. Define $T_n := D _ {B_n \cap \grl{T, \infty}}$ for all $\nn$ and note $\gr{T_n} \subseteq B_n$. As $B_n \cap \grl{T, \infty} \, \in \cT$ and thus can be expressed as a finite union $\bigcup _ {k=1} ^ m \grl{U_k, V_k}$ for $U_k, V_k \in \cT$, we have
+$$T_n = \min _ {1 \le k \le m} D _ {\grl{U_k, V_k}} = \min _ {1 \le k \le m} (U_k) _ {\se{U_k &lt; V_k}} \in \cT$$
+Since $B \subseteq B_n$, we have $T \le T_n \le D_B$, and therefore $T_n \in \mathfrak{B}$. Thus, by definition of essential supremum $T_n = T$ a.s., and as $\gr{T} \subseteq \bigcap _ \nn B_n = B$, we conclude that $T = D_B$. $\square$</p>
+<h1 id="section-theorems">Section Theorems</h1>
+<p>We are now ready to come back to proving section theorems. We start by proving a general section theorem.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 16 [General Section Theorem]:</span> In the context of Theorem 15, let $\sH$ be the $\sigma-$algebra generated by the algebra $\cT$. For every set $A \in \sH$ and $\eps &gt; 0$, there exists a stopping time $T_\eps \in \fA$ with
+$$\gr{T_\eps} \subseteq A \text{ and } \bP\left[\pi(A)\right] \le \bP(T_\eps &lt; \infty) + \eps.$$</p>
+<p><span style="color:darkgray; font-size: 16pt">Proof:</span> Measurable Section Theorem (Theorem 10 in 
+<a href="https://makkar.github.io/post/grlthprcs/" target="_blank" rel="noopener">part 1</a>) implies there exists a random variable $Z : \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\pi(A) = \se{Z &lt; \infty}$. We denote by $\nu$ the measure on the measurable space $\left(\oi \times \Omega, \sH\right)$ defined by
+$$
+\int _ \oio f(t, \omega) \, \nu(\dd t, \dd \omega) = \int _ {\se{Z &lt; \infty}} f(Z(\omega), \omega) \, \bP(\dd \omega)
+$$
+for every $\sH-$measurable $f : \oio \to \oi$. Notice that $(Z(\omega), \omega) \in A$ for $\omega \in \se{Z &lt; \infty}$. By first taking $f$ to be the indicator $\ind{A}$ for $A$ and then indicator $\ind{\oio}$ for $\oio$ in the equation above, we see that $\nu(A) = \bP(Z &lt; \infty) \equiv \bP\left[\pi(A)\right] = \nu(\oio)$. Thus, the measure $\nu$ is carried by the set $A$. Similarly, taking $f$ to be $\ind{B}$ for $B \in \sH$, we get $$\nu(B) = \int _ {\pi(A)} \ind{B}(Z(\omega), \omega) \, \bP(\dd \omega) \le \bP\left[\pi(A \cap B)\right].$$
+Choquet’s capacitability theorem (Theorem 6 in 
+<a href="https://makkar.github.io/post/grlthprcs/" target="_blank" rel="noopener">part 1</a>) applied to the paving $\cT$ and to the capacity $$\nu^*(C) := \inf _ {B \in \sH, C \subseteq B} \nu(B), \quad C \subseteq \oio$$
+we obtain the existence of a subset $B_\eps \in \cT_\delta$ of $A$, such that
+$$
+\bP\left[\pi(A)\right] = \nu(A) \le \nu(B_\eps) + \eps \le \bP\left[\pi(A \cap B_\eps)\right] + \eps \le \bP\left[\pi(B_\eps)\right] + \eps
+$$
+Now take $T_\eps$ to be the debut $D _ {B_\eps}$ which by Theorem 15 is a stopping time in $\fA$. $\square$</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 17 [Optional and Predictable Sections]:</span> Let $A$ be an optional (respectively, predictable) subset of the product space $\oio$. For every $\eps &gt; 0$, there exists a stopping time (respectively, a predictable stopping time) $T_\eps$ with
+$$\gr{T_\eps} \subseteq A \text{ and } \bP\left[\pi(A)\right] \le \bP(T_\eps &lt; \infty) + \eps \tag{6} \label{eq_apprx}$$
+<span style="color:darkgray; font-size: 16pt">Proof:</span> Both statements follow from the General Section Theorem (Theorem 16) in conjunction with the observation before Lemma 10, by taking $\fA$ to be either $\fS$ or $\fSP$. $\square$</p>
+<p>As mentioned in the beginning of the section &ldquo;Properties of Debuts&rdquo;, we didn&rsquo;t get the nice equality
+$$\gr{T} \subseteq A \text{ and } \se{T &lt; \infty} = \pi(A) \tag{7} \label{eq_exact}$$
+as we got in Measurable Section theorem, but instead obtained an approximation \eqref{eq_apprx}. The condition $\gr{T_\eps} \subseteq A$ makes sure that $\se{T_\eps &lt; \infty} \subseteq \pi(A)$, and the $\bP\left[\pi(A)\right] \le \bP(T_\eps &lt; \infty) + \eps$ part ensures that the measure of the difference $\bP\left[ \pi(A) \setminus \se{T_\eps &lt; \infty} \right]$ of these two events can be made as small as desired.</p>
+<p>To see that it is not always possible to choose a stopping time $T$ that satisfies \eqref{eq_exact} if $A \in \sO$, we will construct a filtration $\se{\F_t}_{t \ge 0}$ and choose a set $A \in \sO$ that forces $\pi(A) \setminus \se{T &lt; \infty} \neq \emp$ for every stopping time $T$ (from [3]).</p>
+<p>To this end, let $\tau : \Omega \to (0, \infty)$ be a random variable such that $\Prob{\tau &lt; t} &gt; 0$ for all $t &gt; 0$. For example, let $\tau$ be such that its distribution is uniform on $(0,1)$. Let $\se{\F_t}_{t \ge 0}$ be the completed filtration such that $\F_t$ is generated by $\set{\se{\tau \le s}}{s \le t}$, and thus $\tau$ becomes a stopping time. Let $A = \grrl{0, \tau} \in \sO$. Note that $\Prob{\pi(A)} = 1$ by our construction.</p>
+<p>It is easy to see that $\F_t$ is trivial when restricted to $\se{\tau &gt; t}$. So, every $\F_t-$measurable random variable is a.s. constant on the event $\se{\tau &gt; t}$. Therefore, any stopping time $T$ is deterministic on the event $\se{T &lt; \tau}$. So, if $\gr{T} \subseteq A$, we have
+$$T = \begin{cases} s &amp;\text{on } \se{\tau &gt; s} \\ \infty &amp;\text{on } \se{\tau \le s} \end{cases}$$
+a.s. for some fixed $s &gt; 0$. But then $\Prob{T &lt; \infty} = \Prob{\tau &gt; s} &lt; 1 = \Prob{\pi(A)}$.</p>
+<p>A similar argument can be used to show that it is not possible to choose a predictable stopping time $T$ that satisfies \eqref{eq_exact} if $A \in \sP$.</p>
+<h1 id="applications-of-section-theorems">Applications of Section Theorems</h1>
+<p>Recall the measurable graph theorem (Theorem 8 in 
+<a href="https://makkar.github.io/post/grlthprcs/" target="_blank" rel="noopener">part 1</a>) which implies a map $T : \Omega \to [0, \infty]$ is measurable if and only if its graph $\gr{T}$ is measurable. We also have the following neat result:</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 18:</span> A random variable $T : \Omega \to [0, \infty]$ is a stopping time (respectively, a predictable stopping time), if and only if its graph $\gr{T}$ is an optional (respectively, predictable) set.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> The necessity follows from the characterization of $\sO$ and $\sP$ in Lemma 8. In the optional case, sufficiency follows from Theorem 13 and the fact that $\sO \subseteq \sP_\star$. For the sufficiency in the predictable case, suppose $\gr{T}$ is predictable. Apply Predictable Section theorem (Theorem 17) for $A = \gr{T}$ to construct a sequence $\se{T_n} _ \nn$ of predictable stopping times such that
+$$\gr{T_n} \subseteq \gr{T} \text{ and } \bP(T &lt; \infty) \le \bP(T_n &lt; \infty) + 2^{-n}, \quad \forall \; \nn$$
+Replacing $T_n$ be $T_1 \vee \cdots \vee T_n$ if necessary, we may assume that this sequence is increasing. It follows then, that the limit $T = \lim _ \nn \uparrow T_n = \sup _ \nn T_n$ is predictable (if $\se{T_n^m} _ {m \in \N}$ announces $T_n$, then $\tau_n = \max \set{T_j^k}{j,k \le n}$ announces $T$). $\square$</p>
+<p>Suppose $X$ and $Y$ are measurable processes such that $\Probb{X(T) \ind{\se{T &lt; \infty}} = Y(T) \ind{\se{T &lt; \infty}}} = 1$ for each $\F-$measurable $T : \Omega \to [0, \infty]$. Then what can we say what $X$ and $Y$? We will show that $X$ and $Y$ are indistinguishable! To this end, let $F = \set{(t,\Omega) \in \oio}{X(t,\omega) \neq Y(t, \omega)}$. It is measurable since $X$ and $Y$ are measurable. We want to show that $\Probb{\pi(F)} = 0$, so suppose to the contrary that $\Probb{\pi(F)} &gt; 0$. Any $\F-$measurable $T : \Omega \to [0, \infty]$ satisfying $\gr{T} \subseteq F$ must also satisfy $X(T) \ind{\se{T &lt; \infty}} \neq Y(T) \ind{\se{T &lt; \infty}}$. Now Measurable Section theorem (Theorem 10) says there exists a random variable $T : \Omega \to [0,\infty]$ such that $\gr{T} \subseteq F$ and $\se{T &lt; \infty} = \pi(F)$, and therefore $\Probb{X(T) \ind{\se{T &lt; \infty}} \neq Y(T) \ind{\se{T &lt; \infty}}} \ge \Prob{T &lt; \infty} = \Probb{\pi(F)} &gt; 0$ contradicting our initial assumption.</p>
+<p>Remarkably, we have similar results for optional and predictable processes.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 19:</span> Suppose two optional (respectively, predictable) processes $X$ and $Y$ agree at finite stopping times (respectively, predictable stopping times), i.e., we have
+$$\Probb{X(T) \ind{\se{T &lt; \infty}} = Y(T) \ind{\se{T &lt; \infty}}} = 1, \quad \forall \; T \in \fS \; \left(\text{respectively, } T \in \fSP\right)$$
+Then the two processes $X$ and $Y$ are indistinguishable.<br>
+<span style="color:darkgray; font-size: 16pt">Proof:</span> Consider the optional case &ndash; the predictable case is similar. Just like above we have to show that for optional set $F = \set{(t,\Omega) \in \oio}{X(t,\omega) \neq Y(t, \omega)}$, $\Probb{\pi(F)} = 0$. Suppose to the contrary that $\Probb{\pi(F)} = 2\eps &gt; 0$ for some $0 &lt; \eps \le 1/2$. Then Optional Section theorem (Theorem 17) implies there exists a stopping time $T_\eps$ with the properties $\gr{T_\eps} \subseteq F$ and $2\eps = \Probb{\pi(F)} \le \Prob{T_\eps &lt; \infty} + \eps$. But then $\Probb{X(T) \ind{\se{T &lt; \infty}} \neq Y(T) \ind{\se{T &lt; \infty}}} \ge \Prob{T_\eps &lt; \infty} \ge \eps &gt; 0$ contradicting our initial assumption. $\square$</p>
+<p>As we can see section theorems are really powerful and allow simple proofs of otherwise very difficult results. Other than these two applications, section theorems can be used to prove Proposition 1.2.26 in [1] which is left unproved there. Let me skip this proof.</p>
+<h1 id="projection-theorems">Projection Theorems</h1>
+<p>To motivate optional and predictable projections, let us start with a fundamental problem in 
+<a href="https://en.wikipedia.org/wiki/Filtering_problem_%28stochastic_processes%29" target="_blank" rel="noopener">filtering theory</a>: Assume an underlying complete probability space $\probsp$. There is an underlying signal $X = \se{X(t)} _ {t \ge 0}$ which is modelled as a stochastic process and which we are interested in studying. Our observation process has noise and therefore instead of observing $X$ we observe a process $Z = \se{Z(t)} _ {t \ge 0}$ such that $Z(t) = X(t) + \eps_t$ for some additive noise $\eps_t$. Therefore, it makes sense to consider $\bF = \se{\F(t)} _ {t \ge 0}$ the completed natural filtration of $Z$. The problem, then, is to compute an estimate for $X$ based on the observable data at time $t$, viz. the filtration $\bF$.</p>
+<p>Looking at the expected value of $X$ conditional on the observable data, we obtain the following estimate for $X$ at each time $t \in \oi$,
+$$
+Y(t) = \Exc{X(t)}{\F(t)} \tag{8} \label{motiv}
+$$
+Since, the conditional expectation is defined up to $\bP-$a.s., we have some flexibility in choosing a version of the process $Y = \se{Y(t)} _ {t \ge 0}$. We would be very lucky if it were possible for us to choose a version of $Y$ such that \eqref{motiv} holds not only for all $t \in \oi$ but also for all finite stopping times. And indeed this is possible! This is part of the statement of the optional projection theorem.</p>
+<p>On the other hand, if we want an estimate of $X$ based on observable data before time $t$, then our estimate would be $Y(t) = \Exc{X(t)}{\F(t-)}$ where recall $\F(t-) := \sigma\left(\bigcup _ {s &lt; t} \F(s)\right)$. Again it is possible to choose a version of $Y$ such that this equality holds not only for all $t \in \oi$ but also for all finite predictable stopping times, and this is part of the statement of the predictable projection theorem.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 20 [Optional and Predictable Projections]:</span> Let $X$ be a bounded, measurable (though not necessarily adapted) process.</p>
+<ol>
+<li>There is a unique, modulo indistinguishability, optional process $\oX$, called <em>optional projection of $X$</em>, that satisfies for all stopping times $T \in \fS$ the identity
+$$
+\Exc{X(T) \ind{\se{T &lt; \infty}}}{\F(T)} = \oX(T) \ind{\se{T &lt; \infty}} \tag{9} \label{o_proj}
+$$</li>
+<li>There is a unique, modulo indistinguishability, predictable process $\pX$, called <em>predictable projection of $X$</em>, that satisfies for all predictable stopping times $T \in \fSP$ the identity
+$$
+\Exc{X(T) \ind{\se{T &lt; \infty}}}{\F(T-)} = \pX(T) \ind{\se{T &lt; \infty}} \tag{10} \label{p_proj}
+$$</li>
+</ol>
+<p><span style="color:darkgray; font-size: 16pt">Remarks:</span></p>
+<ol>
+<li>Taking expectations in \eqref{o_proj} we get
+$$
+\Ex{X(T) \ind{\se{T &lt; \infty}}} = \Ex{\oX(T) \ind{\se{T &lt; \infty}}} \tag{11} \label{o_proj2}
+$$
+for all stopping times $T \in \fS$. Now suppose \eqref{o_proj2} holds for all stopping times $T \in \fS$. Fix an arbitrary stopping time $S \in \fS$ and a set $A \in \F(S)$, and write \eqref{o_proj2} for $T = S_A$ to get
+$$\Ex{X(S) \ind{\se{S &lt; \infty}} \ind{A}} = \Ex{\oX(S) \ind{\se{S &lt; \infty}} \ind{A}}$$
+But this immediately implies \eqref{o_proj} for stopping time $S$. Therefore, requiring \eqref{o_proj} to hold for all stopping times is equivalent to requiring \eqref{o_proj2} to hold for for all stopping times.</li>
+<li>Similarly, requiring \eqref{p_proj} to hold for all predictable stopping times is equivalent to requiring
+$$\Ex{X(T) \ind{\se{T &lt; \infty}}} = \Ex{\pX(T) \ind{\se{T &lt; \infty}}} \tag{12} \label{p_proj2}$$
+to hold for for all predictable stopping times.</li>
+<li>Operators $\sideset{^o}{}\,$ and $\sideset{^p}{}\,$ are linear operators, i.e., for bounded, measurable processes $X,Y$ and $a,b \in \R$
+$$\sideset{^o}{}(aX + bY) = a \oX + b \sideset{^o}{}Y$$
+$$\sideset{^p}{}(aX + bY) = a \pX + b \sideset{^p}{}Y$$
+as can be easily seen by properties of conditional expectation. The formulation of \eqref{o_proj2} and \eqref{p_proj2} makes it obvious that $\sideset{^o}{}(\oX) = \oX$ and $\sideset{^p}{}(\pX) = \pX$. This explains the terminology of &ldquo;projection&rdquo;.</li>
+</ol>
+<p><span style="color:darkgray; font-size: 16pt">Proof:</span> Uniqueness is immediate from Theorem 19, so let&rsquo;s focus on existence.</p>
+<ol>
+<li>
+<p>We will employ the monotone class theorem for functions. We need a simple class of processes for which finding an optional projection is easy. To this end, consider the processes of the form
+$$
+X(t, \omega) = \ind{B}(\omega) \ind{[u,v)}(t), \quad 0 \le u &lt; v &lt; \infty \text{ and } B \in \F
+$$
+We claim that the candidate for the optional projection is $\oX(t, \omega) := M(t,\omega) \ind{[u,v)}(t)$, where $M$ is the right-continuous version of the bounded, thus also uniformly integrable, martingale $\Exc{\ind{B}}{\F(t)}$ (see [1,2] for the proof of existence of such a martingale; it is here that the usual conditions on the filtration $\bF$ become crucial).</p>
+<p>With these choices and an arbitrary stopping time $T$, the left-hand side of \eqref{o_proj2} becomes $\bP(B \cap \se{u \le T &lt; v})$, whereas optional stopping theorem [1,2] shows that its right-hand side is $\Ex{\Exc{\ind{B}}{\F(T)} \ind{[u,v)}(T)}$. Recalling now that $T$ is $\F(T)-$measurable shows that the two sides are equal.</p>
+<p>Finally, use linearity and monotone class arguments to establish existence for arbitrary bounded, measurable $X$.</p>
+</li>
+<li>
+<p>Similar ideas work in the predictable case. We first consider processes of the form
+$$
+X(t, \omega) = \ind{B}(\omega) \ind{(u,v]}(t), \quad 0 \le u &lt; v &lt; \infty \text{ and } B \in \F
+$$
+We claim that the candidate for the predictable projection is $\pX(t, \omega) = M_{-}(t,\omega) \ind{[u,v)}(t)$, where $M_{-}(t,\omega) := M(t,\omega)$ is the left-continuous version of the martingale $M$ from above. Again using $\F(T-)-$measurability of $T$ we see the two sides of \eqref{p_proj2} are equal. Monotone class arguments now allow us to finish the proof. $\square$</p>
+</li>
+</ol>
+<h1 id="references">References</h1>
+<ol>
+<li>Ioannis Karatzas and Steven Shreve. <em>Brownian Motion and Stochastic Calculus</em>, Graduate Texts in Mathematics Volume 113, Springer-Verlag New York, 1998.</li>
+<li>Jean-François Le Gall. <em>Brownian Motion, Martingales, and Stochastic Calculus</em>, Graduate Texts in Mathematics Volume 274, Springer International Publishing, 2016.</li>
+<li>
+<a href="https://almostsuremath.com/stochastic-calculus/" target="_blank" rel="noopener">Almost Sure</a> blog by George Lowther.</li>
+<li>Sheng-wu He, Jia-gang Wang and Jia-an Yan. <em>Semimartingale Theory and Stochastic Calculus</em>, CRC Press, 1992.</li>
+<li>Ioannis Karatzas and Steven Shreve. <em>Methods of Mathematical Finance</em>, Probability Theory and Stochastic Modelling Volume 39, Springer-Verlag New York, 1998.</li>
+<li>Claude Dellacherie. <em>Capacités et processus stochastiques</em>, Springer-Verlag, 1972.</li>
+<li>Claude Dellacherie and Paul-André Meyer. <em>Probabilities and Potential</em>, North-Holland Publishing Company, 1978.</li>
+</ol>
+</div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-square" src="/author/aditya-makkar/avatar_huafef36e0e38068a1162b930b5509c06d_432110_270x270_fill_q90_lanczos_center.jpg" alt="Aditya Makkar">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://makkar.github.io/">Aditya Makkar</a></h5>
+        
+        
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/adityamakkar/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/MakkarAditya" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/makkar" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js" integrity="sha256-lyWCDMnMeZiXRi7Zl54sZGKYmgQs4izcT7+tKc+KUBk=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key="></script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js" integrity="sha256-7vjlAeb8OaTrCXZkCNun9djzuB2owUsaO72kXaFDBJs=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = true;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.6f7ce8be710290b8c431bbc97f405d15.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+
+    
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

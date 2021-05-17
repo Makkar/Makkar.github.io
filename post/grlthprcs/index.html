@@ -645,6 +645,34 @@ $$</p>
 <p>I have been attending a reading course on stochastic analysis led by 
 <a href="http://www.math.columbia.edu/~ik/" target="_blank" rel="noopener">Professor Ioannis Karatzas</a>, where the students take turn in presenting a topic of their choice. I recently presented on Choquet&rsquo;s theory of capacities and its applications to measure theory and in the general theory of processes. This blog post is based on this presentation. I have freely copied<sup>
 <a href="#plagiarism">*</a></sup> from many sources, but my primary reference are the unfortunately unpublished lecture notes by Prof. Karatzas.</p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li>Introduction</li>
+<li>Pavings and Mosaics
+<ul>
+<li>Properties of pavings and mosaics</li>
+<li>Compact pavings</li>
+</ul>
+</li>
+<li>Envelopes
+<ul>
+<li>Properties of envelopes</li>
+</ul>
+</li>
+<li>Capacitance</li>
+<li>Scrapers
+<ul>
+<li>Mixing of Scrapers</li>
+</ul>
+</li>
+<li>Choquet Capacities</li>
+<li>Measurable Projection</li>
+<li>Measurable Graph</li>
+<li>Debut</li>
+<li>Measurable Section</li>
+<li>Epilogue</li>
+<li>References</li>
+</ol>
 <h1 id="introduction">Introduction</h1>
 <p>Kolmogorov laid the modern axiomatic foundations of probability theory with the German monograph <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em> which appeared in Ergebnisse Der Mathematik in 1933. This was a period of intense discussions on the foundations of probability, and a majority of probabilists at the time considered measure theory not only a waste of time, but also an offense to &ldquo;probabilistic intuition&rdquo; [1]. But by 1950, with the work of Doob in particular, these discussions of foundations had been settled.</p>
 <p>Continuous-time processes, on the other hand, were difficult to tame even with measure theory: if a particle is subject to random evolution, to show that its trajectory is continuous, or bounded, requires that all time values be considered, whereas classical measure theory can only handle a <em>countable</em> infinity of time values. Thus, not only does probability depend on measure theory, but it also requires more of measure theory than the rest of analysis [1].</p>
@@ -816,7 +844,7 @@ $$I(A) = \sup_{\substack{K \in \E_\delta \\ K \subseteq A}} I(K)$$</p>
 </li>
 <li>
 <p>Consider a probability space $\probsp$, then the outer measure
-$$\PP^*(A) := \inf_{\substack{B \in \F \ A \subseteq B}} \PP(B)$$
+$$\PP^*(A) := \inf_{\substack{B \in \F \\ A \subseteq B}} \PP(B)$$
 is a Choquet $\F-$capacity. Proof of this is a standard exercise in measure theory, albeit with a different terminology of continuity from below.</p>
 </li>
 <li>
@@ -858,7 +886,7 @@ $$D_A(\omega) = \inf\set{t \in [0, \infty)}{(t, \omega) \in A}$$</p>
 <p><span style="color:darkgray; font-size: 16pt">Definition 17:</span> For a mapping $Y \colon \Omega \to [0, \infty]$ we shall define its <em>graph</em> as the product set
 $$\gr{Y} := \set{(t, \omega) \in [0, \infty) \times \Omega}{Y(\omega) = t}$$</p>
 <p>The condition $(Z(\omega), \omega) \in A$ whenever $Z &lt; \infty$ can then be expressed by saying $\gr{Z} \subseteq A$.</p>
-<p><span style="color:darkgray; font-size: 16pt">Theorem 9 [Measurable Section]:</span> Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F$. Then there exists a random variable $Z \colon \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\se{Z &lt; \infty} = \pi(A)$.</p>
+<p><span style="color:darkgray; font-size: 16pt">Theorem 10 [Measurable Section]:</span> Let $\probsp$ be a complete probability space, and consider a measurable set $A \in \B([0, \infty)) \otimes \F$. Then there exists a random variable $Z \colon \Omega \to [0, \infty]$ with $\gr{Z} \subseteq A$ and $\se{Z &lt; \infty} = \pi(A)$.</p>
 <p><span style="color:darkgray; font-size: 16pt">Proof:</span> <span style="color:darkgray; font-size: 14pt">We shall first show that for every $\eps &gt; 0$ there exists a random variable $Z_\eps \colon \Omega \to [0, \infty]$ with $\gr{Z_\eps} \subseteq A$ and $\Prob{\pi(A)} \le \Prob{Z_\eps &lt; \infty} + \eps$.</span></p>
 <p>To this end, recall that if $K = [0, \infty)$ and $\K$ is the paving of all compact subsets of $K$, then we have the $\K \otimes_p \F-$capacity $I(A) = \PP^*(\pi(A)), A \in \PO(K \times \Omega)$. Therefore, every $A \in \B(K) \otimes \F$ is $I-$capacitable, and fixing $A$, there exists for every $\eps &gt; 0$ a set $C_\eps \in (\K \otimes_p \F)_\delta$ such that
 $$C_\eps \subseteq A, \quad I(C_\eps) \le I(A) \le I(C_\eps) + \eps \tag{3} \label{eq_sec}$$
@@ -871,7 +899,8 @@ $$\sum_{k=1}^n \Prob{Z_k &lt; \infty} \ge (1 - 2^{-n}) \Prob{\pi(A)}, \quad \for
 The random variable $Z$ defined as $Z := Z_k$ on $\se{Z_k &lt; \infty}$ for each $k \in \N$, and $Z := \infty$ otherwise, satisfies therefore $\gr{Z} \subseteq A$, thus also $\se{Z &lt; \infty} \subseteq \pi(A).$</p>
 <p>On the other hand, letting $n \to \infty$ in \eqref{eq_notsure}, we see that $\se{Z &lt; \infty}$ and $\pi(A)$ have the same probability. Therefore, the completeness of the probability space implies these two sets can be made equal.  $\square$</p>
 <h1 id="epilogue">Epilogue</h1>
-<p>With this we are done laying the foundations. In the next blog post, we will discuss applications of these results in the general theory of processes.</p>
+<p>With this we are done laying the foundations. In the 
+<a href="https://makkar.github.io/post/grlthprcs2/" target="_blank" rel="noopener">next blog post</a>, we will discuss applications of these results in the general theory of processes.</p>
 <h1 id="references">References</h1>
 <ol>
 <li>Paul-André Meyer. 
