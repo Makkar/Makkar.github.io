@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Kernels - Part 1</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Kernels - Part 1</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#characterization_of_reproducing_kernels">Characterization of Reproducing Kernels</a><ol><li><ol><li><a href="#examples">Examples</a></li></ol></li><li><a href="#equivalence_between_kernel_function_and_reproducing_kernel">Equivalence between kernel function and reproducing kernel</a></li></ol></li><li><a href="#mercers_theorem">Mercer&#39;s Theorem</a></li><li><a href="#operations_on_kernels">Operations on Kernels</a><ol><li><a href="#sums_of_kernels">Sums of kernels</a></li><li><a href="#products_of_kernels">Products of kernels</a></li><li><a href="#other_operations">Other operations</a></li></ol></li><li><a href="#representer_theorem">Representer theorem</a></li><li><a href="#epilogue">Epilogue</a></li></ol></div>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>This is the second blog post in the series of blog posts on kernels. In the <a href="/otium/kernels0">first part</a> I introduced the functional analysis background for kernel theory. I highly recommend you read it before continuing. I will frequently refer to it and use the same notation. In this blog post I aim to introduce the fundamental theorems like Mercer&#39;s theorem and Representer theorem.</p>
+<h2 id="characterization_of_reproducing_kernels"><a href="#characterization_of_reproducing_kernels" class="header-anchor">Characterization of Reproducing Kernels</a></h2>
+<p>We already defined the notion of reproducing kernels for an RKHS &#40;Definition 20&#41;. We now turn our attention to obtaining necessary and sufficient conditions for a function \(K \colon \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) to be the reproducing kernel for some RKHS. But first we must define kernel functions.</p>
+<div class="def"><strong>Definition 21</strong>: Let \(A = (a_{i,j})\) be an \(n \times n\) complex matrix. Then \(A\) is called <em>positive</em> if for every \(\alpha_1, \ldots, \alpha_n \in \mathbb{C}\) we have <div class="nonumber">\[\begin{aligned} \sum_{i,j = 1}^{n} \overline{\alpha_i}\alpha_j a_{i,j} \geq 0.\end{aligned}\]</div> We denote this by \(A \geq 0.\)</div>
+<p>Note that if we define a vector \(x \in \mathbb{C}^n\) to be such that its \(i^{\text{th}}\) component is \(\alpha_i\), then the condition above can rewritten as <div class="nonumber">\[\begin{aligned} \left\langle Ax,x \right\rangle \ge 0.\end{aligned}\]</div></p>
+<p>Also note that if \(A \geq 0\) then \(A = A^*\), where \(A^* = \overline{A^\top}\) denotes the Hermitian matrix &#40;also known as the self-adjoint matrix&#41;. Therefore, positivity gives self-adjoint property for free if we are dealing with complex matrices. Things aren&#39;t so elegant for real matrices. For the real case we need to explicitly state that the matrix \(A\) is also symmetric apart from what&#39;s stated in the definition above. Therefore, we often use the following as the definition of positive matrices:</p>
+<div class="def"><strong>Definition 21&#39;</strong>: An \(n \times n\) matrix \(A\) is <em>positive</em>, in symbols \(A \geq 0\), if it is self-adjoint and if \(\left\langle Ax,x \right\rangle \ge 0\) for all \(x \in \mathbb{C}^n.\)</div>
+<p>Positive matrices are also alternatively called <em>positive semidefinite</em> or <em>nonnegative</em> matrices.</p>
+<p>The following lemma connects the concept of positive matrices to its eigenvalues.</p>
+<div class="thm"><strong>Lemma 2</strong>: A matrix \(A \geq 0\) if and only if \(A = A^*\) and every eigenvalue of \(A\) is nonnegative.</div>
+<div class="proof"><p>Let us first suppose \(A \geq 0\), then \(A = A^*\) by definition. Now if \(\lambda\) is an eigenvalue of \(A\) and \(v\) is an eigenvector of \(A\) corresponding to the eigenvalue \(\lambda\), we have <div class="nonumber">\[\begin{aligned} 0 \leq \left\langle Av,v \right\rangle = \left\langle \lambda v,v \right\rangle = \lambda \left\langle v,v \right\rangle.\end{aligned}\]</div> Since \(\left\langle v,v \right\rangle \ge 0\), \(\lambda\) is a nonnegative number.</p>
+<p>For the other side, find an orthonormal basis \(v_1, \ldots, v_n\) consisting of eigenvectors of \(A\) &#40;it exists by the spectral theorem&#41;. Let \(v_i\) be the eigenvector corresponding to the eigenvalue \(\lambda_i.\) Then for any \(x = \sum_{i=1}^n \alpha_i v_i\) we have \(\left\langle Ax,x \right\rangle = \sum_{i=1}^n \lambda_i \lvert \alpha_i\rvert^2.\) Since \(\lambda_i \geq 0\), \(\left\langle Ax,x \right\rangle \geq 0\) and \(A\) must be positive.</p></div>
+<p>We are now ready to define a kernel function.</p>
+<div class="def"><strong>Definition 22</strong>: Let \(\mathcal{X}\) be a set, then \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) is called a <em>kernel function</em> if for every \(n \in \mathbb N\) and for every choice of \(\{x_1, \ldots, x_n\} \subseteq \mathcal{X}\), the matrix \((K(x_i, x_j)) \geq 0.\) We will use the notation \(K \geq 0\) to denote that the function \(K\) is a kernel function.</div>
+<p>Kernel functions are alternatively called <em>positive definite functions</em> or <em>positive semidefinite functions</em>.</p>
+<div class="def"><strong>Definition 23</strong>: Given a kernel function \(K : \mathcal{X} \times \mathcal{X} \to \mathbb C\) and points \(x_1, \ldots, x_n \in \mathcal{X}\), the \(n \times n\) matrix \((K(x_i, x_j))\), denoted \(\mathbf{K}\), is called the <em>Gram matrix</em> of \(K\) with respect to \(x_1, \ldots, x_n.\)</div>
+<p>Some examples follow:</p>
+<h4 id="examples"><a href="#examples" class="header-anchor">Examples</a></h4>
+<ol>
+<li><p><em>Linear kernels</em>: When \(\mathcal{X} = \mathbb R^d\), we can define the linear kernel function as <div class="nonumber">\[\begin{aligned} K(x,y) = \left\langle  x,y\right\rangle.\end{aligned}\]</div>  It is clearly a symmetric function of its arguments, and hence self-adjoint. To prove positivity, let \(x_1, \ldots, x_n \in \mathbb R^d\) be an arbitrary collection of points, and consider its gram matrix \(\mathbf{K}\), i.e., \(\mathbf{K}_{i,j} = K(x_i, x_j) = \left\langle x_i,x_j\right\rangle.\) Then for any \(\alpha \in \mathbb R^n\), we have <div class="nonumber">\[\begin{aligned} \left\langle \mathbf{K} \alpha, \alpha \right\rangle = \alpha^\top \mathbf{K}^\top \alpha = \alpha^\top \mathbf{K} \alpha = \sum_{i,j = 1}^n \alpha_i \alpha_j \left\langle x_i, x_j \right\rangle = \left\lVert \sum_{i=1}^n \alpha_i x_i \right\rVert^2 \geq 0.\end{aligned}\]</div></p>
+</li>
+<li><p><em>Polynomial kernels</em>: A natural generalization of the linear kernel on \(\mathbb R^d\) is the homogeneous polynomial kernel</p>
+<div class="nonumber">\[\begin{aligned} K(x, y) = (\left\langle  x,y\right\rangle)^m\end{aligned}\]</div>
+<p>of degree \(m \geq 2\), also defined on \(\mathbb R^d.\) It is clearly a symmetric function. To prove positivity, note that</p>
+<div class="nonumber">\[\begin{aligned} K(x,y) = \left( \sum_{i=1}^d x_i y_i \right)^m.\end{aligned}\]</div>
+<p>This will have \(D = \binom{m+d-1}{m}\) monomials, so to simplify the analysis let&#39;s take \(m=2.\) Then</p>
+<div class="nonumber">\[\begin{aligned} K(x,y) = \sum_{i=1}^d x_i^2 y_i^2 + 2 \sum_{i < j} x_i x_j y_i y_j.\end{aligned}\]</div>
+<p>In this case \(D = \binom{d+1}{d} = d + \binom{d}{2}.\) Define a mapping \(\Phi\colon \mathbb R^d \to \mathbb R^D\) such that</p>
+<div class="nonumber">\[\begin{aligned} \Phi(x) = [x_1^2, \ldots, x_d^2, \sqrt{2}x_1 x_2, \ldots, \sqrt{2} x_{d-1} x_d ]^\top.\end{aligned}\]</div>
+<p>Then</p>
+<div class="nonumber">\[\begin{aligned} K(x,y) = \left\langle  \Phi(x),\Phi(y)\right\rangle.\end{aligned}\]</div>
+<p>Following the same argument as the first example, we can verify that the gram matrix thus formed is indeed positive.</p>
+<p>The mapping \(x \mapsto \Phi(x)\) is often referred to as a <em>feature map</em>. We see that dealing with elements in the feature space, i.e., the codomain of \(\Phi\), is computationally expensive. The relation \(K(x,y) = \left\langle \Phi(x),\Phi(y)\right\rangle\) allows us compute the inner products using the kernel function instead of actually taking the inner product in a very high dimensional space. We will see that this &quot;kernel trick&quot; holds for many kernel functions when we discuss Mercer&#39;s theorem.</p>
+</li>
+<li><p><em>Gaussian kernels</em>: Given some compact subset \(\mathcal{X} \subseteq \mathbb R^d\) and \(\sigma \in \mathbb R\), the Gaussian kernel is</p>
+<div class="nonumber">\[\begin{aligned} K(x,y) = \exp{\left( -\frac{1}{2 \sigma^2} \left\lVert  x-y\right\rVert^2 \right)}.\end{aligned}\]</div>
+<p>It is not obvious why this is a kernel function.</p>
+</li>
+</ol>
+<h3 id="equivalence_between_kernel_function_and_reproducing_kernel"><a href="#equivalence_between_kernel_function_and_reproducing_kernel" class="header-anchor">Equivalence between kernel function and reproducing kernel</a></h3>
+<p>Let us return to the characterization of reproducing kernels. We will now prove that a function is a kernel function if and only if there is an RKHS for which it is the reproducing kernel. At this point recall Theorem-3 which states that an RKHS admits a unique reproducing kernel.</p>
+<div class="thm"><strong>Theorem 4</strong>: Let \(\mathcal{X}\) be a set and let \(\mathcal{H}\) be an RKHS on \(\mathcal{X}\) with reproducing kernel \(K.\) Then \(K\) is a kernel function.</div>
+<div class="proof">For some arbitrary \(n \in \mathbb N\) fix some arbitrary collection \(x_1, \ldots, x_n \in \mathcal{X}\) and \(\alpha \in \mathbb{C}^n.\) Then if we denote by \(\mathbf{K}\) the gram matrix of \(K\) with respect to \(x_1, \ldots, x_n\), we have <div class="nonumber">\[\begin{aligned} \left\langle \mathbf{K} \alpha,\alpha \right\rangle =  \sum_{i,j = 1}^n \overline{\alpha_i}\alpha_j K(x_i, x_j) = \sum_{i,j = 1}^n \overline{\alpha_i}\alpha_j \left\langle k_{x_j},k_{x_i} \right\rangle = \left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert^2 \geq 0.\end{aligned}\]</div> And thus \(K\) is a kernel function.</div>
+<p>What does it mean in the above proof if we have an equality? That is, if \(\left\langle \mathbf{K} \alpha,\alpha \right\rangle = 0\)? This happens if and only if \(\left\lVert \sum_{i=1}^n \alpha_i k_{x_i} \right\rVert = 0.\) But this means that for every \(f \in \mathcal{H}\) we have \(\sum_{i=1}^n \overline{\alpha_i} f(x_i) = \left\langle f,\sum_i \alpha_i k_{x_i} \right\rangle = 0.\) Thus, in this case there is an equation of linear dependence between the values of every function in \(\mathcal{H}\) at this finite set of points.</p>
+<p>Now let us state the converse of Theorem-4. It is a deep result in RKHS theory known as the Moore–Aronszajn theorem.</p>
+<div class="thm"><strong>Theorem 5 &#91;Moore–Aronszajn theorem&#93;</strong>: Let \(\mathcal{X}\) be a set and let \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) be a kernel function, then there exists a reproducing kernel Hilbert space \(\mathcal{H}\) of functions on \(\mathcal{X}\) such that \(K\) is the reproducing kernel of \(\mathcal{H}.\)</div>
+<p>For a proof see <a href="https://en.wikipedia.org/wiki/Reproducing_kernel_Hilbert_space#Moore&#37;E2&#37;80&#37;93Aronszajn_theorem">here on Wikipedia</a>.</p>
+<p>In light of these two theorems we have the following notation.</p>
+<div class="def"><strong>Definition 24</strong>: Given a kernel function \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\), we let \(\mathcal{H}_K\) denote the unique RKHS with the reproducing kernel \(K.\)</div>
+<p>It is not an easy problem to start with a kernel function \(K\) on some set \(\mathcal{X}\) and give a concrete description of \(\mathcal{H}_K.\) I will not be discussing this here, but there are plenty of resources available where you can see this problem getting discussed. I recommend Paulsen and Raghupathi&#39;s An Introduction to the Theory of Reproducing Kernel Hilbert Spaces.</p>
+<h2 id="mercers_theorem"><a href="#mercers_theorem" class="header-anchor">Mercer&#39;s Theorem</a></h2>
+<p>Recall the <em>spectral theorem</em> for finite-dimensional vector spaces: A linear operator \(T\colon V \to V\) for some finite dimensional vector space \(V\) on \(\mathbb{C}\) is normal, i.e., \(T T^* = T^* T\), if and only if \(V\) has an orthonormal basis consisting of eigenvectors of \(T.\) This implies that if \(\mathbf{U} = [v_1, \ldots, v_n]\) is a unitary matrix containing the \(i^{\text{th}}\) eigenvector in its \(i^{\text{th}}\) column and \(\mathbf{\Lambda} = \text{diag}(\lambda_1, \ldots, \lambda_n)\) is a diagonal matrix containing the corresponding eigenvalues, then if \(\mathbf{K}\) is a normal matrix then it can written as <div class="nonumber">\[\begin{aligned} \mathbf{K} = \mathbf{U} \mathbf{\Lambda} \mathbf{U}^\top = \sum_{i=1}^n \lambda_i v_i v_i^\top.\end{aligned}\]</div></p>
+<p>Mercer&#39;s theorem generalizes this decomposition to kernel functions. Let us start by defining a special type of kernel function.</p>
+<div class="def"><strong>Definition 25</strong>: Let \(\mathcal{X}\) be a compact metric space. A function \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) is called a <em>Mercer kernel</em> if it is a continuous kernel function.</div>
+<p>Recall the space \(L^2(\mu)\) from Definition-8, where we now take \(\mathcal{X}\) &#40;written as \(X\) there&#41; to be a compact metric space.</p>
+<div class="def"><strong>Definition 26</strong>: Given a Mercer kernel \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\), we define a linear operator \(T_{K} : L^2(\mu) \to L^2(\mu)\) as <div class="nonumber">\[\begin{aligned} T_K(f)(x) := \int_{\mathcal{X}} K(x, y) f(y) \,\mathrm{d}\mu(y), \quad x \in \mathcal{X}.\end{aligned}\]</div></div>
+<p>We assume that the Mercer kernel satisfies the <em>Hilbert-Schmidt condition</em>, stated as <div class="nonumber">\[\begin{aligned} \int_{\mathcal{X} \times \mathcal{X}} \left\lvert K(x,y) \right\rvert^2 \,\mathrm{d}\mu(x) \,\mathrm{d}\mu(y) < \infty,\end{aligned}\]</div> which ensures that \(T_K\) is a bounded linear operator on \(L^2(\mu).\)</p>
+<p>Indeed, we have <div class="nonumber">\[\begin{aligned} \lVert T_K(f) \rVert^{2} = \int_{\mathcal{X}} \left\lvert \int_{\mathcal{X}} K(x, y) f(y) \,\mathrm{d}\mu(y) \right\rvert^2 \,\mathrm{d}\mu(x) \leq \left\lVert  f \right\rVert^2 \int_{\mathcal{X} \times \mathcal{X}} \left\lvert K(x,y) \right\rvert^2 \,\mathrm{d}\mu(x) \,\mathrm{d}\mu(y),\end{aligned}\]</div> where we have applied Schwarz inequality &#40;Theorem-1&#41; as follows <div class="nonumber">\[\begin{aligned} \left\lvert \int_{\mathcal{X}} K(x, y) f(y) \,\mathrm{d}\mu(y) \right\rvert^2 = \left\lvert T_K(f)(x) \right\rvert^2 = \left\lvert \left\langle K(x, \cdot),f \right\rangle \right\rvert^2 \leq \left\lVert K(x, \cdot) \right\rVert^2 \left\lVert f \right\rVert^2.\end{aligned}\]</div></p>
+<p>Operators of this type are known as <em>Hilbert-Schmidt operators</em>.</p>
+<p>We are now ready to state the Mercer&#39;s theorem.</p>
+<div class="thm"><strong>Theorem 5 &#91;Mercer&#39;s theorem&#93;</strong>: Suppose that \(\mathcal{X}\) is a compact metric space, and \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) is a Mercer&#39;s kernel that satisfies the Hilbert-Schmidt condition. Then there exists an at most countable set of eigenfunctions \((e_{i})_{i}\) for \(T_K\) that forms an orthonormal basis of \(L^2(\mu)\), and a corresponding set of non-negative eigenvalues \((\lambda_{i})_{i}\) such that <div class="nonumber">\[\begin{aligned} T_K(e_i) = \lambda_i e_i, \quad i \in \mathbb N.\end{aligned}\]</div> Moreover, \(K\) has the expansion <div class="nonumber">\[\begin{aligned} K(x,y) = \sum_{i} \lambda_i e_i(x) e_i(y), \quad x,y \in \mathcal{X},\end{aligned}\]</div> where the convergence of the series above holds absolutely and uniformly.</div>
+<p>I&#39;ll skip the proof.</p>
+<p>Among other things, Mercer&#39;s theorem provides a framework for embedding an element of \(\mathcal{X}\) into an element of \(\ell^2(\mathbb N)\) &#40;for its definition, see Example-4 in the section on Hilbert spaces in the <a href="https://makkar.github.io/otium/kernels0">previous part</a>&#41;. More concretely, given the eigenfunctions and eigenvalues guaranteed by Mercer&#39;s theorem, we may define a mapping \(\Phi : \mathcal{X} \to \ell^2(\mathbb N)\) as follows <div class="nonumber">\[\begin{aligned} \mathcal{X} \ni x \mapsto \Phi(x) := \left( \sqrt{\lambda_i} e_i(x) \right)_{i \in \mathbb N} \in \ell^2(\mathbb N).\end{aligned}\]</div> Therefore, we have <div class="nonumber">\[\begin{aligned} \left\langle \Phi(x), \Phi(y) \right\rangle = \sum_{i=1}^{\infty} \lambda_i e_i(x) e_i(y) = K(x,y).\end{aligned}\]</div></p>
+<p>This is the well-known &quot;kernel trick&quot;. Let us connect Mercer&#39;s theorem to the spectral theorem.</p>
+<p>Let \(\mathcal{X} = [d] := \{1, 2, \ldots, d\}\) along with the Hamming metric be our compact metric space. Let \(\mu(\{i\}) = 1\) for all \(i \in [d]\) be the counting measure on \(\mathcal{X}.\) Any function \(f : \mathcal{X} \to \mathbb{C}\) is equivalent to the \(d\)-dimensional vector \([f(1), \ldots, f(d)]\), and any kernel function \(K : \mathcal{X} \times \mathcal{X} \to \mathbb{C}\) is continuous, satisfies the Hilbert-Schmidt condition and is equivalent to a \(d \times d\) normal matrix \(\mathbf{K}\) where \(\mathbf{K}_{i,j} = K(i, j).\) The Hilbert-Schmidt operator reduces to <div class="nonumber">\[\begin{aligned} T_K(f)(x) = \int_{\mathcal{X}} K(x, y) f(y) \,\mathrm{d}\mu(y) = \sum_{i=1}^{d} K(x,y) f(y).\end{aligned}\]</div> Mercer&#39;s theorem then states that there exists a set of eigenfunctions \(v_1, \ldots, v_d\) &#40;for our \(\mathcal{X}\) they are equivalent to vectors&#41; and the corresponding eigenvalues \(\lambda_1, \ldots, \lambda_d\) such that <div class="nonumber">\[\begin{aligned} \mathbf{K} = \sum_{i=1}^{d} \lambda_i v_i v_i^T,\end{aligned}\]</div> which is exactly the spectral theorem.</p>
+<h2 id="operations_on_kernels"><a href="#operations_on_kernels" class="header-anchor">Operations on Kernels</a></h2>
+<p>Let us now consider how various algebraic operations on kernels affect the corresponding Hilbert spaces. All this &#40;and a lot more&#41; can be found in the seminal paper by Aronszajn &quot;Theory of Reproducing Kernels&quot;.</p>
+<p>I state the following theorems without proof to illustrate how operations on kernels are done.</p>
+<h3 id="sums_of_kernels"><a href="#sums_of_kernels" class="header-anchor">Sums of kernels</a></h3>
+<div class="thm"><strong>Theorem 6</strong>: Suppose that \(\mathcal{H}_1\) and \(\mathcal{H}_2\) are both RKHSs with kernels \(K_1\) and \(K_2\), respectively. Then the space <div class="nonumber">\[\begin{aligned} \mathcal{H} = \mathcal{H}_1 + \mathcal{H}_2 := \{f_1 + f_2 \, : \, f_1 \in \mathcal{H}_1 \text{ and } f_2 \in \mathcal{H}_2 \}\end{aligned}\]</div> with the norm <div class="nonumber">\[\begin{aligned} \lVert f \rVert^{2}_{\mathcal{H}} := \inf \left\{ \lVert f_1 \rVert^{2}_{\mathcal{H}_1} + \lVert f_1 \rVert^{2}_{\mathcal{H}_2} \, : \, f = f_1 + f_2,\, f_1 \in \mathcal{H}_1,\, f_2 \in \mathcal{H}_2 \right\}\end{aligned}\]</div> is an RKHS with the kernel \(K = K_1 + K_2.\)</div>
+<h3 id="products_of_kernels"><a href="#products_of_kernels" class="header-anchor">Products of kernels</a></h3>
+<p>Let us first define the notion of tensor product of two &#40;separable&#41; Hilbert spaces \(\mathcal{H}_1\) and \(\mathcal{H}_2\) of functions, say with domains \(\mathcal{X}_1\) and \(\mathcal{X}_2.\)</p>
+<div class="def"><strong>Definition 27</strong>: Consider the set of functions \(h : \mathcal{X}_1 \times \mathcal{X}_2 \to \mathbb{C}\) satisfying <div class="nonumber">\[\begin{aligned} \mathcal{H} = \left\{ h = \sum_{i=1}^{n} u_i v_i \, : \, n \in \mathbb N \text{ and } u_i \in \mathcal{H}_1,\, v_i \in \mathcal{H}_2 \text{ for all } i \in [n] \right\}.\end{aligned}\]</div> We define an inner product on \(\mathcal{H}\) as follows: for \(h = \sum_{i=1}^{n} u_i v_i\) and \(g = \sum_{j=1}^{m} w_j x_j\) in \(\mathcal{H}\) define <div class="nonumber">\[\begin{aligned} \left\langle h,g \right\rangle := \sum_{i=1}^{n} \sum_{j=1}^{m} \left\langle u_i,w_j \right\rangle_{\mathcal{H}1} \left\langle v_i,x_j \right\rangle_{\mathcal{H}_2}.\end{aligned}\]</div> Then \(\mathcal{H}\) is a Hilbert space and is called the <em>tensor product</em> of \(\mathcal{H}_1\) and \(\mathcal{H}_2.\) We denote it by \(\mathcal{H} = \mathcal{H}_1 \otimes \mathcal{H}_2.\)</div>
+<p>We can now state the theorem for product of kernels.</p>
+<div class="thm"><strong>Theorem 7</strong>: Suppose that \(\mathcal{H}_1\) and \(\mathcal{H}_2\) are RKHSs of real-valued functions with domains \(\mathcal{X}_1\) and \(\mathcal{X}_2\), and equipped with kernels \(K_1\) and \(K_2\), respectively. Then the tensor product space \(\mathcal{H} = \mathcal{H}_1 \otimes \mathcal{H}_2\) is an RKHS of functions with domain \(\mathcal{X}_1 \times \mathcal{X}_2\), and with kernel function \(K : (\mathcal{X}_1 \times \mathcal{X}_2) \times (\mathcal{X}_1 \times \mathcal{X}_2) \to \mathbb{C}\) defined by <div class="nonumber">\[\begin{aligned} K((x,s), (y,t)) := K_1(x,y) K_2(s,t).\end{aligned}\]</div> \(K\) is called the <em>tensor product</em> of the kernels \(K_1\) and \(K_2\), and denoted by \(K = K_1 \otimes K_2.\)</div>
+<h3 id="other_operations"><a href="#other_operations" class="header-anchor">Other operations</a></h3>
+<p>We can similarly define more operations on kernels:</p>
+<ol>
+<li><p>If \(K\) is a valid kernel and \(\alpha \geq 0\), then \(\alpha K\) is a valid kernel.</p>
+</li>
+<li><p>If \(K\) is a valid kernel and \(\alpha \geq 0\), then \(K + \alpha\) is a valid kernel.</p>
+</li>
+<li><p>We can easily see from all these results that a linear combination or more generally for any polynomial \(P\) with positive coefficients, the composition \(P \circ K\) is a valid kernel if \(K\) is a valid kernel.</p>
+</li>
+<li><p>If \(K\) is a valid kernel, then \(\exp(K)\) is a valid kernel.</p>
+</li>
+</ol>
+<h2 id="representer_theorem"><a href="#representer_theorem" class="header-anchor">Representer theorem</a></h2>
+<p>We are now at a stage where we can put all this theory to use in machine learning. Specifically we will develop Representer theorem which allows many optimization problems over the RKHS to be reduced to relatively simple calculations involving the gram matrix.</p>
+<p>Let us start with a functional analytic viewpoint of supervised learning. Suppose we are given empirical data <div class="nonumber">\[\begin{aligned} (x_1, y_1), \ldots, (x_n, y_n) \in \mathcal{X} \times \mathcal Y,\end{aligned}\]</div> where \(\mathcal{X}\) is a nonempty set, and for now \(\mathcal Y = \mathbb R.\) The output is from an unknown function \(g : \mathcal{X} \to \mathbb R\), i.e., we assume <div class="nonumber">\[\begin{aligned} y_i = g(x_i), \quad i \in [n].\end{aligned}\]</div></p>
+<p>We need to find some function \(f^*\) which &quot;best&quot; approximates \(g.\) A natural way to formalize the notion of &quot;best&quot; is to limit ourselves to an RKHS \(\mathcal{H}\) which contains functions of the form \(f : \mathcal{X} \to \mathbb R\) and choose <div class="nonumber">\[\begin{aligned} f^* = \argmin_{f \in \mathcal{H}} \left\lVert f \right\rVert \text{ such that } f^*(x_i) = y_i \text{ for } i \in [n].\end{aligned}\]</div></p>
+<p>This optimization problem is feasible whenever there exists at least one function \(f \in \mathcal{H}\) that fits the data exactly. Denote by \(y\) the vector \([y_1, \ldots, y_n]^\top.\) It can be shown that if \(\mathbf{K}\) is the gram matrix of the kernel \(K\) with respect to \(x_1, \ldots, x_n\), then the feasibility is equivalent to \(y \in \text{range}(\mathbf{K}).\) As we will see, this is a special case of the representer theorem.</p>
+<p>In a realistic setting we assume that we have noisy observations, i.e., <div class="nonumber">\[\begin{aligned} y_i = g(x_i) + \varepsilon_i, \quad i \in [n],\end{aligned}\]</div> where \(\varepsilon_i\)&#39;s denote the noise. Then the constraint of exact fitting is no longer desirable, and we model the &quot;best&quot; approximation by introducing a loss function which represents how close our approximation is to the observed outputs. More concretely, let \(L_y : \mathbb R^n \to \mathbb R\) be a continuous function. Then we can define our cost function as <div class="nonumber">\[\begin{aligned} J(f) = \lVert f \rVert^2 + L_y(f(x_1), \ldots, f(x_n)).\end{aligned}\]</div></p>
+<div class="thm"><strong>Theorem 8 &#40;Representer theorem&#41;</strong>: If \(f^*\) is a function such that <a id="eq1" class="anchor"></a>\[\begin{aligned} 
+J(f^*) = \inf_{f \in \mathcal{H}} J(f),\end{aligned}\] then \(f^*\) is in the span of the functions \(k_{x_1}, \ldots, k_{x_n}\), i.e., <div class="nonumber">\[\begin{aligned} f^*(\cdot) = \sum_{i=1}^{n} \alpha_i k_{x_i}(\cdot) \quad \text{for some } \alpha_1, \ldots, \alpha_n \in \mathbb{C}.\end{aligned}\]</div></div>
+<p>I&#39;ll skip the proof which can be found in Paulsen and Raghupathi&#39;s book <em>An Introduction to the Theory of Reproducing Kernel Hilbert Spaces</em> or in Schölkopf, Herbrich and Smola&#39;s paper <em>A Generalized Representer Theorem</em>.</p>
+<p>As an example \(L_y\) could be the squared loss \(L_y(f(x_1), \ldots, f(x_n)) = \sum_{i=1}^n (y_i - f(x_i))^2.\) If we assume \(L_y\) to be convex then the solution to <span class="eqref">(<a href="#eq1">1</a>)</span> exists and is unique. Recall that \(E \subseteq \mathbb R^k\) is a <em>convex set</em> if \(\lambda x + (1-\lambda) y \in E\) whenever \(x,y \in E\) and \(0 \le \lambda \le 1.\) A real-valued function \(L\) defined on a convex set \(E\) is a <em>convex function</em> if \(L(\lambda x + (1-\lambda) y) \leq \lambda L(x) + (1-\lambda) L(y)\) whenever \(x, y \in E\) and \(0 \le \lambda \le 1.\) Note that a convex function is continuous on the interior of its domain. Also check out <a href="https://en.wikipedia.org/wiki/Alexandrov_theorem">Alexandrov theorem</a> and <a href="https://en.wikipedia.org/wiki/Rademacher&#37;27s_theorem">Rademacher’s theorem</a>.</p>
+<p>The Representer theorem allows us to reduce the infinite-dimensional problem of optimizing over an RKHS to an \(n\)-dimensional problem.</p>
+<h2 id="epilogue"><a href="#epilogue" class="header-anchor">Epilogue</a></h2>
+<p>I barely scratched the surface of reproducing kernel Hilbert space theory. Some resources I recommend that do a much better job than me in explaining this theory and which I used as reference are:</p>
+<ol>
+<li><p>Paulsen V and Raghupathi M: <em>An Introduction to the Theory of Reproducing Kernel Hilbert Spaces</em></p>
+</li>
+<li><p>Wainwright M: <em>High-Dimensional Statistics</em></p>
+</li>
+<li><p>Schölkopf B, Herbrich R and Smola A.J: <em>A Generalized Representer Theorem</em> &#40;COLT 2001&#41;</p>
+</li>
+<li><p>Aronszajn N: <em>Theory of Reproducing Kernels</em> &#40;1950&#41;</p>
+</li>
+</ol>
+<p>In the <a href="/otium/kernels2">next article</a> I will discuss kernel approximation methods. In particular I will focus on random Fourier Features developed by Rahimi and Recht which I am using in my work.</p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

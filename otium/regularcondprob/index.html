@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>A Note On Conditional Probability</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">A Note On Conditional Probability</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#conditional_expectation">Conditional Expectation</a><ol><li><a href="#properties_of_conditional_expectation">Properties of conditional expectation</a></li></ol></li><li><a href="#conditional_probability">Conditional Probability</a><ol><li><a href="#properties_of_conditional_probability">Properties of conditional probability</a></li></ol></li><li><a href="#regular_conditional_probability">Regular Conditional Probability</a></li><li><a href="#regular_conditional_distribution">Regular Conditional Distribution</a></li><li><a href="#existence_of_regular_conditional_distribution">Existence of Regular Conditional Distribution</a></li><li><a href="#references">References</a></li></ol></div>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>The concept of conditional probability is central to probability theory and excellent treatment of it can be found in many books. My aim with this blog post is to consolidate in one place some ideas around it which helped me form a better intuition. These ideas will be useful if you have already been exposed to this concept from a textbook and just want one more person&#39;s ramblings about it.</p>
+<p>I will start by defining conditional expectation and stating some of its properties. It will be a grave injustice to claim my discussion of it is complete since I don&#39;t even prove its existence; this section exists solely for establishing notation. I will then spend some time discussing conditional probability, relating it to the traditional notion of</p>
+<div class="nonumber">\[\begin{aligned} \mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}.\end{aligned}\]</div>
+<p>These discussions will naturally lead to the notions of regular conditional probability and regular conditional distribution which I discuss next.</p>
+<h2 id="conditional_expectation"><a href="#conditional_expectation" class="header-anchor">Conditional Expectation</a></h2>
+<p>Recall the concept of conditional expectation.</p>
+<div class="thm"><p><strong>Theorem 1</strong>: Let \((\Omega, \mathcal{F}, \mathbb{P})\) be a probability space, and \(X\) a random variable with \(\mathbb{E}(|X|) < \infty.\) Let \(\mathcal{G}\) be a sub-\(\sigma\)-algebra of \(\mathcal{F}.\) Then there exists a random variable \(Y\) such that</p>
+<ol>
+<li><p>\(Y\) is \(\mathcal{G}\)-measurable,</p>
+</li>
+<li><p>\(\mathbb{E}(|Y|) < \infty\), and</p>
+</li>
+<li><p>\(\int_G Y \,\mathrm{d}\mathbb{P} = \int_G X \,\mathrm{d}\mathbb{P}\) for every \(G \in \mathcal{G}.\)</p>
+</li>
+</ol></div>
+<p><strong>Remarks</strong>:</p>
+<ol>
+<li><p>It is easy to see from the \(\pi-\lambda\) theorem that the last condition can be relaxed such that \(\int_G Y \,\mathrm{d}\mathbb{P} = \int_G X \,\mathrm{d}\mathbb{P}\) for every \(G\) in some \(\pi\)-system which contains \(\Omega\) and generates \(\mathcal{G}.\)</p>
+</li>
+<li><p>If \(Y'\) is another random variable with the three properties above then \(Y' = Y\) a.s.. Therefore, \(Y\) in the theorem above is called a <em>version</em> of the conditional expectation. The notation \(\mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)\) is used to denote this unique &#40;up to a.e. equivalence&#41; random variable.</p>
+</li>
+</ol>
+<p>The proof of this standard theorem can be found in any probability textbook; see <span class="bibref"><a href="#williams">(Williams, 1991)</a></span> or <span class="bibref"><a href="#kallenberg">(Kallenberg, 2021)</a></span> for example.</p>
+<div class="def"><strong>Definition 1</strong>: In the setting of Theorem 1, if \(Z\) is a random variable, we write \(\mathbb{E}\!\left(\left. X\,\right\vert\, Z \right)\) for \(\mathbb{E}\!\left(\left. X\,\right\vert\, \sigma(Z) \right).\)</div>
+<p>The fact that conditional expectation is defined as a random variable might come as a surprise, but the correspondence with the traditional usage of conditional expectation as a number becomes clear once you realize that here we are conditioning on a \(\sigma\)-algebra instead of a single event &#40;we haven’t defined what conditioning on an event means, but think of the intuitive meaning for now&#41;. For example, consider the life expectancy of a new born baby conditioned on sex. This is a random variable that takes one value for males and another value for females.</p>
+<h3 id="properties_of_conditional_expectation"><a href="#properties_of_conditional_expectation" class="header-anchor">Properties of conditional expectation</a></h3>
+<p>For completeness I state some useful properties of conditional expectation. You can find the proofs in &#91;1,2&#93; for example. Most of them are parallels to the well-known properties of &#40;unconditional&#41; expectation. Assume that all the \(X\)&#39;s satisfy \(\mathbb{E}(|X|) < \infty\) and let \(\mathcal{G}, \mathcal{H}\) be sub-\(\sigma\)-algebras of \(\mathcal{F}.\)</p>
+<ol>
+<li><p>&#91;<strong>Linearity</strong>&#93; \(\mathbb{E}\!\left(\left. a_1 X_1 + a_2 X_2\,\right\vert\, \mathcal{G}\right) = a_1 \mathbb{E}\!\left(\left. X_1\,\right\vert\, \mathcal{G}\right) + a_2 \mathbb{E}\!\left(\left. X_2\,\right\vert\, \mathcal{G}\right)\) a.s. for real numbers \(a_1\) and \(a_2.\)</p>
+</li>
+<li><p>&#91;<strong>Positivity</strong>&#93; If \(X \ge 0\), then \(\mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right) \ge 0\) a.s..</p>
+</li>
+<li><p>&#91;<strong>Monotone convergence theorem for conditional expectation</strong>&#93; If \(\mathbb{E}(|Y|) < \infty\) and \(Y \le X_n \uparrow X\) a.s., then \(\mathbb{E}\!\left(\left. X_n\,\right\vert\, \mathcal{G}\right) \uparrow \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+</li>
+<li><p>&#91;<strong>Fatou&#39;s lemma for conditional expectation</strong>&#93; If \(\mathbb{E}(|Y|) < \infty\) and \(Y \le X_n\) for all \(n \ge 1\) a.s., then \(\mathbb{E}\!\left(\left. \liminf_{n \to \infty} X_n\,\right\vert\, \mathcal{G}\right) \le \liminf_{n \to \infty}\mathbb{E}\!\left(\left. X_n\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+</li>
+<li><p>&#91;<strong>Dominated convergence theorem for conditional expectation</strong>&#93; If \(|X_n| \le |Y|\) for all \(n \ge 1\), \(\mathbb{E}(|Y|) < \infty\), and \(X_n \to X\) a.s., then \(\mathbb{E}\!\left(\left. X_n\,\right\vert\, \mathcal{G}\right) \to \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+</li>
+<li><p>&#91;<strong>Tower property</strong>&#93; If \(\mathcal{H} \subseteq \mathcal{G}\), then \(\mathbb{E}\!\left(\left. \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)\,\right\vert\, \mathcal{H}\right) = \mathbb{E}\!\left(\left. \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{H}\right)\,\right\vert\, \mathcal{G}\right)=\mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{H}\right)\) a.s.</p>
+</li>
+<li><p>&#91;<strong>Taking out what&#39;s known</strong>&#93; If \(Y\) is \(\mathcal{G}\)-measurable and bounded, then <a id="eq1" class="anchor"></a>\[\begin{aligned} 
+    \mathbb{E}\!\left(\left. YX\,\right\vert\, \mathcal{G}\right) = Y \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right) \text{ a.s..}\end{aligned}\]  If \(p > 1\), \(1/p + 1/q = 1\), \(X \in L^p(\Omega, \mathcal{F}, \mathbb{P})\) and \(Y \in L^q(\Omega, \mathcal{G}, \mathbb{P})\), then \((1)\) again holds. If \(X\) is a nonnegative \(\mathcal{F}\)-measurable random variable, \(Y\) is a nonnegative \(\mathcal{G}\)-measurable random variable, \(\mathbb{E}(X) < \infty\) and \(\mathbb{E}(XY) < \infty\), then also <span class="eqref">(<a href="#eq1">1</a>)</span> holds.</p>
+</li>
+<li><p>&#91;<strong>Role of independence</strong>&#93; If \(\mathcal{H}\) is independent of \(\sigma(\sigma(X) \cup \mathcal{G})\), then \(\mathbb{E}\!\left(\left. X\,\right\vert\, \sigma(\mathcal{G} \cup \mathcal H)\right) = \mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)\) a.s.. In particular, if \(X\) is independent of \(\mathcal{H}\), then \(\mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{H}\right) = \mathbb{E}(X)\) a.s..</p>
+</li>
+</ol>
+<h2 id="conditional_probability"><a href="#conditional_probability" class="header-anchor">Conditional Probability</a></h2>
+<div class="def"><strong>Definition 2</strong>: In the setting of Theorem 1, if \(A \in \mathcal{F}\), we let \(\mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right)\) to mean \(\mathbb{E}\!\left(\left. \mathbf{1}_A\,\right\vert\, \mathcal{G}\right)\) and call it the <em>conditional probability of \(A\) given \(\mathcal{G}\)</em>. Here \(\mathbf{1}_A\) is the indicator random variable. If \(B \in \mathcal{F}\), we let \(\mathbb{P}\!\left(\left. A\,\right\vert\, B\right)\) to mean \(\mathbb{E}\!\left(\left. \mathbf{1}_A\,\right\vert\, \mathbf{1}_B\right).\)</div>
+<p>Just like conditional expectation, conditional probability, as defined above, is a random variable&#33; Unlike conditional expectation this isn&#39;t very palpable and deserves more rumination <span class="bibref"><a href="#halmos">(Halmos, 1950)</a></span>. We have our probability space \((\Omega, \mathcal{F}, \mathbb{P})\) and let \(A,B \in \mathcal{F}\) be such that \(\mathbb{P}(B) \neq 0\) and \(\mathbb{P}(B^\mathsf{c}) \neq 0.\) Then our traditional notion of conditional probability tells us that the conditional probability of \(A\) given \(B\) is defined by <div class="nonumber">\[\begin{aligned} \mathbb{P}_B(A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}.\end{aligned}\]</div></p>
+<p>Let us investigate how \(\mathbb{P}_B(A)\) depends on \(B.\) To this end, introduce the discrete measurable space \((\Lambda, 2^\Lambda)\) with \(\Lambda = \{\lambda_1, \lambda_2\}\), and a measurable mapping \(T \colon \Omega \to \Lambda\) such that <div class="nonumber">\[\begin{aligned} T(\omega) = \begin{cases}                    \lambda_1 & \text{ if } \omega \in B   \\
+\lambda_2 & \text{ if } \omega \in B^\mathsf{c}.                 \end{cases}\end{aligned}\]</div></p>
+<p>Define the two measures \(\nu_A\) and \(\nu\) on \((\Lambda, 2^\Lambda)\) as follows for any \(E \subseteq \Lambda\), <div class="nonumber">\[\begin{aligned} \nu_A(E) &= \mathbb{P}(A \cap T^{-1}(E))\\
+\nu(E) &= \mathbb{P}(T^{-1}(E)).\end{aligned}\]</div></p>
+<p>Then it is easy to see that <div class="nonumber">\[\begin{aligned} \mathbb{P}_B(A) &= \frac{\nu_A(\{\lambda_1\})}{\nu(\{\lambda_1\})} \\
+\mathbb{P}_{B^\mathsf{c}}(A) &= \frac{\nu_A(\{\lambda_2\})}{\nu(\{\lambda_2\})}.\end{aligned}\]</div></p>
+<p>In other words conditional probability may be viewed as a measurable function on \(\Lambda.\)</p>
+<p>This can easily be generalized to any finite setting as follows. Let \(\{A_1, \ldots, A_n\} \subseteq \mathcal{F}\) be a partition of \(\Omega\), i.e., \(A_i \cap A_j = \varnothing\) for \(i \neq j\) and \(\bigcup_i A_i = \Omega.\) Introduce the discrete measurable space \((\Lambda, 2^\Lambda)\) with \(\Lambda = \{\lambda_1, \ldots, \lambda_n\}.\) Define a measurable mapping \(T \colon \Omega \to \Lambda\) such that \(T(\omega) = \lambda_i\) whenever \(\omega \in A_i.\) Define the measures \(\nu_{A_1}, \ldots, \nu_{A_n}, \nu\) on \((\Lambda, 2^\Lambda)\) as follows for any \(E \subseteq \Lambda\), <div class="nonumber">\[\begin{aligned} \nu_{A_i}(E) &= \mathbb{P}(A_i \cap T^{-1}(E))\quad \text{for all } i = 1, \ldots, n\\
+\nu(E) &= \mathbb{P}(T^{-1}(E)).\end{aligned}\]</div> Then once again we have for any \(A \in \mathcal{F}\), <div class="nonumber">\[\begin{aligned} \mathbb{P}_{A_i}(A) = \frac{\mathbb{P}(A \cap A_i)}{\mathbb{P}(A_i)} = \frac{\nu_{A_i}(\{\lambda_i\})}{\nu(\{\lambda_i\})} \quad \text{for all } i = 1, \ldots, n.\end{aligned}\]</div></p>
+<p>These considerations are what motivated the definition of conditional probability in general cases, as you see in Definition 2. If \(T\) is any measurable mapping from \((\Omega, \mathcal{F}, \mathbb{P})\) into an arbitrary measurable space \((\Lambda, \mathcal{L})\), and if we write \(\nu_A(E) = \mathbb{P}(A \cap T^{-1}(E))\) where \(A \in \mathcal{F}\) and \(E \in \mathcal{L}\), then it is clear that \(\nu_E\) and \(\mathbb{P} \circ T^{-1}\) are measures on \(\mathcal{L}\) such that \(\nu_A \ll \mathbb{P} \circ T^{-1}.\) Radon-Nikodym theorem now implies that there exists an \(\mathbb{P} \circ T^{-1}\)-integrable function \(p_A\), unique upto \(\mathbb{P} \circ T^{-1}\)-a.e., such that <div class="nonumber">\[\begin{aligned} \mathbb{P}(A \cap T^{-1}(E)) = \int_E p_A(\lambda) \; (\mathbb{P} \circ T^{-1})(\mathrm{d} \lambda) \quad \text{for all } E \in \mathcal{L}.\end{aligned}\]</div></p>
+<p>We anoint \(p_A(\lambda)\) as the conditional probability of \(A\) given \(\lambda \in \Lambda\) or the conditional probability of \(A\) given that \(T(\omega) = \lambda.\) Note that here we are conditioning on a measurable mapping \(T\) instead of a sub-\(\sigma\)-algebra, but this notion is related to conditioning on \(\sigma(T)\) as will become clear ahead. Keep this &quot;rumination&quot; in mind when we discuss regular conditional distribution later.</p>
+<p>Let&#39;s look at our definition of conditional probability from the other direction and show that \(\mathbb{P}(A \mid B)\) as defined in Definition 2 conforms to our traditional usage. To start, note that \(\sigma(\mathbf{1}_B) =\{\varnothing, B, B^\mathsf{c}, \Omega\}\), and since \(\mathbb{P}(A \mid B)\) is \(\sigma(\mathbf{1}_B)\)-measurable, it must be constant on each of the sets \(B, B^\mathsf{c}\), thereby necessitating <div class="nonumber">\[\begin{aligned} \mathbb{P}(A \mid B)(\omega) = \begin{cases}                    \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} & \text{ if } \omega \in B   \\          \frac{\mathbb{P}(A \cap B^\mathsf{c})}{\mathbb{P}(B^\mathsf{c})} & \text{ if } \omega \in B^\mathsf{c}                \end{cases}\end{aligned}\]</div> because of property 3. of Theorem 1 by taking \(G\) to be \(B\) and \(B^\mathsf{c}.\) Of course, if any of the sets \(B\) or \(B^\mathsf{c}\) is of measure \(0\), then you can take the corresponding value for \(\mathbb{P}(A \mid B)(\omega)\) to be anything in \([0,1]\) and it won&#39;t matter since the concept of conditional probability is defined only up to sets of measure \(0.\)</p>
+<h3 id="properties_of_conditional_probability"><a href="#properties_of_conditional_probability" class="header-anchor">Properties of conditional probability</a></h3>
+<p>Positivity property &#40;property 2. <a href="regularcondprob#properties_of_conditional_expectation">above</a>&#41; and monotone convergence property &#40;property 3. <a href="regularcondprob#properties_of_conditional_expectation">above</a>&#41; of conditional expectation imply \(0 \le\mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right) \le 1\) a.s. for any \(A \in \mathcal{F}\), \(\mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right) = 0\) a.s. if and only if \(\mathbb{P}(A) = 0\), and \(\mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right) = 1\) a.s. if and only if \(\mathbb{P}(A) = 1.\)</p>
+<p>Let \(A_1, A_2, \ldots \in \mathcal{F}\) be a sequence of disjoint sets. By linearity &#40;property 1. <a href="regularcondprob#properties_of_conditional_expectation">above</a>&#41; and monotone convergence theorem for conditional expectation &#40;property 3. <a href="regularcondprob#properties_of_conditional_expectation">above</a>&#41;, we see that</p>
+<a id="eq2" class="anchor"></a>\[\begin{aligned} 
+\mathbb{P}\!\left(\left. \bigcup_n A_n\,\right\vert\, \mathcal{G}\right) = \sum_n \mathbb{P}\!\left(\left. A_n\,\right\vert\, \mathcal{G}\right) \quad \text{a.s.}.\end{aligned}\]
+<p>If \(A_n \in \mathcal{F}\) for \(n \ge 1\) and \(\lim_{n \to \infty} A_n = A\), then we also have \(\lim_{n \to \infty} \mathbb{P}\!\left(\left. A_n\,\right\vert\, \mathcal{G}\right) = \mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+<p>It seems very tempting from the foregoing discussion to claim that \(\mathbb{P}\!\left(\left. \cdot\,\right\vert\, \mathcal{G}\right)(\omega)\) is a probability measure on \(\mathcal{F}\) for almost all \(\omega \in \Omega\), but except for some nice spaces, which we will discuss below, this isn&#39;t true. Let us first try to see this intuitively <span class="bibref"><a href="#chow">(Chow and Teicher, 1997)</a></span>. Equation <span class="eqref">(<a href="#eq2">2</a>)</span> holds for all \(\omega \in \Omega\) EXCEPT for some null set which may well depend on the particular sequence \(\{A_n\}_{n \in \mathbb N}.\) It does NOT stipulate that there exists a fixed null set \(N \in \mathcal{F}\) such that <div class="nonumber">\[\begin{aligned} \mathbb{P}\!\left(\left. \bigcup_n A_n\,\right\vert\, \mathcal{G}\right)(\omega) = \sum_n \mathbb{P}\!\left(\left. A_n\,\right\vert\, \mathcal{G}\right)(\omega), \quad \omega \in \Omega \setminus N\end{aligned}\]</div> for every disjoint sequence \(\{A_n\}_{n \in \mathbb N} \subseteq \mathcal{F}.\) Except in trivial cases, there are uncountably many disjoint sequences, and therefore we will need uncountable union of such null sets to be of measure \(0\), which of course may not even be defined let alone be of measure \(0.\) To further drive this point home you can take a look at an explicit example of how this can fail in an exercise in <span class="bibref"><a href="#halmos">(Halmos, 1950)</a></span> on page 210.</p>
+<h2 id="regular_conditional_probability"><a href="#regular_conditional_probability" class="header-anchor">Regular Conditional Probability</a></h2>
+<p>Motivated by our discussion above, we define regular conditional probability as follows.</p>
+<div class="def"><p><strong>Definition 3</strong>: Let \((\Omega, \mathcal{F}, \mathbb{P})\) be a probability space and \(\mathcal{G}, \mathcal{H}\) be sub-\(\sigma\)-algebras of \(\mathcal{F}.\) A <em>regular conditional probability on \(\mathcal{H}\) given \(\mathcal{G}\)</em> is a function \(\mathbb{P}(\cdot, \cdot) \colon \Omega \times \mathcal{H} \to [0,1]\) such that</p>
+<ol>
+<li><p>for a.e. \(\omega \in \Omega\), \(\mathbb{P}(\omega, \cdot)\) is a probability measure on \(\mathcal{H}\),</p>
+</li>
+<li><p>for each \(A \in \mathcal{H}\), \(\mathbb{P}(\cdot, A)\) is a \(\mathcal{G}\)-measurable function on \(\Omega\) coinciding with the conditional probability of \(A\) given \(\mathcal{G}\), i.e., \(\mathbb{P}(\cdot, A) = \mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+</li>
+</ol></div>
+<p>Let&#39;s show that this definition is not outrageous by showing that it agrees with our traditional notion of conditional pdf and conditional expectation. To that end, suppose that \(X\) and \(Y\) are random variables which have a joint probability density function \(f_{X,Y}(x,y).\) This means that we are considering the probability space \((\mathbb R^2, \mathcal{B}(\mathbb R^2), \mathbb{P})\) with \(X\) and \(Y\) being the coordinate random variables, i.e. \((x,y) \mapsto x\) and \((x,y) \mapsto y\) respectively, and having an absolutely continuous distribution function \(F_{X,Y}(x,y)\) such that <div class="nonumber">\[\begin{aligned} F_{X,Y}(x,y) = \int_{-\infty}^y \int_{-\infty}^x f_{X,Y}(s,t) \; \mathrm{d} s \, \mathrm{d} t.\end{aligned}\]</div> We recall that \(f_X(x) = \int_\mathbb R f_{X,Y}(x,y) \, \mathrm{d} y\) and \(f_Y(y) = \int_\mathbb R f_{X,Y}(x,y) \, \mathrm{d} x\) act as probability density functions for \(X\) and \(Y\) respectively, and <div class="nonumber">\[\begin{aligned} f_{X \mid Y}(x \mid y) = \begin{cases}                    \frac{f_{X,Y}(x,y)}{f_Y(y)} & \text{ if } f_Y(y) \neq 0 \\
+0 & \text{ otherwise}             \end{cases}\end{aligned}\]</div> defines the elementary conditional pdf \(f_{X \mid Y}\) of \(X\) given \(Y.\) By Fubini&#39;s theorem \(f_X\) and \(f_Y\) are Borel functions on \(\mathbb R\) and so \(f_{X \mid Y}\) is a Borel function on \(\mathbb R^2.\) Let \(\mathcal{H} = \mathcal{B}(\mathbb R^2) = \sigma(X, Y)\) and \(\mathcal{G} = \sigma(Y) = \mathbb R \times \mathcal{B}(\mathbb R).\) For \(A \in \mathcal{H}\) and \(\omega = (x,y) \in \mathbb R^2\) we define <div class="nonumber">\[\begin{aligned} \mathbb{P}(\omega, A) = \int_{\{s\,:\,(s,y) \in A\}} f_{X \mid Y}(s \mid y) \, \mathrm{d} s.\end{aligned}\]</div> Then for each \(\omega \in \mathbb R^2\), \(\mathbb{P}(\omega, \cdot)\) is a probability measure on \(\mathcal{H}\), and for each \(A \in \mathcal{H}\), \(\mathbb{P}(\cdot, A)\) is a Borel function in \(y\) and hence \(\mathcal{G}\)-measurable. To verify that \(\mathbb{P}(\cdot, A) = \mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right)\) a.s. for any \(A \in \mathcal{H}\) we just need to verify property 3. of Theorem 1. To this end, fix \(A \in \mathcal{H}\) and \(G \in \mathcal{G}\), and note that \(G\) must be of the form \(G = \mathbb R \times B\) for \(B \in \mathcal{B}(\mathbb R).\) Thus <div class="nonumber">\[\begin{aligned} \int_G \mathbb{P}(\omega, A) \,\mathrm{d}\mathbb{P}(\omega) &= \int_B \int_{\mathbb R} \mathbb{P}((s,t), A) f_{X \mid Y}(s,t) \, \mathrm{d} s \, \mathrm{d} t \quad \text{(by absolute continuity and Fubini's theorem)} \\
+&= \int_B \int_{\mathbb R} \left[ \int_{\{u\,:\,(u,t) \in A\}} f_{X \mid Y}(u \mid t) \, \mathrm{d} u \right] f_{X \mid Y}(s,t) \, \mathrm{d} s \, \mathrm{d} t \\
+&= \int_B \left[ \int_{\{u\,:\,(u,t) \in A\}} f_{X \mid Y}(u \mid t) \, \mathrm{d} u \right] f_{Y}(t) \, \mathrm{d} t \\
+&= \int_B \int_{\{u\,:\,(u,t) \in A\}} f_{X, Y}(u, t) \, \mathrm{d} u \, \mathrm{d} t \\
+&= \int_B \int_{\mathbb R} \mathbf{1}_{A}(u,t) f_{X, Y}(u, t) \, \mathrm{d} u \, \mathrm{d} t \\
+&= \int_{G} \mathbf{1}_{A}(\omega) \, \mathrm{d}\mathbb{P}(\omega)\end{aligned}\]</div></p>
+<p>and so \(\mathbb{P}(\cdot, A) = \mathbb{E}\!\left(\left. \mathbf{1}_A\,\right\vert\, \mathcal{G}\right)= \mathbb{P}\!\left(\left. A\,\right\vert\, \mathcal{G}\right)\) a.s.. Hence, \(\mathbb{P}(\omega, A)\) is a regular conditional probability on \(\mathcal{H}\) given \(\mathcal{G}.\)</p>
+<p>For the corresponding analysis for conditional expectation, let \(h\) be a Borel function on \(\mathbb R^2\) such that <div class="nonumber">\[\begin{aligned} \mathbb{E}{|h(X,Y)|} = \int_\mathbb R \int_\mathbb R |h(x,y)| f_{X,Y}(x,y) \, \mathrm{d} x \, \mathrm{d} y < \infty.\end{aligned}\]</div> Set <div class="nonumber">\[\begin{aligned} g(y) = \int_\mathbb R h(s, y) f_{X \mid Y}(s \mid y) \, \mathrm{d} s.\end{aligned}\]</div> \(g(y)\) is the traditional conditional density of \(h(X, Y)\) given \(Y = y.\) Then the claim is that <div class="nonumber">\[\begin{aligned} g(Y) = \mathbb{E}\!\left(\left. h(X,Y)\,\right\vert\, \sigma(Y)\right) \text{a.s.}.\end{aligned}\]</div> A typical element of \(\sigma(Y)\) has the form \(\{\omega \in \mathbb R^2 \, : \, Y(\omega) \in B\}\), where \(B \in \mathcal{B}(\mathbb R).\) Hence, we must show that <div class="nonumber">\[\begin{aligned} L = \mathbb{E}\left[h(X,Y) \mathbf{1}_{B}(Y)\right] = \mathbb{E}\left[g(Y) \mathbf{1}_{B}(Y)\right] = R.\end{aligned}\]</div> But we can write \(L\) and \(R\) as <div class="nonumber">\[\begin{aligned} L &= \int \int h(x,y) \mathbf{1}_{B}(y) f_{X,Y}(x,y) \, \mathrm{d} x \, \mathrm{d} y \\
+R &= \int g(y) \mathbf{1}_{B}(y) f_Y(y) \, \mathrm{d} y\end{aligned}\]</div> and they are equal by Fubini&#39;s theorem.</p>
+<p>In general, we have the following useful theorem &#40;taken from <span class="bibref"><a href="#chow">(Chow and Teicher, 1997)</a></span>&#41; which allows us to view conditional expectations as ordinary expectations relative to the measure induced by regular conditional probability.</p>
+<div class="thm"><strong>Theorem 2</strong>: Consider the setting of Definition 3 and denote \(\mathbb{P}_\omega(\cdot) = \mathbb{P}(\omega, \cdot).\) Let \(X\) be an \(\mathcal{H}\)-measurable function with \(\mathbb{E}(X) < \infty.\) Then <a id="eq3" class="anchor"></a>\[\begin{aligned} 
+\mathbb{E}\!\left(\left. X\,\right\vert\, \mathcal{G}\right)(\omega) = \int_\Omega X \, \mathrm{d}\mathbb{P}_\omega \quad \text{a.s.}.\end{aligned}\]</div>
+<div class="proof"><p>Recall the monotone class theorem for functions:</p>
+<div class="thm">Let \(\mathscr{H}\) be a family of nonnegative functions on \(\Omega\) which contains all indicators of sets of some class \(\mathcal{H}\) of subsets of \(\Omega.\) If either &#40;i&#41; \(\mathcal{H}\) is a \(\pi\)-class and \(\mathscr{H}\) is a \(\lambda\)-system, or &#40;ii&#41; \(\mathcal{H}\) is a \(\sigma\)-algebra and \(\mathscr{H}\) is a monotone system, then \(\mathscr{H}\) contains all nonnegative \(\sigma(\mathcal{H})\)-measurable functions.</div>
+<p>By separate considerations of \(X^+\) and \(X^-\), it may be supposed that \(X \ge 0.\) Define <div class="nonumber">\[\begin{aligned} \mathscr{H} = \{X \, : \, X \ge 0,\, X \text{ is } \mathcal{H} \text{-measurable, and (3) holds for } X\}.\end{aligned}\]</div> By the definition of regular conditional probability, \(\mathbf{1}_A \in \mathscr{H}\) for \(A \in \mathcal{H}.\) \(\mathcal{H}\) is already a \(\sigma\)-algebra. Let&#39;s show that \(\mathscr{H}\) is a monotone system.</p>
+<p>If \(X_1, X_2 \in \mathscr{H}\) and \(c_1, c_2 \ge 0\), then \(c_1 X_1 + c_2 X_2 \ge 0\), \(c_1 X_1 + c_2 X_2\) is \(\mathcal{H}\)-measurable and Equation <span class="eqref">(<a href="#eq3">3</a>)</span> holds because of linearity of expectation and conditional expectation, and thus \(c_1 X_1 + c_2 X_2 \in \mathscr{H}.\) If \(\{X_n\}_{n \in \mathbb N} \subseteq \mathscr{H}\) such that \(X_n \uparrow X\), then \(X \ge 0\), \(X\) is \(\mathcal{H}\)-measurable, and Equation <span class="eqref">(<a href="#eq3">3</a>)</span> holds for \(X\) because of monotone convergence theorem for expectation and conditional expectation, and thus \(X \in \mathscr{H}.\) Therefore, by the monotone class theorem \(\mathscr{H}\) contains all nonnegative \(\mathcal{H}\)-measurable functions.</p></div>
+<h2 id="regular_conditional_distribution"><a href="#regular_conditional_distribution" class="header-anchor">Regular Conditional Distribution</a></h2>
+<p>In some cases even the concept of regular conditional probability in inadequate, and that motivates the concept of regular conditional distributions.</p>
+<div class="def"><p><strong>Definition 4</strong>: Let \((\Omega, \mathcal{F}, \mathbb{P})\) be a probability space, \(\mathcal{G} \subseteq \mathcal{F}\) a \(\sigma\)-algebra, \((\Lambda, \mathcal{L})\) a measurable space, and \(T \colon \Omega \to \Lambda\) a measurable mapping. A <em>regular conditional distribution for \(T\) given \(\mathcal{G}\)</em> is a function \(\mathbb{P}_T \colon \Omega \times \mathcal{L} \to [0,1]\) such that</p>
+<ol>
+<li><p>for a.e. \(\omega \in \Omega\), \(\mathbb{P}_T(\omega, \cdot)\) is a probability measure on \(\mathcal{L}\),</p>
+</li>
+<li><p>for each \(A \in \mathcal{L}\), \(\mathbb{P}_T(\cdot, A)\) is a \(\mathcal{G}\)-measurable function on \(\Omega\) coinciding with the conditional probability of \(T^{-1}(A)\) given \(\mathcal{G}\), i.e., \(\mathbb{P}_T(\cdot, A) = \mathbb{P}\!\left(\left. T^{-1}(A)\,\right\vert\, \mathcal{G}\right)\) a.s..</p>
+</li>
+</ol></div>
+<p>It is clear that when \(\Lambda = \Omega\), \(\mathcal{L} = \mathcal{H} \subseteq \mathcal{F}\) and \(T\) is the identity map, \(\mathbb{P}_T\) is exactly the regular conditional probability as defined in Definition 3.</p>
+<p>Now would be a good time to reread the first “rumination” in the section <a href="regularcondprob#conditional_probability">Conditional Probability</a> and realize that the definition of regular conditional distribution is in fact well motivated.</p>
+<p>A corresponding version of Theorem 2 exists, proof of which I&#39;ll leave as an easy exercise:</p>
+<div class="thm"><strong>Theorem 3</strong>: In the setting of Definition 4, if \(\mathbb{P}_T^\omega(A) = \mathbb{P}_T(\omega, A)\) and \(h \colon \Lambda \to \mathbb R\) is a Borel function with \(\mathbb{E}(|h(T)|) < \infty\), then <div class="nonumber">\[\begin{aligned} \mathbb{E}\!\left(\left. h(T)\,\right\vert\, \mathcal{G}\right)(\omega) = \int_\Lambda h(\lambda) \, \mathbb{P}_T^\omega(\mathrm{d}\lambda).\end{aligned}\]</div></div>
+<p>To see the power of thinking about conditional probabilities like this, let&#39;s give an unbelievably short proof of conditional Hölder&#39;s inequality that I took from <span class="bibref"><a href="#chow">(Chow and Teicher, 1997)</a></span>. Contrast it with <a href="https://en.wikipedia.org/wiki/H&#37;C3&#37;B6lder&#37;27s_inequality#Conditional_H&#37;C3&#37;B6lder_inequality">other proofs</a>.</p>
+<div class="thm"><strong>Theorem 4</strong>: If \(X,Y\) are random variables on \((\Omega, \mathcal{F}, \mathbb{P})\), \(\mathcal{G} \subseteq \mathcal{F}\) is a \(\sigma\)-algebra, and \(1 < p < \infty\), \(1/p + 1/q = 1\), then <div class="nonumber">\[\begin{aligned} \mathbb{E}\!\left(\left. |XY|\,\right\vert\, \mathcal{G}\right) \le \left[ \mathbb{E}\!\left(\left. |X|^p\,\right\vert\, \mathcal{G}\right)\right]^{1/p}\left[ \mathbb{E}\!\left(\left. |Y|^q\,\right\vert\, \mathcal{G}\right)\right]^{1/q} \text{ a.s.}.\end{aligned}\]</div></div>
+<div class="proof">For \(B \in \mathcal{B}(\mathbb R^2)\) and \(\omega \in \Omega\), let \(\mathbb{P}_{X,Y}^\omega(B) = \mathbb{P}_{X,Y}(\omega, B)\) be the regular conditional distribution for \((X,Y)\) given \(\mathcal{G}.\) Theorem 3 allows us to write <div class="nonumber">\[\begin{aligned} \mathbb{E}\!\left(\left. |XY|\,\right\vert\, \mathcal{G}\right)(\omega) &= \int_{\mathbb R^2} |x y| \,\mathbb{P}_{X,Y}^\omega(\mathrm{d} (x,y))\\ 
+    \left[ \mathbb{E}\!\left(\left. |X|^p\,\right\vert\, \mathcal{G}\right)\right]^{1/p}(\omega) &= \left[ \int_{\mathbb R^2} |x|^p \, \mathbb{P}_{X,Y}^\omega(\mathrm{d} (x,y)) \right]^{1/p} \\
+    \left[ \mathbb{E}\!\left(\left. |Y|^q\,\right\vert\, \mathcal{G}\right)\right]^{1/q}(\omega) &= \left[ \int_{\mathbb R^2} |y|^q \, \mathbb{P}_{X,Y}^\omega(\mathrm{d} (x,y)) \right]^{1/q}.\end{aligned}\]</div> And now our desired inequality follows immediately from the ordinary Hölder&#39;s inequality.</div>
+<h2 id="existence_of_regular_conditional_distribution"><a href="#existence_of_regular_conditional_distribution" class="header-anchor">Existence of Regular Conditional Distribution</a></h2>
+<p>Before we discuss their existence, let us define the concept of standard Borel space <span class="bibref"><a href="#web">(Encyclopedia of Mathematics)</a></span>.</p>
+<div class="def"><strong>Definition 5</strong>: Let \((X, \mathcal{X})\) and \((Y, \mathcal{Y})\) be two measurable spaces. They are called <em>isomorphic</em> if there exists a bijection \(f \colon X \to Y\) such that \(f\) and its inverse \(f^{-1}\) are both measurable. The function \(f\) is called an <em>isomorphism</em>.</div>
+<div class="def"><p><strong>Definition 6</strong>: A measurable space \((X, \mathcal{X})\) is called a <em>standard Borel space</em> if it satisfies any of the following equivalent conditions:</p>
+<ol>
+<li><p>\((X, \mathcal{X})\) is isomorphic to some compact metric space with the Borel \(\sigma\)-algebra.</p>
+</li>
+<li><p>\((X, \mathcal{X})\) is isomorphic to some Polish space &#40;i.e., a separable complete metric space&#41; with the Borel \(\sigma\)-algebra.</p>
+</li>
+<li><p>\((X, \mathcal{X})\) is isomorphic to some Borel subset of some Polish space with the Borel \(\sigma\)-algebra.</p>
+</li>
+</ol></div>
+<p>As you can guess most spaces we deal with are standard Borel spaces. <span class="bibref"><a href="#durrett">(Durrett, 2019)</a></span> calls these space <em>nice</em> since we already have too many things named after Borel. I am not sure I agree with his reasoning but I like Durrett&#39;s terminology.</p>
+<p>The next two theorems show the existence of regular conditional distribution and are taken from &#91;<span class="bibref"><a href="#durrett">(Durrett, 2019)</a></span>, Section 4.1.3&#93;. See also &#91;<span class="bibref"><a href="#parthasarathy">(Parthasarathy, 1967)</a></span>, Section V.8&#93;.</p>
+<div class="thm"><strong>Theorem 5</strong>: Regular conditional distribution exists if \((\Lambda, \mathcal{L})\) is nice.</div>
+<p>A generalization of the last theorem:</p>
+<div class="thm"><p><strong>Theorem 6</strong>: Suppose \((\Lambda, \mathcal{L})\) is a nice space, \(T\) and \(S\) are measurable mappings from \(\Omega\) to \(\Lambda\), and \(\mathcal{G} = \sigma(S).\) Then there exists a function \(\mu \colon \Lambda \times \mathcal{L} \to [0,1]\) such that</p>
+<ol>
+<li><p>for a.e. \(\omega \in \Omega\), \(\mu(S(\omega), \cdot)\) is a probability measure on \(\mathcal{L}\), and</p>
+</li>
+<li><p>for each \(A \in \mathcal{L}\), \(\mu(S(\cdot), A) = \mathbb{P}(T^{-1}(A)\mid\mathcal{G})\) a.s..</p>
+</li>
+</ol></div>
+<p>It is instructive to prove Theorem 5 in the special case when \((\Lambda, \mathcal{L}) = (\mathbb R^n, \mathcal{B}(\mathbb R^n)).\) The theorem and the proof is taken from <span class="bibref"><a href="#chow">(Chow and Teicher, 1997)</a></span>.</p>
+<div class="thm"><strong>Theorem 7</strong>: In the setting of Definition 4, let \((\Lambda, \mathcal{L}) = (\mathbb R^n, \mathcal{B}(\mathbb R^n))\) and \(T = (T_1, \ldots, T_n) \colon \Omega \to \mathbb R^n.\) Then there exists a regular conditional distribution for \(T\) given \(\mathcal{G}.\)</div>
+<div class="proof"><p>Let&#39;s recall the definition of an \(n\)-dimensional distribution function on \(\mathbb R^n\) &#40;the Russian convention of left-continuous distribution function&#41;.</p>
+<div class="def">An \(n\)-dimensional distribution function on \(\mathbb R^n\) is a function \(F \colon \mathbb R^n \to [0,1]\) satisfying: <div class="nonumber">\[\begin{aligned} \lim_{x_j \to - \infty} F(x_1, \ldots, x_n) &= 0, \quad 1 \le j \le n;\\
+\lim_{\substack{x_j \to \infty \\ 1 \le j \le n}} F(x_1, \ldots, x_n) &= 1;\\
+\lim_{y_j \uparrow x_j} F(x_1, \ldots, x_{j-1}, y_j, x_{j+1}, \ldots, x_n) &= F(x_1, \ldots, x_j, \ldots, x_n), \quad 1 \le j \le n; \text{ and}\end{aligned}\]</div> <div class="nonumber">\[\begin{aligned} &F(b_1, \ldots, b_n) - \sum_{j=1}^n F(b_1, \ldots, b_{j-1}, a_j, b_{j+1}, \ldots, b_n)+ \sum_{1 \le j < k \le n} F(b_1, \ldots, b_{j-1}, a_j, b_{j+1}, \ldots, b_{k-1}, a_k, b_{k+1}, \ldots, b_n) - \cdots (-1)^n F(a_1, \ldots, a_n)\\ & =: \Delta_n^{a,b} \ge 0.\end{aligned}\]</div></div>
+<p>We will try to construct a distribution function on \(\mathbb R^n.\) To this end, for any rational number \(r_1, \ldots, r_n\) and \(\omega \in \Omega\), define <a id="eq4" class="anchor"></a>\[\begin{aligned} 
+F_n^\omega(r_1, \ldots, r_n) := \mathbb{P}\!\left(\left. \bigcap_{i=1}^n \{T_i < r_i\} \,\right\vert\, \mathcal{G}\right)(\omega).\end{aligned}\]</p>
+<p>It&#39;s evident that the properties of conditional probability discussed above imply that there is a null set \(N \in \mathcal{G}\) such that for \(\omega \in \Omega \setminus N\) and all rational numbers \(r_i, r_i', q_{i,m}\) the following holds <div class="nonumber">\[\begin{aligned} F_n^\omega(r_1, \ldots, r_n) &\ge F_n^\omega(r_1', \ldots, r_n') \text{ if } r_i > r_i', \, 1 \le i \le n, \\
+    F_n^\omega(r_1, \ldots, r_n) &= \lim_{\substack{q_{i,m} \uparrow r_i \\ 1 \le i \le n}} F_n^\omega(q_{1, m}, \ldots, q_{n, m}), \\
+    \lim_{r_i \to -\infty} F_n^\omega(r_1, \ldots, r_n) &= 0, \quad 1 \le i \le n, \\
+    \lim_{\substack{r_i \to \infty \\ 1 \le i \le n}} F_n^\omega(r_1, \ldots, r_n) &= 1, \text{ and} \\
+    \Delta_n^{r, r'} F_n^\omega &\ge 0 \text{ if } r \le r',\end{aligned}\]</div> where \(r \le r'\) means \(r_i \le r_i'\) for all \(1 \le i \le n.\) Having defined \(F_n^\omega\) for rational values, extend to any real numbers \(x_1, \ldots, x_n\) as follows <a id="eq5" class="anchor"></a>\[\begin{aligned} 
+F_n^\omega(x_1, \ldots, x_n) = \begin{cases}                    \lim_{\substack{r_i \uparrow x_i \\ r_i \in \mathbb{Q} \\ 1 \le i \le n}} F_n^\omega(r_1, \ldots, r_n) & \text{ if } \omega \in \Omega \setminus N   \\                    \mathbb{P}\left(\bigcap_{i=1}^n \{T_i < r_i\}\right) & \text{ if } \omega \in N.              \end{cases}\end{aligned}\]</p>
+<p>Then for each \(\omega \in \Omega\), \(F_n^\omega(x_1, \ldots, x_n)\) is an \(n\)-dimensional distribution function and hence determines a Lebesgue-Stieltjes measure \(\mu_\omega\) on \(\mathcal{B}(\mathbb R^n)\) with \(\mu_\omega(\mathbb R^n) = 1.\) For \(B \in \mathcal{B}(\mathbb R^n)\) and \(\omega \in \Omega\) define <div class="nonumber">\[\begin{aligned} \mathbb{P}_T(\omega, B) = \mu_\omega(B).\end{aligned}\]</div> If <div class="nonumber">\[\begin{aligned} \mathcal{H} &= \{B \in \mathcal{B}(\mathbb R^n)\,:\,\mathbb{P}_T(\cdot, B) = \mathbb{P}(T^{-1}(B)\mid\mathcal{G}) \text{ a.s.}\} \\
+    \mathcal{D} &= \{B \in \mathcal{B}(\mathbb R^n)\,:\,B = [-\infty, r_1) \times \cdots \times [-\infty, r_n), \, r_i \in \mathbb{Q}\},\end{aligned}\]</div> then a moment&#39;s reflection will convince you that that \(\mathcal{H}\) is a \(\lambda\)-class, \(\mathcal D\) is a \(\pi\)-class, and \(\mathcal{H} \supseteq \mathcal D.\) Hence, by the \(\pi-\lambda\) theorem \(\mathcal{H} \supseteq \sigma(\mathcal D) = \mathcal{B}(\mathbb R^n)\), or in other words, \(\mathbb{P}_T(\omega, B)\) is a regular conditional distribution for \(T\) given \(\mathcal{G}.\)</p></div>
+<p>In fact, this theorem is easily extended to \((\mathbb R^\infty, \mathcal{B}(\mathbb R^\infty))\) as follows: For all \(n \ge 1\), define \(F_n^\omega\) as in Equation <span class="eqref">(<a href="#eq4">4</a>)</span>. Select the null set \(N \in \mathcal{G}\) such that in addition to the conditions it satisfies above we also have the consistency condition <div class="nonumber">\[\begin{aligned} \lim_{r_{n+1} \to \infty} F_n^\omega(r_1, \ldots, r_n, r_{n+1}) = F_n^\omega(r_1, \ldots, r_n), \quad n \ge 1.\end{aligned}\]</div></p>
+<p>For reals \(x_1, \ldots, x_n\), define just like Equation <span class="eqref">(<a href="#eq5">5</a>)</span>. Then for each \(\omega \in \Omega\), \(\{F_n^\omega, \, n \ge 1\}\) is a consistent family of distribution functions, and hence by the Kolmogorov extension theorem there exists a unique measure \(\mu_\omega\) on \((\mathbb R^\infty, \mathcal{B}(\mathbb R^\infty))\) whose finite dimensional distributions are \(\{F_n^\omega, \, n \ge 1\}.\) Define \(\mathbb{P}_T(\omega, B) = \mu_\omega(B)\) for \(B \in \mathcal{B}(\mathbb R^\infty).\) If <div class="nonumber">\[\begin{aligned} \mathcal{H} &= \{B \in \mathcal{B}(\mathbb R^\infty)\,:\,\mathbb{P}_T( \cdot, B) = \mathbb{P}(T^{-1}(B)\mid\mathcal{G}) \text{ a.s.}\} \\
+\mathcal D &= \bigcup_{n=1}^\infty \{B \in \mathcal{B}(\mathbb R^\infty)\,:\,B = [-\infty, r_1) \times \cdots \times [-\infty, r_n) \times \mathbb R \times \mathbb R \times \cdots, \, r_i \in \mathbb{Q}\},\end{aligned}\]</div> then \(\mathcal{H}\) is a \(\lambda\)-class, \(\mathcal{D}\) is a \(\pi\)-class, and \(\mathcal{H} \supseteq \mathcal{D}.\) Hence, by the \(\pi-\lambda\) theorem \(\mathcal{H} \supseteq \sigma(\mathcal{D}) = \mathcal{B}(\mathbb R^\infty).\)</p>
+<h2 id="references"><a href="#references" class="header-anchor">References</a></h2>
+<ul>
+<li><p><a id="chow" class="anchor"></a> Chow, Yuan Shih and Teicher, Henry. <em>Probability Theory: Independence, Interchangeability, Martingales</em>, 3rd edn. Springer-Verlag New York, 1997.</p>
+</li>
+<li><p><a id="durrett" class="anchor"></a> Durrett, R.: <em>Probability: Theory and Examples</em>, 5th edn. Cambridge University Press, 2019.</p>
+</li>
+<li><p><a id="halmos" class="anchor"></a> Halmos, P. R.. <em>Measure Theory</em>. Van Nostrand, Princeton, N. J., 1950; Springer-Verlag, Berlin and New York, 1974.</p>
+</li>
+<li><p><a id="kallenberg" class="anchor"></a> Kallenberg, Olav. <em>Foundations of Modern Probability</em>, Third Edition, Springer, 2021.</p>
+</li>
+<li><p><a id="parthasarathy" class="anchor"></a> Parthasarathy, K. R.. <em>Probability Measures on Metric Spaces</em>. AMS Chelsea Publishing, 1967.</p>
+</li>
+<li><p><a id="williams" class="anchor"></a> Williams, David. <em>Probability with Martingales</em>. Cambridge mathematical textbooks, Cambridge University Press, 1991.</p>
+</li>
+<li><p><a id="web" class="anchor"></a> <a href="https://encyclopediaofmath.org/wiki/Standard_Borel_space">Standard Borel space. Encyclopedia of Mathematics.</a></p>
+</li>
+</ul>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>A Coin Tossing Game</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">A Coin Tossing Game</div>
+<h3 id="the_game"><a href="#the_game" class="header-anchor">The Game</a></h3>
+<p>I recently came across this simple to state puzzle:</p>
+<blockquote>
+<p>Suppose you have a coin that has probabilities \(p\) for heads and \(1-p\) for tails. You play the following game with a friend who also knows the value of \(p.\) The first player picks one of the outcomes \(HH\), \(TH\), \(HT\) or \(TT\). The second player observes the choice of the first player and picks one of the remaining 3 outcomes. You then proceed to toss the coin infinitely many times independently constructing an infinite sequence of \(H\)’s and \(T\)’s. A player wins if their choice appears first in the sequence. For example, if player one chose \(HH\) and player two chose \(TT\) and if the coin toss sequence observed is \(HTHTHTTHTHHH...\), then it results in a victory for player two since \(TT\) occurred before \(HH\) in this sequence. For what values of \(p\) is it better to go first in this game?</p>
+</blockquote>
+<p>Let&#39;s make the conditions under which a player wins more concrete.</p>
+<p><strong>The strategy</strong>: It’s better to go as the first player in the game if for some choice \(a \in \{HH,TT,HT,TH\}\), the probability of winning the game is greater than \(1/2\) no matter the choice of the second player. It’s better to go as the second player in the game if for every choice \(a\) of the first player, we can find some element of the set \(\{HH,TT,HT,TH\} \setminus \{a\}\), such that the probability of winning the game is greater than \(1/2.\)</p>
+<p>As an example, suppose \(p = 3/4\), then if the first player chooses \(HH\), then no matter the choice of the second player, the probability of the first player winning the game is greater than \(1/2.\) To see this note that the probability of getting two consecutive heads in the first two coin tosses itself is \(9/16 > 1/2.\) Therefore, for \(p=3/4\) it is better to go as the first player.</p>
+<p>On first impression it seems as if it must be better to go as the first player, no matter the value of \(p\), since the first player has more choices, but as we will see, the fact that the second player has the advantage of choosing the outcome <em>after</em> observing the choice of the first player gives him an advantage for certain values of \(p.\)</p>
+<p>But before we do that, we should prove an implicit assumption: the game ends with a winner in a finite number of moves with probability \(1.\) But to do that we first need to define a probability space on which the game is played. In particular, does it even exist? Indeed it does as we see below.</p>
+<h3 id="constructing_the_probability_space"><a href="#constructing_the_probability_space" class="header-anchor">Constructing the probability space</a></h3>
+<p>To formalize our analysis we need to define a sequence of i.i.d. random variables, one for each coin toss. However, the existence of a probability space on which we can define this sequence is not obvious at all. For example, the following proposition shows that we cannot always construct desired number of random variables on a measurable space.</p>
+<div class="thm"><strong>Proposition</strong>: There do not exist uncountably many independent, non-constant random variables on the probability space \(([0,1], \mathcal{B}([0,1]), \lambda)\), where \(\lambda\) is the Lebesgue measure on the Borel \(\sigma\)-algebra \(\mathcal{B}([0,1]).\)</div>
+<div class="proof">Assume that \(\{X_i \}_{i \in I}\) is a collection of independent non-constant random variables. Define the collection \(\{Y_i \} _{i \in I}\) by letting \(Y_i = X_i \mathbf{1}_{\{|X_i| < C_i\}}\) where \(C_i\) is large enough that \(Y_i\) isn&#39;t a constant. The collection formed by the random variables \(Z_i = Y_i - \mathbb{E}(Y_i)\) is a collection of independent random variables. Note that the random variables \(Z_i\) are in the separable Hilbert space \(L^2([0,1], \lambda)\) and are orthogonal to each other. But a separable Hilbert can have only countably such elements. Thus, \(I\) must be countable.</div>
+<p>Fortunately the situation isn&#39;t so bleak for our case and <a href="https://en.wikipedia.org/wiki/Kolmogorov_extension_theorem">Kolmogorov extension theorem</a> allows us to claim the existence of a probability space on which there exists our required sequence of i.i.d. random variables if we can show for each \(n \in \mathbb N\) the existence of a probability space \((\Omega_n, \mathcal{F}_n, \mathbb{P}_n)\) for \(n\) coin tosses that satisfy the consistency conditions. This is very easy: let \(\Omega_n = \{H, T\}^n\), \(\mathcal{F}_n = 2^{\Omega_n}\), \(\mathbb{P}(\{\omega\}) = p^{m} (1-p)^{n-m}\) where \(m\) equals the number of \(H\) in \(\omega \in \Omega_n\), and finally \(\mathbb{P}(A) = \sum_{\omega \in A} \mathbb{P}(\{\omega\})\) for any \(A \in \mathcal{F}_n.\) It is easy to see that this construction satisfies the consistency conditions and thus there exists a unique probability measure \(\mathbb{P}\) defined on the measurable space \((\Omega, \mathcal{F})\) where \(\Omega = \{H, T\}^{\mathbb N}\) and \(\mathcal{F}\) is the product \(\sigma\)-algebra generated by the cylinder sets.</p>
+<h3 id="the_game_has_a_winner_with_probability_1"><a href="#the_game_has_a_winner_with_probability_1" class="header-anchor">The game has a winner with probability \(1\)</a></h3>
+<p>We can now safely say the following statement: Let \(\{X_n\}_{n \in \mathbb N}\) be a sequence of i.i.d. Bernoulli random variables such that \(X_n = H\) or \(T\) depending on the result of the \(n^\text{th}\) coin toss. To show that the game has a winner with probability \(1\) it is sufficient to prove that in the sequence \(X_1, X_2, \ldots\) all of the four choices \(HH\), \(TH\), \(HT\) and \(TT\) appear in a finite number of coin tosses with probability \(1.\)</p>
+<p>To that end, fix any of the four choices \(HH\), \(TH\), \(HT\) and \(TT\), and call it \(XY\). Let \(E_n\) be the event that \(X_{2n-1} = X\) and \(X_{2n} = Y.\) Then \(\mathbb{P}(E_n) = \varepsilon > 0\), where \(\varepsilon\) is some positive real number dependent on \(XY\) &#40;for example, if \(XY = HT\) then \(\varepsilon = p(1-p)\)&#41;. Now the events \(\{E_n\}_{n \in \mathbb N}\) are independent and \(\sum_{n=1}^\infty \mathbb{P}(E_n) = \infty\), and thus we can apply the <a href="https://en.wikipedia.org/wiki/Borel&#37;E2&#37;80&#37;93Cantelli_lemma#Converse_result">second Borel-Cantelli lemma</a> to get \(\mathbb{P}(E_n \text{ i.o.}) = 1.\) But this immediately implies that each of the four outcomes appear in that sequence infinitely many times with probability \(1.\)</p>
+<h3 id="back_to_the_game"><a href="#back_to_the_game" class="header-anchor">Back to the game</a></h3>
+<p>Recall the strategy outlined above. Without loss of generality we may assume \(p \geq 1/2\) because otherwise we can just flip the tags \(H\) and \(T\). From a first player perspective we just want to find one of the dominant choices \(HH\), \(TH\), \(HT\) or \(TT\). Let&#39;s calculate the minimum \(p\) we get for each choice.</p>
+<p>If player \(1\) chooses \(HH\) and player \(2\) chooses \(TH\), then it&#39;s better to be player \(1\) if \(p > 1/\sqrt{2}.\) Checking for other choices of player \(2\) we see that \(TH\) is the optimal choice.</p>
+<p>If player \(1\) chooses \(TT\) and player \(2\) chooses \(HT\), then for no \(p \geq 1/2\) it is better to be player \(1.\)</p>
+<p>If player \(1\) chooses \(HT\) and player \(2\) chooses \(HH\), then for no \(p \geq 1/2\) it is better to be player \(1.\)</p>
+<p>If player \(1\) chooses \(TH\) and player \(2\) chooses \(HT\), then for no \(p \geq 1/2\) it is better to be player \(1.\)</p>
+<p>Overall it is better to be player \(1\) if \(p > 1/\sqrt{2}\) or if \(p < 1 - 1/\sqrt{2}.\) And on the other hand it is better to be player \(2\) if \(1 - 1/\sqrt{2} < p < 1/\sqrt{2}.\)</p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

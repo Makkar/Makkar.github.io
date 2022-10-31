@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Longest Increasing Subsequence</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Longest Increasing Subsequence</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#problem">Problem</a></li><li><a href="#combinatorial_results">Combinatorial results</a></li><li><a href="#poissonization">Poissonization</a></li><li><a href="#back_to_longest_increasing_subsequences">Back to longest increasing subsequences</a></li><li><a href="#epilogue">Epilogue</a></li></ol></div>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>Finding a longest increasing subsequence is a well-known problem in computer science &#40;note that I use the article &quot;a&quot; instead of &quot;the&quot; because there could be multiple longest subsequences&#41;: Given a sequence \(\{a_1, \ldots, a_n\}\) of real numbers, we want to find a subsequence \(\{a_{i_1}, \ldots, a_{i_k}\}\) such that \(0 \le i_1 < \cdots < i_k \le n\), \(a_{i_1} \le \cdots \le a_{i_k}\), and the subsequence is as long as possible. It has a very easy <a href="https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/">dynamic programming solution</a> with a time complexity of \(O(n^2)\) and a slightly <a href="https://en.wikipedia.org/wiki/Longest_increasing_subsequence#Efficient_algorithms">more involved solution</a> with a time complexity of \(O(n \log n).\) But we are not interested in these algorithms in this blog post.</p>
+<p>We are interested in studying the asymptotics of the <em>length</em> of the longest increasing subsequences of a sequence whose elements are coming from a random permutation. This simple to state problem will take us on a beautiful journey touching topics from combinatorics and probability theory. In particular, we will get to see the very elegant technique of Poissonization.</p>
+<h2 id="problem"><a href="#problem" class="header-anchor">Problem</a></h2>
+<p>Let us start by stating precisely what we are trying to prove. To do that we first define some notation. For any integer \(n \ge 1\), let \(S_n\) be the group of permutations of order \(n\), i.e., it contains all permutations of \(\{1, 2, \ldots, n\}\) and hence \(S_n\) contains \(n!\) elements. If \(\pi \in S_n\) then a subsequence of \(\pi\) is a sequence \(\{\pi(i_1), \ldots, \pi(i_k)\}\) such that \(1 \leq i_1 < \cdots < i_k \leq n.\) It is an increasing subsequence if \(\pi(i_1) < \cdots < \pi(i_k)\) and similarly for the decreasing subsequence. Consider the uniform measure \(\mu_n\) on the discrete measurable space \((S_n, 2^{S_n})\), i.e., \(\mu_n(\pi) = 1 / n!\) for any \(\pi \in S_n.\) For \(\pi \in S_n\) define \(L_n(\pi)\) to be the maximal length of an increasing subsequence of \(\pi\), i.e., \(L_n(\pi)\) is the largest \(k\) such that there are integers \(1 \leq i_1 < \cdots < i_k \leq n\) so that \(\pi(i_1) < \cdots < \pi(i_k).\) Similarly define \(D_n(\pi)\) to be the maximal length of a decreasing subsequence of \(\pi.\)</p>
+<p>Since \(L_n\) is a random variable we can consider its expectation \(\ell_n = \mathbb{E}[L_n]\) on the probability space \((S_n, 2^{S_n}, \mu_n).\) It can be explicitly written as</p>
+<a id="eq1" class="anchor"></a>\[\begin{aligned} 
+\ell_n = \frac{1}{n!} \sum_{\pi \in S_n} L_n(\pi).\end{aligned}\]
+<p>We want to study the limiting properties of the sequence \(\{\ell_n\}_{n \in \mathbb N}.\) Specifically we will show that</p>
+<a id="eq2" class="anchor"></a>\[\begin{aligned} 
+\frac{\ell_n}{\sqrt{n}} \to \gamma \text{ almost surely}\end{aligned}\]
+<p>for some constant \(\gamma.\) It is known that \(\gamma = 2.\) We will not be showing this, but we will show that \(1 \le \gamma \le e.\)</p>
+<h2 id="combinatorial_results"><a href="#combinatorial_results" class="header-anchor">Combinatorial results</a></h2>
+<p>We now prove some useful combinatorial results. The first result is called the Erdős–Szekeres theorem. We will need to prove lower and upper bounds for \(\ell_n / \sqrt{n}.\)</p>
+<div class="thm"><strong>Theorem 1 &#91;Erdős–Szekeres theorem&#93;</strong>: In any sequence \(\{a_1, a_2, \ldots, a_{mn+1}\}\) of \(mn+1\) distinct real numbers, there exists either an increasing subsequence \(a_{i_1} < \cdots < a_{i_{m+1}}\) of length \(m+1\), where \(i_1 < \cdots < i_{m+1}\), or a decreasing subsequence \(a_{j_1} > \cdots > a_{j_{n+1}}\) of length \(n+1\), where \(j_1 < \cdots < j_{n+1}.\)</div>
+<div class="proof"><p>For \(1 \leq i \leq mn+1\) define \(t_i\) to be the length of a longest increasing subsequence starting at \(a_i\), i.e., the first element of a longest increasing subsequence must be \(a_i\) and the rest of the \(a\)&#39;s must have indices greater than \(i.\)</p>
+<p>If \(t_i \geq m+1\) for some \(i\) then we are done since we then have an increasing subsequence of length \(m+1,\) so assume \(t_i \leq m\) for all \(i.\) Since \(t_i \geq 1\), pigeonhole principle implies that there is some integer \(1 \leq k \leq m\) such that \(t_i = k\) for at least \(n+1\) \(i\)&#39;s. Let \(t_i = k\) for all \(i \in (j_1 < \cdots < j_{n+1}).\) Now note that if \(a_{j_l} < a_{j_{l+1}}\) for some \(1 \leq l \leq n\), then we would obtain an increasing subsequence of length \(k+1\) starting at \(a_{j_l}\) because there is an increasing subsequence of length \(k\) starting at \(a_{j_{l+1}}.\) But this contradicts the fact that \(t_{j_l} = k,\) and thus \(a_{j_l} > a_{j_{l+1}}\) for all \(1 \leq l \leq n.\) But now this gives us a decreasing subsequence \(a_{j_1} > \cdots > a_{j_{n+1}}\) of length \(n+1.\)</p></div>
+<p>The next two theorems prove lower and upper bounds for \(\ell_n / \sqrt{n}.\)</p>
+<div class="thm"><strong>Theorem 2</strong>: \(\ell_n / \sqrt{n}\) is lower bounded as follows: <a id="eq3" class="anchor"></a>\[\begin{aligned} 
+\ell_n \geq \sqrt{n} \text{ for all } n \geq 1.\end{aligned}\]</div>
+<div class="proof">Theorem 1 implies that \(L_n(\pi) D_n(\pi) \geq n\) for each \(\pi \in S_n.\) Note that for each permutation \(\pi \in S_n\) there exists an inverse permutation \(\pi'\) such that \(L_n(\pi) = D_n(\pi')\), and thus we can write \(\ell_n\) equivalently as <a id="eq4" class="anchor"></a>\[\begin{aligned} 
+\ell_n = \frac{1}{n!} \sum_{\pi \in S_n} D_n(\pi).\end{aligned}\] Therefore, averaging the two ways of computing the expectation \(\ell_n\) &#40;Equations <span class="eqref">(<a href="#eq1">1</a>)</span> and <span class="eqref">(<a href="#eq4">4</a>)</span>&#41; and using the <a href="https://en.wikipedia.org/wiki/Inequality_of_arithmetic_and_geometric_means">AM-GM inequality</a> we have <div class="nonumber">\[\begin{aligned} \ell_n = \frac{1}{n!} \sum_{\pi \in S_n} \frac{L(\pi) + D(\pi)}{2} \geq \frac{1}{n!} \sum_{\pi \in S_n} \sqrt{L(\pi) D(\pi)} \geq \frac{1}{n!} \sum_{\pi \in S_n} \sqrt{n} = \sqrt{n}.\end{aligned}\]</div></div>
+<div class="thm"><strong>Theorem 3</strong>: Upper bound: <a id="eq5" class="anchor"></a>\[\begin{aligned} 
+\limsup_{n \to \infty} \frac{\ell_n}{\sqrt{n}} \leq e.\end{aligned}\]</div>
+<div class="proof"><p>We start by getting an upper bound on the tail probabilities \(\mu_n(L_n \geq k)\) for \(1 \leq k \leq n\) by cleverly defining a random variable \(X_{n,k}\), writing its expectation in two different ways, and then comparing.</p>
+<p>If \(\pi \in S_n\) and \(1 \leq k \leq n\) let \(X_{n,k}(\pi)\) be the number of increasing subsequences of \(\pi\) which are of length \(k.\) These subsequences correspond exactly to those subsets \(S \subseteq \{1, \ldots, n\}\) for which \(|S| = k\) and if \(S = \{i_1 < \cdots < i_k\}\) then \(\pi(i_1) < \cdots < \pi(i_k).\) On the probability space \((S_n, 2^{S_n}, \mu_n)\), by the linearity of expectation, the expected value of \(X_{n,k}\) is given by the number of ways to select subsets of \(\{1, \ldots, n\}\) with size \(k\) times the probability that a selection has all the elements in the increasing order. The number of ways is simply \(\binom{n}{k}\) and the probability is \(1/k!\) and thus</p>
+<div class="nonumber">\[\begin{aligned} \mathbb{E}[X_{n,k}] = \frac{1}{k!} \binom{n}{k}.\end{aligned}\]</div>
+<p>The Taylor expansion of \(e^x\) implies \(e^x \ge x^k / k!.\) Substituting \(x = k\) in this inequality, we get \(k! \geq (k/e)^k.\) Therefore, we get</p>
+<div class="nonumber">\[\begin{aligned} \mathbb{E}[X_{n,k}] = \frac{1}{k!} \binom{n}{k} = \frac{n(n-1) \cdots (n-k-1)}{(k!)^2} \leq \frac{n^k}{(k/e)^{2k}}.\end{aligned}\]</div>
+<p>Now for the discrete random variable \(X_{n,k}\) we can also write</p>
+<div class="nonumber">\[\begin{aligned} \mathbb{E}[X_{n,k}] = \sum_{i=0}^n \mu_n(X_{n,k} \geq i),\end{aligned}\]</div>
+<p>and thus \(\mu_n(X_{n,k} \geq 1) \leq \mathbb{E}[X_{n,k}].\) Also note that \(L_n(\pi) \geq k\) if and only if \(X_{n,k}(\pi) \geq 1.\) We thus get our tail probability,</p>
+<div class="nonumber">\[\begin{aligned} \mu_n(L_n \geq k) = \mu_n(X_{n,k} \geq 1) \leq \mathbb{E}[X_{n,k}] \leq \frac{n^k}{(k/e)^{2k}}.\end{aligned}\]</div>
+<p>To make this more amenable to limiting analysis, fix an arbitrary \(\delta > 0\) and let \(k = \min\{\left\lceil(1+\delta)e\sqrt{n}\right\rceil, n\}\) in the inequality above to get</p>
+<div class="nonumber">\[\begin{aligned} \mu_n(L_n \geq k) \leq \frac{n^k}{(k/e)^{2k}} \leq \left( \frac{1}{1+\delta} \right)^{2k} \leq \left( \frac{1}{1+\delta} \right)^{2(1+\delta)e\sqrt{n}}.\end{aligned}\]</div>
+<p>Since \(L_n \leq n\), we have</p>
+<div class="nonumber">\[\begin{aligned} \ell_n = \mathbb{E}[L_n] \leq \mu_n(L_n < k) (1+\delta)e\sqrt{n} + \mu_n(L_n \geq k) n \leq (1+\delta)e\sqrt{n} + O(e^{-c\sqrt{n}})\end{aligned}\]</div>
+<p>where \(c\) is some positive constant that depends on \(\delta.\)</p>
+<p>Since \(\delta\) was arbitrary, we can let \(\delta \to 0\) and then take \(\limsup\) over \(n\) to get <span class="eqref">(<a href="#eq5">5</a>)</span>.</p></div>
+<h2 id="poissonization"><a href="#poissonization" class="header-anchor">Poissonization</a></h2>
+<p>To be able to show <span class="eqref">(<a href="#eq2">2</a>)</span> we will draw a correspondence between this problem of longest increasing subsequences and a seemingly unrelated problem called the Poissonized version. This Poissonized version will allow us to use the powerful Subadditive Ergodic Theorem &#40;Theorem 5 below&#41; to show <span class="eqref">(<a href="#eq2">2</a>)</span>.</p>
+<p>To this end, assume an underlying probability space \((\Omega, \mathcal{F}, \mathbb{P})\) and let \(N\) be a Poisson random measure on \(\mathbb{R}_+^2\) with mean measure given by the Lebesgue measure on \(\mathbb{R}_+^2.\) In other words \(N:\Omega \times \mathcal B(\mathbb R_+^2) \to \overline{\mathbb R}_+\) is a transition kernel from \((\Omega, \mathcal{F})\) to \((\mathbb R_+^2, \mathcal B(\mathbb R_+^2))\) with \(\int_\Omega \mathbb P(\mathrm{d} \omega) N(\omega, A) = \text{Leb}(A)\) for any \(A \in \mathcal B(\mathbb R_+^2).\) We can view the random process as a sequence \(\{(X_i, Y_i)\} _ {i \geq 1}\) of independent random variables taking values in \(\mathbb R _ + ^2\) and having a uniform probability measure &#40;more correctly, Lebesgue measure on \((\mathbb R_+^2, \mathcal B(\mathbb R_+^2))\)&#41;. If we let \(R_{s,t}\) denote the rectangle with vertices \((s,s), (s,t), (t,t)\) and \((t,s)\), then for each outcome \(\omega \in \Omega\), we can think of having \(\text{Poisson}(\text{Leb}(R_{s,t}))\) distributed number of such points inside the rectangle \(R_{s,t}.\)</p>
+<p>For \(s < t \in [0, \infty)\) let \(Z_{s,t}\) be the random variable denoting the length of the longest increasing path lying in the rectangle \(R_{s,t}\), i.e., \(Z_{s,t}\) is the largest integer \(k\) for which there are points \((X_1,Y_1), \dots, (X_k, Y_k)\) in the Poisson process with \(s < X_1 < \cdots < X_k < t\) and \(s< Y_1 < \cdots < Y_k < t.\)</p>
+<p>Let \(\tau(n)\) be the smallest value of \(t \in [0, \infty)\) for which there are \(n\) points in \(R_{0,t}.\) Let the \(n\) points in \(R_{0, \tau(n)}\) be written as \(\{(X_i, Y_i)\}{1 \leq i \leq n}\) such that \(0 < X_1 < \cdots < X_n \leq \tau(n)\) &#40;the inequalities are strict almost surely since they have continuous distributions&#41;. Let \(\pi_n \in S_n\) be the unique permutation such that \(Y_{\pi_n(1)} < \cdots < Y_{\pi_{n}(n)}\) &#40;It is not difficult to see the existence and the uniqueness&#41;. Then</p>
+<a id="eq6" class="anchor"></a>\[\begin{aligned} 
+\pi_n \text{ is a uniformly random sample of } S_n \text{, and } Z_{0, \tau(n)} = L_n(\pi_n).\end{aligned}\]
+<p>The second claim is obvious from the definition of \(\pi_n.\) The first claim is equivalent to showing that if \(U_1, \ldots, U_n\) are i.i.d. random variables with a uniform distribution on \([0,1]\) and if \(U_{(1)}, \ldots, U_{(n)}\) are the order statistics, i.e., \(U_{(k)}\) is the \(k^\text{th}\) smallest among \(U_1, \ldots, U_n\), then the probability that \(U_{(1)}, \ldots, U_{(n)}\) is the same as \(U_{\pi(1)}, \ldots, U_{\pi(n)}\) for some fixed \(\pi \in S_n\) is \(1/n!.\) But this is obvious from the independence of \(U_i\)&#39;s. The next theorem is from Durrett:</p>
+<div class="thm"><strong>Theorem 4</strong>: \(\tau(n) / \sqrt{n} \to 1\) almost surely.</div>
+<div class="proof">Let \(S_n\) be the number of points in \(R_{0,\sqrt{n}}.\) Since <div class="nonumber">\[\begin{aligned} (R_{0, \sqrt{n}} \setminus R_{0, \sqrt{n-1}}) \cap (R_{0, \sqrt{m}} \setminus R_{0, \sqrt{m-1}}) = \varnothing\end{aligned}\]</div> for \(n \neq m\), the definition of a Poisson random measure implies \(\{S_n - S_{n-1}\}_{n \geq 1}\) are independent Poisson random variables with mean \(1.\) The strong law of large numbers now implies \(S_n / n \to 1\) almost surely. For any \(\varepsilon > 0\) we can find an \(n\) large enough such that \(S_{n(1-\varepsilon)} < n < S_{n(1+\varepsilon)}\) but then this means \(\sqrt{n(1-\varepsilon)} \leq \tau(n) \leq \sqrt{n(1+\varepsilon)}\) which is same as the statement of the theorem since \(\varepsilon\) was arbitrary.</div>
+<p>This theorem along with <span class="eqref">(<a href="#eq6">6</a>)</span> implies \(Z_{0, \sqrt{n}} \to \ell_n\) almost surely, or written differently <a id="eq7" class="anchor"></a>\[\begin{aligned} 
+\frac{Z_{0,n}}{n} \to \frac{\ell_{n^2}}{n} \text{ almost surely.}\end{aligned}\]</p>
+<h2 id="back_to_longest_increasing_subsequences"><a href="#back_to_longest_increasing_subsequences" class="header-anchor">Back to longest increasing subsequences</a></h2>
+<p>Having established the connection between the two ways of looking at the problem of longest increasing subsequences, we now freely jump between the two characterizations and use them to prove our results.</p>
+<p>Define \(W_{s,t} = - Z_{s,t}.\) We now check that \(W_{m,n}, 0 \le m < n\) satisfies the conditions required for the Subadditive Ergodic Theorem. I state the theorem below for completeness. Check out Theorem 6.4.1 in <a href="https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf">Durrett</a> for a proof.</p>
+<div class="thm"><p><strong>Theorem 5 &#91;Subadditive Ergodic Theorem&#93;</strong>: Suppose \(W_{m,n}\) for \(0 \le m < n\) satisfy:</p>
+<ol>
+<li><p>\(W_{0,m} + W_{m,n} \ge W_{0,n}\),</p>
+</li>
+<li><p>\(\{W_{nk, (n+1)k}, n \ge 1\}\) is a stationary sequence for each \(k\),</p>
+</li>
+<li><p>The distribution of \(\{W_{m,m+k}, k \ge 1\}\) does not depend on \(m\), and</p>
+</li>
+<li><p>\(\mathbb{E}[W_{0,1}^+] < \infty\) and \(\inf_{n \ge 1} \frac{1}{n} \mathbb{E}[W_{0,1}] = \beta > - \infty.\)</p>
+</li>
+</ol>
+<p>Then</p>
+<ul>
+<li><p>\(\lim_{n \to \infty} \frac{1}{n} \mathbb{E}[W_{0,1}] = \beta\),</p>
+</li>
+<li><p>\(W = \lim_{n \to \infty} \frac{1}{n} W_{0,1}\) exists almost surely and in \(L^1\), and \(\mathbb{E}[W] = \beta\), and finally</p>
+</li>
+<li><p>if all stationary sequences in condition 2. above are ergodic, then \(W = \beta\) almost surely.</p>
+</li>
+</ul></div>
+<p>Coming back to the problem, let \(0 < m < n\) then we claim \(Z_{0,m} + Z_{m,n} \leq Z_{0,n}.\) To see this, fix \(\omega \in \Omega\) and let \(Z_{0,m}(\omega) = a\) and \(Z_{m,n}(\omega) = b.\) Then there exist</p>
+<div class="nonumber">\[\begin{aligned}
+&(X_1(\omega), Y_1(\omega)), \ldots (X_a(\omega), Y_a(\omega)), (X_{a+1}(\omega), Y_{a+1}(\omega)), \ldots, (X_{a+b}(\omega), Y_{a+b}(\omega)) \text{ such that} \\
+& \bullet \; 0 < X_1(\omega) < \cdots < X_a(\omega) < m, \\ &\bullet \; 0 < Y_1(\omega) < \cdots < Y_a(\omega) < m,\\
+& \bullet \; m < X_{a+1}(\omega) < \cdots < X_{a+b}(\omega) < n \,\text{, and }\, \\ &\bullet \; m < Y_{a+1}(\omega) < \cdots < Y_{a+b}(\omega) < n.
+\end{aligned}\]</div>
+<p>But then it&#39;s clear that \(0 < X_1(\omega) < \cdots < X_{a+b}(\omega) < n\), \(0 < Y_1(\omega) < \cdots < Y_{a+b}(\omega) < n\) and we have \(Z_{0,m}(\omega) + Z_{m,n}(\omega) \leq Z_{0,n}(\omega).\) Since \(\omega\) was arbitrary, our claim is true. Therefore, \(W_{0,m} + W_{m,n} \ge W_{0,n}\) and condition 1. is true.</p>
+<p>For condition 2. we want to show that \(\{W_{nk, (n+1)k, n \geq 1}\}\) is a stationary and ergodic sequence for all \(k \geq 1.\) This is clear from the observation that \(Z_{ik, (i+1)k}\) and \(Y_{0,k}\) have the same distribution, since \(\text{Leb}(R_{ik, (i+1)k}) = \text{Leb}(R_{0,k})\), and thus by the definition of the Poisson random measure the number of points in each rectangle is an i.i.d. Poisson random variable. Checking the condition 3. is similar to condition 2..</p>
+<p>For condition 4. note that \(W_{0,1}^+ = Z_{0,1}\) and \(Z_{0,1} \leq \text{Poisson}(1)\) since there are \(\text{Poisson}(1)\) number of points inside \([0,1]^2\) and at most all of them can be arranged in the increasing order. Thus, \(\mathbb{E}[W_{0,1}^+] < \mathbb{E}[\text{Poisson}(1)] = 1 < \infty.\) Now note that since \(W_{0,n} = - Z_{0,n}\), <div class="nonumber">\[\begin{aligned} \inf_{n \geq 1} \frac{1}{n} \mathbb{E}[W_{0,n}] = - \sup_{n \geq 1} \frac{1}{n} \mathbb{E}[Z_{0,n}],\end{aligned}\]</div> and thus to show the second part of condition 4. we need to show that \(\sup_{n \geq 1} \frac{1}{n} \mathbb{E}[Z_{0,n}] < \infty.\) But this is immediate from Equation <span class="eqref">(<a href="#eq5">5</a>)</span> in Theorem 3 and Equation <span class="eqref">(<a href="#eq7">7</a>)</span>. Therefore, the subadditive ergodic theorem now implies <div class="nonumber">\[\begin{aligned} \frac{Z_{0,n}}{n} \to \gamma \text{ a.s.},\end{aligned}\]</div></p>
+<p>where \(\gamma\), due to Equations <span class="eqref">(<a href="#eq3">3</a>)</span> and <span class="eqref">(<a href="#eq5">5</a>)</span>, lies in \([1,e]\) and we are done since this implies <span class="eqref">(<a href="#eq2">2</a>)</span>.</p>
+<h2 id="epilogue"><a href="#epilogue" class="header-anchor">Epilogue</a></h2>
+<p>I got introduced to this problem from an exam question in a math course I took recently. I recommend the book <em>The Surprising Mathematics of Longest Increasing Subsequences</em> by Dan Romik, which is <a href="https://www.math.ucdavis.edu/~romik/book/">freely available online</a>, for a lot more content.</p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

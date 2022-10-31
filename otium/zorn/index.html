@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Zorn's Lemma</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Zorn&#39;s Lemma</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#preliminaries">Preliminaries</a><ol><li><ol><li><a href="#examples">Examples</a></li></ol></li></ol></li><li><a href="#zorns_lemma">Zorn&#39;s Lemma</a></li><li><a href="#example_application_1">Example Application 1</a></li><li><a href="#example_application_2">Example application 2</a></li></ol></div>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>I have been self-studying some functional analysis recently, and Zorn&#39;s lemma comes up often in proofs &#40;for example, showing that every nontrivial vector space has a Hamel basis &#40;I show this fundamental result below&#41; or in the proof of Hahn-Banach theorem&#41;. Since I have no formal background in mathematics &#40;my undergrad was in Mechanical engineering&#41;, it was my first time hearing about Zorn&#39;s lemma. I read its statement from the Wikipedia article, naively assuming I understood this extremely powerful tool. But every usage of Zorn&#39;s lemma seemed contrived to me, and it was only in retrospect that I could see how Zorn&#39;s lemma seems like an obvious tool to apply. An excellent article which helped me understand Zorn&#39;s lemma is <a href="https://gowers.wordpress.com/2008/08/12/how-to-use-zorns-lemma/">How to use Zorn&#39;s lemma</a> by Timothy Gowers. If you didn&#39;t know about Gowers&#39;s article, then mentioning it is the biggest contribution of my article and I recommend you read it.</p>
+<p>In this article, I want to show how to use Zorn&#39;s lemma by stating two theorems and discussing their proofs. Things &quot;clicked&quot; for me when I proved the first theorem discussed below. I will therefore try to be verbose, and go through my thinking process in detail. But before we do that let me define some important concepts.</p>
+<h2 id="preliminaries"><a href="#preliminaries" class="header-anchor">Preliminaries</a></h2>
+<p>Recall the concept of <em>relation</em> I defined <a href="https://makkar.github.io/otium/partitions">here</a>.</p>
+<div class="def"><p><strong>Definition 1</strong>: Let \(P\) be a nonempty set. A <em>partial order relation</em> in \(P\) is a relation which is symbolized by \(\preceq\) and that satisfies the following properties for all \(x,y,z \in P\):</p>
+<ol>
+<li><p>Reflexivity: \(x \preceq x\);</p>
+</li>
+<li><p>Antisymmetry: \(x \preceq y\) and \(y \preceq x\) implies \(x = y\);</p>
+</li>
+<li><p>Transitivity: \(x \preceq y\) and \(y \preceq z\) implies \(x \preceq z\).</p>
+</li>
+</ol>
+<p>The set \(P\) is then called a <em>partially ordered set</em>. If in addition to these three properties, the set \(P\) also satisfies</p>
+<ol start="4">
+<li><p>any two elements are comparable, i.e., either \(x \preceq y\) or \(y \preceq x\),</p>
+</li>
+</ol>
+<p>then the relation is called a <em>total order relation</em> and the set \(P\) is called a <em>totally ordered set</em> or a <em>chain</em>. We often write \(x \prec y\) to mean \(x \preceq y\) but \(x \neq y\).</p></div>
+<h4 id="examples"><a href="#examples" class="header-anchor">Examples</a></h4>
+<ol>
+<li><p>Let \(P\) be the set of all positive integers, and let \(m \preceq n\) mean that \(m\) divides \(n\). Then \(P\) is a partially ordered set. It is not a chain as \(2\) and \(3\) are not comparable, for example.</p>
+</li>
+<li><p>Let \(P\) be the set of all real numbers, and let \(x \preceq y\) mean that \(y-x\) is nonnegative. Then \(P\) is a chain. Note that with this choice of ordering we have our usual ordering of real numbers, which we denote by \(x \leq y.\)</p>
+</li>
+<li><p>Let \(P\) be the class of all subsets of some universal set \(U\), and let \(A \preceq B\) for \(A,B \in P\) mean that \(A \subseteq B.\) Then \(P\) is a partially ordered set. It is not a chain because if \(U\) contains at least two elements, then we can find two subsets of \(U\) neither of which is a subset of the other.</p>
+</li>
+</ol>
+<div class="def"><strong>Definition 2</strong>: If \(P\) is a partially ordered set, an element \(x \in P\) is said to be <em>maximal</em> if for any \(y \in P\) for which \(x \preceq y\), we must have \(x = y\).</div>
+<p>Note that a maximal element does not have to be bigger than everything else: it just must not be smaller than anything else. A maximal element may not exist, and if it exists it may not be unique. Examples 1 and 2 above have no maximal elements. Example 3 has one maximal element: \(U.\)</p>
+<div class="def"><strong>Definition 3</strong>: Let \(Q\) be a nonempty subset of a partially ordered set \(P.\) An element \(x \in P\) is called an <em>upper bound</em> of \(Q\) if \(y \preceq x\) for every \(y \in Q.\) An upper bound of \(Q\) is called a <em>least upper bound</em> of \(Q\) if it is less than or equal to every upper bound of \(Q.\)</div>
+<p>Similarly for <em>lower bound</em> and <em>greatest lower bound</em>.</p>
+<p>Note how similar these definitions are to the definitions of supremum and infimum for real numbers. That&#39;s because in that case they are the same. In Example 1 above, if we take \(Q\) to be any finite subset of \(P\), then the greatest lower bound is the greatest common divisor of all the elements of \(Q\) and the least upper bound is the least common multiple. In Example 3 above, let \(Q\) be any nonempty subset of \(P.\) Then the least upper bound is the union of all the sets in \(Q\), and the greatest lower bound is the intersection of all the sets in \(Q.\)</p>
+<p>We are now ready to state the Zorn&#39;s lemma.</p>
+<h2 id="zorns_lemma"><a href="#zorns_lemma" class="header-anchor">Zorn&#39;s Lemma</a></h2>
+<div class="thm"><strong>Zorn&#39;s lemma</strong>: If \(P\) is a partially ordered set in which every chain has an upper bound, then \(P\) possesses a maximal element.</div>
+<p>I&#39;ll mention in passing that Zorn&#39;s lemma is equivalent to the <a href="https://en.wikipedia.org/wiki/Axiom_of_choice">axiom of choice</a>.</p>
+<h2 id="example_application_1"><a href="#example_application_1" class="header-anchor">Example Application 1</a></h2>
+<div class="thm"><strong>Theorem 1</strong>: Any infinite set \(X\) can be represented as a union of a disjoint class of countably infinite subsets.</div>
+<div class="proof"><p>The first thing that we need to do is realize Zorn&#39;s lemma can be applied here. I use the following description taken from Gowers&#39;s article as a guiding principle:</p>
+<blockquote>
+<p>If you are building a mathematical object in stages and find that &#40;i&#41; you have not finished even after infinitely many stages, and &#40;ii&#41; there seems to be nothing to stop you continuing to build, then Zorn’s lemma may well be able to help you.</p>
+</blockquote>
+<p>The fact that we need to build \(X\) by taking a union of some sets, and it could be an uncountable union and therefore we might not finish even in countably infinite number of stages, suggests Zorn&#39;s lemma might be helpful here. Zorn&#39;s lemma will prove the existence of a maximal element in a partially ordered set, therefore, we want to construct a partially ordered set such that we can prove that its maximal element constructs \(X.\)</p>
+<p>We want to build our partially ordered set to be consisting of elements of this form: disjoint class of countably infinite subsets of \(X.\) The reason we want to define our partially ordered set this way is because, first, the subset operation makes it a partially ordered set, and second, it seems intuitively true that the maximal element of this partially ordered set, if it exists, will be such that the union of its elements is \(X.\)</p>
+<p>To this end, let \(\mathscr{P}\) be the set of all disjoint classes of countably infinite subsets of \(X.\) \(\mathscr{P}\) is partially ordered by \(\subseteq\) as we saw in Example 3 above.</p>
+<p>To be able to apply Zorn&#39;s lemma we need to show that every chain in \(\mathscr{P}\) has an upper bound. Let \(\mathscr{C}\) be a chain in \(\mathscr{P}.\) A natural guess for the upper bound of \(\mathscr{C}\) is \(\mathcal{U} = \bigcup _{\mathcal{S} \in \mathscr{C}} \mathcal{S}.\) To show that \(\mathcal{U}\) is an upper bound of \(\mathscr{C}\) we need to show that \(\mathcal{U} \in \mathscr{P}\) and \(\mathcal{S} \subseteq \mathcal{U}\) for every \(\mathcal{S} \in \mathscr{C}.\) The second claim is trivial from \(\mathcal{U}\)&#39;s definition. It is easy to see that \(\mathcal{U}\) is a class of countably infinite subsets of \(X\) because this is true for each \(\mathcal{S} \in \mathscr{C}.\) To show that \(\mathcal{U}\) is a disjoint class, let \(A, B \in \mathcal{U}\) be distinct elements of \(\mathcal{U}.\) There exist elements \(\mathcal{S}_A, \mathcal{S}_B \in \mathscr{C}\) such that \(A \in \mathcal{S}_A\) and \(B \in \mathcal{S}_B.\) Since \(\mathscr{C}\) is a chain, either \(\mathcal{S}_A \subseteq \mathcal{S}_B\) or \(\mathcal{S}_B \subseteq \mathcal{S}_A.\) Without loss of generality, \(\mathcal{S}_A \subseteq \mathcal{S}_B.\) Then \(A, B \in \mathcal{S}_B\) and this implies \(A\) and \(B\) are disjoint because this is true for the elements of our chain. Thus \(\mathcal{U}\) is a disjoint class of countably infinite subsets and hence belongs to \(\mathscr{P}.\)</p>
+<p>By the Zorn&#39;s lemma, \(\mathscr{P}\) possesses a maximal element \(\mathcal{M}.\) If \(\bigcup _{E \in \mathcal{M}} E = X\) then we are done because \(\mathcal{M}\) is the required disjoint class of countably infinite subsets whose union is \(X.\) But it can still happen that some elements of \(X\) are not present in this union. In this case we can show that these leftover elements form a finite set and we can get our required disjoint class by adding these leftover elements to any element of \(\mathcal{M}.\) To see that the leftover elements must be finite, denote the set of leftover elements by \(Y = X \setminus \bigcup _{E \in \mathcal{M}} E.\) If \(Y\) is infinite it must contain a countably infinite subset \(Z \subseteq Y.\) Consider the class \(\mathcal{M} \cup \{Z\}.\) It is an element of \(\mathscr{P}\) because it is a disjoint class of countably infinite subsets of \(X.\) But \(\mathcal{M}\) is a strict subset of \(\mathcal{M} \cup \{Z\}\) which contradicts the fact that \(\mathcal{M}\) is a maximal element of \(\mathscr{P}.\)</p>
+<p>We are done&#33;</p></div>
+<h2 id="example_application_2"><a href="#example_application_2" class="header-anchor">Example application 2</a></h2>
+<p>Let us end by showing a fundamental theorem in functional analysis.</p>
+<div class="def"><p><strong>Definition 4</strong>: Let \(X\) be a nontrivial vector space &#40;i.e., \(X \neq \{0\}\)&#41; over the field \(\mathbb{K}.\) Then a <em>Hamel basis</em> of \(X\) is any family \(\{e_i\}_{i \in I}\) of vectors \(e_i \in X\) that satisfies</p>
+<ol>
+<li><p>The family is linearly independent, i.e., given any finite subfamily \(\{e_j\}_ {j \in J}\) of \(\{e_i\}_{i \in I}\) and any scalars \(\{\alpha_j\}_{j \in J} \subseteq \mathbb{K}\)**such that \(\sum_{j \in J} \alpha_j e_j = 0\), then \(\alpha_j = 0\) for all \(j \in J\), and</p>
+</li>
+<li><p>\(\text{Span}\left(\{e_i\} _{i \in I}\right) = X\), i.e., given any vector \(x \in X\), there exists a finite subfamily \(\{e_j\} _ {j \in J}\) of \(\{e_i\} _ {i \in I}\) and there exist scalars \(\{x_j\} _ {j \in J} \subseteq \mathbb{K}\), such that \(x = \sum _ {j \in J} x_j e_j.\)</p>
+</li>
+</ol></div>
+<div class="thm"><strong>Theorem 2</strong>: Let \(X\) be a nontrivial vector space, then there exists a Hamel basis of \(X.\)</div>
+<div class="proof"><p>Let \(\mathcal{P}\) denote the set formed by all linearly independent families of vectors of \(X.\) Hence, \(\mathcal{P}\) is nonempty, since \(\mathcal{P}\) contains \(\{x\}\), where \(x\) is any nonzero vector of \(X.\) We define a partial order on the elements of \(\mathcal{P}\) as follows: if \(E = \{e_i\} _ {i \in I}\) and \(F = \{e_j\} _ {j \in J}\) are any two elements of \(\mathcal{P}\), then \(E \preceq F\) iff \(E \subseteq F.\)</p>
+<p>The next step is to show that if \(\mathcal{C}\) is any chain in \(\mathcal{P}\), then \(\mathcal{C}\) has an upper bound in \(\mathcal{P}.\) To this end, define \(U = \bigcup_{S \in \mathcal{C}} S.\) We claim that this is the desired upper bound. \(U\) is in \(\mathcal{P}\) because any finite subfamily \(\{e_i\} _ {i=1}^n\) of \(U\) is a subfamily of some \(S \in \mathcal{C}\) since \(\mathcal{C}\) is a chain, and therefore the vectors \(\{e_i\} _ {i=1}^n\) are linearly independent. Also, \(U\) is clearly an upper bound of \(\mathcal{C}\), since \(S \subseteq U\) for all \(S \in \mathcal{C}.\)</p>
+<p>By the Zorn&#39;s lemma, \(\mathcal{P}\) possesses a maximal element \(M\), which we claim to be a Hamel basis of \(X.\) For otherwise, there would exist a nonzero vector \(x \in X\) that cannot be written as a linear combination of elements of \(M.\) But then \(M \cup \{x\}\) would be an element of \(\mathcal{P}\) that satisfies \(M \prec M \cup \{x\}\), a contradiction.</p></div>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

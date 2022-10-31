@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Upper and Lower Limits</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Upper and Lower Limits</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#definitions">Definitions</a></li><li><a href="#some_useful_lemmas">Some Useful Lemmas</a></li><li><a href="#properties">Properties</a></li><li><a href="#upper_and_lower_limits_a_reprise">Upper and Lower Limits — A Reprise</a></li><li><a href="#more_properties">More Properties</a></li></ol></div>
+<p>Most of what follows is taken from Rudin&#39;s book <em>Principles of Mathematical Analysis</em>.</p>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>The concept of upper and lower limits &#40;commonly denoted by \(\limsup\) and \(\liminf\) respectively&#41; shows up routinely when discussing the limiting behaviour of a sequence. For example, consider the Big O notation, \(\mathcal{O}\), defined as \(f(n) = \mathcal{O}(g(n))\) iff there exists a positive real number \(c\) and an integer \(N\) such that for every \(n \in \Z\), \(n > N\), we have \(|f(n)| \leq c g(n)\). This can be succinctly written as</p>
+<div class="nonumber">\[\begin{aligned} \limsup_{n \to \infty} \frac{|f(n)|}{g(n)} < \infty.\end{aligned}\]</div>
+<p>In this post, I aim to expound on the concept of upper and lower limits so that the second formulation of Big O notation above becomes just as natural as the first one.</p>
+<h2 id="definitions"><a href="#definitions" class="header-anchor">Definitions</a></h2>
+<p>I start with some definitions.</p>
+<div class="def"><strong>Definition 1</strong>: A <em>sequence</em> is a real-valued function defined on the set \(\mathbb N\) of positive integers. If \(f(n) = x_n\), for \(n \in \mathbb N\), we denote the sequence \(f\) by the symbol \(\{x_n\}_{n \in \mathbb N}\), or simply \(\{x_n\}\), or sometimes by \(x_1, x_2, \ldots\).</div>
+<div class="def"><strong>Definition 2</strong>: A sequence \(\{p_n\}\) in a metric space \((X, d)\) is said to <em>converge</em> if there is a point \(p \in X\) with the following property: for every \(\varepsilon > 0\) there is an integer \(N\) such that \(n \geq N\) implies that \(d(p_n, p) < \varepsilon\). We write this as \(\lim_{n \to \infty} p_n = p\) or simply as \(p_n \to p\).</div>
+<div class="def"><strong>Definition 3</strong>: Let \(\{s_n\}\) be a sequence of real numbers with the following property: For every real \(M\) there is an integer \(N\) such that \(n \geq N\) implies \(s_n \geq M\). We then write \(s_n \to +\infty\). Similarly for \(s_n \to -\infty\).</div>
+<p><strong>Note</strong>: The symbol \(\to\) is now used for certain type of divergent sequences as well.</p>
+<div class="def"><strong>Definition 4</strong>: Given a sequence \(\{p_n\}\), consider a sequence \(\{n_k\}\) of positive integers, such that \(n_1 < n_2 < \cdots\). Then the sequence \(\{p_{n_k}\}_{k \in \mathbb N}\), which is a composition of the functions \(\{n_k\}_k\) and \(\{p_n\}_n\), is called a <em>subsequence</em> of the sequence \(\{p_n\}\). If \(\{p_{n_k}\}\) converges, its limit is called a <em>subsequential limit</em> of \(\{p_n\}\).</div>
+<div class="def"><strong>Definition 5</strong>: Let \(\{s_n\}\) be a sequence of real numbers. Let \(E\) be the set of numbers \(x\) &#40;in the extended real number system, i.e., \(x \in \overline{\mathbb R} := \mathbb R \cup \{+\infty, -\infty\}\)&#41; such that \(s_{n_k} \to x\) for some subsequence \(\{s_{n_k}\}\). Therefore, this set contains all the subsequential limits of \(\{s_n\}\) plus possibly the numbers \(+\infty\) and \(-\infty\). We define <div class="nonumber">\[\begin{aligned}
+s^* &= \sup E \\
+s_* &= \inf E.
+\end{aligned}\]</div> The numbers \(s^*\) and \(s_*\) are called the <em>upper and lower limits</em> of \(\{s_n\}\) respectively. We use the notation <div class="nonumber">\[\begin{aligned}
+\limsup_{n \to \infty} s_n &= s^* \\
+\liminf_{n \to \infty} s_n &= s_*.
+\end{aligned}\]</div></div>
+<p>It immediately follows that \(s_* \leq s^*\).</p>
+<p>The fact that \(E\) is non-empty &#40;and thus taking \(\sup\) or \(\inf\) makes sense&#41; follows from the observation that either \(\{s_n\}\) is bounded or unbounded. If it is bounded then it must contain a convergent subsequence &#40;by the Bolzano–Weierstrass theorem&#41; and thus at least one element, or if it is unbounded then it must contain either \(+\infty\) or \(-\infty\).</p>
+<h2 id="some_useful_lemmas"><a href="#some_useful_lemmas" class="header-anchor">Some Useful Lemmas</a></h2>
+<p>Now let us prove some lemmas that will be useful later.</p>
+<div class="thm"><strong>Lemma 1</strong>: The subsequential limits of a sequence \(\{p_n\}\) in a metric space \(X\) form a closed subset of \(X\).</div>
+<div class="proof"><p>As before, let \(E\) be the set of all subsequential limits of \(\{p_n\}\) and let \(q\) be a limit point of \(E\). We have to show that \(q \in E\). To show this we will construct a subsequence of \(\{p_n\}\) which converges to \(q.\)</p>
+<p>Choose \(n_1\) so that \(p_{n_1} \neq q\). If no such \(n_1\) exists, then \(E\) has only one element, namely \(q = p_1 = p_2 = \cdots\), and there is nothing to prove. Define \(\delta = d(q, p_{n_1})\). Suppose \(n_1, \ldots, n_{i-1}\) for some fixed \(i \ge 2\) are chosen. Since \(q\) is a limit point of \(E\), there is a point \(x \in E\) with \(d(q, x) < \delta /2^i\). Since \(x \in E\), there is an \(n_i > n_{i-1}\) such that \(d(x, p_{n_i}) < \delta/2^i\). Thus <div class="nonumber">\[\begin{aligned} d(q, p_{n_i}) \leq d(q, x) + d(x, p_{n_i}) < \frac{\delta}{2^{i-1}} \quad \text{for } i = 1,2,\ldots.\end{aligned}\]</div> This implies \(p_{n_k} \to q\), showing \(q \in E\).</p></div>
+<div class="thm"><strong>Lemma 2</strong>: Let \(F\) be a nonempty closed set of real numbers which is bounded above. Let \(\alpha = \sup F\). Then \(\alpha \in F\).</div>
+<div class="proof">Assume for the sake of the contradiction that \(\alpha \notin F\). Then since \(F^\mathsf{c}\) is an open set &#40;because \(F\) is closed&#41; there exists an \(\varepsilon > 0\) such that \((\alpha - \varepsilon, \alpha + \varepsilon) \subset F^\mathsf{c}\). But this implies \(\alpha - \frac{\varepsilon}{2}\) is an upper bound for \(F\) which is smaller than \(\alpha\). This gives us our required contradiction.</div>
+<h2 id="properties"><a href="#properties" class="header-anchor">Properties</a></h2>
+<p>We now have all the tools to prove the highlight of this blog post, a very useful characterization of upper and lower limits.</p>
+<div class="thm"><p><strong>Theorem 1</strong>: Let \(\{s_n\}\) be a sequence of real numbers. Let \(E\) and \(s^*\) have the same meaning as previously. Then \(s^*\) has the following two properties:</p>
+<ol>
+<li><p>\(s^* \in E\), and</p>
+</li>
+<li><p>if \(x > s^*\), then there exists an integer \(N\) such that \(n \geq N\) implies \(s_n < x.\)</p>
+</li>
+</ol>
+<p>Moreover, \(s^*\) is the only number with these two properties.</p></div>
+<p>Of course, an analogous result is true for \(s_*\).</p>
+<div class="proof"><p>We start by showing the two properties.</p>
+<ol>
+<li><p>We divide it into three cases depending on what value \(s^*\) takes:</p>
+<ol>
+<li><p>If \(s^* = +\infty\), then \(E\) is not bounded above, hence \(\{s_n\}\) is not bounded above, and thus there is a subsequence \(\{s_{n_k}\}\) such that \(s_{n_k} \to +\infty.\) Therefore, \(+\infty \in E\), or in other words \(s^* \in E\).</p>
+</li>
+<li><p>If \(s^*\) is real, then \(E\) is bounded above, and at least one subsequential limit exists by the definition of \(\sup\). **Therefore, \(s^* \in E\) follows from the Lemmas 1 and 2, and the fact that \(s^* = \sup E.\)</p>
+</li>
+<li><p>Lastly, if \(s^* = -\infty\), then \(E\) contains only one element, namely \(-\infty\), and there is no subsequential limit. Thus, \(s^* \in E\).</p>
+</li>
+</ol>
+</li>
+<li><p>Suppose for the sake of contradiction that there is a number \(x > s^*\) such that \(s_n \geq x\) for infinitely many values of \(n\). Let&#39;s denote this set of \(n\)&#39;s with \(\mathcal{K}\) and let \(\{s_k\}_{k \in \mathcal{K}}\) be this subsequence. If \(\{s_k\}_{k \in \mathcal{K}}\) is unbounded then \(s^* = +\infty\) contradicting the fact that there exists an \(x > s^*.\) And if \(\{s_k\}_{k \in \mathcal{K}}\) is bounded that it contains a convergent subsequence &#40;by the Bolzano–Weierstrass theorem&#41;. Suppose this convergent subsequence converges to \(y\). Then \(y \geq x > s^*\). This contradicts the definition of \(s^*.\)</p>
+</li>
+</ol>
+<p>To show the uniqueness, suppose there are two distinct numbers, \(p\) and \(q\), which satisfy the two properties, and suppose \(p < q\). Choose \(x\) such that \(p < x < q\). Since \(p\) satisfies the second property, there exists an integer \(N\) such that \(s_n < x\) for \(n \geq N\). But then \(q\) cannot satisfy the first property.</p></div>
+<p>An intuitive theorem:</p>
+<div class="thm"><strong>Theorem 2</strong>: If for two sequences \(\{s_n\}\) and \(\{t_n\}\) we have \(s_n \leq t_n\) for \(n \geq N\), where \(N \in \mathbb N\) is fixed, then <div class="nonumber">\[\begin{aligned}
+\liminf_{n \to \infty} s_n &\le \liminf_{n \to \infty} t_n \\
+\limsup_{n \to \infty} s_n &\le \limsup_{n \to \infty} t_n.
+\end{aligned}\]</div></div>
+<div class="proof"><p>Let \(s^* = \limsup_{n \to \infty} s_n\) and \(t^* = \limsup_{n \to \infty} t_n\), as before. Suppose for the sake of contradiction \(t^* < s^*\). Choose \(x\) such that \(t^* < x < s^*\). Then by the second property of Theorem 1 there is an integer \(N_1\) such that \(n \geq N_1\) implies \(t_n < x\). Also by the first property of Theorem 1 there exists a subsequence \(\{s_{n_k}\}\) such that \(s_{n_k} \to s^*\). This implies that there exists an integer \(N_2\) such that \(n \geq N_2\) implies \(x < s_n\). But then for \(n \geq \max\{N_1, N_2\}\) we have \(t_n < x < s_n\). This gives us our required contradiction.</p>
+<p>A similar argument can be made for the \(\liminf\) case.</p></div>
+<p>Next we give a necessary and sufficient condition for the convergence of a sequence in terms of its \(\liminf\) and \(\limsup\).</p>
+<div class="thm"><strong>Theorem 3</strong>: For a real-valued sequence \(\{s_n\}\), \(s_n \to s \in \overline{\mathbb R}\) if and only if <div class="nonumber">\[\begin{aligned} \limsup_{n \to \infty} s_n = \liminf_{n \to \infty} s_n = s.\end{aligned}\]</div></div>
+<div class="proof"><p>We divide the analysis into three cases.</p>
+<ol>
+<li><p>First, let \(s \in \mathbb R\). Then if \(s^* = s_* = s\), Theorem 1 implies that for any \(\varepsilon > 0\) we have \(s_n \in (s-\varepsilon, s+\varepsilon)\) for all but finitely many \(n\), which means \(s_n \to s.\) On the other hand if \(s_n \to s\) then every subsequence \(\{s_{n_k}\}\) must converge to \(s\) and hence \(s^* = s_* = s\).</p>
+</li>
+<li><p>Now let \(s = +\infty\). Then \(s_n \to s\) means that for every \(M \in \mathbb R\) there is an integer \(N\) such that \(n \geq N\) implies \(s_n \geq M.\) This is same as saying \(s_* = +\infty\), which gives \(s^* = +\infty\) curtsy of Theorem 2.</p>
+</li>
+<li><p>Lastly, let \(s = -\infty\). Then \(s_n \to s\) means that for every \(M \in \mathbb R\) there is an integer \(N\) such that \(n \geq N\) implies \(s_n \leq M.\) This is same as saying \(s^* = -\infty,\) which gives \(s_* = -\infty\) curtsy of Theorem 2.</p>
+</li>
+</ol></div>
+<h2 id="upper_and_lower_limits_a_reprise"><a href="#upper_and_lower_limits_a_reprise" class="header-anchor">Upper and Lower Limits — A Reprise</a></h2>
+<p>There is an equivalent and often useful way to express upper and lower limits.</p>
+<div class="def"><strong>Definition 6</strong>: Let \(\{s_n\}\) be a sequence of real numbers. We define the notation <div class="nonumber">\[\begin{aligned}
+\sup_{k \ge n} s_k &:= \sup \{s_k : k \ge n\} \\
+\inf_{k \ge n} s_k &:= \inf \{s_k : k \ge n\}.
+\end{aligned}\]</div></div>
+<p>We note that the sequence \(\{\sup_{k \ge n} s_k\}_{n \in \mathbb N}\) is monotonically decreasing and the sequence \(\{\inf_{k \ge n} s_k\}_{n \in \mathbb N}\) is monotonically increasing, and thus their limits exist in \(\overline{\mathbb R}.\)</p>
+<p>We now show the equivalence of the two ways of looking at upper and lower limits.</p>
+<div class="thm"><strong>Theorem 4</strong>: Let \(\{s_n\}\) be a sequence of real numbers. Then <div class="nonumber">\[\begin{aligned}
+\lim_{n \to \infty} \sup_{k \ge n} s_k &= \limsup_{n \to \infty} s_n, \\
+\lim_{n \to \infty} \inf_{k \ge n} s_k &= \liminf_{n \to \infty} s_n.
+\end{aligned}\]</div></div>
+<div class="proof"><p>We will prove the first equation. The proof for the second is similar. We prove the equation in two steps.</p>
+<p>Let \(S = \{ s_n : n \in \mathbb N \}\). Let&#39;s show that \(\sup S = +\infty\) if and only if \(s^* = + \infty.\) Suppose first that \(\sup S = + \infty.\) Then we construct a subsequence \(\{s_{n_k}\}\) as follows. We let \(n_1 = 1.\) Suppose \(n_1, \ldots, n_{k}\) for some fixed \(k \ge 1\) have been chosen and let <div class="nonumber">\[\begin{aligned} S_k = \{ n \in \mathbb N : s_n \geq \max\{s_{n_1}, \ldots, s_{n_k}, k\} + 1 \}.\end{aligned}\]</div></p>
+<p>Notice that \(S_k\) is infinite as otherwise we can find an \(M \in \mathbb R\) such that \(s_n \leq M\) for all \(n \geq 1\), contradicting the fact that \(\sup S = + \infty\). We pick \(n_{k+1}\) to be the smallest element of \(S_k\) which is bigger than \(n_k.\) The resulting subsequence satisfies the condition that \(s_{n_k} \geq k\) for \(k \geq 2\) and thus we conclude that \(s_{n_k} \to +\infty\) which gives \(s^* = +\infty.\) Now suppose that \(s^* = +\infty.\) From Theorem 1 we can conclude that there exists a subsequence \(\{s_{n_k}\}\) such that \(s_{n_k} \to +\infty.\) This immediately implies \(\sup S = +\infty.\)</p>
+<p>For the second step, suppose \(\sup S < + \infty.\) Denote <div class="nonumber">\[\begin{aligned} a_n = \sup_{k \ge n} s_k.\end{aligned}\]</div> Notice that \(a_1 < +\infty\) and \(\{a_n\}\) is a monotonically decreasing sequence. Therefore, we have that either \(\{a_n\}\) is lower bounded, in which case it converges to, say, \(a,\) or it is not, in which case \(a_n \to -\infty.\) Since \(s_n \leq a_n,\) by Theorem 2 we can conclude <div class="nonumber">\[\begin{aligned} s^* \le a^* = \lim_{n \to \infty} a_n,\end{aligned}\]</div> where the last equality follows from Theorem 3. We will now show that <div class="nonumber">\[\begin{aligned} s^* \ge \lim_{n \to \infty} a_n,\end{aligned}\]</div> which will give us our required equality. If \(\lim_{n \to \infty} a_n = -\infty\), there is nothing to prove and so we assume that \(a > -\infty.\) Let \(\varepsilon > 0\) be given and define <div class="nonumber">\[\begin{aligned} B := \{ n \in \mathbb N : s_n \ge a - \varepsilon \}.\end{aligned}\]</div> We claim that \(B\) is infinite. Indeed, if \(B\) were finite we could find \(N \in \mathbb N\) so that \(N \geq \max B.\) This will imply that \(s_n \le a - \varepsilon\) for all \(n \geq N\) and so \(a_n \leq a - \varepsilon\) for \(n \geq N.\) But then by Theorem 2 we would conclude \(a = \lim a_n \leq a-\varepsilon.\) Thus \(B\) is infinite and we let \(\{s_{n_k}\}\) be a subsequence of \(\{s_n\}\) with \(n_k \in B.\) Notice that \(\limsup_{k \to \infty} s_{n_k} \leq s^*,\) since any subsequential limit of \(\{s_{n_k}\}\) is also a subsequential limit of \(\{s_n\}.\) This along with Theorem 2 give <div class="nonumber">\[\begin{aligned} a - \varepsilon \le \limsup_{k \to \infty} s_{n_k} \leq s^*.\end{aligned}\]</div> Since \(\varepsilon\) was arbitrary we conclude that \(s^* \ge a\), which is what we wanted.</p></div>
+<h2 id="more_properties"><a href="#more_properties" class="header-anchor">More Properties</a></h2>
+<p>These theorems make it easier to discover more properties of upper and lower limits.</p>
+<div class="thm"><strong>Theorem 5</strong>: Let \(\{s_n\}\) be a sequence of real numbers. Then <div class="nonumber">\[\begin{aligned} \liminf_{n \to \infty} s_n = - \limsup_{n \to \infty} (-s_n).\end{aligned}\]</div></div>
+<div class="proof">If for a set \(S\) of real numbers, we denote by \(-S\) the set \(\{-s : s \in S\},\) then the theorem follows immediately from the simple observation that <div class="nonumber">\[\begin{aligned} \inf S = - \sup (-S)\end{aligned}\]</div> and Theorem 4.</div>
+<div class="thm"><strong>Theorem 6 &#91;Subadditivity of \(\limsup\)&#93;</strong>: For any two real sequences \(\{s_n\}\) and \(\{t_n\}\), we have <div class="nonumber">\[\begin{aligned} \limsup_{n \to \infty} (s_n + t_n) \le \limsup_{n \to \infty} s_n + \limsup_{n \to \infty} t_n,\end{aligned}\]</div> provided the sum on the right is not of the form \(\infty - \infty.\)</div>
+<div class="proof"><p>If \(s^* = +\infty\) or \(t^* = +\infty\) or \(s^* = -\infty\) or \(t^* = -\infty\), it is easily checked that the inequality is true, and so we may assume \(s^*, t^* \in \mathbb R.\)</p>
+<p>For two sets \(S\) and \(T\) of real numbers satisfying \(S \subseteq T\), we know that \(\sup S \le \sup T\). This fact along with the observation <div class="nonumber">\[\begin{aligned} \{(k,k) : k \ge n\} \subseteq \{k : k \ge n\} \times \{k : k \ge n\}\end{aligned}\]</div> for any \(n \in \mathbb N\), imply <div class="nonumber">\[\begin{aligned} \sup_{k \ge n} (s_k + t_k) \le \sup_{k \ge n} s_k + \sup_{k \ge n} t_k.\end{aligned}\]</div> Taking limit as \(n \to \infty\) now gives us our desired inequality.</p></div>
+<div class="thm"><strong>Theorem 7 &#91;Superadditivity of \(\liminf\)&#93;</strong>: For any two real sequences \(\{s_n\}\) and \(\{t_n\}\), we have <div class="nonumber">\[\begin{aligned} \liminf_{n \to \infty} (s_n + t_n) \ge \liminf_{n \to \infty} s_n + \liminf_{n \to \infty} t_n.\end{aligned}\]</div></div>
+<div class="proof">Similar to the proof of Theorem 6.</div>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

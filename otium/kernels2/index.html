@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Kernels - Part 2</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Kernels - Part 2</div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#kernel_ridge_regression">Kernel Ridge Regression</a><ol><li><a href="#ridge_regression">Ridge Regression</a></li><li><a href="#kernel_ridge_regression__2">Kernel Ridge Regression</a></li></ol></li><li><a href="#kernel_approximation">Kernel Approximation</a><ol><li><a href="#bochners_theorem">Bochner’s Theorem</a></li><li><a href="#random_fourier_features">Random Fourier Features</a><ol><li><a href="#extension_to_a_more_general_class_of_kernels">Extension to a more general class of kernels</a></li></ol></li></ol></li><li><a href="#epilogue">Epilogue</a></li></ol></div>
+<h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
+<p>We discussed <a href="https://makkar.github.io/otium/kernels0">some functional analysis</a> and the <a href="https://makkar.github.io/otium/kernels1">basics of Reproducing Kernel Hilbert Space theory</a> in a previous two blog posts. The aim of this article is to discuss the need for approximating the kernel matrix and one method in particular to do that, Random Fourier Features.</p>
+<p>Let&#39;s start by discussing Kernel Ridge Regression, a simple application of kernel methods.</p>
+<h2 id="kernel_ridge_regression"><a href="#kernel_ridge_regression" class="header-anchor">Kernel Ridge Regression</a></h2>
+<h3 id="ridge_regression"><a href="#ridge_regression" class="header-anchor">Ridge Regression</a></h3>
+<p>Let&#39;s recall the ridge regression model. We have some training data of the form: </p>
+<div class="nonumber">\[\begin{aligned} (x_1, y_1), \ldots, (x_n, y_n) \in (\mathcal{X}, \mathcal{Y}),\end{aligned}\]</div>
+<p>where \(\mathcal{X} = \mathbb R^d\) and \(\mathcal{Y} = \mathbb R.\) We represent the training data more succinctly by letting \(\mathbf{y} = [y_1, \ldots, y_n]^\top\) and \(\mathbf{X}\) be an \(n \times d\) matrix whose \(i^{\text{th}}\) row is \(x_i^\top.\) Then in ridge regression the likelihood model is</p>
+<div class="nonumber">\[\begin{aligned} \mathbf{y} \sim \mathcal{N}(\mathbf{X} \mathbf{w}, \sigma^2 \mathbf{I}_n),\end{aligned}\]</div>
+<p>where \(\mathbf{w}\) is a \(d\)-dimensional column vector representing the weights to learned, and \(\sigma^2 > 0.\) We also assume a Gaussian prior on \(\mathbf{w}\)</p>
+<div class="nonumber">\[\begin{aligned} \mathbf{w} \sim \mathcal{N}\left(0, \frac{1}{\lambda} \mathbf{I}_d\right).\end{aligned}\]</div>
+<p>Then the maximum a posteriori &#40;MAP&#41; estimate is given by</p>
+<div class="nonumber">\[\begin{aligned} \begin{align*}\mathbf{w}_{\text{MAP}} &= \argmax _{\mathbf{w}} \; \ln p(\mathbf{w} | \mathbf{y}, \mathbf{X}) \\ &= \argmax _{\mathbf{w}} \; \ln p(\mathbf{y} | \mathbf{w}, \mathbf{X}) + \ln p(\mathbf{w}) \\ &= \argmax _{\mathbf{w}} \; \underbrace{-\frac{1}{2\sigma^2} (\mathbf{y} - \mathbf{X} \mathbf{w})^\top (\mathbf{y} - \mathbf{X} \mathbf{w}) - \frac{\lambda}{2} \mathbf{w}^\top \mathbf{w}} _{\mathcal{L}}\end{align*}\end{aligned}\]</div>
+<p>If we call this objective \(\mathcal{L}\), then \(\mathbf{w}_{\text{MAP}}\) is given by the solution of the equation formed by equating the gradient of \(\mathcal{L}\) with respect to \(\mathbf{w}\) to \(0.\) Thus,</p>
+<div class="nonumber">\[\begin{aligned} 0 = \nabla_{\mathbf{w}} \mathcal{L} = \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{y} - \frac{1}{\sigma^2} \mathbf{X}^\top \mathbf{X} \mathbf{w} - \lambda \mathbf{w}\end{aligned}\]</div>
+<p>and we get</p>
+<div class="nonumber">\[\begin{aligned} \mathbf{w}_{\text{MAP}} = (\lambda \sigma^2 \mathbf{I} + \mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y},\end{aligned}\]</div>
+<p>which is called the ridge regression solution, and we denote it by \(\mathbf{w}_{\text{RR}}.\) We are inverting a \(d \times d\) matrix taking \(\mathcal{O}(d^3)\) time, and matrix multiplication of a \(d \times d\) matrix with a \(d \times n\) matrix taking \(\mathcal{O}(d^2 n)\) time.</p>
+<h3 id="kernel_ridge_regression__2"><a href="#kernel_ridge_regression__2" class="header-anchor">Kernel Ridge Regression</a></h3>
+<p>The previous model suffers from limited expressiveness. As we have seen before, the idea of kernel methods is to define a map which takes our inputs from \(\mathcal{X}\) to an RKHS \(\mathcal{H}\), <div class="nonumber">\[\begin{aligned} \phi \colon \mathcal{X} \to \mathcal{H}\end{aligned}\]</div></p>
+<p>and then apply the linear model of ridge regression above to \(\phi(x_i)\) instead of \(x_i.\) \(\mathcal{H}\) could be an infinite-dimensional vector space, but for now suppose it is \(D\)-dimensional. Let \(\mathbf{\Phi}\) represent the \(n \times D\) matrix whose \(i^{\text{th}}\) row is \(\phi(x_i)^\top.\) Then the ridge regression solution is given by <div class="nonumber">\[\begin{aligned} \mathbf{w}_{\text{RR}} = (\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} \mathbf{\Phi}^\top \mathbf{y}.\end{aligned}\]</div></p>
+<p>We immediately realize the problem here: we are inverting a \(D \times D\) matrix and \(D\) can be huge&#33; Fortunately, we have a matrix trick that we can exploit, the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity#Discussion">push-though identity</a>. It looks like this</p>
+<div class="nonumber">\[\begin{aligned}
+\mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top) &= (\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi}) \mathbf{\Phi}^\top \\
+(\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top) &= (\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} (\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi}) \mathbf{\Phi}^\top \\
+(\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top) &= \mathbf{\Phi}^\top \\(\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top) (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top)^{-1} &= \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top)^{-1} \\
+(\lambda \sigma^2 \mathbf{I}_D + \mathbf{\Phi}^\top \mathbf{\Phi})^{-1} \mathbf{\Phi}^\top &= \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top)^{-1}.
+\end{aligned}\]</div>
+<p>And thus we get <div class="nonumber">\[\begin{aligned} \mathbf{w}_{\text{RR}} = \mathbf{\Phi}^\top (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top)^{-1} \mathbf{y}.\end{aligned}\]</div></p>
+<p>We are now inverting an \(n \times n\) matrix taking \(\mathcal{O}(n^3)\) time, and matrix multiplication of a \(D \times n\) matrix with a \(n \times n\) matrix taking \(\mathcal{O}(D n^2)\) time.</p>
+<p>Notice that \(\mathbf{\Phi} \mathbf{\Phi}^\top\) is the gram matrix, and let&#39;s denote it by \(\mathbf{K}.\) Its \((i,j)^{\text{th}}\) entry is \(\mathbf{K}_{i,j} = \left\langle \phi(x_i),\phi(x_j) \right\rangle = K(x_i, x_j)\), where \(K \colon \mathbb R^d \times \mathbb R^d \to \mathbb{C}\) is the kernel function corresponding to the RKHS \(\mathcal{H}.\)</p>
+<p>If we denote <div class="nonumber">\[\begin{aligned} \mathbf{\alpha} = (\lambda \sigma^2 \mathbf{I}_n + \mathbf{\Phi} \mathbf{\Phi}^\top)^{-1} \mathbf{y} = (\lambda \sigma^2 \mathbf{I}_n + \mathbf{K})^{-1} \mathbf{y}\end{aligned}\]</div> then we have <div class="nonumber">\[\begin{aligned} \mathbf{w}_{\text{RR}} = \mathbf{\Phi}^\top \mathbf{\alpha} = \sum _{i=1}^n \alpha_i \phi(x_i),\end{aligned}\]</div> and prediction for a test data point, \(x\), is <div class="nonumber">\[\begin{aligned} \mathbf{w}_{\text{RR}}^\top \phi(x) = \sum _{i=1}^n \alpha_i \phi(x_i)^\top \phi(x) = \sum _{i=1}^n \alpha_i k _{x_i}(x),\end{aligned}\]</div> where \(k_{x_i}\) denotes the reproducing kernel for the point \(x_i.\)</p>
+<p>If this looks suspiciously similar to the Representer theorem &#40;Theorem-8 <a href="https://makkar.github.io/otium/kernels1">here</a>&#41;, then that&#39;s because it is an instance of it&#33; So prediction takes \(\mathcal{O}(n)\) time.</p>
+<p>The point of this discussion was to show that Kernel Ridge Regression is computationally expensive. Simply storing the gram matrix, \(\mathbf{K}\), takes \(\mathcal{O}(n^2)\) space. We need to find methods which can circumvent using \(\mathbf{K}\) if we are to apply kernel methods to anything other than the smallest of the data sets.</p>
+<h2 id="kernel_approximation"><a href="#kernel_approximation" class="header-anchor">Kernel Approximation</a></h2>
+<p>The idea behind kernel approximation methods is to replace the gram matrix, \(\mathbf{K}\), with a low rank approximation, i.e., find an \(n \times S\) matrix, \(\mathbf{Z}\), such that <div class="nonumber">\[\begin{aligned} \mathbf{K} \approx \mathbf{Z} \mathbf{Z}^\top.\end{aligned}\]</div></p>
+<p>We want \(S \ll n\), and thus we significantly reduce our time and space complexity. \(\mathbf{Z}\) takes only \(\mathcal{O}(nS)\) space. Inversion of \((\lambda \sigma^2 \mathbf{I}_n + \mathbf{Z} \mathbf{Z}^\top)\) takes only \(\mathcal{O}(n S^2)\) time.</p>
+<p>One way to think about this is we want to find a mapping of \(x_i\)&#39;s to some latent space such that the inner product in this latent space approximates the kernel <div class="nonumber">\[\begin{aligned} \mathbf{K}_{i,j} = K(x_i, x_j) \approx z_i^\top z_j,\end{aligned}\]</div> where \(z_i\) denotes the \(i^\text{th}\) row of \(\mathbf{Z}.\) One popular way to do that is by Nyström approximation, which I won&#39;t be discussing at all. The other popular method is to use random Fourier features. This approach was introduced by Rahimi and Recht in their seminal 2007 paper <a href="https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines.pdf">Random Features for Large-Scale Kernel Machines</a>. It relies on a result from functional analysis called Bochner&#39;s theorem, so let&#39;s digress and discuss that first.</p>
+<h3 id="bochners_theorem"><a href="#bochners_theorem" class="header-anchor">Bochner’s Theorem</a></h3>
+<div class="def"><strong>Definition 28</strong>: A function \(K : \mathbb R^n \to \mathbb{C}\), is said to be <em>positive-definite</em> if <div class="nonumber">\[\begin{aligned} \sum _{i,j = 1}^n \alpha_i \overline{\alpha}_j K(x_i - x_j) \geq 0\end{aligned}\]</div> for every choice of \(x_1, \ldots, x_n \in \mathbb R^n\) and for every choice of complex numbers \(\alpha_1, \ldots, \alpha_n.\)</div>
+<p>Notice how similar this definition is to the <a href="https://makkar.github.io/otium/kernels1">definition of a kernel function</a>. Positive-definite functions have some nice properties:</p>
+<div class="thm"><strong>Lemma 3</strong>: If \(K: \mathbb R^n \to \mathbb{C}\) is a positive-definite function, then \(K(-x) = \overline{K(x)}\) for every \(x \in \mathbb R^n.\)</div>
+<div class="proof">It is easy to see that \(K(0) \geq 0.\) In the definition 28 above, let \(n = 2\), \(x_1 = x\), \(x_2 = 0\), \(\alpha_1\) be an arbitrary complex number, and \(\alpha_2 = 1.\) Then applying the definition of a positive-definite function, we get <div class="nonumber">\[\begin{aligned} (1 + |\alpha_1|^2)K(0) + \alpha_1 K(x) + \overline{\alpha}_1K(-x) \geq 0.\end{aligned}\]</div> Let \(\alpha_1 = 1\), then <div class="nonumber">\[\begin{aligned} 2K(0) + K(x) + K(-x) \geq 0.\end{aligned}\]</div> In particular, \(K(x) + K(-x)\) is real, which implies <div class="nonumber">\[\begin{aligned} K(x) + K(-x) = \overline{K(x)} +\overline{K(-x)}.\end{aligned}\]</div> Similarly, letting \(\alpha_1 = i\), we get \(i(K(x) - K(-x))\) is real, which implies <div class="nonumber">\[\begin{aligned} K(x) - K(-x) = -\overline{K(x)} + \overline{K(-x)}.\end{aligned}\]</div> Adding these two equations, we get \(K(-x) = \overline{K(x)}.\)</div>
+<div class="thm"><strong>Lemma 4</strong>: If \(K: \mathbb R^n \to \mathbb{C}\) is a positive-definite function, then \(K\) is bounded. In particular, \(|K(x)| \leq K(0)\) for every \(x \in \mathbb R^n.\)</div>
+<div class="proof">From lemma-3, \(K(0)\) must be real. In the definition above, let \(n = 2\), \(x_1 = 0\), \(x_2 = x\), \(\alpha_1 = |K(x)|\), and \(\alpha_2 = -\overline{K(x)}.\) Then applying the definition of a positive-definite function, we get <div class="nonumber">\[\begin{aligned} 2K(0) \left|K(x)\right|^2 - |K(x)| K(x) K(-x) - \overline{K(x)} |K(x)| K(x) \geq 0.\end{aligned}\]</div> Now use lemma-3 to substitute \(\overline{K(x)}\) for \(K(-x)\) in the middle term to get <div class="nonumber">\[\begin{aligned} 2K(0) |K(x)|^2 - 2 |K(x)|^3 \geq 0.\end{aligned}\]</div> If \(|K(x)| = 0\), then we obviously have our result, since we can easily show \(K(0) \geq 0\), otherwise we can divide by \(2|K(x)|^2\) to get <div class="nonumber">\[\begin{aligned} K(0) - |K(x)| \geq 0,\end{aligned}\]</div> which is our desired result.</div>
+<p>The following theorem is the converse of Bochner&#39;s theorem. We state it first since it is easier to prove.</p>
+<div class="thm"><strong>Theorem 9 &#91;Converse of Bochner&#39;s theorem&#93;</strong>: The Fourier transform of every finite Borel measure on \(\mathbb R^n\) is positive-definite.</div>
+<div class="proof">Let \(\mu\) be a finite Borel measure on \(\mathbb R^n.\) Let \(K : \mathbb R^n \to \mathbb{C}\) be the Fourier transform of \(\mu\), i.e., <div class="nonumber">\[\begin{aligned} K(x) = \int_{\mathbb R^n} \exp(-i \omega^\top x) \,\mathrm{d}\mu(\omega).\end{aligned}\]</div> Let \(x_1, \ldots, x_n \in \mathbb R^n\) and \(\alpha_1, \ldots, \alpha_n \in \mathbb{C}\) be arbitrary. Then <div class="nonumber">\[\begin{aligned}
+    \sum _{i,j = 1}^n \alpha_i \overline{\alpha}_j K(x_i - x_j) &= \sum _{i,j = 1}^n \alpha_i \overline{\alpha}_j \int _{\mathbb R^n} \exp\{-i \omega^\top (x_i - x_j)\} \,\mathrm{d}\mu(\omega) \\
+    &= \int_{\mathbb R^n} \left| \sum_{i = 1}^n \alpha_i \exp(-i \omega^\top x_i) \right|^2 \mathrm{d}\mu(\omega) \\&\geq 0.
+    \end{aligned}\]</div> Thus, \(K\) is positive-definite.</div>
+<div class="thm"><strong>Theorem 10 &#91;Bochner&#39;s theorem&#93;</strong>: If \(K\) is continuous and positive-definite, then \(K\) is the Fourier transform of a finite positive Borel measure.</div>
+<p>I&#39;ll skip the proof since it is beyond my understanding. The proof can be easily found on the internet, see <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi&#61;10.1.1.917.270&amp;rep&#61;rep1&amp;type&#61;pdf">here</a> or <a href="http://individual.utoronto.ca/jordanbell/notes/bochnertheorem.pdf">here</a> for example.</p>
+<p>This finite positive Borel measure is often called as <em>spectral measure</em>. It is easy to see that \(K(0) = \mu(\mathbb R^n)\), and thus if we assume \(K(0) = 1\) then the spectral measure is a probability measure.</p>
+<h3 id="random_fourier_features"><a href="#random_fourier_features" class="header-anchor">Random Fourier Features</a></h3>
+<p>Picking up where we left: We want to find a low-dimensional mapping of \(x_i\)&#39;s into a latent space such that we can approximate the kernel computation with an inner product in this latent space. We will use Bochner&#39;s theorem for this. To apply this theorem we need to limit ourselves to a special class of kernels.</p>
+<div class="def"><strong>Definition 29</strong>: A kernel function \(K : \mathbb R^d \times \mathbb R^d \to \mathbb{C}\) is called <em>shift-invariant</em> if \(K(x, y) = K(x-y, 0).\)</div>
+<p>Gaussian and Laplacian kernels are examples of shift-invariant kernels.</p>
+<p>Note that the function \(K': \mathbb R^d \to \mathbb{C}\) defined by \(K'(x) = K(x, 0)\) is positive-definite if \(K\) is a shift-invariant kernel. Bochner&#39;s theorem then implies the existence of a spectral measure, \(\mu\), such that</p>
+<div class="nonumber">\[\begin{aligned} K(x, y) = K(x-y, 0) = K'(x-y) = \int _{\mathbb R^d} \exp\{-i\omega^\top (x-y)\} \,\mathrm{d}\mu(\omega).\end{aligned}\]</div>
+<p>Let \(p\) denote the Radon-Nikodym derivative of \(\mu\) with respect to the Lebesgue measure on \(\mathbb R^d\) &#40;or more simply, the density of \(\mu\)&#41;, then we can write the equation above as</p>
+<a id="star" class="anchor"></a>\[\begin{aligned} 
+K(x, y) = \int _{\mathbb R^d} \exp\{-i\omega^\top (x-y)\} p(\omega) \,\mathrm{d}\omega.\end{aligned}\]
+<p>For example, if we take the Gaussian kernel</p>
+<div class="nonumber">\[\begin{aligned} K(x,y) = \exp\left(-\frac{\lVert x-y\rVert^2_2}{2 \sigma^2}\right),\end{aligned}\]</div>
+<p>then since \(K(0,0) = 1\), \(p\) is a probability density, and can be easily shown to be Gaussian</p>
+<div class="nonumber">\[\begin{aligned} p \sim \mathcal{N}\left(0, \frac{1}{\sigma^2} \mathbf{I}_d\right).\end{aligned}\]</div>
+<p>We now see an obvious way to approximate the kernel from equation <span class="eqref">(<a href="#star">1</a>)</span>: use Monte Carlo approximation. If we take \(S\) samples, \(\omega_1, \ldots, \omega_S \sim p(\omega)\),</p>
+<div class="nonumber">\[\begin{aligned}
+K(x, y) &= \int_{\mathbb R^d} \exp\{-i\omega^\top (x-y)\} p(\omega) \,\mathrm{d}\omega \\
+&\approx \frac{1}{S} \sum _{s=1}^S \exp\{-i\omega^\top_s (x-y)\} \\
+&= \left\langle z(x),z(y) \right\rangle,
+\end{aligned}\]</div>
+<p>where \(z : \mathbb R^d \to \mathbb R^S\) is the latent mapping given by</p>
+<div class="nonumber">\[\begin{aligned} z(x) = \frac{1}{\sqrt{S}}[\exp(-i \omega ^\top _1 x), \ldots, \exp(-i \omega ^\top _S x)]^\top.\end{aligned}\]</div>
+<p>We can get another mapping by noting that if the kernel is real, then from <span class="eqref">(<a href="#star">1</a>)</span> we can see that the RHS must also be real and we can thus write it as</p>
+<div class="nonumber">\[\begin{aligned} K(x, y) = \int _{\mathbb R^d} \cos\{\omega^\top (x-y)\} p(\omega) \,\mathrm{d}\omega.\end{aligned}\]</div>
+<p>Using the fact that \(\cos(a - b) = \cos(a) \cos(b) + \sin(a) \sin(b)\), we can write \(\cos\{\omega^\top (x-y)\} = \cos(\omega^\top x) \cos(\omega^\top y) + \sin(\omega^\top x) \sin(\omega^\top y).\) Thus, if we define \(z_1 : \mathbb R^d \to \mathbb R^{2S}\) by</p>
+<div class="nonumber">\[\begin{aligned} z_1(x) = \frac{1}{\sqrt{S}}[\cos(\omega^\top_1 x), \ldots, \cos(\omega^\top_S x), \sin(\omega^\top_1 x), \ldots, \sin(\omega^\top_S x)]^\top\end{aligned}\]</div>
+<p>we have \(\left\langle z_1(x),z_1(y) \right\rangle \approx K(x, y).\) Another mapping that is used is \(z_2 : \mathbb R^d \to \mathbb R^{S}\) defined by</p>
+<div class="nonumber">\[\begin{aligned} z_2(x) = \sqrt{\frac{2}{S}}[\cos(\omega^\top_1 x + b_1), \ldots, \cos(\omega^\top_S x + b_S)]^\top,\end{aligned}\]</div>
+<p>where \(b_1, \ldots, b_S \sim \text{Unif}[0, 2\pi].\) It is not too difficult to show that</p>
+<div class="nonumber">\[\begin{aligned} \mathbb{E}[z_2(x)^\top z_2(y)] = \mathbb{E}[z_1(x)^\top z_1(y)].\end{aligned}\]</div>
+<p>There exist many modifications to the basic RFF approach described here. For example, we can do Quasi-Monte Carlo approximations instead of Monte Carlo approximations. See the paper <a href="https://jmlr.org/papers/volume17/14-538/14-538.pdf">Quasi-Monte Carlo Feature Maps for Shift-Invariant Kernels</a> by Avron, Sindhwani, Yang and Mahoney &#40;2016&#41;. Or we could sample from a modified distribution in Fourier space, given by the leverage function of the kernel. See the paper <a href="https://arxiv.org/pdf/1804.09893.pdf">Random Fourier Features for Kernel Ridge Regression: Approximation Bounds and Statistical Guarantees</a> by Avron et al &#40;2017&#41;.</p>
+<h4 id="extension_to_a_more_general_class_of_kernels"><a href="#extension_to_a_more_general_class_of_kernels" class="header-anchor">Extension to a more general class of kernels</a></h4>
+<p>I have often seen kernels being represented as an integral of a product of two functions neatly separating the dependence on \(x\) and \(y\): <div class="nonumber">\[\begin{aligned} K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \mathrm{d}\mu(\omega),\end{aligned}\]</div></p>
+<p>for some function \(\varphi(\cdot, \cdot)\) and measure \(\mu\) on \(\Omega.\) I found a good explanation of when this is possible in the papers by Bach &#40;2017&#41; <a href="https://jmlr.org/papers/volume18/14-546/14-546.pdf">Breaking the Curse of Dimensionality with Convex Neural Networks</a> and Li et al &#40;2019&#41; <a href="https://arxiv.org/pdf/1806.09178.pdf">Towards a Unified Analysis of Random Fourier Features</a>.</p>
+<p>Let \(\mu\) be a Borel probability measure on a compact space \(\Omega\), and \(\varphi: \Omega \times \mathcal{X} \to \mathbb R\) be a function such that the functions \(\varphi(\cdot, x) : \Omega \to \mathbb R\) are measurable for all \(x \in \mathcal{X}\). Now define the set \(\mathcal{H}\) to consist of all functions \(f\) that can written as <div class="nonumber">\[\begin{aligned} f(x) = \int_{\Omega} h(\omega) \varphi(\omega, x) \,\mathrm{d}\mu(\omega) \quad \text{for all } x \in \mathcal{X},\end{aligned}\]</div></p>
+<p>for some \(h: \Omega \to \mathbb R\) such that \(\int_{\Omega} h^2 \,\mathrm{d}\mu < \infty.\) Let us define the squared norm, \(\lVert f \rVert_{\mathcal{H}}^2\), as the infimum of \(\int_{\Omega} h^2 \,\mathrm{d}\mu\) over all functions \(h\) for which \(f\) can be decomposed as above. Then it can be shown that \(\mathcal{H}\) is an RKHS with the kernel <div class="nonumber">\[\begin{aligned} K(x,y) = \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y) \,\mathrm{d}\mu(\omega).\end{aligned}\]</div></p>
+<p>Therefore, we can again approximate this kernel with a Monte Carlo approximation:</p>
+<div class="nonumber">\[\begin{aligned}
+K(x,y) &= \int_{\Omega} \varphi(\omega, x) \varphi(\omega, y)\,\mathrm{d}\mu(\omega)\\
+&\approx \frac{1}{S} \sum_{s=1}^S \varphi(\omega_s, x) \varphi(\omega_s, y).
+\end{aligned}\]</div>
+<h2 id="epilogue"><a href="#epilogue" class="header-anchor">Epilogue</a></h2>
+<p>Random Fourier Features is an easy to implement approach that allows us to apply kernel methods on large data sets. I haven&#39;t discussed the number of samples, \(S\), needed to approximate the kernel function within an error bound. You can find such results in the papers linked above.</p>
+<p>With this article I conclude the series on kernels. I had initially set out to write a short piece on Random Fourier Features but the subject of kernel theory is vast and beautiful, and that short piece metastasised to three articles.</p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

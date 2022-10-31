@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Partitions and Equivalence Relations</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><div class="main-heading">Partitions and Equivalence Relations</div>
+<div class="franklin-toc"><ol><li><a href="#partition">Partition</a></li><li><a href="#equivalence_relation">Equivalence Relation</a><ol><li><ol><li><a href="#examples">Examples</a></li></ol></li></ol></li><li><a href="#relation_to_partition">“Relation” to Partition</a></li></ol></div>
+<p>I want to show how these two concepts are a single mathematical idea.</p>
+<h2 id="partition"><a href="#partition" class="header-anchor">Partition</a></h2>
+<div class="def"><strong>Definition 1</strong>: A <em>partition</em> of a nonempty set, \(X\), is a disjoint class \(\{X_i\}_{i \in I}\) of non-empty subsets of \(X\) whose union is \(X.\) Each of the \(X_i\) is called a <em>partition set</em>.</div>
+<p>For example, if \(X = \mathbb R\), then \(X\) can be partitioned as</p>
+<div class="nonumber">\[\begin{aligned} X = \bigcup_{n \in \mathbb{Z}}[n, n+1).\end{aligned}\]</div>
+<h2 id="equivalence_relation"><a href="#equivalence_relation" class="header-anchor">Equivalence Relation</a></h2>
+<div class="def"><strong>Definition 2</strong>: A <em>binary relation</em>, or simply <em>relation</em>, \(R\), in the set \(X\) is a subset of \(X \times X.\)</div>
+<p>For \(x, y \in X\), we denote the fact \((x,y) \in R\) by writing \(x R y.\) A function may be defined as a special kind of binary relation.</p>
+<p>Let&#39;s assume that a partition of our non-empty set \(X\) is given, and we associate with this partition a relation, \(\sim\), in \(X\) defined as follows: \(x \sim y\) if \(x\) and \(y\) belong to the same partition set. It can easily checked that the relation \(\sim\) satisfies:</p>
+<ol>
+<li><p>\(x \sim y\) for every \(x \in X\) &#40;<em>reflexivity</em>&#41;;</p>
+</li>
+<li><p>\(x \sim y \implies y \sim x\) &#40;<em>symmetry</em>&#41;;</p>
+</li>
+<li><p>\(x \sim y\) and \(y \sim z\) \(\implies\) \(x \sim z\) &#40;<em>transitivity</em>&#41;.</p>
+</li>
+</ol>
+<div class="def"><strong>Definition 3</strong>: Any relation in \(X\) which possesses these three properties is called an <em>equivalence relation</em> in \(X.\)</div>
+<h4 id="examples"><a href="#examples" class="header-anchor">Examples</a></h4>
+<ol>
+<li><p>Let \(X = \mathbb{Z}\) and let \(x \sim y\) if \(2 \vert x-y\) for \(x,y \in X.\) Then clearly \(\sim\) is an equivalence relation in \(X.\)</p>
+</li>
+<li><p>Let \(X\), \(Y\) be any non-empty sets and \(f\) be a mapping from \(X\) onto \(Y.\) Let \(x \sim y\) if \(f(x) = f(y)\) for \(x,y \in X.\) This defines an equivalence relation in \(X.\) Indeed, \(f(x) = f(x)\), and so \(x \sim x.\) If \(f(x) = f(y)\) then \(f(y) = f(x)\), and so \(x \sim y \implies y \sim x.\) Finally, if \(f(x) = f(y)\) and \(f(y) = f(z)\) then \(f(x) = f(z),\) and so \(x \sim y\) and \(y \sim z\) implies \(x \sim z.\) The first example is a special case of this one if we take \(X = \mathbb{Z}\), \(Y = \{0,1\}\) and \(f(x) = x \mod 2.\)</p>
+</li>
+</ol>
+<h2 id="relation_to_partition"><a href="#relation_to_partition" class="header-anchor">“Relation” to Partition</a></h2>
+<p>We have just seen that each partition of \(X\) has associated with it a natural equivalence relation in \(X.\) Let us now reverse the situation and show that a given equivalence relation in \(X\) determines a natural partition of \(X.\)</p>
+<p>Let \(\sim\) be an equivalence relation in \(X.\) For every \(x \in X\) define the set <div class="nonumber">\[\begin{aligned} [x] := \{ y \in X : y \sim x\}\end{aligned}\]</div> called the <em>equivalence set</em> of \(x.\) We show that the class of all distinct equivalence sets forms a partition of \(X.\)</p>
+<p>By reflexivity, \(x \in [x]\) for every \(x \in X\), and thus each equivalence set is non-empty and their union is \(X.\) We now need to show that any two equivalence sets \([x_1]\) and \([x_2]\) are either disjoint or identical. We prove this by showing that if \([x_1]\) and \([x_2]\) are not disjoint then they are identical. To this end, let \(z\) be a common element of \([x_1]\) and \([x_2].\) Let \(y\) be any element of \([x_1].\) Using transitivity, <div class="nonumber">\[\begin{aligned} y \sim x_1 \sim z \sim x_2.\end{aligned}\]</div></p>
+<p>Therefore, \(y \in [x_2].\) Since \(y\) was an arbitrary element of \([x_1]\), we get \([x_1] \subseteq [x_2].\) We can similarly show that \([x_2] \subseteq [x_1].\) In short, \([x_1] = [x_2].\)</p>
+<p>We have shown that there is no real distinction between partitions of a set and equivalence relations in the set. They are two equivalent approaches for the same mathematical idea. The approach we choose in an application depends entirely on our own convenience.</p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>
