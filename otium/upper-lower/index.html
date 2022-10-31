@@ -29,6 +29,9 @@
 <!-- Content appended here -->
 <div class="franklin-content"><div class="main-heading">Upper and Lower Limits</div>
 <div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#definitions">Definitions</a></li><li><a href="#some_useful_lemmas">Some Useful Lemmas</a></li><li><a href="#properties">Properties</a></li><li><a href="#upper_and_lower_limits_a_reprise">Upper and Lower Limits — A Reprise</a></li><li><a href="#more_properties">More Properties</a></li></ol></div>
+
+<hr style="border: 0.1px solid lightgrey">
+
 <p>Most of what follows is taken from Rudin&#39;s book <em>Principles of Mathematical Analysis</em>.</p>
 <h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
 <p>The concept of upper and lower limits &#40;commonly denoted by \(\limsup\) and \(\liminf\) respectively&#41; shows up routinely when discussing the limiting behaviour of a sequence. For example, consider the Big O notation, \(\mathcal{O}\), defined as \(f(n) = \mathcal{O}(g(n))\) iff there exists a positive real number \(c\) and an integer \(N\) such that for every \(n \in \Z\), \(n > N\), we have \(|f(n)| \leq c g(n)\). This can be succinctly written as</p>
@@ -127,6 +130,7 @@ s_* &= \inf E.
 <p>For two sets \(S\) and \(T\) of real numbers satisfying \(S \subseteq T\), we know that \(\sup S \le \sup T\). This fact along with the observation <div class="nonumber">\[\begin{aligned} \{(k,k) : k \ge n\} \subseteq \{k : k \ge n\} \times \{k : k \ge n\}\end{aligned}\]</div> for any \(n \in \mathbb N\), imply <div class="nonumber">\[\begin{aligned} \sup_{k \ge n} (s_k + t_k) \le \sup_{k \ge n} s_k + \sup_{k \ge n} t_k.\end{aligned}\]</div> Taking limit as \(n \to \infty\) now gives us our desired inequality.</p></div>
 <div class="thm"><strong>Theorem 7 &#91;Superadditivity of \(\liminf\)&#93;</strong>: For any two real sequences \(\{s_n\}\) and \(\{t_n\}\), we have <div class="nonumber">\[\begin{aligned} \liminf_{n \to \infty} (s_n + t_n) \ge \liminf_{n \to \infty} s_n + \liminf_{n \to \infty} t_n.\end{aligned}\]</div></div>
 <div class="proof">Similar to the proof of Theorem 6.</div>
+<p><a href="#">Back to top</a></p>
 <div class="page-foot">
     <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
