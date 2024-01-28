@@ -20,6 +20,8 @@
     <li><a href="/">Home</a></li>
     <!-- <li><a href="/research/">Research</a></li> -->
     <li><a href="/otium/">Otium</a></li>
+    <!-- <li><a href="/notes/">Notes</a></li> -->
+    <li><a href="/misc/">Misc</a></li>
   </ul>
   <img src="/assets/hamburger.svg" id="menu-icon">
 </nav>
@@ -28,7 +30,7 @@
 
 <!-- Content appended here -->
 <div class="franklin-content"><div class="main-heading">Kernels - Part 0</div>
-<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#background">Background</a><ol><li><a href="#linear_spaces">Linear Spaces</a><ol><li><a href="#examples">Examples</a></li></ol></li><li><a href="#inner_products_and_norms">Inner Products and Norms</a></li><li><a href="#hilbert_spaces">Hilbert Spaces</a><ol><li><a href="#examples__2">Examples</a></li><li><a href="#orthonormal_bases">Orthonormal Bases</a></li><li><a href="#separable_hilbert_spaces">Separable Hilbert Spaces</a></li></ol></li><li><a href="#riesz_representation_theorem">Riesz Representation Theorem</a></li></ol></li><li><a href="#reproducing_kernel_hilbert_spaces_rkhs">Reproducing Kernel Hilbert Spaces &#40;RKHS&#41;</a><ol><li><ol><li><a href="#example">Example</a></li></ol></li></ol></li><li><a href="#epilogue">Epilogue</a></li></ol></div>
+<div class="franklin-toc"><ol><li><a href="#introduction">Introduction</a></li><li><a href="#background">Background</a><ol><li><a href="#linear_spaces">Linear Spaces</a><ol><li><a href="#examples">Examples</a></li></ol></li><li><a href="#inner_products_and_norms">Inner Products and Norms</a></li><li><a href="#hilbert_spaces">Hilbert Spaces</a><ol><li><a href="#examples__2">Examples</a></li></ol></li><li><a href="#orthonormal_bases">Orthonormal Bases</a></li><li><a href="#separable_hilbert_spaces">Separable Hilbert Spaces</a></li><li><a href="#riesz_representation_theorem">Riesz Representation Theorem</a></li></ol></li><li><a href="#reproducing_kernel_hilbert_spaces_rkhs">Reproducing Kernel Hilbert Spaces &#40;RKHS&#41;</a><ol><li><a href="#example">Example</a></li></ol></li><li><a href="#epilogue">Epilogue</a></li></ol></div>
 <h2 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h2>
 <p>The word &quot;kernel&quot; is <a href="https://en.wikipedia.org/wiki/Kernel">heavily overloaded</a>, but for our purposes it is, intuitively, a similarity measure that can be thought of as an inner product in some feature space. Kernel methods provide an elegant, theoretically well-founded, and powerful approach to solving many learning problems.</p>
 <p>We usually have the following framework: The input space \(\mathcal{X}\) which contains our observations/inputs/features is either not rich enough &#40;for example, if there is no linear boundary separating the two classes in a binary classification problem&#41; or not convenient &#40;for example, if our inputs are strings&#41;, and therefore we want to work is some other space we call feature space \(\mathcal{H}.\) Suppose we have a map which takes our inputs from \(\mathcal{X}\) to \(\mathcal{H}\) <div class="nonumber">\[\begin{aligned} \Phi \colon \mathcal{X} \to \mathcal{H}.\end{aligned}\]</div></p>
