@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+  <link rel="stylesheet" href="/css/basic.css">
+  <link rel="icon" href="/assets/favicon.png">
+   <title>Research</title>  
+</head>
+<body>
+  <header>
+<!--<img src="/assets/photo.png" alt="Brownian motion in 2D" width="50" height="auto">-->
+<div class="blog-name"><a href="/">Aditya Makkar</a></div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <!-- <li><a href="/research/">Research</a></li> -->
+    <li><a href="/otium/">Otium</a></li>
+    <!-- <li><a href="/notes/">Notes</a></li> -->
+    <li><a href="/misc/">Misc</a></li>
+  </ul>
+  <img src="/assets/hamburger.svg" id="menu-icon">
+</nav>
+</header>
+
+
+<!-- Content appended here -->
+<div class="franklin-content">
+<div class="main-heading">Research</div>
+<p>I am broadly interested in theoretical machine learning, nonparametric statistics and probability theory. The following are some of the topics I am working on right now:</p>
+<h3 id="statistical_optimal_transport"><a href="#statistical_optimal_transport" class="header-anchor">Statistical Optimal Transport</a></h3>
+<p>Suppose \(X\) and \(Y\) are \(\mathbb R^d-\)valued random vectors on a probability space \((\Omega, \mathscr F, \mathbb P)\) with distributions \(\mu := \mathbb P \circ X^{-1}\) and \(\nu := \mathbb P \circ Y^{-1}\) respectively. It is often of interest to find, if it exists, a measurable map \(T \colon \mathbb R^d \to \mathbb R^d\) such that the pushforward \(T_{\#} \mu := \mu \circ T^{-1}\) of \(\mu\) under \(T\) equals \(\nu.\) It is possible that no such map exists, for example, if \(\mu = \delta_{x_0}\) for some \(x_0 \in \mathbb R^d\) and \(\nu\) does not equal a Dirac measure, because for any measurable \(T\colon \mathbb R^d \to \mathbb R^d\) the pushforward \(T_{\#}\mu\) is \(\delta_{T(x_0)}.\)</p>
+<p>On the other hand, if multiple such maps exist, then which one should we prefer? In the Monge&#39;s formulation of optimal transport problem, we have a measurable cost function \(c \colon \mathbb R^d \times \mathbb R^d \to [0, \infty]\), and we want to find an optimal map <div class="nonumber">\[\begin{aligned} T_0 \in \argmin_{T_{\#}\mu = \nu} \int_{\mathbb R^d} c(x, T(x)) \, \mathrm{d}\mu(x),\end{aligned}\]</div> provided, of course, that it exists. It is not obvious when such a map exists, however, the following refinement by <span class="bibref"><a href="#mccann_1995">(McCann, 1995)</a></span> of the result discovered independently by <span class="bibref"><a href="#knott_smith_1984">(Knott and Smith, 1984)</a></span> and by <span class="bibref"><a href="#brenier_1987">(Brenier, 1987)</a></span> tells us when an optimal map exists, assuming quadratic cost. As a piece of terminology, we call a set \(A \subseteq \mathbb R^d\;\)<em>small</em> if it has a Hausdorff dimension at most \(d-1.\) So, for example, Lebesgue-negligible sets are small.</p>
+<div class="thm"><strong>Theorem</strong>: Let \(\mu\) and \(\nu\) be two Borel probability measures on \(\mathbb R^d\), with \(d\) a positive integer. Suppose that \(\mu\) does not give mass to small sets, and that the cost function \(c\colon \mathbb R^d \times \mathbb R^d \to [0, \infty]\) is the squared Euclidean norm \(c(x,y) = \left\lVert x-y\right\rVert^2.\) Then there is exactly one &#40;upto \(\mu-\)a.e. of course&#41; measurable map \(T \colon \mathbb R^d \to \mathbb R^d\) such that \(T_{\#} \mu = \nu\), and moreover \(T = \nabla \varphi\) for some convex function \(\varphi \colon \mathbb R^d \to \mathbb R.\)</div>
+<p>In statistical optimal transport, the explicit form of the measures \(\mu\) or \(\nu\) is unknown, and instead only independent samples from them are observed. To that end, let \(X_1, X_2, \ldots\) be independent copies of \(X,\) and let \(Y_1, Y_2, \ldots\) be independent copies of \(Y.\) Let \(\mu_n := \frac{1}{n} \sum_{i=1}^n \delta_{X_i}\) denote the empirical measure based on the sample \((X_1, \ldots, X_n)\) of the first \(n\) observations, and likewise for \(\nu_n.\)</p>
+<h3 id="deep_learning"><a href="#deep_learning" class="header-anchor">Deep Learning</a></h3>
+<h3 id="references"><a href="#references" class="header-anchor">References</a></h3>
+<ul>
+<li><p><a id="brenier_1987" class="anchor"></a> Brenier, Y.: <em>Decomposition polaire et rearrangement monotone des champs de vecteurs</em>. C. R. Acad. Sci. Paris Ser. I Math., 305:805–808, 1987.</p>
+</li>
+<li><p><a id="knott_smith_1984" class="anchor"></a> Knott, M. and Smith, C. S.: <em>On the optimal mapping of distributions</em>. Journal of Optimization Theory and Applications, 43&#40;1&#41;:39–49, 1984.</p>
+</li>
+<li><p><a id="mccann_1995" class="anchor"></a> McCann, R.J.: <em>Existence and uniqueness of monotone measure-preserving maps</em>. Duke Mathematical Journal, 80&#40;2&#41;:309 – 323, 1995.</p>
+</li>
+<li><p><a id="santambrogio_2015" class="anchor"></a> Santambrogio, F.: <em>Optimal Transport for Applied Mathematicians</em>. Progress in Nonlinear Differential Equations and Their Applications, vol. 87. Birkhäuser/Springer, Cham &#40;2015&#41;. Calculus of variations, PDEs, and modeling.</p>
+</li>
+<li><p><a id="villani_2003" class="anchor"></a> Villani, C.: <em>Topics in Optimal Transportation</em>. Graduate Studies in Mathematics, vol. 58. American Mathematical Society, Providence &#40;2003&#41;.</p>
+</li>
+</ul>
+<h5 id="professional_activities"><a href="#professional_activities" class="header-anchor">Professional Activities</a></h5>
+<h6 id="reviewer"><a href="#reviewer" class="header-anchor">Reviewer</a></h6>
+<p>NeurIPS 2022, AISTATS 2022, ICLR 2022, NeurIPS 2021, AAAI 2021, ICML 2020</p>
+<h6 id="teaching"><a href="#teaching" class="header-anchor">Teaching</a></h6>
+<p>Fall 2021, Spring 2021 — <a href="http://www.columbia.edu/~jwp2128/Teaching/W4721/Spring2017/W4721Spring2017.html">Masters level course on introduction to machine learning</a></p>
+<div class="page-foot">
+    <!--<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> {{ fill author }}. {{isnotpage /tag/*}}Last modified: {{ fill fd_mtime }}.{{end}}
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.-->
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    
+        <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/contrib/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

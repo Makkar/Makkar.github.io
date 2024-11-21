@@ -418,7 +418,7 @@ code {
 ================================================================== */
 
 .franklin-content .colbox-blue {
-  background-color: #eef3f5;
+  background-color: #eeeeee; /*#eef3f5;*/
   padding-top: 5px;
   padding-right: 10px;
   padding-left: 10px;
