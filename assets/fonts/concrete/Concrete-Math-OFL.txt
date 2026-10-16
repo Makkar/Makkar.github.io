@@ -1,0 +1,11 @@
+CMUConcrete-Roman  (cmunorm.otf) converted by Andrey V. Panov from TeX fonts.
+CMUConcrete-Italic (cmunoti.otf) converted by Andrey V. Panov from TeX fonts.
+CMUConcrete-Bold   (cmunobx.otf) converted by Andrey V. Panov from TeX fonts.
+CMUConcrete-BoldItalic (cmunobi.otf) converted by Andrey V. Panov from TeX fonts.
+Copyright (c) 1999, concmath package v2 Math fonts by Ulrik Vieth.
+
+Concrete-Math (c) 2022-2024 Daniel Flipo
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+
+http://scripts.sil.org/OFL
